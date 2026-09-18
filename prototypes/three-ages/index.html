@@ -12,42 +12,71 @@
     .panel,.card { background:#fff; border:1px solid var(--line); border-radius:10px; padding:18px; } .building { display:block; width:100%; text-align:left; border:0; border-bottom:1px solid var(--line); background:white; padding:12px 5px; cursor:pointer; color:inherit; } .building:hover,.building.active { background:var(--soft); }
     .building b,.building small { display:block; } small,.muted { color:var(--muted); } .hero { display:flex; justify-content:space-between; gap:20px; align-items:start; } .badge { background:var(--soft); color:var(--accent); padding:5px 9px; border-radius:99px; white-space:nowrap; font-weight:700; }
     .timeline { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:22px 0; } .age { border-top:4px solid var(--accent); background:#fcfbfb; padding:13px; min-height:130px; } .age .year { font-size:25px; font-weight:750; } .age span { display:block; color:var(--muted); font-size:13px; }
-    .evidence { border-left:3px solid #d9c2ca; padding-left:13px; margin-top:18px; } .confidence { display:inline-block; margin-top:5px; font-size:12px; font-weight:700; color:var(--accent); } code { background:#f0f2f3; padding:2px 4px; border-radius:4px; }
+    .evidence { border-left:3px solid #d9c2ca; padding-left:13px; margin-top:18px; } .confidence { display:inline-block; margin-top:5px; font-size:12px; font-weight:700; color:var(--accent); } .status { display:inline-block; margin-top:8px; padding:3px 7px; border-radius:99px; background:#f1e9ec; color:var(--accent); font-size:12px; font-weight:700; } .source-note { background:#f7f4f5; padding:10px 12px; border-radius:7px; } blockquote { margin:8px 0; color:var(--muted); } code { background:#f0f2f3; padding:2px 4px; border-radius:4px; }
     @media(max-width:720px){ .layout{grid-template-columns:1fr;} .timeline{grid-template-columns:1fr;} }
   </style>
 </head>
 <body>
 <main>
   <h1>De Drie Leeftijden van een Brussels pand</h1>
-  <p class="lede">A tiny building-history explorer: compare the registered construction year, the visible facade period and the inferred structural period.</p>
-  <div class="notice"><b>Feasibility spike:</b> the interactive case records below are illustrative. They are not historical claims about the listed addresses.</div>
-  <p id="source" class="muted">Loading public-source snapshot…</p>
+  <p class="lede">A small evidence pilot: compare what a public history source says with the fields still needed for a defensible three-age annotation.</p>
+  <div class="notice"><b>Pilot boundary:</b> these are real Grand Place source records. Only documented source facts are shown; register years and image-derived structural labels remain pending.</div>
+  <p id="source" class="muted" aria-live="polite">Loading public-source snapshot…</p>
+  <a id="datasetLink" class="muted" href="#" target="_blank" rel="noopener" hidden>Open the public dataset endpoint</a>
   <div class="layout">
-    <aside class="panel"><h2>Case set</h2><p class="muted">Select a building to inspect its three ages and evidence.</p><div id="list"></div><h3>Public source preview</h3><div id="sourceList" class="muted">Loading records…</div><div id="sourceDetail" class="evidence"></div></aside>
+    <aside class="panel"><h2>Case set</h2><p class="muted">Select a building to inspect its three ages and evidence.</p><div id="list"></div><h3>Public source preview</h3><div id="sourceList" class="muted">Loading records…</div><div id="sourceDetail" class="evidence"></div><div id="protocol" class="evidence"></div></aside>
     <section class="card"><div id="content"></div></section>
   </div>
 </main>
 <script>
-const buildings=[
- {id:'BXL-01',address:'Rue de la Brasserie 12',register:1898,facade:'1890s — art nouveau',facadeYear:1895,structure:'1890s — original structure',structureYear:1898,confidence:'high',evidence:['building register record','curated street photograph','historical aerial image']},
- {id:'BXL-02',address:'Chaussée de Forest 88',register:1905,facade:'1900s — preserved facade',facadeYear:1905,structure:'1960s — reconstructed behind facade',structureYear:1964,confidence:'medium',evidence:['register year','facade annotation','aerial-image comparison required']},
- {id:'BXL-03',address:'Boulevard Léopold II 41',register:1932,facade:'1930s — modernist influence',facadeYear:1932,structure:'1930s — no structural change detected',structureYear:1932,confidence:'medium',evidence:['register record','street-image label','single historical image epoch']},
- {id:'BXL-04',address:'Avenue du Port 207',register:1971,facade:'1970s — brutalist',facadeYear:1971,structure:'2000s — major redevelopment signal',structureYear:2006,confidence:'low',evidence:['register year','visual style label','incomplete aerial series']}
-];
 const $=id=>document.getElementById(id);
-function renderList(){ $('list').innerHTML=buildings.map((b,i)=>`<button class="building" data-id="${b.id}"><b>${b.id}</b><small>${b.address}</small></button>`).join(''); document.querySelectorAll('.building').forEach(x=>x.addEventListener('click',()=>show(x.dataset.id))); show(buildings[0].id); }
-function show(id){ const b=buildings.find(x=>x.id===id); document.querySelectorAll('.building').forEach(x=>x.classList.toggle('active',x.dataset.id===id)); $('content').innerHTML=`<div class="hero"><div><h2>${b.address}</h2><p class="muted">Case ${b.id} · prototype record</p></div><span class="badge">${b.confidence} confidence</span></div><div class="timeline"><article class="age"><span>1 · Register age</span><div class="year">${b.register}</div><p>Officially recorded construction year.</p></article><article class="age"><span>2 · Facade-style age</span><div class="year">${b.facadeYear}</div><p>${b.facade}</p></article><article class="age"><span>3 · Structural age</span><div class="year">${b.structureYear}</div><p>${b.structure}</p></article></div><div class="evidence"><h3>Evidence trail</h3><ul>${b.evidence.map(x=>`<li>${x}</li>`).join('')}</ul><p class="muted">Prototype rule: a disagreement between ages is a research signal, not proof of facadism. Each claim needs a source, confidence level and manual review path.</p></div>`; }
-function showSource(record){
-  $('sourceDetail').innerHTML=`<b>${record.name || record.id}</b><br><small>${record.address || 'address unavailable'}</small><p><b>Years mentioned:</b> ${(record.history_years || []).join(', ') || 'none extracted'}</p><p>${record.history || 'No history text.'}</p><p><small>${record.facade || 'No facade description.'}</small></p>`;
+const escapeHTML=value=>String(value ?? '').replace(/[&<>"']/g, character=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+let sourceRecords=new Map();
+let pilotRecords=[];
+
+function sourceFor(pilot){ return sourceRecords.get(pilot.source_id) || {}; }
+function valueOrPending(field){ return field.value || 'Pending'; }
+function renderList(){
+  $('list').innerHTML=pilotRecords.map(p=>{
+    const source=sourceFor(p);
+    return `<button type="button" class="building" aria-pressed="false" data-id="${escapeHTML(p.source_id)}"><b>${escapeHTML(source.name || p.source_id)}</b><small>${escapeHTML(source.address || 'address unavailable')}</small></button>`;
+  }).join('');
+  document.querySelectorAll('#list .building').forEach(button=>button.addEventListener('click',()=>show(button.dataset.id)));
+  if(pilotRecords[0]) show(pilotRecords[0].source_id);
 }
-renderList();
-fetch('data/grand-place-buildings.json').then(r=>r.json()).then(d=>{
-  const withHistory=d.records.filter(x=>x.history).length;
-  $('source').textContent=`Public source connected: City of Brussels Grand Place dataset — ${d.source} buildings; ${withHistory} include English restoration/history text. These records prove source feasibility, not the three-age classification.`;
-  $('sourceList').innerHTML=d.records.slice(0,6).map(x=>`<button class="building source-building" data-source-id="${x.id}"><b>${x.name || x.id}</b><small>${x.address || 'address unavailable'}</small></button>`).join('');
-  document.querySelectorAll('.source-building').forEach(el=>el.addEventListener('click',()=>showSource(d.records.find(x=>x.id===el.dataset.sourceId))));
-  showSource(d.records[0]);
-}).catch(()=>{$('source').textContent='Public-source snapshot unavailable; run the local server and fetch script first.'; $('sourceList').textContent='Public-source snapshot unavailable.'});
+function ageCard(number,label,field,description){
+  return `<article class="age"><span>${number} · ${label}</span><div class="year">${escapeHTML(valueOrPending(field))}</div><span class="status">${escapeHTML(field.status)}</span><p>${escapeHTML(description || field.note)}</p></article>`;
+}
+function show(id){
+  const pilot=pilotRecords.find(record=>record.source_id===id);
+  const source=sourceFor(pilot);
+  if(!pilot) return;
+  document.querySelectorAll('#list .building').forEach(button=>{ const selected=button.dataset.id===id; button.classList.toggle('active',selected); button.setAttribute('aria-pressed',selected); });
+  $('content').innerHTML=`<div class="hero"><div><h2>${escapeHTML(source.name || id)}</h2><p class="muted">${escapeHTML(source.address || 'Address unavailable')} · source record ${escapeHTML(id)}</p></div><span class="badge">source-grounded pilot</span></div><div class="timeline">${ageCard(1,'Register age',pilot.register,'Official register year is not present in this source snapshot.')} ${ageCard(2,'Facade evidence',pilot.facade,source.facade)} ${ageCard(3,'Structural evidence',pilot.structure,'A dated reconstruction is a historical proxy, not a structural-age conclusion.')}</div><div class="evidence"><h3>Evidence trail</h3><p><b>Why this case:</b> ${escapeHTML(pilot.selection_reason)}</p><p><b>History source:</b></p><blockquote>${escapeHTML(source.history || 'No history text.')}</blockquote><p><b>Facade source:</b></p><blockquote>${escapeHTML(source.facade || 'No facade description.')}</blockquote><p class="source-note"><b>Next annotation step:</b> ${escapeHTML(pilot.next_step)}<br><span class="muted">Image evidence attached: ${pilot.image_evidence.length ? pilot.image_evidence.length : 'none yet'}.</span></p><p><a href="${escapeHTML(source.source_url || '#')}" target="_blank" rel="noopener">Open source location</a></p></div>`;
+}
+function showSource(record){
+  if(!record) return;
+  $('sourceDetail').innerHTML=`<b>${escapeHTML(record.name || record.id)}</b><br><small>${escapeHTML(record.address || 'address unavailable')}</small><p><b>Years mentioned:</b> ${(record.history_years || []).map(escapeHTML).join(', ') || 'none extracted'}</p><p>${escapeHTML(record.history || 'No history text.')}</p><p><small>${escapeHTML(record.facade || 'No facade description.')}</small></p>`;
+}
+Promise.all([
+  fetch('data/grand-place-buildings.json').then(response=>response.json()),
+  fetch('data/three-ages-pilot.json').then(response=>response.json())
+]).then(([source,pilot])=>{
+  sourceRecords=new Map(source.records.map(record=>[record.id,record]));
+  pilotRecords=pilot.records.filter(record=>sourceRecords.has(record.source_id));
+  const withHistory=source.records.filter(record=>record.history).length;
+  $('source').textContent=`Public source connected: City of Brussels Grand Place dataset — ${source.source} buildings; ${withHistory} include restoration/history text. The pilot currently contains ${pilotRecords.length} source-linked cases and no image-derived labels.`;
+  $('datasetLink').href=source.dataset_url || '#';
+  $('datasetLink').hidden=!source.dataset_url;
+  renderList();
+  $('sourceList').innerHTML=pilotRecords.map(p=>{ const record=sourceFor(p); return `<button type="button" class="building source-building" data-source-id="${escapeHTML(record.id)}"><b>${escapeHTML(record.name || record.id)}</b><small>${escapeHTML(record.address || 'address unavailable')}</small></button>`; }).join('');
+  $('protocol').innerHTML=`<h3>Pilot protocol</h3><ul>${Object.entries(pilot.annotation_protocol).map(([label,note])=>`<li><b>${escapeHTML(label)}:</b> ${escapeHTML(note)}</li>`).join('')}</ul>`;
+  document.querySelectorAll('.source-building').forEach(button=>button.addEventListener('click',()=>showSource(sourceRecords.get(button.dataset.sourceId))));
+  showSource(sourceRecords.get(pilotRecords[0]?.source_id));
+}).catch(()=>{
+  $('source').textContent='Public-source snapshot unavailable; run the local server and check the local data files.';
+  $('sourceList').textContent='Public-source snapshot unavailable.';
+});
 </script>
 </body>
 </html>

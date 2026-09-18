@@ -1,5 +1,6 @@
 {
   "source": 34,
+  "dataset_url": "https://opendata.brussels.be/api/explore/v2.1/catalog/datasets/description-des-batiments-de-la-grand-place/records",
   "completeness": {
     "history": 34,
     "history_years": 34,

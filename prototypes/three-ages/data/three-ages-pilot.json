@@ -1,0 +1,66 @@
+{
+  "source": "City of Brussels Grand Place building snapshot",
+  "method": "Manual pilot schema. Values marked proxy are extracted from source history, not inferred from imagery.",
+  "annotation_protocol": {
+    "register": "Use an official construction-year field; this source snapshot does not provide one.",
+    "facade": "Record the source-described style separately from a future image-based style label.",
+    "structure": "Treat a documented reconstruction date as a proxy only until historical imagery is reviewed.",
+    "confidence": "Do not assign a final confidence score until image epochs, licensing and annotation review are complete."
+  },
+  "records": [
+    {
+      "source_id": "005",
+      "selection_reason": "Stone facade from 1641 followed by reconstruction in 1697–1704.",
+      "register": {"status": "pending", "value": null, "note": "No official register-year field in this snapshot."},
+      "facade": {"status": "source description", "value": "Baroque", "note": "Style is described by the public source; visual dating is pending."},
+      "structure": {"status": "documented proxy", "value": "1697–1704", "note": "Reconstruction date from the public history text; not an aerial-image inference."},
+      "image_evidence": [],
+      "next_step": "Find two permitted historical image epochs and annotate whether the visible facade and underlying volume changed."
+    },
+    {
+      "source_id": "009",
+      "selection_reason": "1698 reconstruction with a clearly described classical facade.",
+      "register": {"status": "pending", "value": null, "note": "No official register-year field in this snapshot."},
+      "facade": {"status": "source description", "value": "Classical French style", "note": "Style is described by the public source; visual dating is pending."},
+      "structure": {"status": "documented proxy", "value": "1698", "note": "Reconstruction date from the public history text; not an aerial-image inference."},
+      "image_evidence": [],
+      "next_step": "Verify whether the present facade survives from the reconstruction or later restoration work."
+    },
+    {
+      "source_id": "022",
+      "selection_reason": "Reconstruction after 1695 and facade completely rebuilt in 1896–1899.",
+      "register": {"status": "pending", "value": null, "note": "No official register-year field in this snapshot."},
+      "facade": {"status": "source description", "value": "Baroque gable", "note": "The source documents a later facade rebuild; visual dating is pending."},
+      "structure": {"status": "documented proxy", "value": "after 1695", "note": "Earlier reconstruction date from the public history text; not an aerial-image inference."},
+      "image_evidence": [],
+      "next_step": "Use imagery to test whether the 1896–1899 facade rebuild preserved the earlier structural volume."
+    },
+    {
+      "source_id": "023",
+      "selection_reason": "1697 rebuild followed by a complete facade rebuild in 1895–1899.",
+      "register": {"status": "pending", "value": null, "note": "No official register-year field in this snapshot."},
+      "facade": {"status": "source description", "value": "Baroque gable", "note": "The source documents a later facade rebuild; visual dating is pending."},
+      "structure": {"status": "documented proxy", "value": "1697", "note": "Rebuild date from the public history text; not an aerial-image inference."},
+      "image_evidence": [],
+      "next_step": "Compare historical imagery before and after 1895 to distinguish facade change from structural change."
+    },
+    {
+      "source_id": "024",
+      "selection_reason": "1704 reconstruction with a later complete reconstruction of the rear facade.",
+      "register": {"status": "pending", "value": null, "note": "No official register-year field in this snapshot."},
+      "facade": {"status": "source description", "value": "Baroque", "note": "Style is described by the public source; visual dating is pending."},
+      "structure": {"status": "documented proxy", "value": "1704", "note": "Reconstruction date from the public history text; not an aerial-image inference."},
+      "image_evidence": [],
+      "next_step": "Check whether rear-volume change is visible in aerial imagery while the Grand-Place facade remains stable."
+    },
+    {
+      "source_id": "026",
+      "selection_reason": "1697 reconstruction with explicit preservation of the facade and a rebuilt gable.",
+      "register": {"status": "pending", "value": null, "note": "No official register-year field in this snapshot."},
+      "facade": {"status": "source description", "value": "Renaissance-inspired", "note": "The source describes the visible style and later gable work; visual dating is pending."},
+      "structure": {"status": "documented proxy", "value": "1697", "note": "Reconstruction date from the public history text; not an aerial-image inference."},
+      "image_evidence": [],
+      "next_step": "Test the source statement that the facade was preserved against permitted historical imagery."
+    }
+  ]
+}
