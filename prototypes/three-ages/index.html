@@ -22,7 +22,8 @@
   <p class="lede">A small evidence pilot: compare what a public history source says with the fields still needed for a defensible three-age annotation.</p>
   <div class="notice"><b>Pilot boundary:</b> these are real Grand Place source records. Only documented source facts are shown; register years and image-derived structural labels remain pending.</div>
   <p id="source" class="muted" aria-live="polite">Loading public-source snapshot…</p>
-  <a id="datasetLink" class="muted" href="#" target="_blank" rel="noopener" hidden>Open the public dataset endpoint</a>
+  <a id="datasetLink" class="muted" href="#" target="_blank" rel="noopener" hidden>Open the public dataset endpoint</a><br>
+  <a id="pilotExportLink" class="muted" href="data/three-ages-pilot-export.csv" download hidden>Download the pilot annotation worksheet</a>
   <div class="layout">
     <aside class="panel"><h2>Case set</h2><p class="muted">Select a building to inspect its three ages and evidence.</p><div id="list"></div><h3>Public source preview</h3><div id="sourceList" class="muted">Loading records…</div><div id="sourceDetail" class="evidence"></div><div id="protocol" class="evidence"></div></aside>
     <section class="card"><div id="content"></div></section>
@@ -70,6 +71,7 @@ Promise.all([
   $('source').textContent=`Public source connected: City of Brussels Grand Place dataset — ${source.source} buildings; ${withHistory} include restoration/history text. The pilot currently contains ${pilotRecords.length} source-linked cases and no image-derived labels.`;
   $('datasetLink').href=source.dataset_url || '#';
   $('datasetLink').hidden=!source.dataset_url;
+  $('pilotExportLink').hidden=false;
   renderList();
   $('sourceList').innerHTML=pilotRecords.map(p=>{ const record=sourceFor(p); return `<button type="button" class="building source-building" data-source-id="${escapeHTML(record.id)}"><b>${escapeHTML(record.name || record.id)}</b><small>${escapeHTML(record.address || 'address unavailable')}</small></button>`; }).join('');
   $('protocol').innerHTML=`<h3>Pilot protocol</h3><ul>${Object.entries(pilot.annotation_protocol).map(([label,note])=>`<li><b>${escapeHTML(label)}:</b> ${escapeHTML(note)}</li>`).join('')}</ul>`;
