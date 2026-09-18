@@ -33,6 +33,7 @@ const $=id=>document.getElementById(id);
 const escapeHTML=value=>String(value ?? '').replace(/[&<>"']/g, character=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
 let sourceRecords=new Map();
 let pilotRecords=[];
+let pilotStatus='source-grounded pilot';
 
 function sourceFor(pilot){ return sourceRecords.get(pilot.source_id) || {}; }
 function valueOrPending(field){ return field.value || 'Pending'; }
@@ -52,7 +53,7 @@ function show(id){
   const source=sourceFor(pilot);
   if(!pilot) return;
   document.querySelectorAll('#list .building').forEach(button=>{ const selected=button.dataset.id===id; button.classList.toggle('active',selected); button.setAttribute('aria-pressed',selected); });
-  $('content').innerHTML=`<div class="hero"><div><h2>${escapeHTML(source.name || id)}</h2><p class="muted">${escapeHTML(source.address || 'Address unavailable')} · source record ${escapeHTML(id)}</p></div><span class="badge">source-grounded pilot</span></div><div class="timeline">${ageCard(1,'Register age',pilot.register,'Official register year is not present in this source snapshot.')} ${ageCard(2,'Facade evidence',pilot.facade,source.facade)} ${ageCard(3,'Structural evidence',pilot.structure,'A dated reconstruction is a historical proxy, not a structural-age conclusion.')}</div><div class="evidence"><h3>Evidence trail</h3><p><b>Why this case:</b> ${escapeHTML(pilot.selection_reason)}</p><p><b>History source:</b></p><blockquote>${escapeHTML(source.history || 'No history text.')}</blockquote><p><b>Facade source:</b></p><blockquote>${escapeHTML(source.facade || 'No facade description.')}</blockquote><p class="source-note"><b>Next annotation step:</b> ${escapeHTML(pilot.next_step)}<br><span class="muted">Image evidence attached: ${pilot.image_evidence.length ? pilot.image_evidence.length : 'none yet'}.</span></p><p><a href="${escapeHTML(source.source_url || '#')}" target="_blank" rel="noopener">Open source location</a></p></div>`;
+  $('content').innerHTML=`<div class="hero"><div><h2>${escapeHTML(source.name || id)}</h2><p class="muted">${escapeHTML(source.address || 'Address unavailable')} · source record ${escapeHTML(id)}</p></div><span class="badge">${escapeHTML(pilotStatus)}</span></div><div class="timeline">${ageCard(1,'Register age',pilot.register,'Official register year is not present in this source snapshot.')} ${ageCard(2,'Facade evidence',pilot.facade,source.facade)} ${ageCard(3,'Structural evidence',pilot.structure,'A dated reconstruction is a historical proxy, not a structural-age conclusion.')}</div><div class="evidence"><h3>Evidence trail</h3><p><b>Why this case:</b> ${escapeHTML(pilot.selection_reason)}</p><p><b>History source:</b></p><blockquote>${escapeHTML(source.history || 'No history text.')}</blockquote><p><b>Facade source:</b></p><blockquote>${escapeHTML(source.facade || 'No facade description.')}</blockquote><p class="source-note"><b>Next annotation step:</b> ${escapeHTML(pilot.next_step)}<br><span class="muted">Image evidence attached: ${pilot.image_evidence.length ? pilot.image_evidence.length : 'none yet'}.</span></p><p><a href="${escapeHTML(source.source_url || '#')}" target="_blank" rel="noopener">Open source location</a></p></div>`;
 }
 function showSource(record){
   if(!record) return;
@@ -64,6 +65,7 @@ Promise.all([
 ]).then(([source,pilot])=>{
   sourceRecords=new Map(source.records.map(record=>[record.id,record]));
   pilotRecords=pilot.records.filter(record=>sourceRecords.has(record.source_id));
+  pilotStatus=pilot.review_status || pilotStatus;
   const withHistory=source.records.filter(record=>record.history).length;
   $('source').textContent=`Public source connected: City of Brussels Grand Place dataset — ${source.source} buildings; ${withHistory} include restoration/history text. The pilot currently contains ${pilotRecords.length} source-linked cases and no image-derived labels.`;
   $('datasetLink').href=source.dataset_url || '#';

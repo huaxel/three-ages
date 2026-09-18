@@ -1,6 +1,7 @@
 {
   "source": "City of Brussels Grand Place building snapshot",
   "method": "Manual pilot schema. Values marked proxy are extracted from source history, not inferred from imagery.",
+  "review_status": "source-grounded pilot",
   "annotation_protocol": {
     "register": "Use an official construction-year field; this source snapshot does not provide one.",
     "facade": "Record the source-described style separately from a future image-based style label.",
