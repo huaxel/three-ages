@@ -1,0 +1,623 @@
+{
+  "source": 34,
+  "completeness": {
+    "history": 34,
+    "history_years": 34,
+    "facade": 32,
+    "original_function": 34
+  },
+  "records": [
+    {
+      "id": "005",
+      "name": "The Horn",
+      "address": "Grand-Place, 6",
+      "latitude": 50.84695467577162,
+      "longitude": 4.351754130265315,
+      "history": "Reconstruction in 1697-1704 of the house with a stone façade from 1641 (Architect Antoon Pastorana). Restoration in 1885-1902; refurbishment of the upper parts in 1987-1990, and most recent restoration by the City completed in 2015.",
+      "history_years": [
+        1641,
+        1697,
+        1704,
+        1885,
+        1902,
+        1987,
+        1990,
+        2015
+      ],
+      "facade": "Façade in a striking Baroque style, with concave lateral spans and a highly elaborate crowning. Iconography related to navigation and the sea; portrait and coat of arms of King Charles II of Spain, sovereign of the Netherlands at the time of the reconstruction.",
+      "original_function": "House of the Guild of Boatmen since the 15th century",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.84695467577162%2C4.351754130265315"
+    },
+    {
+      "id": "009",
+      "name": "The Swan",
+      "address": "Grand-Place, 9",
+      "latitude": 50.84630264405441,
+      "longitude": 4.35243753345387,
+      "history": "Reconstruction in 1698 (Architect Cornelis Van Nerven). Restoration in 1895-1904; most recent restoration by the City completed in 2008.",
+      "history_years": [
+        1698,
+        1895,
+        1904,
+        2008
+      ],
+      "facade": "Restrained and monumental façade, in the classical French style, topped by a domed roof finished with a belvedere. Originally, the figurative program was limited to the speaking signboard and monogram of the owner Pierre Fariseau. The Guild of Butchers completed this program with allegories of Agriculture and Butchery on either side of a statue of Abundance, on the pediment of the house. The restorers of the 19th century respected this extended program.",
+      "original_function": "An inn, then a private house purchased in 1720 by the Guild of Butchers",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.84630264405441%2C4.35243753345387"
+    },
+    {
+      "id": "014",
+      "name": "The Dukes of Brabant  - Fortune",
+      "address": "Grand-Place, 13",
+      "latitude": 50.846225357971974,
+      "longitude": 4.352883400404438,
+      "history": "Reconstruction in 1696-1698 in the place of a row of already unified brick houses from 1441 built on the site of a medieval fortified house (Architect Willem De Bruyne). Restoration in 1881-1892 and 1986-1990.",
+      "history_years": [
+        1696,
+        1698,
+        1881,
+        1892,
+        1986,
+        1990
+      ],
+      "facade": "House without a façade, as it was built inside a block of houses. Statue of Fame above the entrance.",
+      "original_function": "Private house and shop",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.846225357971974%2C4.352883400404438"
+    },
+    {
+      "id": "016",
+      "name": "The Dukes of Brabant -  Fortune",
+      "address": "Grand-Place, 15",
+      "latitude": 50.8462898085351,
+      "longitude": 4.353063036547242,
+      "history": "Reconstruction in 1696-1698 on the site of a row of already unified brick houses from 1441 built on the site of a medieval fortified house (Architect Willem De Bruyne). Restoration in 1881-1892 and 1986-1990.",
+      "history_years": [
+        1696,
+        1698,
+        1881,
+        1892,
+        1986,
+        1990
+      ],
+      "facade": "Façade occupying one side of the square, imposing basement on 2 levels and half-buried cellars, giant order spanning the two upper floors, monumental cornice and balustrade in front of the mansard roof. In addition to the general program of the façade, dedicated to the Dukes of Brabant, the house emblem and 2 cartouches depicting tools used in the tannery profession.",
+      "original_function": "Private house, then headquarters of the Guild of Tanners in 1759",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.8462898085351%2C4.353063036547242"
+    },
+    {
+      "id": "027",
+      "name": "The Arms of the Duchy  of  Brabant",
+      "address": "Grand-Place, 28",
+      "latitude": 50.84681995846164,
+      "longitude": 4.352993244153482,
+      "history": "Reconstruction around 1709 of a house with a wooden gable façade. Façades rebuilt in 1896-1899; most recent restoration by the City completed in 2012.",
+      "history_years": [
+        1709,
+        1896,
+        1899,
+        2012
+      ],
+      "facade": "Façade composed of 4 registers surmounted by a restrained gable in the baroque spirit. The decoration is limited to the arms of the Duchy of Brabant surrounded by the crests of its 4 cities: Leuven, Antwerp, Brussels and Bois-le-Duc.",
+      "original_function": "House and shop",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.84681995846164%2C4.352993244153482"
+    },
+    {
+      "id": "015",
+      "name": "The Dukes of Brabant -  the Hermitage",
+      "address": "Grand-Place, 14",
+      "latitude": 50.84627244911472,
+      "longitude": 4.352962864763425,
+      "history": "Reconstruction in 1696-1698 in the place of a series of already unified brick houses from 1441 built on the site of a medieval fortified house (Architect Willem De Bruyne). Restoration in 1881-1892 and 1986-1990.",
+      "history_years": [
+        1696,
+        1698,
+        1881,
+        1892,
+        1986,
+        1990
+      ],
+      "facade": "Façade occupying one side of the square, imposing basement on 2 levels and half-buried cellars, giant order spanning the two upper floors, monumental cornice and balustrade in front of the mansard roof. In addition to the general program of the façade, dedicated to the Dukes of Brabant, the house emblem.",
+      "original_function": "Private house",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.84627244911472%2C4.352962864763425"
+    },
+    {
+      "id": "011",
+      "name": "The Rose",
+      "address": "Grand-Place, 11",
+      "latitude": 50.846248451486446,
+      "longitude": 4.352658201417896,
+      "history": "Reconstruction in 1702 of a house with a wooden façade, on a site made smaller by adjusting the alignment. Restoration in 1884-1888; most recent restoration by the City completed in 2008.",
+      "history_years": [
+        1702,
+        1884,
+        1888,
+        2008
+      ],
+      "facade": "Sober façade divided into 3 registers, with baroque gable. Decorative program limited to a house emblem and the year of construction.",
+      "original_function": "Private house",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.846248451486446%2C4.352658201417896"
+    },
+    {
+      "id": "022",
+      "name": "Joseph and Anne",
+      "address": "Grand-Place, 21-22",
+      "latitude": 50.84663140298947,
+      "longitude": 4.3532418710798915,
+      "history": "Reconstruction after 1695 on the partially preserved cellars. Façade completely rebuilt in 1896-1899, with refurbishment of the gable; most recent restoration by the City completed in 2012.",
+      "history_years": [
+        1695,
+        1896,
+        1899,
+        2012
+      ],
+      "facade": "Highly sober façade on 4 levels with a gable in two registers of baroque style. Decorative program limited to two polychrome cartouches above the ground floor, with the names of the house.",
+      "original_function": "Two houses and shops",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.84663140298947%2C4.3532418710798915"
+    },
+    {
+      "id": "024",
+      "name": "The  Weighing  Scales",
+      "address": "Grand-Place, 24",
+      "latitude": 50.84671827430188,
+      "longitude": 4.353152773262009,
+      "history": "Reconstruction in 1704 on the preserved cellars. Restorations in 1890 and 1986; most recent intervention in 2000 with complete reconstruction of the rear façade, following its collapse.",
+      "history_years": [
+        1704,
+        1890,
+        1986,
+        2000
+      ],
+      "facade": "Baroque façade with an original elevation, adorned with 3 overlapping orders and finished by an elongated gable. Decorative program consisting of a house emblem, two caryatids on the balcony and the year of construction.",
+      "original_function": "Private house",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.84671827430188%2C4.353152773262009"
+    },
+    {
+      "id": "026",
+      "name": "The Pigeon",
+      "address": "Grand-Place, 26-27",
+      "latitude": 50.846832360703424,
+      "longitude": 4.353053947078274,
+      "history": "House reconstructed  in 1697  with a stone façade (Architect Pieter Simons). Restoration in 1901-1908, with preservation of the façade, except for the rebuilt gable; most recent restoration by the City completed in 2012.",
+      "history_years": [
+        1697,
+        1901,
+        1908,
+        2012
+      ],
+      "facade": "Façade still inspired by the Renaissance, perhaps in reference to the previous façade, with overlapping registers, arched windows, a Venetian window and grotesque decorations. Grotesque decoration above the entrances and on the corbels at mezzanine level, probably dating from the end of the 18th century.",
+      "original_function": "House of the Guild of Painters until the bombardment of Brussels, then sold to a private individual in 1697",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.846832360703424%2C4.353053947078274"
+    },
+    {
+      "id": "023",
+      "name": "The Angel",
+      "address": "Grand-Place, 23",
+      "latitude": 50.84666628057443,
+      "longitude": 4.3532003597568245,
+      "history": "Rebuilt in 1697 (Architect Willem De Bruyne). Façade completely rebuilt in 1895-1899, with refurbishment of the gable; most recent restoration by the City completed in 2012.",
+      "history_years": [
+        1697,
+        1895,
+        1899,
+        2012
+      ],
+      "facade": "Highly vertical façade, basement on 2 levels and disproportionate giant order on 3 levels instead of 2, baroque gable. Decorative program limited to 2 sculpted faces on the third floor and the year of construction on the  5th floor.",
+      "original_function": "Private house",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.84666628057443%2C4.3532003597568245"
+    },
+    {
+      "id": "032",
+      "name": "The Oak",
+      "address": "Grand-Place, 37",
+      "latitude": 50.847265047462,
+      "longitude": 4.35245320048519,
+      "history": "Reconstruction in 1696. Restoration in 1883-1886; most recent restoration by the City completed in 2016.",
+      "history_years": [
+        1696,
+        1883,
+        1886,
+        2016
+      ],
+      "facade": "Left half of the restrained façade in painted and coated brick, under a hipped roof with an attractive dormer window. Decorative program limited to decorated panels and the year of construction.",
+      "original_function": "House and shop",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.847265047462%2C4.35245320048519"
+    },
+    {
+      "id": "020",
+      "name": "The Dukes of Brabant - the Purse",
+      "address": "Grand-Place, 19",
+      "latitude": 50.846480095820226,
+      "longitude": 4.353356821798408,
+      "history": "Reconstruction in 1696-1698 on the site of a row of already unified brick houses from 1441 built on the site of a medieval fortified house (Architect Willem De Bruyne). Restoration in 1881-1892 and 1986-1990.",
+      "history_years": [
+        1696,
+        1698,
+        1881,
+        1892,
+        1986,
+        1990
+      ],
+      "facade": "Façade occupying one side of the square, imposing basement on 2 levels and half-buried cellars, giant order spanning the two upper floors, monumental cornice and balustrade in front of the mansard roof. In addition to the general program of the façade, dedicated to the Dukes of Brabant, and a cartouche decorated with historical scenes acting as a house emblem, with year of construction.",
+      "original_function": "Private house",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.846480095820226%2C4.353356821798408"
+    },
+    {
+      "id": "029",
+      "name": "The Helm",
+      "address": "Grand-Place, 34",
+      "latitude": 50.84713643821335,
+      "longitude": 4.352531917945232,
+      "history": "Reconstruction after 1695 of a house with a wooden façade, attributed to Pieter Van Dievoet. Restoration in 1879 and in 1916-1923; most recent restoration by the City completed in 2016.",
+      "history_years": [
+        1695,
+        1879,
+        1916,
+        1923,
+        2016
+      ],
+      "facade": "Façade with 3 registers, with restrained ornamentation, and a gable with inverted consoles in the Baroque style. Decorative program with speaking signboard and two bas-reliefs illustrating the work of arms manufacture, inspired by 17th century originals.",
+      "original_function": "House and shop",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.84713643821335%2C4.352531917945232"
+    },
+    {
+      "id": "008",
+      "name": "The Star",
+      "address": "Grand-Place, 9",
+      "latitude": 50.84633820876636,
+      "longitude": 4.3523979709574085,
+      "history": "Reconstruction in 1695-1696, demolished in 1853 to widen the street, and rebuilt on a gallery opened in 1896-1897. Restoration by the City completed in 2008; monument to Everard t' Serclaes replaced by a copy in 2016. The original is now kept at the City Hall.",
+      "history_years": [
+        1695,
+        1696,
+        1853,
+        1896,
+        1897,
+        2008,
+        2016
+      ],
+      "facade": "Façade on covered gallery on the ground floor, giant order spanning 2 levels, scrolled gable. The star at the top of the gable refers to the name of the house. Under the arcades, monument to Mayor Charles Buls by Victor Rousseau and Victor Horta in 1899 and monument to Everart t' Serclaes by Julien Dillens in 1902.",
+      "original_function": "Originally attributed to Amman, the sovereign's representative to the City in the Middle Ages, then a private house",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.84633820876636%2C4.3523979709574085"
+    },
+    {
+      "id": "028",
+      "name": "The King's House",
+      "address": "Grand-Place, 29-33",
+      "latitude": 50.846971590628016,
+      "longitude": 4.352725917042516,
+      "history": "The first building to occupy the site of the Brussels City Museum was a bread hall, in other words a covered market. The building, probably built in the 13th century, overlooked the Grand Place, where the city's largest market was held.\nThe hall was abandoned by the bakers in the 15th century and  subsequently used for part of the ducal  administration. From 1515 to 1536, Charles V had the hall replaced by a prestigious building, which was renamed the \"King's House\" in his honour. \nThe King's House marked the presence of centralised power in the very heart of the city. As such, the King's House competed with the City Hall, a symbol of local power, which stood opposite. \nThe interior of the King's House was destroyed during the bombardment of Brussels by King Louis XIV of France in 1695.\nThe building was summarily restored. During the 18th century, it underwent a minor transformation to give it a more classical appearance.\nThe building, which had become dilapidated, was purchased by the City of Brussels in 1860 with the intention of restoring it. However, the poor state of the foundations prompted architect Pierre-Victor Jamaer to have it rebuilt from scratch. \nThis new King's House, built between 1874 and 1896, differed  considerably  from the original version. It is considered one of the most beautiful examples of the neo-Gothic style in Belgium.\nThe neo-Gothic style interior of the King's House is definitely worth a visit. The large main staircase in oak is illuminated by superb stained glass windows bearing the coats of arms of the territories governed by Charles V in the 16th century.\nThe ground floor of the museum is dedicated to sculpture, painting and the decorative arts that have made Brussels famous.\nVarious tapestries, as well as an exceptional preparatory model on paper, testify to Brussels' leading role in this art form. \nThe first floor of the museum tells the story of Brussels through paintings, sculptures, maps, etc. It presents exceptional views of districts and monuments that no longer exist.\nA model of Brussels in the 13th century will come as a surprise, since the medieval city was so different from today's.\nIt is also here that you can learn more about the history of the Grand Place, the commercial and political heart of the city.\nOn the second floor, a large room with remarkable wooden panelling, houses temporary exhibitions. Don't miss the exhibition \"The Grand Place To Be\" while you're there.\nThe icing on the cake is a room set aside for the original statuette of the famous Manneken-Pis and his history.",
+      "history_years": [
+        1515,
+        1536,
+        1695,
+        1860,
+        1874,
+        1896
+      ],
+      "facade": null,
+      "original_function": "An old bread market  since the 14th century, converted into the administrative seat of ducal power in the early 15th century, and then rebuilt in the early 16th century.",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.846971590628016%2C4.352725917042516"
+    },
+    {
+      "id": "031",
+      "name": "The Little Fox",
+      "address": "Grand-Place, 36",
+      "latitude": 50.84725514101129,
+      "longitude": 4.352344218295277,
+      "history": "Reconstruction in 1696. Restoration in 1883-1886; most recent restoration by the City completed in 2016.",
+      "history_years": [
+        1696,
+        1883,
+        1886,
+        2016
+      ],
+      "facade": "Right half of the restrained façade in painted and coated brick, under a hipped roof with an attractive dormer window. Decorative program limited to decorated panels and the year of construction.",
+      "original_function": "House and shop",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.84725514101129%2C4.352344218295277"
+    },
+    {
+      "id": "006",
+      "name": "The Fox",
+      "address": "Grand-Place, 7",
+      "latitude": 50.84691812529184,
+      "longitude": 4.351664892694273,
+      "history": "Reconstruction in 1697-1700 of a house with a stone façade from 1645 (Architect Cornelis Van Nerven). Restoration in 1879-1885; most recent restoration by the City completed in 2015.",
+      "history_years": [
+        1645,
+        1697,
+        1700,
+        1879,
+        1885,
+        2015
+      ],
+      "facade": "Façade with 2 high floors on a base with ground floor and mezzanine, finished with a baroque gable. Complex decorative program on the theme of commerce with: house emblem, 4 reliefs, allegories of the 4 corners of the world surrounding Justice, the year of construction and a statue of Saint Nicolas at the top of the gable. The 4 bas-reliefs, which appear to be originals from the late 17th century, illustrate a haberdashery shop, a draper's shop, a dyeing workshop and a ceramics factory.",
+      "original_function": "House of the Mercers' Guild  since the 15th century",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.84691812529184%2C4.351664892694273"
+    },
+    {
+      "id": "034",
+      "name": "The House of the Donkey",
+      "address": "Grand-Place, 39",
+      "latitude": 50.847259913430236,
+      "longitude": 4.352309173134977,
+      "history": "Reconstruction in 1695 of a house with a wooden façade on the preserved cellars. Façade completely restored and reconstructed in 1913-1920; most recent restoration by the City completed in 2004.",
+      "history_years": [
+        1695,
+        1913,
+        1920,
+        2004
+      ],
+      "facade": "Façade with 3 registers with orders and original gable finished with a curved pediment. Decorative program with two horns of plenty overflowing with fruits and flowers at the top of the gable.",
+      "original_function": "House and shop",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.847259913430236%2C4.352309173134977"
+    },
+    {
+      "id": "030",
+      "name": "The Peacock",
+      "address": "Grand-Place, 35",
+      "latitude": 50.847161780892094,
+      "longitude": 4.3524552664983425,
+      "history": "Reconstruction in 1697 of a house with a wooden façade. Restoration in two phases, between 1876 and 1895; most recent restoration by the City in 2016.",
+      "history_years": [
+        1697,
+        1876,
+        1895,
+        2016
+      ],
+      "facade": "Modest façade in plastered and painted masonry, punctuated with strips jutting out. Decorative program with speaking signboard, year of construction and garlands of fruit and flowers.",
+      "original_function": "House and shop",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.847161780892094%2C4.3524552664983425"
+    },
+    {
+      "id": "017",
+      "name": "The Dukes of Brabant - The Windmill",
+      "address": "Grand-Place, 16",
+      "latitude": 50.84633839246801,
+      "longitude": 4.353141906775982,
+      "history": "Reconstruction in 1696-1698 in the place of a row of already unified brick houses from 1441 built on the site of a medieval fortified house (Architect Willem De Bruyne). Restoration in 1881-1892 and 1986-1990.",
+      "history_years": [
+        1696,
+        1698,
+        1881,
+        1892,
+        1986,
+        1990
+      ],
+      "facade": "Façade occupying one side of the square, imposing basement on 2 levels and half-buried cellars, giant order spanning the two upper floors, monumental cornice and balustrade in front of the mansard roof. In addition to the general program (or scheme) of the façade, dedicated to the Dukes of Brabant, the house emblem and 2 cartouches depicting tools used by the profession. Pediment modified in 1770 by Laurent-Benoît Dewez, with an allegory of Prosperity.",
+      "original_function": "Headquarters of the Guild of Millers in 1697",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.84633839246801%2C4.353141906775982"
+    },
+    {
+      "id": "025",
+      "name": "The Golden Boat",
+      "address": "Grand-Place, 24-25",
+      "latitude": 50.846744339052826,
+      "longitude": 4.353110615381656,
+      "history": "Rebuilt in 1697 (Architect Willem De Bruyne). Restorations in 1879-1880 and 1898-1899; most recent restoration by the City completed in 2012.",
+      "history_years": [
+        1697,
+        1879,
+        1880,
+        1898,
+        1899,
+        2012
+      ],
+      "facade": "Monumental façade in baroque style with a classical appearance, remarkably well balanced, with giant order, antique-style pediment and gable. Decorative program with a bust of Saint Barbara in the circular transom window above the entrance and free-standing statue of Saint Boniface at the top of the gable.",
+      "original_function": "House of the Guild of Tailors",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.846744339052826%2C4.353110615381656"
+    },
+    {
+      "id": "033",
+      "name": "Saint Barbara",
+      "address": "Grand-Place, 38",
+      "latitude": 50.847237913413004,
+      "longitude": 4.352354573134857,
+      "history": "Reconstruction in 1695 of a house with a wooden façade. Façade completely restored and reconstructed in 1913-1920; most recent restoration by the City in 2016.",
+      "history_years": [
+        1695,
+        1913,
+        1920,
+        2016
+      ],
+      "facade": "Narrow façade with a very restrained elevation, finished with a scroll gable. Decorative program limited to a bas-relief representing Saint Barbara on the 3rd floor.",
+      "original_function": "House and shop",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.847237913413004%2C4.352354573134857"
+    },
+    {
+      "id": "007",
+      "name": "City Hall",
+      "address": "Grand-Place, 8",
+      "latitude": 50.846621878224376,
+      "longitude": 4.351922751625859,
+      "history": "The City Hall in Brussels is one of the most beautiful examples of Gothic architecture. Since its construction at the end of the Middle Ages, it has served as a meeting place for the City's leaders. It also houses offices and ceremonial rooms which are used by the municipal authorities.\n\nThe building was constructed in two stages. The first phase of construction started in 1401 and ended in 1421. At the time, the City Hall was smaller than what you see today. It was limited to the current left wing of the building and the square base of the tower.\n\nDuring the second phase, from 1444 to 1455, the building took the shape you see before you.  A new wing was built on the right side, which was shorter than the one on the left. At the same time, the tower was raised by an octagonal arrow ending in a point.\n\nThe imposing look of the completed building testified to the power acquired by Brussels and its municipal authorities at the end of the Middle Ages. As a riposte to the splendour of the  City Hall, Charles V had the King's House built  on the other side of the square in the following century, as the symbol of centralised power.\n\nConstruction of the City Hall was completed in 1455, with the installation of a weathervane in the form of a statue of the Archangel Michael at the top of the tower, the patron saint of Brussels' inhabitants and the official symbol of municipal authority. Saint Michael battling the devil dominates the city at a height of nearly 97 metres.\n\nSince 1996, an identical copy has replaced the original statue. The original is currently on display at the King's House, which now houses the Brussels City Museum.\n\nAlong with the entire lower part of the city, the City Hall was burned down during the bombardment of Brussels in 1695, which was ordered by King Louis XIV of France. Fortunately, the building's exterior walls remained intact. However, all of the interior that went up in smoke and needed to be rebuilt, as did all of the houses on the Grand Place.\n\nIt was this reconstruction, hastily implemented, that gave the square its unique aspect, which can still be admired today.\n\nBetween the 1840s and the early 20th century, the City Hall underwent a comprehensive restoration. In order to further enhance the building, circa 300 neo-Gothic statues were installed on the facades. During the same period, all the houses in the square were also restored, and the King's House was rebuilt.\n\nAt the same time, the interior was largely redecorated in a style inspired by the Middle Ages, which was reminiscent of the splendour of Brussels' past. Guided tours are regularly organised at the City Hall. To find out more, please visit the VisitBrussels offices on the ground floor.",
+      "history_years": [
+        1695,
+        1996
+      ],
+      "facade": null,
+      "original_function": "The seat of municipal power since the 15th century",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.846621878224376%2C4.351922751625859"
+    },
+    {
+      "id": "010",
+      "name": "The Brewers House (The Golden Tree)",
+      "address": "Grand-Place, 10",
+      "latitude": 50.846267927645755,
+      "longitude": 4.352548231083662,
+      "history": "Reconstruction in 1698 (Architect Willem De Bruyne). Restoration in 1893-1900; most recent restoration by the City completed in 2008.",
+      "history_years": [
+        1698,
+        1893,
+        1900,
+        2008
+      ],
+      "facade": "Monumental façade in baroque style with classical features, in the giant order spanning the 2 upper floors, curved pediment topped by a gable. Rich decorative program consisting of 3 bas-reliefs (the 2 lateral ones are originals, attributed to Pieter Van Dievoet), the coat of arms and the equestrian statue of Charles of Lorraine at the top of the gable. The reliefs represent the picking of hops, the transport of barrels and the harvest.",
+      "original_function": "A guild house that successively welcomed tanners and upholsterers before being bought by brewers in the early 17th century",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.846267927645755%2C4.352548231083662"
+    },
+    {
+      "id": "019",
+      "name": "The Dukes of Brabant - The Hill",
+      "address": "Grand-Place, 18",
+      "latitude": 50.846438655271875,
+      "longitude": 4.353308614831314,
+      "history": "Reconstruction in 1696-1698 in the place of a series of already unified brick houses from 1441 built on the site of a medieval fortified house (Architect Willem De Bruyne). Restoration in 1881-1892 and 1986-1990.",
+      "history_years": [
+        1696,
+        1698,
+        1881,
+        1892,
+        1986,
+        1990
+      ],
+      "facade": "Façade occupying one side of the square, imposing basement on 2 levels and half-buried cellars, giant order spanning the two upper floors, monumental cornice and balustrade in front of the mansard roof. In addition to the general program of the façade, dedicated to the Dukes of Brabant, and a cartouche depicting tools used in the construction profession, acting as a house emblem.",
+      "original_function": "Headquarters of the Guild of Sculptors, Masons, Stone-cutters and Slate-cutters",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.846438655271875%2C4.353308614831314"
+    },
+    {
+      "id": "021",
+      "name": "The Stag",
+      "address": "Grand-Place, 20",
+      "latitude": 50.84660913788655,
+      "longitude": 4.35330273842187,
+      "history": "Reconstruction in 1710 (Architect Gillis Vanden Eynde). Façade completely reconstructed in 1897; most recent restoration by the City completed in 2012.",
+      "history_years": [
+        1710,
+        1897,
+        2012
+      ],
+      "facade": "Narrow and highly restrained façade, finished with a gable in the baroque style. On the main façade, decorative program limited to 4 cartouches bearing the name of the house and its year of construction. Small bas-relief of a kite on the side façade.",
+      "original_function": "House and shop",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.84660913788655%2C4.35330273842187"
+    },
+    {
+      "id": "001",
+      "name": "The King of Spain",
+      "address": "Grand-Place, 1",
+      "latitude": 50.84715337898082,
+      "longitude": 4.352107199312394,
+      "history": "Six houses built in 1696 at the corner of Rue au Beurre and the Grand Place, on the ruins of an old fortified house (Architect Jan Cosyn). Complete reconstruction in 1898-1902; most recent restoration by the City completed in 2015.",
+      "history_years": [
+        1696,
+        1898,
+        1902,
+        2015
+      ],
+      "facade": "Façade composed of 3 registers with 3 antique orders; balustrade and roof dome. Rich decorative program featuring: a bust of Saint Aubert, patron saint of bakers, portrait of King Charles II of Spain, sovereign of the Netherlands at the time of construction, mythological figures on the balustrade and an allegory of Fame at the top of the dome.",
+      "original_function": "The Bakers Guild House",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.84715337898082%2C4.352107199312394"
+    },
+    {
+      "id": "002",
+      "name": "The Wheelbarrow",
+      "address": "Grand-Place, 2-3",
+      "latitude": 50.84707971080297,
+      "longitude": 4.351992534756097,
+      "history": "Reconstruction in 1696-1697, integrating part of the stone façade from 1644 (Architect Jan Cosyn). Restoration in 1894-1913, with the gable reconstructed; most recent restoration by the City completed in 2015.",
+      "history_years": [
+        1644,
+        1696,
+        1697,
+        1894,
+        1913,
+        2015
+      ],
+      "facade": "Façade composed of 4 registers in antique style, and finished with a baroque gable. Decorative program consisting of a house emblem, the year of construction, and the statue of Saint Gilles, patron saint of the guild in a niche at the top of the gable.",
+      "original_function": "House of the Grease Dealers' Guild since the 15th century",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.84707971080297%2C4.351992534756097"
+    },
+    {
+      "id": "003",
+      "name": "The Sack",
+      "address": "Grand-Place, 4",
+      "latitude": 50.84703098535017,
+      "longitude": 4.351910381044836,
+      "history": "Reconstruction in 1697, integrating part of the stone façade from 1644 (Architects Pieter Paul Merckx and Antoon Pastorana). Restorations in 1854-1858, and 1907-1913; most recent restoration by the City completed in 2015.",
+      "history_years": [
+        1644,
+        1697,
+        1854,
+        1858,
+        1907,
+        1913,
+        2015
+      ],
+      "facade": "Façade similar to that of The Wheelbarrow, with 4 registers in the Antique style and a baroque gable. Decorative program : house emblem, tools used in the carpentry profession, 5 caryatids and the year of construction.",
+      "original_function": "House of the  Carpenters' Guild  since the 15th century",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.84703098535017%2C4.351910381044836"
+    },
+    {
+      "id": "018",
+      "name": "The Dukes of Brabant - the Tin Pot",
+      "address": "Grand-Place, 17",
+      "latitude": 50.846400887378884,
+      "longitude": 4.353209115563415,
+      "history": "Reconstruction in 1696-1698 in the place of a series of already unified brick houses from 1441 built on the site of a medieval fortified house (Architect Willem De Bruyne). Restoration in 1881-1892 and 1986-1990.",
+      "history_years": [
+        1696,
+        1698,
+        1881,
+        1892,
+        1986,
+        1990
+      ],
+      "facade": "Façade occupying one side of the square, imposing basement on 2 levels and half-buried cellars, giant order spanning the two upper floors, monumental cornice and balustrade in front of the mansard roof. In addition to the general program of the façade, dedicated to the Dukes of Brabant, the speaking signboard, 2 cartouches depicting tools of the carpentry profession, and the year of construction Pediment modified in 1770 by Laurent-Benoît Dewez, with an allegory of Prosperity.",
+      "original_function": "Headquarters of the Guild of Cartwrights",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.846400887378884%2C4.353209115563415"
+    },
+    {
+      "id": "012",
+      "name": "Mount Tabor",
+      "address": "Grand-Place, 12",
+      "latitude": 50.84621881402431,
+      "longitude": 4.352734644033377,
+      "history": "Reconstruction in 1699 above the remaining cellars of a house with a wooden façade, in the new alignment specified for No. 11. Architects Frans Timmermans and Pieter De Roy. Restoration of the façade with refurbishment of the gable in 1885-1889; most recent restoration by the City completed in 2008.",
+      "history_years": [
+        1699,
+        1885,
+        1889,
+        2008
+      ],
+      "facade": "Modest façade with giant order on the upper floors on a very sober lower section and baroque gable. Decorative program limited to a house emblem.",
+      "original_function": "Private house and shop",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.84621881402431%2C4.352734644033377"
+    },
+    {
+      "id": "004",
+      "name": "The She-Wolf",
+      "address": "Grand-Place, 5",
+      "latitude": 50.846997437286795,
+      "longitude": 4.3518359378948315,
+      "history": "Construction in 1690-1691 following a fire. Architect Pieter Herbosch. Reconstruction in 1696 with the entire façade preserved, except for its pediment. Restoration in 1890-1892 to its 1691 appearance; most recent restoration by the City completed in 2015.",
+      "history_years": [
+        1690,
+        1691,
+        1696,
+        1890,
+        1892,
+        2015
+      ],
+      "facade": "Façade with 4 very elongated levels under a pediment in the antique style, reflecting a very modern style at the time of its construction. Elaborate decorative program, primarily devoted to the theme of vice and virtue. Speaking signboard, probably original, by Marc De Vos. The god Apollo with his bow on the pediment, and phoenix at the top, the symbol of rebirth by fire. Ironwork on the doors with intertwining letters of the first names \"Antonius\" and \"Sebastianus\", the patron saints of archers.",
+      "original_function": "House of the Archers since the early 17th century",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.846997437286795%2C4.3518359378948315"
+    },
+    {
+      "id": "013",
+      "name": "The King of Bavaria",
+      "address": "Grand-Place, 12a",
+      "latitude": 50.846185086997444,
+      "longitude": 4.352856386390363,
+      "history": "Rebuilt in 1699. Restoration in 1895-1908; cleaned in 1986-1987 and new intervention in 2012.",
+      "history_years": [
+        1699,
+        1895,
+        1908,
+        1986,
+        1987,
+        2012
+      ],
+      "facade": "Large façade finished with a large baroque gable. Decorative program (or scheme) consisting of 5 busts installed in the 19th century, representing Gambrinus surrounded by fire, hops, wheat and water.",
+      "original_function": "Private house and shop",
+      "source_url": "https://www.google.com/maps/search/?api=1&query=50.846185086997444%2C4.352856386390363"
+    }
+  ]
+}

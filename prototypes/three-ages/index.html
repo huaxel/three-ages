@@ -20,9 +20,10 @@
 <main>
   <h1>De Drie Leeftijden van een Brussels pand</h1>
   <p class="lede">A tiny building-history explorer: compare the registered construction year, the visible facade period and the inferred structural period.</p>
-  <div class="notice"><b>Feasibility spike:</b> these are invented case records showing the information architecture. They are not historical claims about the listed addresses.</div>
+  <div class="notice"><b>Feasibility spike:</b> the interactive case records below are illustrative. They are not historical claims about the listed addresses.</div>
+  <p id="source" class="muted">Loading public-source snapshot…</p>
   <div class="layout">
-    <aside class="panel"><h2>Case set</h2><p class="muted">Select a building to inspect its three ages and evidence.</p><div id="list"></div></aside>
+    <aside class="panel"><h2>Case set</h2><p class="muted">Select a building to inspect its three ages and evidence.</p><div id="list"></div><h3>Public source preview</h3><div id="sourceList" class="muted">Loading records…</div><div id="sourceDetail" class="evidence"></div></aside>
     <section class="card"><div id="content"></div></section>
   </div>
 </main>
@@ -36,7 +37,17 @@ const buildings=[
 const $=id=>document.getElementById(id);
 function renderList(){ $('list').innerHTML=buildings.map((b,i)=>`<button class="building" data-id="${b.id}"><b>${b.id}</b><small>${b.address}</small></button>`).join(''); document.querySelectorAll('.building').forEach(x=>x.addEventListener('click',()=>show(x.dataset.id))); show(buildings[0].id); }
 function show(id){ const b=buildings.find(x=>x.id===id); document.querySelectorAll('.building').forEach(x=>x.classList.toggle('active',x.dataset.id===id)); $('content').innerHTML=`<div class="hero"><div><h2>${b.address}</h2><p class="muted">Case ${b.id} · prototype record</p></div><span class="badge">${b.confidence} confidence</span></div><div class="timeline"><article class="age"><span>1 · Register age</span><div class="year">${b.register}</div><p>Officially recorded construction year.</p></article><article class="age"><span>2 · Facade-style age</span><div class="year">${b.facadeYear}</div><p>${b.facade}</p></article><article class="age"><span>3 · Structural age</span><div class="year">${b.structureYear}</div><p>${b.structure}</p></article></div><div class="evidence"><h3>Evidence trail</h3><ul>${b.evidence.map(x=>`<li>${x}</li>`).join('')}</ul><p class="muted">Prototype rule: a disagreement between ages is a research signal, not proof of facadism. Each claim needs a source, confidence level and manual review path.</p></div>`; }
+function showSource(record){
+  $('sourceDetail').innerHTML=`<b>${record.name || record.id}</b><br><small>${record.address || 'address unavailable'}</small><p><b>Years mentioned:</b> ${(record.history_years || []).join(', ') || 'none extracted'}</p><p>${record.history || 'No history text.'}</p><p><small>${record.facade || 'No facade description.'}</small></p>`;
+}
 renderList();
+fetch('data/grand-place-buildings.json').then(r=>r.json()).then(d=>{
+  const withHistory=d.records.filter(x=>x.history).length;
+  $('source').textContent=`Public source connected: City of Brussels Grand Place dataset — ${d.source} buildings; ${withHistory} include English restoration/history text. These records prove source feasibility, not the three-age classification.`;
+  $('sourceList').innerHTML=d.records.slice(0,6).map(x=>`<button class="building source-building" data-source-id="${x.id}"><b>${x.name || x.id}</b><small>${x.address || 'address unavailable'}</small></button>`).join('');
+  document.querySelectorAll('.source-building').forEach(el=>el.addEventListener('click',()=>showSource(d.records.find(x=>x.id===el.dataset.sourceId))));
+  showSource(d.records[0]);
+}).catch(()=>{$('source').textContent='Public-source snapshot unavailable; run the local server and fetch script first.'; $('sourceList').textContent='Public-source snapshot unavailable.'});
 </script>
 </body>
 </html>
