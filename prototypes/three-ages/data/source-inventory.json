@@ -1,0 +1,41 @@
+{
+  "grand_place_dataset": {
+    "name": "City of Brussels Grand Place buildings",
+    "url": "https://opendata.brussels.be/api/explore/v2.1/catalog/datasets/description-des-batiments-de-la-grand-place/records",
+    "status": "snapshot available",
+    "note": "The committed snapshot contains history and facade text but no official register-year field."
+  },
+  "bruciel_1996": {
+    "name": "BruCiel orthophotos 1996",
+    "url": "https://data.mobility.brussels/en/info/d5e0a5dc-e3b7-48ce-a7ae-bac5ec0b38ba/",
+    "licence": "CC0 stated on metadata page",
+    "status": "candidate epoch",
+    "note": "Confirm tile access and attribution requirements before adding assets."
+  },
+  "bruciel_1944": {
+    "name": "BruCiel orthophotos 1944",
+    "url": "https://data.mobility.brussels/en/info/ortho_44/",
+    "licence": "pending verification",
+    "status": "candidate epoch",
+    "note": "WMS/WFS services are listed; licence was not visible on the reviewed page."
+  },
+  "brussels_archives": {
+    "name": "Brussels Archives image collection",
+    "url": "https://archives.brussels.be/requests-reproduction-or-use-images",
+    "licence": "permission request required",
+    "status": "access request needed",
+    "note": "Confirm reuse terms, credit and possible fees for each selected image."
+  },
+  "urbis_buildings": {
+    "name": "UrbIS buildings technical specification",
+    "url": "https://urbisdownload.datastore.brussels/UrbIS/TechSpec/Buildings_TechSpec_FR20250708.pdf",
+    "status": "source lead",
+    "note": "Verify whether the needed identity and construction attributes are available."
+  },
+  "planning_permits": {
+    "name": "City of Brussels planning and environmental permits",
+    "url": "https://opendata.brussels.be/explore/dataset/permis-urbanisme-environnement-vbx/",
+    "status": "source lead",
+    "note": "Test address or building matching for later reconstruction evidence."
+  }
+}

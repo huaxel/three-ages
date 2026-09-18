@@ -25,7 +25,7 @@
   <a id="datasetLink" class="muted" href="#" target="_blank" rel="noopener" hidden>Open the public dataset endpoint</a><br>
   <a id="pilotExportLink" class="muted" href="data/three-ages-pilot-export.csv" download hidden>Download the pilot annotation worksheet</a>
   <div class="layout">
-    <aside class="panel"><h2>Case set</h2><p class="muted">Select a building to inspect its three ages and evidence.</p><div id="list"></div><h3>Public source preview</h3><div id="sourceList" class="muted">Loading records…</div><div id="sourceDetail" class="evidence"></div><div id="protocol" class="evidence"></div></aside>
+    <aside class="panel"><h2>Case set</h2><p class="muted">Select a building to inspect its three ages and evidence.</p><div id="list"></div><h3>Public source preview</h3><div id="sourceList" class="muted">Loading records…</div><div id="sourceDetail" class="evidence"></div><div id="protocol" class="evidence"></div><div id="access" class="evidence"></div></aside>
     <section class="card"><div id="content"></div></section>
   </div>
 </main>
@@ -62,8 +62,9 @@ function showSource(record){
 }
 Promise.all([
   fetch('data/grand-place-buildings.json').then(response=>response.json()),
-  fetch('data/three-ages-pilot.json').then(response=>response.json())
-]).then(([source,pilot])=>{
+  fetch('data/three-ages-pilot.json').then(response=>response.json()),
+  fetch('data/source-inventory.json').then(response=>response.json())
+]).then(([source,pilot,inventory])=>{
   sourceRecords=new Map(source.records.map(record=>[record.id,record]));
   pilotRecords=pilot.records.filter(record=>sourceRecords.has(record.source_id));
   pilotStatus=pilot.review_status || pilotStatus;
@@ -75,6 +76,7 @@ Promise.all([
   renderList();
   $('sourceList').innerHTML=pilotRecords.map(p=>{ const record=sourceFor(p); return `<button type="button" class="building source-building" data-source-id="${escapeHTML(record.id)}"><b>${escapeHTML(record.name || record.id)}</b><small>${escapeHTML(record.address || 'address unavailable')}</small></button>`; }).join('');
   $('protocol').innerHTML=`<h3>Pilot protocol</h3><ul>${Object.entries(pilot.annotation_protocol).map(([label,note])=>`<li><b>${escapeHTML(label)}:</b> ${escapeHTML(note)}</li>`).join('')}</ul>`;
+  $('access').innerHTML=`<h3>Source access</h3><ul>${Object.values(inventory).map(source=>`<li><a href="${escapeHTML(source.url)}" target="_blank" rel="noopener">${escapeHTML(source.name)}</a> — ${escapeHTML(source.status)}${source.licence ? ` (${escapeHTML(source.licence)})` : ''}</li>`).join('')}</ul>`;
   document.querySelectorAll('.source-building').forEach(button=>button.addEventListener('click',()=>showSource(sourceRecords.get(button.dataset.sourceId))));
   showSource(sourceRecords.get(pilotRecords[0]?.source_id));
 }).catch(()=>{
