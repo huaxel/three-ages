@@ -15,9 +15,9 @@
   "bruciel_1944": {
     "name": "BruCiel orthophotos 1944",
     "url": "https://data.mobility.brussels/en/info/ortho_44/",
-    "licence": "pending verification",
+    "licence": "CC0 stated on metadata page",
     "status": "candidate epoch",
-    "note": "WMS/WFS services are listed; licence was not visible on the reviewed page."
+    "note": "WMS/WFS services are listed; confirm tile access before adding assets."
   },
   "brussels_archives": {
     "name": "Brussels Archives image collection",
