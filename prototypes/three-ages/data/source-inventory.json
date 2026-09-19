@@ -17,6 +17,8 @@
     "licence": "CC0 stated on metadata page",
     "wms": "https://gis.urban.brussels/geoserver/wms",
     "layer": "URBAN_DCC_ER:Orthophotoplans_1996",
+    "preview": "data/bruciel-1996-grand-place.png",
+    "preview_bbox_crs84": "4.348,50.845,4.357,50.849",
     "status": "WMS extract verified for Grand Place bbox",
     "note": "A small 640x480 GetMap request returned PNG data; do not commit imagery until the pilot area and attribution are documented."
   },
