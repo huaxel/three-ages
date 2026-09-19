@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data"
 OUTPUT = DATA / "three-ages-pilot-export.csv"
+IMAGE_OUTPUT = DATA / "three-ages-image-review.csv"
 
 FIELDS = [
     "source_id",
@@ -31,6 +32,26 @@ FIELDS = [
     "image_evidence_ids",
     "image_evidence_epochs",
     "image_evidence_urls",
+]
+
+IMAGE_FIELDS = [
+    "source_id",
+    "name",
+    "address",
+    "asset_id",
+    "epoch",
+    "source_url",
+    "image_url",
+    "preview",
+    "licence",
+    "credit",
+    "source_observation",
+    "annotation_status",
+    "facade_observation",
+    "structural_observation",
+    "reviewer",
+    "reviewed_at",
+    "confidence",
 ]
 
 
@@ -65,7 +86,33 @@ def main() -> None:
                 "image_evidence_epochs": ";".join(str(asset.get("epoch", "")) for asset in case["image_evidence"]),
                 "image_evidence_urls": ";".join(asset.get("source_url", "") for asset in case["image_evidence"]),
             })
-    print(f"wrote {OUTPUT.relative_to(ROOT)}")
+
+    with IMAGE_OUTPUT.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=IMAGE_FIELDS, lineterminator="\n")
+        writer.writeheader()
+        for case in pilot["records"]:
+            record = sources[case["source_id"]]
+            for asset in case["image_evidence"]:
+                writer.writerow({
+                    "source_id": case["source_id"],
+                    "name": record.get("name", ""),
+                    "address": record.get("address", ""),
+                    "asset_id": asset.get("asset_id", ""),
+                    "epoch": asset.get("epoch", ""),
+                    "source_url": asset.get("source_url", ""),
+                    "image_url": asset.get("image_url", ""),
+                    "preview": asset.get("preview", ""),
+                    "licence": asset.get("licence", ""),
+                    "credit": asset.get("credit", ""),
+                    "source_observation": asset.get("observation", ""),
+                    "annotation_status": asset.get("annotation_status", ""),
+                    "facade_observation": "",
+                    "structural_observation": "",
+                    "reviewer": "",
+                    "reviewed_at": "",
+                    "confidence": "",
+                })
+    print(f"wrote {OUTPUT.relative_to(ROOT)} and {IMAGE_OUTPUT.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

@@ -103,7 +103,7 @@ notes
 - [ ] Every non-pending claim has evidence, rationale, annotator and reviewer fields.
 - [ ] Disagreements and uncertainty remain visible in the explorer.
 - [ ] Image permissions and reuse conditions are documented.
-- [ ] The exported dataset can reproduce every displayed claim.
+- [ ] The building export and historical-image review worksheet can reproduce every displayed claim.
 
 ## Current pilot status
 
@@ -113,4 +113,4 @@ Image epochs: the pilot commits two legally reusable modern ortho extracts for t
 
 Register status: three cases (The Swan, Joseph and Anne, The Angel) carry `proxy` register years sourced from Wikidata inception claims referenced to Brussels heritage register records, with the city-history comparison recorded in each note. The Swan (1698) agrees with the city text; Joseph and Anne (1695) is consistent with "reconstruction after 1695"; The Angel shows a recorded inter-source disagreement (Wikidata 1695 vs city text 1697) and must not receive confidence until reviewed. The Horn, The Weighing Scales and The Pigeon now carry direct Brussels architectural heritage inventory reconstruction-date proxies (1697, 1704 and 1697), with source URLs and the distinction from an original-construction year recorded in each note. All six remain unreviewed.
 
-The next blockers are a permitted historical view for Grand-Place 24, structural/aerial historical evidence, reviewer annotations and confirmation that the six proxy dates satisfy the intended register-year semantics.
+The historical-image review worksheet is now ready for a reviewer to record facade and structural observations, reviewer identity, review date and confidence. The next blockers are a permitted historical view for Grand-Place 24, structural/aerial historical evidence and confirmation that the six proxy dates satisfy the intended register-year semantics.

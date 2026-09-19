@@ -23,7 +23,8 @@
   <div class="notice"><b>Pilot boundary:</b> these are real Grand Place source records. Official reconstruction-date proxies are shown with their source links; original register-year semantics and image-derived structural labels still require review.</div>
   <p id="source" class="muted" aria-live="polite">Loading public-source snapshot…</p>
   <a id="datasetLink" class="muted" href="#" target="_blank" rel="noopener" hidden>Open the public dataset endpoint</a><br>
-  <a id="pilotExportLink" class="muted" href="data/three-ages-pilot-export.csv" download hidden>Download the pilot annotation worksheet</a>
+  <a id="pilotExportLink" class="muted" href="data/three-ages-pilot-export.csv" download hidden>Download the pilot annotation worksheet</a><br>
+  <a id="imageReviewLink" class="muted" href="data/three-ages-image-review.csv" download hidden>Download the historical-image review worksheet</a>
   <div class="layout">
     <aside class="panel"><h2>Case set</h2><p class="muted">Select a building to inspect its three ages and evidence.</p><div id="list"></div><h3>Public source preview</h3><div id="sourceList" class="muted">Loading records…</div><div id="sourceDetail" class="evidence"></div><div id="protocol" class="evidence"></div><div id="access" class="evidence"></div><figure class="source-preview"><img src="data/bruciel-1996-grand-place.png" alt="Small 1996 BruCiel orthophoto preview around the Grand Place"><figcaption>1996 BruCiel preview for the pilot area (CC0). This verifies source access; it is not yet attached as evidence to an individual case.</figcaption></figure><figure class="source-preview"><img src="data/urbisgrid-2022-grand-place.png" alt="Small 2022 urbisgrid orthophoto preview around the Grand Place"><figcaption>2022 urbisgrid preview for the same pilot area (open data; attribution recorded). Together the 1996 and 2022 extracts are two legally reusable modern epochs; five licensed KIK-IRPA 1941–1942 facade previews are shown within their individual cases.</figcaption></figure></aside>
     <section class="card"><div id="content"></div></section>
@@ -79,6 +80,7 @@ Promise.all([
   $('datasetLink').href=source.dataset_url || '#';
   $('datasetLink').hidden=!source.dataset_url;
   $('pilotExportLink').hidden=false;
+  $('imageReviewLink').hidden=false;
   renderList();
   $('sourceList').innerHTML=pilotRecords.map(p=>{ const record=sourceFor(p); return `<button type="button" class="building source-building" data-source-id="${escapeHTML(record.id)}"><b>${escapeHTML(record.name || record.id)}</b><small>${escapeHTML(record.address || 'address unavailable')}</small></button>`; }).join('');
   $('protocol').innerHTML=`<h3>Pilot protocol</h3><ul>${Object.entries(pilot.annotation_protocol).map(([label,note])=>`<li><b>${escapeHTML(label)}:</b> ${escapeHTML(note)}</li>`).join('')}</ul>`;
