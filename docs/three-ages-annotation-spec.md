@@ -66,6 +66,7 @@ notes
 - Prefer an official register or permit source over a derived year in narrative text.
 - Preserve the original field name and source URL.
 - If the source reports a reconstruction rather than a register year, store it as historical evidence, not as the register claim.
+- A Wikidata inception claim referenced to the Brussels heritage register record (via the Heritage API `srcountry=be-bru` identifier) may be stored as a `proxy` register claim, but only with the full source chain: QID, claim URL, heritage identifier, and the city-history comparison in the note. Record agreement or disagreement explicitly; disagreement blocks any confidence assignment until review.
 
 ### Facade evidence
 
@@ -106,4 +107,8 @@ notes
 
 ## Current pilot status
 
-The six current cases have source-described facade text and documented reconstruction proxies. They intentionally have no image evidence and no final confidence labels. The next blocker is access to permitted image epochs and an official register-year source.
+The six current cases have source-described facade text and documented reconstruction proxies. They intentionally have no image evidence and no final confidence labels.
+
+Register status: three cases (The Swan, Joseph and Anne, The Angel) now carry `proxy` register years sourced from Wikidata inception claims referenced to Brussels heritage register records, with the city-history comparison recorded in each note. The Swan (1698) agrees with the city text; Joseph and Anne (1695) is consistent with "reconstruction after 1695"; The Angel shows a recorded inter-source disagreement (Wikidata 1695 vs city text 1697) and must not receive confidence until reviewed. The Horn, The Weighing Scales and The Pigeon remain `pending` because no Wikidata inception claim exists for them.
+
+The next blockers are access to permitted image epochs and an official register-year source for the three pending cases.
