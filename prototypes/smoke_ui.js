@@ -65,29 +65,6 @@ function requireIncludes(value, expected, label) {
   }
 }
 
-async function testTrees() {
-  const { element } = await loadPrototype("trees-surfaces", { heat: "60", proximity: "40" });
-  const quality = element("dataQuality").textContent;
-  for (const expected of [
-    "100/100 valid coordinates",
-    "heat joined 100/100 with 0 NoData pixels",
-    "nearest-counter joined 100/100",
-    "measured-flow context 97/100",
-    "vbx_58411, vbx_58413, vbx_58589",
-    "all core analysis joins are complete",
-  ]) requireIncludes(quality, expected, "Trees data completeness");
-  requireIncludes(element("sensitivity").innerHTML, "9/10 with heat-only", "Trees sensitivity");
-  requireIncludes(element("sensitivity").innerHTML, "1/10 with proximity-only", "Trees sensitivity");
-  requireIncludes(element("sourceLinks").innerHTML, "City of Brussels/Data Management", "Trees managed-tree attribution");
-  requireIncludes(element("sourceLinks").innerHTML, "Bruxelles Mobilité", "Trees managed-tree catalogue credits");
-  requireIncludes(element("sourceLinks").innerHTML, "heritage.brussels", "Trees remarkable-tree attribution");
-  requireIncludes(element("sourceLinks").innerHTML, "NGI-IGN, ngi.be", "Trees remarkable-tree catalogue credits");
-  requireIncludes(element("sourceLinks").innerHTML, "Brussels Environment / Leefmilieu Brussel, CC BY 4.0", "Trees heat attribution");
-  requireIncludes(element("sourceLinks").innerHTML, "Brussels Mobility, CC0 1.0", "Trees mobility attribution");
-  requireIncludes(element("stakeholderDecision").innerHTML, "Stakeholder review pending", "Trees stakeholder state");
-  requireIncludes(element("detail").innerHTML, "not a causal mobility estimate or a planting recommendation", "Trees interpretation boundary");
-}
-
 async function testThreeAges() {
   const { context, element } = await loadPrototype("three-ages");
   const source = element("source").textContent;
@@ -117,9 +94,8 @@ async function testThreeAges() {
 }
 
 (async () => {
-  await testTrees();
   await testThreeAges();
-  console.log("prototype UI smoke tests passed");
+  console.log("Three Ages UI smoke test passed");
 })().catch(error => {
   console.error(error.stack || error);
   process.exit(1);

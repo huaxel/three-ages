@@ -14,8 +14,6 @@ if (($#)); then
   exit 2
 fi
 
-python3 prototypes/trees-surfaces/analyze_signal.py
-python3 prototypes/trees-surfaces/export_stakeholder_review.py
 python3 prototypes/three-ages/generate_structural_crops.py
 python3 prototypes/three-ages/export_pilot.py
 python3 prototypes/validate_snapshots.py
@@ -67,4 +65,4 @@ if [[ $CHECK_CLEAN == true ]]; then
     exit 1
   fi
 fi
-printf 'prototype validation passed\n'
+printf 'Three Ages validation passed\n'

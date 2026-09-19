@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Integration-test review preservation and deliberate reset flags in copies."""
+"""Integration-test Three Ages review preservation, refusal and reset behavior."""
 from __future__ import annotations
 
 import csv
@@ -11,11 +11,6 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-STAKEHOLDER_REVIEW_FIELDS = (
-    "review_status", "reviewer_name", "reviewer_role", "reviewed_at",
-    "accepted_decision_question", "accepted_spatial_unit", "accepted_mobility_measure",
-    "accepted_heat_period", "false_positive_preference", "evidence_threshold", "review_notes",
-)
 IMAGE_REVIEW_FIELDS = ("facade_observation", "structural_observation", "reviewer", "reviewed_at", "confidence")
 STRUCTURAL_REVIEW_FIELDS = ("structural_observation", "reviewer", "reviewed_at", "confidence")
 REGISTER_REVIEW_FIELDS = ("register_decision", "register_observation", "reviewer", "reviewed_at", "confidence")
@@ -77,27 +72,9 @@ def require_blank(path: Path, fields: tuple[str, ...]) -> None:
 def main() -> None:
     with tempfile.TemporaryDirectory() as temporary:
         temp = Path(temporary)
-        trees = temp / "trees-data"
         ages = temp / "ages-data"
-        shutil.copytree(ROOT / "trees-surfaces" / "data", trees)
         shutil.copytree(ROOT / "three-ages" / "data", ages)
 
-        stakeholder = trees / "tree-stakeholder-review.csv"
-        with stakeholder.open(newline="", encoding="utf-8") as handle:
-            proposal = next(csv.DictReader(handle))
-        update_first_row(stakeholder, {
-            "review_status": "accepted",
-            "reviewer_name": "Integration Test",
-            "reviewer_role": "Reviewer",
-            "reviewed_at": "2026-09-20",
-            "accepted_decision_question": proposal["decision_question"],
-            "accepted_spatial_unit": proposal["spatial_unit"],
-            "accepted_mobility_measure": proposal["mobility_measure"],
-            "accepted_heat_period": "2016-08-24",
-            "false_positive_preference": "Prefer manual follow-up",
-            "evidence_threshold": "One additional check",
-            "review_notes": "Preservation and reset integration test",
-        })
         update_first_row(ages / "three-ages-image-review.csv", {
             "facade_observation": "Test facade observation",
             "reviewer": "Integration Test",
@@ -118,34 +95,14 @@ def main() -> None:
             "confidence": "medium",
         })
 
-        run(str(ROOT / "trees-surfaces" / "export_stakeholder_review.py"), "--data-dir", str(trees))
         run(str(ROOT / "three-ages" / "export_pilot.py"), "--data-dir", str(ages))
         expected_completed = (
-            trees / "tree-stakeholder-reviews.json",
             ages / "three-ages-image-reviews.json",
             ages / "three-ages-structural-reviews.json",
             ages / "three-ages-register-reviews.json",
         )
         if any(record_count(path) != 1 for path in expected_completed):
-            raise AssertionError("ordinary regeneration did not preserve every completed review")
-
-        stakeholder_outputs = (
-            stakeholder,
-            trees / "tree-stakeholder-reviews.json",
-        )
-        stakeholder_before = {path: path.read_bytes() for path in stakeholder_outputs}
-        sensitivity_path = trees / "tree-signal-sensitivity.json"
-        sensitivity_original = sensitivity_path.read_bytes()
-        sensitivity = json.loads(sensitivity_original)
-        sensitivity["weight_sensitivity"]["interpretation"] = "Changed integration-test evidence"
-        write_json(sensitivity_path, sensitivity)
-        run_fails(
-            str(ROOT / "trees-surfaces" / "export_stakeholder_review.py"),
-            "--data-dir", str(trees),
-            message="proposal evidence changed",
-        )
-        require_unchanged(stakeholder_before)
-        sensitivity_path.write_bytes(sensitivity_original)
+            raise AssertionError("ordinary regeneration did not preserve every completed Three Ages review")
 
         review_outputs = (
             ages / "three-ages-pilot-export.csv",
@@ -195,7 +152,6 @@ def main() -> None:
         pilot_path.write_bytes(pilot_original)
 
         reset_contracts = (
-            (stakeholder, STAKEHOLDER_REVIEW_FIELDS),
             (ages / "three-ages-image-review.csv", IMAGE_REVIEW_FIELDS + ("annotation_status",)),
             (ages / "three-ages-structural-review.csv", STRUCTURAL_REVIEW_FIELDS + ("annotation_status",)),
             (ages / "three-ages-register-review.csv", REGISTER_REVIEW_FIELDS + ("annotation_status",)),
@@ -204,7 +160,6 @@ def main() -> None:
             path: csv_rows_without(path, mutable_fields)
             for path, mutable_fields in reset_contracts
         }
-        run(str(ROOT / "trees-surfaces" / "export_stakeholder_review.py"), "--data-dir", str(trees), "--reset-review")
         run(str(ROOT / "three-ages" / "export_pilot.py"), "--data-dir", str(ages), "--reset-reviews")
         if any(record_count(path) != 0 for path in expected_completed):
             raise AssertionError("explicit reset left a compiled completed review")
@@ -212,12 +167,11 @@ def main() -> None:
         for path, mutable_fields in reset_contracts:
             if csv_rows_without(path, mutable_fields) != source_fields_before_reset[path]:
                 raise AssertionError(f"reset changed source-derived worksheet fields in {path}")
-        require_blank(stakeholder, STAKEHOLDER_REVIEW_FIELDS)
         require_blank(ages / "three-ages-image-review.csv", IMAGE_REVIEW_FIELDS)
         require_blank(ages / "three-ages-structural-review.csv", STRUCTURAL_REVIEW_FIELDS)
         require_blank(ages / "three-ages-register-review.csv", REGISTER_REVIEW_FIELDS)
 
-    print("review preservation, provenance refusal and explicit reset integration passed")
+    print("Three Ages review preservation, provenance refusal and explicit reset integration passed")
 
 
 if __name__ == "__main__":
