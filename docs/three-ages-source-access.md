@@ -28,7 +28,7 @@ The archive is a discovery source, not an assumed open-licence source. Request r
 - **Works/change evidence lead:** [City of Brussels planning and environmental permits](https://opendata.brussels.be/explore/dataset/permis-urbanisme-environnement-vbx/)
 - **Regional statistics context:** [IBSA building stock theme](https://ibsa.brussels/themes/amenagement-du-territoire/parc-de-batiments)
 
-The committed Grand Place snapshot contains restoration/history text and facade descriptions, but no official register-year field. The register-year source therefore remains an explicit access task rather than an inferred value.
+The committed Grand Place snapshot contains restoration/history text and facade descriptions, but no official register-year field. The reviewed UrbIS specification documents geometry, addresses and identifiers but does not demonstrate an individual construction-year attribute. Planning permits may provide later-work evidence, but cannot be treated as original construction years without verification. The register-year source therefore remains an explicit access task rather than an inferred value.
 
 ## Access log
 

@@ -42,12 +42,12 @@
     "name": "UrbIS buildings technical specification",
     "url": "https://urbisdownload.datastore.brussels/UrbIS/TechSpec/Buildings_TechSpec_FR20250708.pdf",
     "status": "source lead",
-    "note": "Verify whether the needed identity and construction attributes are available."
+    "note": "The reviewed technical specification documents geometry, addresses and identifiers but does not demonstrate an individual construction-year field."
   },
   "planning_permits": {
     "name": "City of Brussels planning and environmental permits",
     "url": "https://opendata.brussels.be/explore/dataset/permis-urbanisme-environnement-vbx/",
     "status": "source lead",
-    "note": "Test address or building matching for later reconstruction evidence."
+    "note": "Test address or building matching for later reconstruction evidence; permits should not be treated as original construction years without verification."
   }
 }
