@@ -27,6 +27,7 @@ The archive is a discovery source, not an assumed open-licence source. Request r
 - **Regional building data lead:** [UrbIS buildings technical specification](https://urbisdownload.datastore.brussels/UrbIS/TechSpec/Buildings_TechSpec_FR20250708.pdf)
 - **Works/change evidence lead:** [City of Brussels planning and environmental permits](https://opendata.brussels.be/explore/dataset/permis-urbanisme-environnement-vbx/)
 - **Regional statistics context:** [IBSA building stock theme](https://ibsa.brussels/themes/amenagement-du-territoire/parc-de-batiments)
+- **Modern ortho verification reference:** [urbisgrid WMS](https://geoservices-urbis.irisnet.be/geoserver/urbisgrid/wms?) — used only to verify the 1996 extract geometry, not as pilot evidence until its licence is confirmed.
 
 The committed Grand Place snapshot contains restoration/history text and facade descriptions, but no official register-year field. A live API check of all 34 records confirms the field inventory is limited to name, address, height, original and current function, narrative history/restorations text, facade description, protection measures and coordinates — no structured construction year. The reviewed UrbIS specification describes 2D building geometry, addresses, block/building identifiers and a January 2025 temporal snapshot, but does not list an individual construction-year attribute in the Buildings catalogue. The City of Brussels planning-permits open dataset is aggregate yearly statistics only (year, domain, category, totals; coverage from 2013) with no address-level records, so permit-to-building matching is not possible from open data. Later-work evidence would require consulting permit PDFs via the city or Urban.brussels directly. The register-year source therefore remains an explicit access task rather than an inferred value.
 
@@ -34,7 +35,7 @@ The committed Grand Place snapshot contains restoration/history text and facade 
 
 | Source | Intended use | Licence/access status | Next action |
 |---|---|---|---|
-| BruCiel 1996 | structural comparison epoch | CC0 stated; small WMS extract verified | preserve request parameters and test image alignment |
+| BruCiel 1996 | structural comparison epoch | CC0 stated; WMS 1.1.1 extract verified and aligned | request parameters preserved; alignment tested against the 2022 urbisgrid ortho (phase-correlation peak 18 sigma, offset ~4 m) |
 | BruCiel 1944 | second structural epoch | CC0 stated; layer is a dead cascade on all tested endpoints; provider workspace removed | find an alternative 1944-era source or ask the provider to republish the layer |
 | BruCiel other epochs | optional additional evidence | unknown per layer | only add after licence check |
 | Brussels Archives | facade/history imagery | permission/reuse request required | submit a pilot request |
