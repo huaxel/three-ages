@@ -7,6 +7,7 @@ This checklist records the first source-access review for the curated MVP. A sou
 ### BruCiel / Brussels Mobility
 
 - **Landing/API:** [BruCiel information page](https://data.mobility.brussels/en/info/ortho_44/) and the listed [BruCiel API](https://urbanisme.irisnet.be/cartographie/bruciel).
+- **Historical photo discovery:** [BruCiel viewer](https://bruciel.brussels/). The official description reports roughly 5,000 selected, geolocated historical photographs across different periods; reuse terms must be checked per asset.
 - **1944 layer:** [Ortho 1944 metadata](https://data.mobility.brussels/en/info/ortho_44/) exposes WMS/WFS services, a web viewer and an explicit [CC0](https://creativecommons.org/publicdomain/zero/1.0) licence.
 - **1996 layer:** [Ortho 1996 metadata](https://data.mobility.brussels/en/info/d5e0a5dc-e3b7-48ce-a7ae-bac5ec0b38ba/) explicitly links to [CC0](https://creativecommons.org/publicdomain/zero/1.0).
 - **Other epochs:** BruCiel covers multiple periods, but each layer needs its own licence and completeness check.

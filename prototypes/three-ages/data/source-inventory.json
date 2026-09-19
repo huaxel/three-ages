@@ -1,4 +1,10 @@
 {
+  "bruciel_app": {
+    "name": "BruCiel historical imagery viewer",
+    "url": "https://bruciel.brussels/",
+    "status": "discovery source",
+    "note": "The official description reports roughly 5,000 geolocated historical photographs; reuse terms must be checked per asset."
+  },
   "grand_place_dataset": {
     "name": "City of Brussels Grand Place buildings",
     "url": "https://opendata.brussels.be/api/explore/v2.1/catalog/datasets/description-des-batiments-de-la-grand-place/records",
