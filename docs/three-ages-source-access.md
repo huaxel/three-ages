@@ -19,7 +19,7 @@ This checklist records the first source-access review for the curated MVP. A sou
 - [Brussels Archives legal notes](https://archives.brussels.be/legal-notes)
 - [Brussels Archives reproduction or image-use request](https://archives.brussels.be/requests-reproduction-or-use-images)
 
-The archive is a discovery source, not an assumed open-licence source. Request reuse terms, required credit and any fees before adding an image to the pilot export.
+The archive is a discovery source, not an assumed open-licence source. Request reuse terms, required credit and any fees before adding an image to the pilot export. A prepared submission wizard is in [`scripts/archives-image-request.sh`](../scripts/archives-image-request.sh): it walks through the catalogue search, emails `archives@brucity.be` with a ready-to-paste request, and records the reply terms in `docs/archives-request-state.env`.
 
 ## Register and building evidence
 
@@ -40,7 +40,7 @@ A partial register-year proxy chain exists via Wikidata: inception claims for th
 | BruCiel 1996 | structural comparison epoch | CC0 stated; WMS 1.1.1 extract verified and aligned | request parameters preserved; alignment tested against the 2022 urbisgrid ortho (phase-correlation peak 18 sigma, offset ~4 m) |
 | BruCiel 1944 | second structural epoch | CC0 stated; layer is a dead cascade on all tested endpoints; provider workspace removed | find an alternative 1944-era source or ask the provider to republish the layer |
 | BruCiel other epochs | optional additional evidence | unknown per layer | only add after licence check |
-| Brussels Archives | facade/history imagery | permission/reuse request required | submit a pilot request |
+| Brussels Archives | facade/history imagery | permission/reuse request required; submission wizard prepared | run `bash scripts/archives-image-request.sh` and send the enquiry |
 | Grand Place dataset | source identity/history/facade text | current JSON snapshot available; live field inventory checked (34 records, no register year) | identify official register-year field |
 | UrbIS buildings | building geometry/identity | access and attribute coverage to verify | inspect technical specification |
 | Planning permits | later works and reconstruction clues | aggregate yearly statistics only, no addresses; matching not possible from open data | request permit PDFs via the city or Urban.brussels if needed |
