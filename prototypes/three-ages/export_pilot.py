@@ -92,7 +92,9 @@ def main() -> None:
         writer.writeheader()
         for case in pilot["records"]:
             record = sources[case["source_id"]]
-            for asset in case["image_evidence"]:
+            assets = case["image_evidence"] or [None]
+            for asset in assets:
+                asset = asset or {}
                 writer.writerow({
                     "source_id": case["source_id"],
                     "name": record.get("name", ""),
@@ -104,8 +106,8 @@ def main() -> None:
                     "preview": asset.get("preview", ""),
                     "licence": asset.get("licence", ""),
                     "credit": asset.get("credit", ""),
-                    "source_observation": asset.get("observation", ""),
-                    "annotation_status": asset.get("annotation_status", ""),
+                    "source_observation": asset.get("observation", "No permitted historical preview is attached."),
+                    "annotation_status": asset.get("annotation_status", "pending historical source"),
                     "facade_observation": "",
                     "structural_observation": "",
                     "reviewer": "",
