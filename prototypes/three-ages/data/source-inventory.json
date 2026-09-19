@@ -21,7 +21,7 @@
     "wms": "https://gis.urban.brussels/geoserver/wms",
     "layer": "URBAN_DCC_ER:Orthophotoplans_1944",
     "status": "WMS layer unavailable in test request",
-    "note": "A small GetMap request returned a service error saying the layer was not found; investigate the service or alternate endpoint."
+    "note": "Generic and workspace-specific GetMap requests returned a service error saying the layer was not found; ask the provider for the current endpoint or use the BruCiel API/viewer."
   },
   "brussels_archives": {
     "name": "Brussels Archives image collection",
