@@ -11,6 +11,7 @@ This checklist records the first source-access review for the curated MVP. A sou
 - **1944 layer:** [Ortho 1944 metadata](https://data.mobility.brussels/en/info/ortho_44/) exposes WMS/WFS services, a web viewer and an explicit [CC0](https://creativecommons.org/publicdomain/zero/1.0) licence.
 - **1996 layer:** [Ortho 1996 metadata](https://data.mobility.brussels/en/info/d5e0a5dc-e3b7-48ce-a7ae-bac5ec0b38ba/) explicitly links to [CC0](https://creativecommons.org/publicdomain/zero/1.0).
 - **Other epochs:** BruCiel covers multiple periods, but each layer needs its own licence and completeness check.
+- **Modern urban.brussels orthos:** the [Ortho info page](https://data.mobility.brussels/info/Ortho) states CC0 for the `urbisgrid` ortho layers, while the INSPIRE distribution record requires CC-BY attribution. Either way the 2022 layer is reusable open data; the pilot records attribution for both readings.
 
 **Current status:** the 1996 WMS returned a small PNG extract for a Grand Place bounding box. The equivalent 1944 layer fails every GetMap request with `LayerNotDefined`. The failure is now diagnosed: the capabilities entry `URBAN_DCC_ER:Orthophotoplans_1944` is a `cascaded="1"` layer whose upstream source has gone away, and the `BDU_DEP` workspace documented on the metadata page no longer exists on any GeoServer. The official mobigis viewer itself lists no catalog entry for the layer. The 1944 endpoint is therefore treated as retired by the provider; a second epoch must come from another source (BruCiel photo API, Brussels Archives, or a public-domain photo) rather than this WMS.
 
@@ -38,6 +39,7 @@ A partial register-year proxy chain exists via Wikidata: inception claims for th
 | Source | Intended use | Licence/access status | Next action |
 |---|---|---|---|
 | BruCiel 1996 | structural comparison epoch | CC0 stated; WMS 1.1.1 extract verified and aligned | request parameters preserved; alignment tested against the 2022 urbisgrid ortho (phase-correlation peak 18 sigma, offset ~4 m) |
+| urbisgrid 2022 | modern structural-state epoch | open data (CC0 per Ortho info page; CC-BY per INSPIRE record); extract verified | paired with 1996 as two legally reusable modern epochs; historical epoch still pending |
 | BruCiel 1944 | second structural epoch | CC0 stated; layer is a dead cascade on all tested endpoints; provider workspace removed | find an alternative 1944-era source or ask the provider to republish the layer |
 | BruCiel other epochs | optional additional evidence | unknown per layer | only add after licence check |
 | Brussels Archives | facade/history imagery | permission/reuse request required; submission wizard prepared | run `bash scripts/archives-image-request.sh` and send the enquiry |

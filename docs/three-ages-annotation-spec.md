@@ -107,8 +107,10 @@ notes
 
 ## Current pilot status
 
-The six current cases have source-described facade text and documented reconstruction proxies. They intentionally have no image evidence and no final confidence labels.
+The six current cases have source-described facade text and documented reconstruction proxies. They intentionally have no final confidence labels.
+
+Image epochs: the pilot now commits two legally reusable modern ortho extracts for the pilot area — BruCiel 1996 (CC0) and urbisgrid 2022 (open data; CC0 per the Ortho info page, CC-BY per the INSPIRE record). They are displayed as source previews only and are not yet attached as evidence to individual cases. The analytical blocker remains the historical epoch (1940s): the 1944 BruCiel WMS is retired, and permitted archival photographs are pending the archives request.
 
 Register status: three cases (The Swan, Joseph and Anne, The Angel) now carry `proxy` register years sourced from Wikidata inception claims referenced to Brussels heritage register records, with the city-history comparison recorded in each note. The Swan (1698) agrees with the city text; Joseph and Anne (1695) is consistent with "reconstruction after 1695"; The Angel shows a recorded inter-source disagreement (Wikidata 1695 vs city text 1697) and must not receive confidence until reviewed. The Horn, The Weighing Scales and The Pigeon remain `pending` because no Wikidata inception claim exists for them.
 
-The next blockers are access to permitted image epochs and an official register-year source for the three pending cases.
+The next blockers are access to permitted 1940s-era imagery and an official register-year source for the three pending cases.

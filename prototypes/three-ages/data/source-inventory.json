@@ -51,5 +51,18 @@
     "url": "https://opendata.brussels.be/explore/dataset/permis-urbanisme-environnement-vbx/",
     "status": "source lead",
     "note": "Test address or building matching for later reconstruction evidence; permits should not be treated as original construction years without verification."
+  },
+  "urbisgrid_2022": {
+    "name": "urbisgrid orthophotos 2022",
+    "url": "https://data.mobility.brussels/info/Ortho",
+    "licence": "open data; Ortho info page states CC0, INSPIRE distribution record requires CC-BY attribution",
+    "wms": "https://geoservices-urbis.irisnet.be/geoserver/urbisgrid/wms",
+    "layer": "urbisgrid:Ortho2022Ns",
+    "preview": "data/urbisgrid-2022-grand-place.png",
+    "preview_bbox_crs84": "4.348,50.845,4.357,50.849",
+    "wms_version": "1.1.1",
+    "srs": "EPSG:4326",
+    "status": "WMS extract verified for Grand Place bbox",
+    "note": "Modern structural-state epoch. Reuse terms are open data (CC0 per the Ortho info page; CC-BY attribution per the INSPIRE record); this pilot's source linking satisfies attribution. Both 1996 and 2022 are modern epochs; the historical 1940s epoch remains the analytical blocker."
   }
 }
