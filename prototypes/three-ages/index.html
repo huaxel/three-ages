@@ -20,7 +20,7 @@
 <main>
   <h1>De Drie Leeftijden van een Brussels pand</h1>
   <p class="lede">A small evidence pilot: compare what a public history source says with the fields still needed for a defensible three-age annotation.</p>
-  <div class="notice"><b>Pilot boundary:</b> these are real Grand Place source records. Only documented source facts are shown; register years and image-derived structural labels remain pending.</div>
+  <div class="notice"><b>Pilot boundary:</b> these are real Grand Place source records. Official reconstruction-date proxies are shown with their source links; original register-year semantics and image-derived structural labels still require review.</div>
   <p id="source" class="muted" aria-live="polite">Loading public-source snapshot…</p>
   <a id="datasetLink" class="muted" href="#" target="_blank" rel="noopener" hidden>Open the public dataset endpoint</a><br>
   <a id="pilotExportLink" class="muted" href="data/three-ages-pilot-export.csv" download hidden>Download the pilot annotation worksheet</a>
@@ -47,7 +47,9 @@ function renderList(){
   if(pilotRecords[0]) show(pilotRecords[0].source_id);
 }
 function ageCard(number,label,field,description){
-  return `<article class="age"><span>${number} · ${label}</span><div class="year">${escapeHTML(valueOrPending(field))}</div><span class="status">${escapeHTML(field.status)}</span><p>${escapeHTML(description || field.note)}</p></article>`;
+  const sourceUrl=field.source?.url || field.source?.claim_url;
+  const sourceLink=sourceUrl ? `<p><a href="${escapeHTML(sourceUrl)}" target="_blank" rel="noopener">Open evidence source</a></p>` : '';
+  return `<article class="age"><span>${number} · ${label}</span><div class="year">${escapeHTML(valueOrPending(field))}</div><span class="status">${escapeHTML(field.status)}</span><p>${escapeHTML(description || field.note)}</p>${sourceLink}</article>`;
 }
 function show(id){
   const pilot=pilotRecords.find(record=>record.source_id===id);

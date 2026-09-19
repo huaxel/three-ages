@@ -11,6 +11,12 @@
     "status": "snapshot available",
     "note": "The committed snapshot contains history and facade text but no official register-year field."
   },
+  "brussels_heritage_inventory": {
+    "name": "Brussels architectural heritage inventory",
+    "url": "https://monument.heritage.brussels/fr/",
+    "status": "official inventory pages found for all six pilot cases",
+    "note": "Direct inventory pages provide reconstruction-date proxies for the three previously pending cases; they do not replace a structured original-construction year or human review."
+  },
   "bruciel_1996": {
     "name": "BruCiel orthophotos 1996",
     "url": "https://data.mobility.brussels/en/info/d5e0a5dc-e3b7-48ce-a7ae-bac5ec0b38ba/",

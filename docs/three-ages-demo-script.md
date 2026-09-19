@@ -10,13 +10,13 @@ Use the prototype to test whether an evidence-led building-history explorer is u
    > Can a Brussels building record show separate register, facade and structural evidence without collapsing uncertainty into one date?
 
 2. **Set the boundary**
-   Explain that the pilot contains six real Grand Place source records. The source text is real; register-year claims are sourced proxies or pending, and image-derived structural annotations are intentionally not final until a historical epoch is permitted.
+   Explain that the pilot contains six real Grand Place source records. The source text is real; register dates are explicitly labelled proxies (three Wikidata/heritage-linked and three official architectural-inventory reconstruction dates), and image-derived structural annotations are intentionally not final until a historical epoch is permitted.
 
 3. **Select a case**
    Open a case such as Joseph and Anne or The Angel. Point out why it was selected: the history text describes an earlier reconstruction and a later facade rebuild.
 
 4. **Read the three evidence cards**
-   - Register age: three cases (The Swan, Joseph and Anne, The Angel) show a sourced proxy year traced from a Wikidata inception claim to a Brussels heritage register record, with the city-history comparison in the note (including one recorded disagreement, The Angel); three cases remain pending.
+   - Register age: three cases (The Swan, Joseph and Anne, The Angel) show sourced proxy years traced from Wikidata inception claims to Brussels heritage register records, while The Horn, The Weighing Scales and The Pigeon show direct Brussels architectural-inventory reconstruction-date proxies. The cards link to each evidence source; all remain unreviewed proxies.
    - Facade evidence: source-described style, not a dated visual classification.
    - Structural evidence: documented reconstruction proxy, not an aerial-image conclusion.
 
@@ -24,7 +24,7 @@ Use the prototype to test whether an evidence-led building-history explorer is u
    Show the source history, facade description, next annotation step, dataset endpoint, pilot worksheet export, and the two committed ortho previews (1996 CC0 and 2022 open data) that verify modern-epoch source access without yet attaching evidence to a case.
 
 6. **Close with the feasibility decision**
-   Ask whether the stakeholder can provide or approve a historical (1940s-era) image epoch — the two modern epochs (1996, 2022) are already legally reusable — and an official register-year source for the three pending cases.
+   Ask whether the stakeholder can provide or approve a historical (1940s-era) image epoch — the two modern epochs (1996, 2022) are already legally reusable — and confirm whether the official inventory reconstruction dates satisfy the intended register-year semantics.
 
 ## Questions to capture
 

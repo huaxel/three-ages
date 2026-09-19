@@ -13,9 +13,14 @@
       "source_id": "005",
       "selection_reason": "Stone facade from 1641 followed by reconstruction in 1697–1704.",
       "register": {
-        "status": "pending",
-        "value": null,
-        "note": "No official register-year field in this snapshot; Wikidata item Q3279994 (maison du Cornet) exists but carries no inception claim."
+        "status": "proxy",
+        "value": 1697,
+        "note": "Brussels architectural heritage inventory entry 31123 lists reconstruction in 1697; the city dataset gives the broader range 1697–1704. This is an official reconstruction-date proxy, not a structured original-construction year; human review still required.",
+        "source": {
+          "kind": "brussels-architectural-inventory",
+          "inventory_id": "31123",
+          "url": "https://monument.heritage.brussels/fr/Bruxelles_Pentagone/Grand-Place/6/31123"
+        }
       },
       "facade": {
         "status": "source description",
@@ -118,9 +123,14 @@
       "source_id": "024",
       "selection_reason": "1704 reconstruction with a later complete reconstruction of the rear facade.",
       "register": {
-        "status": "pending",
-        "value": null,
-        "note": "No official register-year field in this snapshot; no Wikidata item with an inception claim found for Grand-Place 24."
+        "status": "proxy",
+        "value": 1704,
+        "note": "Brussels architectural heritage inventory entry 30991 (La Balance, Rue de la Colline 24) lists 1704, agreeing with the city history text. This is an official reconstruction-date proxy, not a structured original-construction year; human review still required.",
+        "source": {
+          "kind": "brussels-architectural-inventory",
+          "inventory_id": "30991",
+          "url": "https://monument.heritage.brussels/fr/Bruxelles_Pentagone/Rue_de_la_Colline/24/30991"
+        }
       },
       "facade": {
         "status": "source description",
@@ -139,9 +149,14 @@
       "source_id": "026",
       "selection_reason": "1697 reconstruction with explicit preservation of the facade and a rebuilt gable.",
       "register": {
-        "status": "pending",
-        "value": null,
-        "note": "No official register-year field in this snapshot; no Wikidata item with an inception claim found for Grand-Place 26-27."
+        "status": "proxy",
+        "value": 1697,
+        "note": "Brussels architectural heritage inventory entry 31141 lists reconstruction in 1697, agreeing with the city history text. This is an official reconstruction-date proxy, not a structured original-construction year; human review still required.",
+        "source": {
+          "kind": "brussels-architectural-inventory",
+          "inventory_id": "31141",
+          "url": "https://monument.heritage.brussels/fr/Bruxelles_Pentagone/Grand-Place/26/31141"
+        }
       },
       "facade": {
         "status": "source description",
