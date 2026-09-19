@@ -19,8 +19,10 @@
     "layer": "URBAN_DCC_ER:Orthophotoplans_1996",
     "preview": "data/bruciel-1996-grand-place.png",
     "preview_bbox_crs84": "4.348,50.845,4.357,50.849",
-    "status": "WMS extract verified for Grand Place bbox",
-    "note": "A small 640x480 GetMap request returned PNG data; do not commit imagery until the pilot area and attribution are documented."
+    "status": "WMS extract verified for Grand Place bbox (WMS 1.1.1 required)",
+    "note": "640x480 GetMap with WMS 1.1.1 + SRS EPSG:4326 returns real imagery; the 1.3.0 + CRS:84 variant returns blank transparent tiles. Content guard added to validation.",
+    "wms_version": "1.1.1",
+    "srs": "EPSG:4326"
   },
   "bruciel_1944": {
     "name": "BruCiel orthophotos 1944",
@@ -29,7 +31,7 @@
     "wms": "https://gis.urban.brussels/geoserver/wms",
     "layer": "URBAN_DCC_ER:Orthophotoplans_1944",
     "status": "WMS layer unavailable in test request",
-    "note": "Generic and workspace-specific GetMap requests returned a service error saying the layer was not found; ask the provider for the current endpoint or use the BruCiel API/viewer."
+    "note": "GetMap fails with LayerNotDefined under every tested version; the capabilities entry is a dead cascade (cascaded=1) and the documented BDU_DEP workspace no longer exists on any server. Treat the endpoint as retired; find an alternative 1944-era source."
   },
   "brussels_archives": {
     "name": "Brussels Archives image collection",

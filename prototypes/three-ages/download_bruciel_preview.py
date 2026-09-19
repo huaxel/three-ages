@@ -12,6 +12,10 @@ DEFAULT_OUTPUT = ROOT / "data" / "bruciel-1996-grand-place.png"
 WMS_URL = "https://gis.urban.brussels/geoserver/wms"
 LAYER = "URBAN_DCC_ER:Orthophotoplans_1996"
 BBOX = "4.348,50.845,4.357,50.849"
+# WMS 1.3.0 + CRS:84 returns blank tiles from this GeoServer for the layer;
+# 1.1.1 + SRS:EPSG:4326 returns the actual imagery.
+WMS_VERSION = "1.1.1"
+SRS = "EPSG:4326"
 PNG_HEADER = b"\x89PNG\r\n\x1a\n"
 
 
@@ -21,7 +25,7 @@ def main() -> None:
     args = parser.parse_args()
     params = {
         "service": "WMS",
-        "version": "1.3.0",
+        "version": WMS_VERSION,
         "request": "GetMap",
         "layers": LAYER,
         "styles": "",
@@ -29,7 +33,7 @@ def main() -> None:
         "transparent": "true",
         "width": 640,
         "height": 480,
-        "crs": "CRS:84",
+        "srs": SRS,
         "bbox": BBOX,
     }
     url = f"{WMS_URL}?{urlencode(params)}"
