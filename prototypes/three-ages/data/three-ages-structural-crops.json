@@ -1,0 +1,281 @@
+{
+  "sources": [
+    "three-ages-pilot.json",
+    "grand-place-buildings.json"
+  ],
+  "method": "Building coordinates projected linearly into aligned WMS 1.1.1 EPSG:4326 previews; identical pixel boxes cropped from every epoch.",
+  "review_status": "derived review aids; no structural observations",
+  "crs": "EPSG:4326",
+  "bounds": {
+    "west": 4.348,
+    "south": 50.845,
+    "east": 4.357,
+    "north": 50.849
+  },
+  "source_size_pixels": {
+    "width": 640,
+    "height": 480
+  },
+  "crop_size_pixels": 160,
+  "record_count": 6,
+  "records": [
+    {
+      "source_id": "005",
+      "name": "The Horn",
+      "address": "Grand-Place, 6",
+      "latitude": 50.84695467577162,
+      "longitude": 4.351754130265315,
+      "source_center_pixels": {
+        "x": 267,
+        "y": 245
+      },
+      "crop_box_pixels": {
+        "left": 187,
+        "top": 165,
+        "right": 347,
+        "bottom": 325
+      },
+      "assets": [
+        {
+          "asset_id": "bruciel-grand-place-1935",
+          "epoch": "1930–1935",
+          "source_preview": "data/bruciel-1935-grand-place.png",
+          "source_preview_sha256": "d77806ad41785dc7a823b5cf1065705655bdbae9318a1d41e5e3dbb793f756a3",
+          "crop_preview": "data/structural/005-bruciel-grand-place-1935.png",
+          "pixel_sha256": "3358ceb1d962cce9f48431fe6d65bba9f4eae0787055f09fd6efd495b9d80728"
+        },
+        {
+          "asset_id": "bruciel-grand-place-1996",
+          "epoch": 1996,
+          "source_preview": "data/bruciel-1996-grand-place.png",
+          "source_preview_sha256": "4b1084de94e68d26752d758982e06c1241bd9f3d395be40db9b6c00866ed6803",
+          "crop_preview": "data/structural/005-bruciel-grand-place-1996.png",
+          "pixel_sha256": "1f370bd9bc4b7d54a848c97c409524b69a289df2dae7b1c0314af577c33ccbf5"
+        },
+        {
+          "asset_id": "urbisgrid-grand-place-2022",
+          "epoch": 2022,
+          "source_preview": "data/urbisgrid-2022-grand-place.png",
+          "source_preview_sha256": "871d995a3753d2d03c811a5c59c1686b97b6ced87ae718a49481a743a2340ea5",
+          "crop_preview": "data/structural/005-urbisgrid-grand-place-2022.png",
+          "pixel_sha256": "a9c0010b9400307125b54b2ea7bd40a94e89a360dcf5a254b5db1fdd39d700d5"
+        }
+      ]
+    },
+    {
+      "source_id": "009",
+      "name": "The Swan",
+      "address": "Grand-Place, 9",
+      "latitude": 50.84630264405441,
+      "longitude": 4.35243753345387,
+      "source_center_pixels": {
+        "x": 316,
+        "y": 324
+      },
+      "crop_box_pixels": {
+        "left": 236,
+        "top": 244,
+        "right": 396,
+        "bottom": 404
+      },
+      "assets": [
+        {
+          "asset_id": "bruciel-grand-place-1935",
+          "epoch": "1930–1935",
+          "source_preview": "data/bruciel-1935-grand-place.png",
+          "source_preview_sha256": "d77806ad41785dc7a823b5cf1065705655bdbae9318a1d41e5e3dbb793f756a3",
+          "crop_preview": "data/structural/009-bruciel-grand-place-1935.png",
+          "pixel_sha256": "8d25f67714165dbf4496173bf4cace4f0f56d67eb3273e5fd0c53c38b906c596"
+        },
+        {
+          "asset_id": "bruciel-grand-place-1996",
+          "epoch": 1996,
+          "source_preview": "data/bruciel-1996-grand-place.png",
+          "source_preview_sha256": "4b1084de94e68d26752d758982e06c1241bd9f3d395be40db9b6c00866ed6803",
+          "crop_preview": "data/structural/009-bruciel-grand-place-1996.png",
+          "pixel_sha256": "1bbb03dc1b71f6d315ef71002094f41c5876042cba8a3961f1a7ea8fcbaf42e7"
+        },
+        {
+          "asset_id": "urbisgrid-grand-place-2022",
+          "epoch": 2022,
+          "source_preview": "data/urbisgrid-2022-grand-place.png",
+          "source_preview_sha256": "871d995a3753d2d03c811a5c59c1686b97b6ced87ae718a49481a743a2340ea5",
+          "crop_preview": "data/structural/009-urbisgrid-grand-place-2022.png",
+          "pixel_sha256": "ea1f1f4c928450eba84d4fc0306d6cf925dad9e3bd82509a44f232abf1407e02"
+        }
+      ]
+    },
+    {
+      "source_id": "022",
+      "name": "Joseph and Anne",
+      "address": "Grand-Place, 21-22",
+      "latitude": 50.84663140298947,
+      "longitude": 4.3532418710798915,
+      "source_center_pixels": {
+        "x": 373,
+        "y": 284
+      },
+      "crop_box_pixels": {
+        "left": 293,
+        "top": 204,
+        "right": 453,
+        "bottom": 364
+      },
+      "assets": [
+        {
+          "asset_id": "bruciel-grand-place-1935",
+          "epoch": "1930–1935",
+          "source_preview": "data/bruciel-1935-grand-place.png",
+          "source_preview_sha256": "d77806ad41785dc7a823b5cf1065705655bdbae9318a1d41e5e3dbb793f756a3",
+          "crop_preview": "data/structural/022-bruciel-grand-place-1935.png",
+          "pixel_sha256": "aabbf1676d82fc20f36a0fac231a0f9d3660d56b3f7d342ead8bd4e172a8076c"
+        },
+        {
+          "asset_id": "bruciel-grand-place-1996",
+          "epoch": 1996,
+          "source_preview": "data/bruciel-1996-grand-place.png",
+          "source_preview_sha256": "4b1084de94e68d26752d758982e06c1241bd9f3d395be40db9b6c00866ed6803",
+          "crop_preview": "data/structural/022-bruciel-grand-place-1996.png",
+          "pixel_sha256": "dd2a4355656192e61e9ab0e8075628ffae69ca0095ab564fbe3da1b53d648ef7"
+        },
+        {
+          "asset_id": "urbisgrid-grand-place-2022",
+          "epoch": 2022,
+          "source_preview": "data/urbisgrid-2022-grand-place.png",
+          "source_preview_sha256": "871d995a3753d2d03c811a5c59c1686b97b6ced87ae718a49481a743a2340ea5",
+          "crop_preview": "data/structural/022-urbisgrid-grand-place-2022.png",
+          "pixel_sha256": "3dfe20d41915f5e5284f617239efcaa083916bf02885e1e9f850a7e0c91dca5c"
+        }
+      ]
+    },
+    {
+      "source_id": "023",
+      "name": "The Angel",
+      "address": "Grand-Place, 23",
+      "latitude": 50.84666628057443,
+      "longitude": 4.3532003597568245,
+      "source_center_pixels": {
+        "x": 370,
+        "y": 280
+      },
+      "crop_box_pixels": {
+        "left": 290,
+        "top": 200,
+        "right": 450,
+        "bottom": 360
+      },
+      "assets": [
+        {
+          "asset_id": "bruciel-grand-place-1935",
+          "epoch": "1930–1935",
+          "source_preview": "data/bruciel-1935-grand-place.png",
+          "source_preview_sha256": "d77806ad41785dc7a823b5cf1065705655bdbae9318a1d41e5e3dbb793f756a3",
+          "crop_preview": "data/structural/023-bruciel-grand-place-1935.png",
+          "pixel_sha256": "2d8ed92c18040cb57e2c36846328f182b2155ab9c722c39f73c7da119e85ee28"
+        },
+        {
+          "asset_id": "bruciel-grand-place-1996",
+          "epoch": 1996,
+          "source_preview": "data/bruciel-1996-grand-place.png",
+          "source_preview_sha256": "4b1084de94e68d26752d758982e06c1241bd9f3d395be40db9b6c00866ed6803",
+          "crop_preview": "data/structural/023-bruciel-grand-place-1996.png",
+          "pixel_sha256": "fe3c4d2d73ba5da6584377803cd9278d3aa4cb4bde809501c5c92bc6cf5fd4a7"
+        },
+        {
+          "asset_id": "urbisgrid-grand-place-2022",
+          "epoch": 2022,
+          "source_preview": "data/urbisgrid-2022-grand-place.png",
+          "source_preview_sha256": "871d995a3753d2d03c811a5c59c1686b97b6ced87ae718a49481a743a2340ea5",
+          "crop_preview": "data/structural/023-urbisgrid-grand-place-2022.png",
+          "pixel_sha256": "55f334fc62037d0179fc94369e4f7a355846940dcc3beeb1b72ea62f0aa956fe"
+        }
+      ]
+    },
+    {
+      "source_id": "024",
+      "name": "The  Weighing  Scales",
+      "address": "Grand-Place, 24",
+      "latitude": 50.84671827430188,
+      "longitude": 4.353152773262009,
+      "source_center_pixels": {
+        "x": 366,
+        "y": 274
+      },
+      "crop_box_pixels": {
+        "left": 286,
+        "top": 194,
+        "right": 446,
+        "bottom": 354
+      },
+      "assets": [
+        {
+          "asset_id": "bruciel-grand-place-1935",
+          "epoch": "1930–1935",
+          "source_preview": "data/bruciel-1935-grand-place.png",
+          "source_preview_sha256": "d77806ad41785dc7a823b5cf1065705655bdbae9318a1d41e5e3dbb793f756a3",
+          "crop_preview": "data/structural/024-bruciel-grand-place-1935.png",
+          "pixel_sha256": "e93a2235675b03b14be8dce48e152104ab6c07443d23b4234061fab872c50f02"
+        },
+        {
+          "asset_id": "bruciel-grand-place-1996",
+          "epoch": 1996,
+          "source_preview": "data/bruciel-1996-grand-place.png",
+          "source_preview_sha256": "4b1084de94e68d26752d758982e06c1241bd9f3d395be40db9b6c00866ed6803",
+          "crop_preview": "data/structural/024-bruciel-grand-place-1996.png",
+          "pixel_sha256": "f1673aa1cf315b84595c837ff16da2c81b077fe09c59291393fd7daac1513cef"
+        },
+        {
+          "asset_id": "urbisgrid-grand-place-2022",
+          "epoch": 2022,
+          "source_preview": "data/urbisgrid-2022-grand-place.png",
+          "source_preview_sha256": "871d995a3753d2d03c811a5c59c1686b97b6ced87ae718a49481a743a2340ea5",
+          "crop_preview": "data/structural/024-urbisgrid-grand-place-2022.png",
+          "pixel_sha256": "fe60b6c734b03445ea993fc5eaba3260c6c30c2ef91c27f3f1a532a1aba24d08"
+        }
+      ]
+    },
+    {
+      "source_id": "026",
+      "name": "The Pigeon",
+      "address": "Grand-Place, 26-27",
+      "latitude": 50.846832360703424,
+      "longitude": 4.353053947078274,
+      "source_center_pixels": {
+        "x": 359,
+        "y": 260
+      },
+      "crop_box_pixels": {
+        "left": 279,
+        "top": 180,
+        "right": 439,
+        "bottom": 340
+      },
+      "assets": [
+        {
+          "asset_id": "bruciel-grand-place-1935",
+          "epoch": "1930–1935",
+          "source_preview": "data/bruciel-1935-grand-place.png",
+          "source_preview_sha256": "d77806ad41785dc7a823b5cf1065705655bdbae9318a1d41e5e3dbb793f756a3",
+          "crop_preview": "data/structural/026-bruciel-grand-place-1935.png",
+          "pixel_sha256": "d5ec05e1c9db22456a1f0b6488517395554712f94d10bdaade4c04fce257c275"
+        },
+        {
+          "asset_id": "bruciel-grand-place-1996",
+          "epoch": 1996,
+          "source_preview": "data/bruciel-1996-grand-place.png",
+          "source_preview_sha256": "4b1084de94e68d26752d758982e06c1241bd9f3d395be40db9b6c00866ed6803",
+          "crop_preview": "data/structural/026-bruciel-grand-place-1996.png",
+          "pixel_sha256": "3861065234fd6f48f1a3a2b4b1fba9903f9d1e1b187afb41431bf80efbb21e6b"
+        },
+        {
+          "asset_id": "urbisgrid-grand-place-2022",
+          "epoch": 2022,
+          "source_preview": "data/urbisgrid-2022-grand-place.png",
+          "source_preview_sha256": "871d995a3753d2d03c811a5c59c1686b97b6ced87ae718a49481a743a2340ea5",
+          "crop_preview": "data/structural/026-urbisgrid-grand-place-2022.png",
+          "pixel_sha256": "272505921213cc8bc1813673552bc5316efb4b491f0a7d5c2845c1b08da754cb"
+        }
+      ]
+    }
+  ]
+}

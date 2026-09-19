@@ -2,24 +2,42 @@
   "bruciel_app": {
     "name": "BruCiel historical imagery viewer",
     "url": "https://bruciel.brussels/",
+    "licence": "per-asset verification required",
+    "credit": "urban.brussels / BruCiel",
     "status": "discovery source",
     "note": "The official description reports roughly 5,000 geolocated historical photographs; reuse terms must be checked per asset."
   },
   "grand_place_dataset": {
     "name": "City of Brussels Grand Place buildings",
     "url": "https://opendata.brussels.be/api/explore/v2.1/catalog/datasets/description-des-batiments-de-la-grand-place/records",
+    "metadata": "https://opendata.brussels.be/api/explore/v2.1/catalog/datasets/description-des-batiments-de-la-grand-place",
+    "licence": "CC BY 4.0",
+    "credit": "Ville de Bruxelles/Data Management; catalogue attributions: Behind Brussels, Google Maps",
     "status": "snapshot available",
     "note": "The committed snapshot contains history and facade text but no official register-year field."
   },
   "brussels_heritage_inventory": {
     "name": "Brussels architectural heritage inventory",
     "url": "https://monument.heritage.brussels/fr/",
+    "terms": "https://monument.heritage.brussels/fr/legal/",
+    "licence": "text quotations and reused information permitted with explicit source attribution",
+    "credit": "urban.brussels — Inventaire du patrimoine architectural",
     "status": "official inventory pages found for all six pilot cases",
     "note": "Direct inventory pages provide reconstruction-date proxies for the three previously pending cases; they do not replace a structured original-construction year or human review."
+  },
+  "wikidata_register_proxies": {
+    "name": "Wikidata structured inception claims",
+    "url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+    "licence": "CC0 1.0 for structured data",
+    "credit": "Wikidata contributors (source acknowledgement encouraged)",
+    "status": "three crowd-sourced inception claims linked to Brussels heritage identifiers",
+    "note": "The pilot uses Q3279995, Q3279408 and Q3279633 only as sourced register-date proxies. CC0 reuse does not make the values official or resolve their date semantics; each remains subject to the register-semantics review."
   },
   "heritage_collection_1749": {
     "name": "Heritage Brussels 1749 contextual drawings",
     "url": "https://collections.heritage.brussels/fr/objects/36738",
+    "licence": "illustration reproduction requires rights clearance",
+    "credit": "urban.brussels — Collections du patrimoine mobilier",
     "status": "contextual lead only; reproduction permission not confirmed",
     "note": "Official records 36738 and 36739 depict historic street stretches near Rue de la Colline. The collection legal notice says illustrations require rights clearance; they are not attached as pilot evidence."
   },
@@ -27,13 +45,33 @@
     "name": "KIK-IRPA BALaT historical photographs",
     "url": "https://balat.kikirpa.be/en/photo/search/",
     "licence": "CC BY 4.0 for the photo assets; CC0 for metadata",
+    "credit": "KIK-IRPA; exact cliché identifier recorded per preview",
     "status": "five 1941-1942 pilot previews verified",
     "note": "The pilot commits five 800px IIIF previews for Grand-Place 6, 9, 21-22, 23 and 26-27. Credit lines and source records are stored per asset; these are source previews, not reviewed change annotations."
+  },
+  "wikimedia_commons_balance": {
+    "name": "Wikimedia Commons — Maison de la Balance facade",
+    "url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_de_la_Balance_-_01.jpg",
+    "licence": "CC BY-SA 3.0",
+    "credit": "EmDee, via Wikimedia Commons",
+    "status": "exact-case 2011 facade preview verified",
+    "note": "This source describes its 2011 Maison de la Balance photograph as Grand-Place and embeds protected-monument identifier 2043-0177/0; it does not state Rue de la Colline 24. It supplies the modern half of the 1878/2011 facade pair; structural context comes from the aligned ortho crops."
+  },
+  "balance_engraving_1878": {
+    "name": "British Library — Maison de la Balance engraving",
+    "url": "https://www.flickr.com/photos/britishlibrary/11271682895/",
+    "image_url": "https://live.staticflickr.com/2815/11271682895_1aeeecbddd_o.jpg",
+    "licence": "No known copyright restrictions",
+    "credit": "British Library, HMNTS 10270.g.3 (identifier 000266582); engraving by Victor Dedoncker",
+    "preview": "data/historical/british-library-maison-balance-1878.jpg",
+    "status": "exact-case 1878 institutional scan verified and committed",
+    "note": "Victor Dedoncker’s Maison de la Balance, rue de la Colline engraving appears on printed page 24 (scan page 36) of La Belgique illustrée, volume 1. The exact British Library Flickr Commons record identifies book 000266582, shelfmark Digital Store 10270.g.3, labels the image no known copyright restrictions and exposes the original JPEG. The downloader verifies the live rights metadata and pins the image by SHA-256."
   },
   "bruciel_1996": {
     "name": "BruCiel orthophotos 1996",
     "url": "https://data.mobility.brussels/en/info/d5e0a5dc-e3b7-48ce-a7ae-bac5ec0b38ba/",
     "licence": "CC0 stated on metadata page",
+    "credit": "Brussels Mobility / urban.brussels, BruCiel Ortho 1996",
     "wms": "https://gis.urban.brussels/geoserver/wms",
     "layer": "URBAN_DCC_ER:Orthophotoplans_1996",
     "preview": "data/bruciel-1996-grand-place.png",
@@ -43,38 +81,61 @@
     "wms_version": "1.1.1",
     "srs": "EPSG:4326"
   },
+  "bruciel_1935": {
+    "name": "BruCiel orthophotos 1930–1935",
+    "url": "https://data.mobility.brussels/en/info/ortho_35/",
+    "licence": "CC0 stated on metadata page",
+    "credit": "Brussels Mobility / urban.brussels, BruCiel Ortho 1930–1935",
+    "wms": "https://gis.urban.brussels/geoserver/wms",
+    "layer": "URBAN_DCC_ER:Orthophotoplans_1935",
+    "preview": "data/bruciel-1935-grand-place.png",
+    "preview_bbox_crs84": "4.348,50.845,4.357,50.849",
+    "status": "historical WMS extract verified for Grand Place bbox",
+    "note": "The Ortho 1935 metadata page lists CC0. The live capabilities describe imagery captured between 1930 and 1935 and publish it under the URBAN_DCC_ER workspace, while the metadata page retains the retired BDU_DEP layer name. A 640x480 WMS 1.1.1 extract provides the missing historical structural/aerial pilot epoch; exact capture year and visible changes still require review.",
+    "wms_version": "1.1.1",
+    "srs": "EPSG:4326"
+  },
   "bruciel_1944": {
     "name": "BruCiel orthophotos 1944",
     "url": "https://data.mobility.brussels/en/info/ortho_44/",
     "licence": "CC0 stated on metadata page",
+    "credit": "Brussels Mobility / urban.brussels, BruCiel Ortho 1944",
     "wms": "https://gis.urban.brussels/geoserver/wms",
     "layer": "URBAN_DCC_ER:Orthophotoplans_1944",
     "status": "WMS layer unavailable in test request",
-    "note": "GetMap fails with LayerNotDefined under every tested version; the capabilities entry is a dead cascade (cascaded=1) and the documented BDU_DEP workspace no longer exists on any server. Treat the endpoint as retired; find an alternative 1944-era source."
+    "note": "GetMap fails with LayerNotDefined under every tested version; the capabilities entry is a dead cascade (cascaded=1) and the documented BDU_DEP workspace no longer exists on any server. Retain this failure diagnosis, but use the verified CC0 1930–1935 layer as the historical structural pilot epoch."
   },
   "brussels_archives": {
     "name": "Brussels Archives image collection",
     "url": "https://archives.brussels.be/requests-reproduction-or-use-images",
     "licence": "permission request required",
+    "credit": "Archives of the City of Brussels; exact asset credit pending permission response",
     "status": "access request needed",
     "note": "Confirm reuse terms, credit and possible fees for each selected image."
   },
   "urbis_buildings": {
     "name": "UrbIS buildings technical specification",
     "url": "https://urbisdownload.datastore.brussels/UrbIS/TechSpec/Buildings_TechSpec_FR20250708.pdf",
+    "metadata": "https://data.gov.be/en/datasets/2cf42541-1813-11ef-8a81-00090ffe0001",
+    "licence": "Open Data licence stated by provider; exact licence text not pinned for this source lead",
+    "credit": "Paradigm",
     "status": "source lead",
-    "note": "The reviewed technical specification documents geometry, addresses and identifiers but does not demonstrate an individual construction-year field."
+    "note": "The reviewed technical specification documents geometry, addresses and identifiers but does not demonstrate an individual construction-year field. The data.gov.be record says the separate FPS Finance licence applies to the cadastral-parcel class; this prototype lead concerns the building class."
   },
   "planning_permits": {
     "name": "City of Brussels planning and environmental permits",
     "url": "https://opendata.brussels.be/explore/dataset/permis-urbanisme-environnement-vbx/",
+    "metadata": "https://opendata.brussels.be/api/explore/v2.1/catalog/datasets/permis-urbanisme-environnement-vbx",
+    "licence": "CC0 1.0",
+    "credit": "Ville de Bruxelles/Développement urbain",
     "status": "source lead",
-    "note": "Test address or building matching for later reconstruction evidence; permits should not be treated as original construction years without verification."
+    "note": "The open dataset is aggregate yearly statistics without address-level records, so building matching is not possible. Permits should not be treated as original construction years without separate evidence."
   },
   "urbisgrid_2022": {
     "name": "urbisgrid orthophotos 2022",
     "url": "https://data.mobility.brussels/info/Ortho",
     "licence": "open data; Ortho info page states CC0, INSPIRE distribution record requires CC-BY attribution",
+    "credit": "Brussels Mobility / urban.brussels, urbisgrid Ortho 2022",
     "wms": "https://geoservices-urbis.irisnet.be/geoserver/urbisgrid/wms",
     "layer": "urbisgrid:Ortho2022Ns",
     "preview": "data/urbisgrid-2022-grand-place.png",
@@ -82,6 +143,6 @@
     "wms_version": "1.1.1",
     "srs": "EPSG:4326",
     "status": "WMS extract verified for Grand Place bbox",
-    "note": "Modern structural-state epoch. Reuse terms are open data (CC0 per the Ortho info page; CC-BY attribution per the INSPIRE record); this pilot's source linking satisfies attribution. Both 1996 and 2022 are modern epochs; the historical 1940s epoch remains the analytical blocker."
+    "note": "Modern structural-state epoch. Reuse terms are open data (CC0 per the Ortho info page; CC-BY attribution per the INSPIRE record); this pilot's source linking satisfies attribution. Pair with the verified CC0 BruCiel 1930–1935 preview for historical-to-modern structural review."
   }
 }

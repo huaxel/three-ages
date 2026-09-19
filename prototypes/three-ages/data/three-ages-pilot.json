@@ -8,6 +8,47 @@
     "structure": "Treat a documented reconstruction date as a proxy only until historical imagery is reviewed.",
     "confidence": "Do not assign a final confidence score until image epochs, licensing and annotation review are complete."
   },
+  "area_image_evidence": [
+    {
+      "asset_id": "bruciel-grand-place-1935",
+      "epoch": "1930–1935",
+      "scope": "Grand Place pilot area",
+      "source_url": "https://data.mobility.brussels/en/info/ortho_35/",
+      "image_url": "https://gis.urban.brussels/geoserver/wms?service=WMS&version=1.1.1&request=GetMap&layers=URBAN_DCC_ER%3AOrthophotoplans_1935&styles=&format=image%2Fpng&transparent=true&width=640&height=480&srs=EPSG%3A4326&bbox=4.348%2C50.845%2C4.357%2C50.849",
+      "preview": "data/bruciel-1935-grand-place.png",
+      "preview_sha256": "d77806ad41785dc7a823b5cf1065705655bdbae9318a1d41e5e3dbb793f756a3",
+      "licence": "CC0",
+      "credit": "Brussels Mobility / urban.brussels, BruCiel Ortho 1930–1935",
+      "observation": "The source preview covers the Grand Place pilot area and supplies historical structural context; exact capture year and case-level changes are not yet reviewed.",
+      "annotation_status": "area source preview; no reviewer annotation"
+    },
+    {
+      "asset_id": "bruciel-grand-place-1996",
+      "epoch": 1996,
+      "scope": "Grand Place pilot area",
+      "source_url": "https://data.mobility.brussels/en/info/d5e0a5dc-e3b7-48ce-a7ae-bac5ec0b38ba/",
+      "image_url": "https://gis.urban.brussels/geoserver/wms?service=WMS&version=1.1.1&request=GetMap&layers=URBAN_DCC_ER%3AOrthophotoplans_1996&styles=&format=image%2Fpng&transparent=true&width=640&height=480&srs=EPSG%3A4326&bbox=4.348%2C50.845%2C4.357%2C50.849",
+      "preview": "data/bruciel-1996-grand-place.png",
+      "preview_sha256": "4b1084de94e68d26752d758982e06c1241bd9f3d395be40db9b6c00866ed6803",
+      "licence": "CC0",
+      "credit": "Brussels Mobility / urban.brussels, BruCiel Ortho 1996",
+      "observation": "The source preview covers the same pilot-area bounds as the historical and modern epochs; no case-level structural change is assigned.",
+      "annotation_status": "area source preview; no reviewer annotation"
+    },
+    {
+      "asset_id": "urbisgrid-grand-place-2022",
+      "epoch": 2022,
+      "scope": "Grand Place pilot area",
+      "source_url": "https://data.mobility.brussels/info/Ortho",
+      "image_url": "https://geoservices-urbis.irisnet.be/geoserver/urbisgrid/wms?service=WMS&version=1.1.1&request=GetMap&layers=urbisgrid%3AOrtho2022Ns&styles=&format=image%2Fpng&transparent=true&width=640&height=480&srs=EPSG%3A4326&bbox=4.348%2C50.845%2C4.357%2C50.849",
+      "preview": "data/urbisgrid-2022-grand-place.png",
+      "preview_sha256": "871d995a3753d2d03c811a5c59c1686b97b6ced87ae718a49481a743a2340ea5",
+      "licence": "Open data (CC0 metadata page; CC-BY INSPIRE record)",
+      "credit": "Brussels Mobility / urban.brussels, urbisgrid Ortho 2022",
+      "observation": "The source preview supplies the modern structural context for the same pilot-area bounds; no case-level structural change is assigned.",
+      "annotation_status": "area source preview; no reviewer annotation"
+    }
+  ],
   "records": [
     {
       "source_id": "005",
@@ -15,6 +56,8 @@
       "register": {
         "status": "proxy",
         "value": 1697,
+        "date_semantics": "heritage-inventory reconstruction date",
+        "source_comparison": "agrees with city reconstruction history",
         "note": "Brussels architectural heritage inventory entry 31123 lists reconstruction in 1697; the city dataset gives the broader range 1697–1704. This is an official reconstruction-date proxy, not a structured original-construction year; human review still required.",
         "source": {
           "kind": "brussels-architectural-inventory",
@@ -39,6 +82,7 @@
           "source_url": "https://balat.kikirpa.be/en/photo/T084580/",
           "image_url": "https://iiif.kikirpa.be/iiif/2/t084580/full/!800,800/0/default.jpg",
           "preview": "data/historical/kik-irpa-T084580.jpg",
+          "preview_sha256": "9b55192144b537a50e4584c4b81c0616b850574bd8ae6db798b023157cab1b2d",
           "licence": "CC BY 4.0",
           "credit": "KIK-IRPA, Brussels (Belgium), cliché T084580",
           "observation": "Source record identifies a facade detail of Maison Le Cornet, Grand-Place 6; no change label assigned.",
@@ -53,6 +97,8 @@
       "register": {
         "status": "proxy",
         "value": 1698,
+        "date_semantics": "Wikidata inception claim referenced to heritage register",
+        "source_comparison": "agrees with city reconstruction history",
         "note": "Wikidata inception claim (Q3279995), referenced to the Brussels heritage register record 2043-0065/009; agrees with the city history text (reconstruction in 1698). Human review still required.",
         "source": {
           "kind": "wikidata-inception",
@@ -79,6 +125,7 @@
           "source_url": "https://balat.kikirpa.be/en/photo/B031587/",
           "image_url": "https://iiif.kikirpa.be/iiif/2/b031587/full/!800,800/0/default.jpg",
           "preview": "data/historical/kik-irpa-B031587.jpg",
+          "preview_sha256": "6283f8fbcc7d5bbf5b2d840892a8185bd305f24c2aa8618bcada8e24220a36cf",
           "licence": "CC BY 4.0",
           "credit": "KIK-IRPA, Brussels (Belgium), cliché B031587",
           "observation": "Source record identifies a facade view of Maison Le Cygne, Grand-Place 9; no change label assigned.",
@@ -93,6 +140,8 @@
       "register": {
         "status": "proxy",
         "value": 1695,
+        "date_semantics": "Wikidata inception claim referenced to heritage register",
+        "source_comparison": "compatible with city history (reconstruction after 1695)",
         "note": "Wikidata inception claim (Q3279408), referenced to the Brussels heritage register record 2043-0065/021; consistent with the city history text (reconstruction after 1695). Human review still required.",
         "source": {
           "kind": "wikidata-inception",
@@ -119,6 +168,7 @@
           "source_url": "https://balat.kikirpa.be/en/photo/A102887/",
           "image_url": "https://iiif.kikirpa.be/iiif/2/a102887/full/!800,800/0/default.jpg",
           "preview": "data/historical/kik-irpa-A102887.jpg",
+          "preview_sha256": "522ca72791cf0cf91d0699d44142a58497653f811e0379e31ad91506b9256404",
           "licence": "CC BY 4.0",
           "credit": "KIK-IRPA, Brussels (Belgium), cliché A102887",
           "observation": "Source record identifies a facade view of Maison Joseph et Anne, Grand-Place 21-22; no change label assigned.",
@@ -133,6 +183,8 @@
       "register": {
         "status": "proxy",
         "value": 1695,
+        "date_semantics": "Wikidata inception claim referenced to heritage register",
+        "source_comparison": "disagrees with city reconstruction history (1695 versus 1697)",
         "note": "Wikidata inception claim (Q3279633), referenced to the Brussels heritage register record 2043-0065/023; disagrees with the city history text (rebuilt in 1697). Inter-source disagreement recorded; human review required before confidence.",
         "source": {
           "kind": "wikidata-inception",
@@ -159,6 +211,7 @@
           "source_url": "https://balat.kikirpa.be/en/photo/B024641/",
           "image_url": "https://iiif.kikirpa.be/iiif/2/b024641/full/!800,800/0/default.jpg",
           "preview": "data/historical/kik-irpa-B024641.jpg",
+          "preview_sha256": "1cb4b385605d6935e709bf2b4556dde169125c62a4177ae4e2ce1fb73d3b1e30",
           "licence": "CC BY 4.0",
           "credit": "KIK-IRPA, Brussels (Belgium), cliché B024641",
           "observation": "Source record identifies a facade view of Maison L'Ange, Grand-Place 23; no change label assigned.",
@@ -170,9 +223,46 @@
     {
       "source_id": "024",
       "selection_reason": "1704 reconstruction with a later complete reconstruction of the rear facade.",
+      "identity_note": "The City dataset labels this case The Weighing Scales, Grand-Place 24. Heritage inventory Urban 30991 labels La Balance, Rue de la Colline 24, while explicitly treating its facade as part of the Grand-Place ensemble. The British Library caption uses rue de la Colline; Wikimedia Commons describes Grand-Place and supplies protected-monument identifier 2043-0177/0. The City and heritage records share the distinctive 1704, 1890 and 1986 chronology, but the street-address mapping still requires reviewer confirmation.",
+      "identity_evidence": [
+        {
+          "source_kind": "city-open-data",
+          "record_id": "024",
+          "label": "The Weighing Scales",
+          "address": "Grand-Place 24",
+          "source_url": "https://opendata.brussels.be/api/explore/v2.1/catalog/datasets/description-des-batiments-de-la-grand-place/records",
+          "observation": "City record with coordinates 50.84671827430188, 4.353152773262009 and reconstruction/restoration years 1704, 1890 and 1986."
+        },
+        {
+          "source_kind": "brussels-architectural-inventory",
+          "record_id": "30991",
+          "label": "La Balance",
+          "address": "Rue de la Colline 24",
+          "source_url": "https://monument.heritage.brussels/fr/buildings/30991",
+          "observation": "Official inventory record with map centre 50.846470524895, 4.3534887375043; it gives 1704, 1890 and 1986 and describes the facade as part of the Grand-Place ensemble."
+        },
+        {
+          "source_kind": "wikimedia-commons",
+          "record_id": "2043-0177/0",
+          "label": "Maison de la Balance",
+          "address": "Grand-Place (description; no street number)",
+          "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_de_la_Balance_-_01.jpg",
+          "observation": "The 2011 file description says Grand-Place and embeds Brussels protected-monument identifier 2043-0177/0."
+        },
+        {
+          "source_kind": "british-library-flickr-commons",
+          "record_id": "11271682895",
+          "label": "Maison de la Balance",
+          "address": "rue de la Colline (engraving caption; no street number)",
+          "source_url": "https://www.flickr.com/photos/britishlibrary/11271682895/",
+          "observation": "The 1878 engraving caption names Maison de la Balance, rue de la Colline."
+        }
+      ],
       "register": {
         "status": "proxy",
         "value": 1704,
+        "date_semantics": "heritage-inventory reconstruction date",
+        "source_comparison": "agrees with city reconstruction history",
         "note": "Brussels architectural heritage inventory entry 30991 (La Balance, Rue de la Colline 24) lists 1704, agreeing with the city history text. This is an official reconstruction-date proxy, not a structured original-construction year; human review still required.",
         "source": {
           "kind": "brussels-architectural-inventory",
@@ -190,8 +280,33 @@
         "value": "1704",
         "note": "Reconstruction date from the public history text; not an aerial-image inference."
       },
-      "image_evidence": [],
-      "next_step": "Check whether rear-volume change is visible in aerial imagery while the Grand-Place facade remains stable."
+      "image_evidence": [
+        {
+          "asset_id": "british-library-balance-1878",
+          "epoch": 1878,
+          "source_url": "https://www.flickr.com/photos/britishlibrary/11271682895/",
+          "image_url": "https://live.staticflickr.com/2815/11271682895_1aeeecbddd_o.jpg",
+          "preview": "data/historical/british-library-maison-balance-1878.jpg",
+          "preview_sha256": "1ca88eca41411d38f722b176efedd991da9028feea02795ce6409113026927b8",
+          "licence": "No known copyright restrictions",
+          "credit": "British Library, HMNTS 10270.g.3 (identifier 000266582); engraving by Victor Dedoncker",
+          "observation": "The 1878 volume captions this exact facade Maison de la Balance, rue de la Colline; the source image is an engraving rather than a photograph and has no reviewer change label.",
+          "annotation_status": "source preview; no reviewer annotation"
+        },
+        {
+          "asset_id": "commons-balance-2011-01",
+          "epoch": 2011,
+          "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_de_la_Balance_-_01.jpg",
+          "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Belgique_-_Bruxelles_-_Maison_de_la_Balance_-_01.jpg",
+          "preview": "data/historical/commons-maison-balance-2011.jpg",
+          "preview_sha256": "8af4305c92db16d063ce19f901afc9841e1721e5be4c70d39b9cb3deed9bce03",
+          "licence": "CC BY-SA 3.0",
+          "credit": "EmDee, via Wikimedia Commons",
+          "observation": "Source record identifies a 2011 facade view of Maison de la Balance and describes it as Grand-Place; it embeds protected-monument identifier 2043-0177/0. No change label is assigned.",
+          "annotation_status": "source preview; no reviewer annotation"
+        }
+      ],
+      "next_step": "Compare the permitted 1878 engraving with the 2011 facade view and check whether the documented rear-volume change is visible in aerial imagery."
     },
     {
       "source_id": "026",
@@ -199,6 +314,8 @@
       "register": {
         "status": "proxy",
         "value": 1697,
+        "date_semantics": "heritage-inventory reconstruction date",
+        "source_comparison": "agrees with city reconstruction history",
         "note": "Brussels architectural heritage inventory entry 31141 lists reconstruction in 1697, agreeing with the city history text. This is an official reconstruction-date proxy, not a structured original-construction year; human review still required.",
         "source": {
           "kind": "brussels-architectural-inventory",
@@ -223,6 +340,7 @@
           "source_url": "https://balat.kikirpa.be/en/photo/B031502/",
           "image_url": "https://iiif.kikirpa.be/iiif/2/b031502/full/!800,800/0/default.jpg",
           "preview": "data/historical/kik-irpa-B031502.jpg",
+          "preview_sha256": "fe085935651ab77bf403c68f43cb537d60d1d4090dd97360e7a8beb1dc28b475",
           "licence": "CC BY 4.0",
           "credit": "KIK-IRPA, Brussels (Belgium), cliché B031502",
           "observation": "Source record identifies a facade view of Maison Le Pigeon, Grand-Place 26-27; no change label assigned.",

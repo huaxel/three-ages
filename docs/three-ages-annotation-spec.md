@@ -50,6 +50,7 @@ evidence_id
 claim_type
 asset_uri
 asset_epoch
+preview_sha256
 source_owner
 licence_or_permission
 observation
@@ -86,13 +87,14 @@ notes
 
 1. Select a source-linked building from the pilot.
 2. Verify identity, address and coordinates.
-3. Attach the register source and record the register claim.
+3. Attach the register source, record its actual date semantics and compare it explicitly with the City history.
 4. Attach permitted historical image assets and record their epochs and licence.
 5. Annotate facade observations without inferring structure.
-6. Compare image epochs for structural change.
+6. Compare the identical building-centred 1930–1935, 1996 and 2022 crop boxes for structural change. The red centre marker locates the source coordinate; it does not define a building footprint.
 7. Have a second reviewer inspect the evidence and disagreement notes.
-8. Assign confidence only after review.
-9. Export the case with all evidence and unresolved fields preserved.
+8. Record facade-source observations in `three-ages-image-review.csv` and the case-level aerial comparison in `three-ages-structural-review.csv`. In `three-ages-register-review.csv`, choose `accept proxy for MVP`, `retain as reconstruction evidence`, or `reject source mapping` and explain the semantics decision. Every completed row requires reviewer, ISO-8601 review date and `low`, `medium` or `high` confidence.
+9. Regenerate with `export_pilot.py`; it preserves completed fields only while the full asset, comparison or register provenance matches, refuses to silently move or discard a review, and compiles completed rows to the corresponding `three-ages-*-reviews.json` artifact for the explorer.
+10. Verify the explorer displays each reviewed observation or decision beside the correct source claim, with reviewer, date and confidence; unresolved fields remain pending. Use `--reset-reviews` only when all three sets of reviewer data should deliberately be cleared.
 
 ## MVP acceptance criteria
 
@@ -103,14 +105,14 @@ notes
 - [ ] Every non-pending claim has evidence, rationale, annotator and reviewer fields.
 - [ ] Disagreements and uncertainty remain visible in the explorer.
 - [ ] Image permissions and reuse conditions are documented.
-- [ ] The building export and historical-image review worksheet can reproduce every displayed claim.
+- [ ] The building export and three review worksheets can reproduce every displayed claim and decision.
 
 ## Current pilot status
 
 The six current cases have source-described facade text and documented reconstruction proxies. They intentionally have no final confidence labels.
 
-Image epochs: the pilot commits two legally reusable modern ortho extracts for the pilot area — BruCiel 1996 (CC0) and urbisgrid 2022 (open data; CC0 per the Ortho info page, CC-BY per the INSPIRE record) — plus five KIK-IRPA BALaT facade photographs from 1941–1942 under CC BY 4.0 for Grand-Place 6, 9, 21-22, 23 and 26-27. Each historical preview stores its source URL, IIIF URL, epoch, credit and explicit no-annotation status. The 1944 BruCiel WMS is retired; Grand-Place 24 still lacks a permitted historical view, and the facade photos do not substitute for an aerial structural epoch.
+Image epochs: the pilot commits three aligned ortho extracts for the pilot area — BruCiel 1930–1935 and 1996 under CC0, plus urbisgrid 2022 (open data; CC0 per the Ortho info page, CC-BY per the INSPIRE record) — and five KIK-IRPA BALaT facade photographs from 1941–1942 under CC BY 4.0 for Grand-Place 6, 9, 21-22, 23 and 26-27. Maison de la Balance has an exact-case 1878 British Library engraving marked no known copyright restrictions and a 2011 Wikimedia Commons photograph under CC BY-SA 3.0. Each case-level preview stores its source URL, image URL, epoch, credit, SHA-256 checksum and explicit no-annotation status. The 1944 BruCiel WMS is retired, but the verified 1930–1935 layer now supplies the missing historical structural/aerial source; its mixed capture window and any visible changes require reviewer interpretation.
 
-Register status: three cases (The Swan, Joseph and Anne, The Angel) carry `proxy` register years sourced from Wikidata inception claims referenced to Brussels heritage register records, with the city-history comparison recorded in each note. The Swan (1698) agrees with the city text; Joseph and Anne (1695) is consistent with "reconstruction after 1695"; The Angel shows a recorded inter-source disagreement (Wikidata 1695 vs city text 1697) and must not receive confidence until reviewed. The Horn, The Weighing Scales and The Pigeon now carry direct Brussels architectural heritage inventory reconstruction-date proxies (1697, 1704 and 1697), with source URLs and the distinction from an original-construction year recorded in each note. All six remain unreviewed.
+Register status: three cases (The Swan, Joseph and Anne, The Angel) carry `proxy` register years sourced from Wikidata inception claims referenced to Brussels heritage register records; the other three carry direct heritage-inventory reconstruction dates. Each now stores `date_semantics` and a structured City-history comparison. The Swan (1698) agrees; Joseph and Anne (1695) is compatible with “reconstruction after 1695”; The Angel preserves the 1695-versus-1697 disagreement. All six remain unreviewed until a controlled decision is recorded in the register worksheet.
 
-The historical-image review worksheet is now ready for a reviewer to record facade and structural observations, reviewer identity, review date and confidence. The next blockers are a permitted historical view for Grand-Place 24, structural/aerial historical evidence and confirmation that the six proxy dates satisfy the intended register-year semantics.
+Three provenance-safe worksheets are ready. `three-ages-image-review.csv` contains seven facade-asset rows. `three-ages-structural-review.csv` binds six case rows to the complete 1930–1935/1996/2022 evidence set, crop geometry and pixel hashes. `three-ages-register-review.csv` binds six semantics decisions to each source claim, source note and City comparison. Completed rows compile to the JSON artifacts displayed by the explorer, and the exporter refuses preservation after provenance changes. The next blockers are reviewer confirmation of the La Balance crosswalk (City and Commons use Grand-Place labels; heritage and the British Library use Rue de la Colline), completion of the six structural comparisons and completion of the six register decisions.
