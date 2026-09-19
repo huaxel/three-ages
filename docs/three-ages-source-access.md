@@ -21,6 +21,10 @@ This checklist records the first source-access review for the curated MVP. A sou
 
 The [KIK-IRPA BALaT catalogue](https://balat.kikirpa.be/en/photo/search/) exposes IIIF images and labels the photo assets **CC BY 4.0** (metadata is CC0). Five source records are committed in the pilot as 800px previews: [T084580](https://balat.kikirpa.be/en/photo/T084580/) (Le Cornet, 1942), [B031587](https://balat.kikirpa.be/en/photo/B031587/) (Le Cygne, 1942), [A102887](https://balat.kikirpa.be/en/photo/A102887/) (Joseph and Anne, 1941), [B024641](https://balat.kikirpa.be/en/photo/B024641/) (L'Ange, 1941) and [B031502](https://balat.kikirpa.be/en/photo/B031502/) (Le Pigeon, 1942). Each pilot record stores the source URL, IIIF URL, epoch, licence, credit line and an explicit `source preview; no reviewer annotation` status. The previews establish a permitted historical facade source, not a structural-change conclusion.
 
+### Heritage Brussels contextual lead
+
+The official [1749 drawing record 36738](https://collections.heritage.brussels/fr/objects/36738) and adjacent [record 36739](https://collections.heritage.brussels/fr/objects/36739) depict historic street stretches around Rue de la Colline. They are useful leads for the uncovered Weighing Scales case, but they do not identify that facade at building level in the pilot and are not committed as evidence. The collection's [legal notice](https://collections.heritage.brussels/fr/legal/) says illustrations require rights clearance from the named institution or rights holder; request permission before reuse.
+
 ### Brussels Archives
 
 - [Brussels Archives legal notes](https://archives.brussels.be/legal-notes)
@@ -51,6 +55,7 @@ A direct official-source pass now covers the three previously pending houses: th
 | BruCiel 1944 | second structural epoch | CC0 stated; layer is a dead cascade on all tested endpoints; provider workspace removed | find an alternative 1944-era source or ask the provider to republish the layer |
 | BruCiel other epochs | optional additional evidence | unknown per layer | only add after licence check |
 | KIK-IRPA BALaT | permitted historical facade imagery | five 1941–1942 photo assets verified and committed as CC BY 4.0 previews; 5/6 pilot cases covered | annotate only after reviewer checks source identity and visual observation; find a permitted view for Grand-Place 24 |
+| Heritage Brussels collection | contextual historical drawing lead | 1749 records 36738/36739 found; reproduction rights not confirmed and building-level identity is insufficient | ask the collection or named institution whether a non-commercial copy may be reused; do not treat as pilot evidence yet |
 | Brussels Archives | facade/history imagery | permission/reuse request required; submission wizard prepared | run `bash scripts/archives-image-request.sh` and send the enquiry |
 | Grand Place dataset | source identity/history/facade text | current JSON snapshot available; live field inventory checked (34 records, no register year) | pair with heritage inventory dates and document semantics |
 | Brussels architectural heritage inventory | official building descriptions and reconstruction-date proxies | direct inventory pages found for all six pilot cases; three newly added to the pilot | confirm exact register-year interpretation and review each proxy |

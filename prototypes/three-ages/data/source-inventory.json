@@ -17,6 +17,12 @@
     "status": "official inventory pages found for all six pilot cases",
     "note": "Direct inventory pages provide reconstruction-date proxies for the three previously pending cases; they do not replace a structured original-construction year or human review."
   },
+  "heritage_collection_1749": {
+    "name": "Heritage Brussels 1749 contextual drawings",
+    "url": "https://collections.heritage.brussels/fr/objects/36738",
+    "status": "contextual lead only; reproduction permission not confirmed",
+    "note": "Official records 36738 and 36739 depict historic street stretches near Rue de la Colline. The collection legal notice says illustrations require rights clearance; they are not attached as pilot evidence."
+  },
   "kik_irpa_historical": {
     "name": "KIK-IRPA BALaT historical photographs",
     "url": "https://balat.kikirpa.be/en/photo/search/",
