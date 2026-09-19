@@ -12,7 +12,7 @@ This checklist records the first source-access review for the curated MVP. A sou
 - **1996 layer:** [Ortho 1996 metadata](https://data.mobility.brussels/en/info/d5e0a5dc-e3b7-48ce-a7ae-bac5ec0b38ba/) explicitly links to [CC0](https://creativecommons.org/publicdomain/zero/1.0).
 - **Other epochs:** BruCiel covers multiple periods, but each layer needs its own licence and completeness check.
 
-**Current status:** the 1996 WMS returned a small PNG extract for a Grand Place bounding box. The equivalent 1944 WMS request returned a service error saying the layer was not found, despite the metadata page and GetCapabilities response listing the layer. The generic and workspace-specific GeoServer endpoints produced the same result. Investigate the 1944 endpoint before treating the pair as a matched image set.
+**Current status:** the 1996 WMS returned a small PNG extract for a Grand Place bounding box. The equivalent 1944 layer fails every GetMap request with `LayerNotDefined`. The failure is now diagnosed: the capabilities entry `URBAN_DCC_ER:Orthophotoplans_1944` is a `cascaded="1"` layer whose upstream source has gone away, and the `BDU_DEP` workspace documented on the metadata page no longer exists on any GeoServer. The official mobigis viewer itself lists no catalog entry for the layer. The 1944 endpoint is therefore treated as retired by the provider; a second epoch must come from another source (BruCiel photo API, Brussels Archives, or a public-domain photo) rather than this WMS.
 
 ## Historical photographs
 
@@ -28,19 +28,19 @@ The archive is a discovery source, not an assumed open-licence source. Request r
 - **Works/change evidence lead:** [City of Brussels planning and environmental permits](https://opendata.brussels.be/explore/dataset/permis-urbanisme-environnement-vbx/)
 - **Regional statistics context:** [IBSA building stock theme](https://ibsa.brussels/themes/amenagement-du-territoire/parc-de-batiments)
 
-The committed Grand Place snapshot contains restoration/history text and facade descriptions, but no official register-year field. The reviewed UrbIS specification describes 2D building geometry, addresses, block/building identifiers and a January 2025 temporal snapshot, but does not list an individual construction-year attribute in the Buildings catalogue. Planning permits may provide later-work evidence, but cannot be treated as original construction years without verification. The register-year source therefore remains an explicit access task rather than an inferred value.
+The committed Grand Place snapshot contains restoration/history text and facade descriptions, but no official register-year field. A live API check of all 34 records confirms the field inventory is limited to name, address, height, original and current function, narrative history/restorations text, facade description, protection measures and coordinates — no structured construction year. The reviewed UrbIS specification describes 2D building geometry, addresses, block/building identifiers and a January 2025 temporal snapshot, but does not list an individual construction-year attribute in the Buildings catalogue. The City of Brussels planning-permits open dataset is aggregate yearly statistics only (year, domain, category, totals; coverage from 2013) with no address-level records, so permit-to-building matching is not possible from open data. Later-work evidence would require consulting permit PDFs via the city or Urban.brussels directly. The register-year source therefore remains an explicit access task rather than an inferred value.
 
 ## Access log
 
 | Source | Intended use | Licence/access status | Next action |
 |---|---|---|---|
 | BruCiel 1996 | structural comparison epoch | CC0 stated; small WMS extract verified | preserve request parameters and test image alignment |
-| BruCiel 1944 | second structural epoch | CC0 stated; multiple WMS endpoints tested and failed | ask the data provider for the current layer endpoint or use the BruCiel API/viewer |
+| BruCiel 1944 | second structural epoch | CC0 stated; layer is a dead cascade on all tested endpoints; provider workspace removed | find an alternative 1944-era source or ask the provider to republish the layer |
 | BruCiel other epochs | optional additional evidence | unknown per layer | only add after licence check |
 | Brussels Archives | facade/history imagery | permission/reuse request required | submit a pilot request |
-| Grand Place dataset | source identity/history/facade text | current JSON snapshot available | identify official register-year field |
+| Grand Place dataset | source identity/history/facade text | current JSON snapshot available; live field inventory checked (34 records, no register year) | identify official register-year field |
 | UrbIS buildings | building geometry/identity | access and attribute coverage to verify | inspect technical specification |
-| Planning permits | later works and reconstruction clues | dataset available; field suitability to verify | test address/building matching |
+| Planning permits | later works and reconstruction clues | aggregate yearly statistics only, no addresses; matching not possible from open data | request permit PDFs via the city or Urban.brussels if needed |
 
 ## Go/no-go gate
 
