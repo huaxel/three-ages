@@ -9,15 +9,19 @@
     "name": "BruCiel orthophotos 1996",
     "url": "https://data.mobility.brussels/en/info/d5e0a5dc-e3b7-48ce-a7ae-bac5ec0b38ba/",
     "licence": "CC0 stated on metadata page",
-    "status": "candidate epoch",
-    "note": "Confirm tile access and attribution requirements before adding assets."
+    "wms": "https://gis.urban.brussels/geoserver/wms",
+    "layer": "URBAN_DCC_ER:Orthophotoplans_1996",
+    "status": "WMS extract verified for Grand Place bbox",
+    "note": "A small 640x480 GetMap request returned PNG data; do not commit imagery until the pilot area and attribution are documented."
   },
   "bruciel_1944": {
     "name": "BruCiel orthophotos 1944",
     "url": "https://data.mobility.brussels/en/info/ortho_44/",
     "licence": "CC0 stated on metadata page",
-    "status": "candidate epoch",
-    "note": "WMS/WFS services are listed; confirm tile access before adding assets."
+    "wms": "https://gis.urban.brussels/geoserver/wms",
+    "layer": "URBAN_DCC_ER:Orthophotoplans_1944",
+    "status": "WMS layer unavailable in test request",
+    "note": "A small GetMap request returned a service error saying the layer was not found; investigate the service or alternate endpoint."
   },
   "brussels_archives": {
     "name": "Brussels Archives image collection",

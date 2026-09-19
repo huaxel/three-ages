@@ -11,7 +11,7 @@ This checklist records the first source-access review for the curated MVP. A sou
 - **1996 layer:** [Ortho 1996 metadata](https://data.mobility.brussels/en/info/d5e0a5dc-e3b7-48ce-a7ae-bac5ec0b38ba/) explicitly links to [CC0](https://creativecommons.org/publicdomain/zero/1.0).
 - **Other epochs:** BruCiel covers multiple periods, but each layer needs its own licence and completeness check.
 
-**Current status:** 1944 and 1996 are both strong reuse candidates. Confirm tile access and extract a small matched area before adding image assets to the pilot.
+**Current status:** the 1996 WMS returned a small PNG extract for a Grand Place bounding box. The equivalent 1944 WMS request returned a service error saying the layer was not found, despite the metadata page listing the layer. Investigate the 1944 endpoint before treating the pair as a matched image set.
 
 ## Historical photographs
 
@@ -33,8 +33,8 @@ The committed Grand Place snapshot contains restoration/history text and facade 
 
 | Source | Intended use | Licence/access status | Next action |
 |---|---|---|---|
-| BruCiel 1996 | structural comparison epoch | CC0 stated on metadata page | download/test one pilot tile |
-| BruCiel 1944 | second structural epoch | CC0 stated on metadata page | inspect layer access and extract a matched pilot area |
+| BruCiel 1996 | structural comparison epoch | CC0 stated; small WMS extract verified | preserve request parameters and test image alignment |
+| BruCiel 1944 | second structural epoch | CC0 stated; WMS test failed | resolve the layer/service mismatch and extract a matched pilot area |
 | BruCiel other epochs | optional additional evidence | unknown per layer | only add after licence check |
 | Brussels Archives | facade/history imagery | permission/reuse request required | submit a pilot request |
 | Grand Place dataset | source identity/history/facade text | current JSON snapshot available | identify official register-year field |
