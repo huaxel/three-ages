@@ -17,6 +17,13 @@
     "status": "official inventory pages found for all six pilot cases",
     "note": "Direct inventory pages provide reconstruction-date proxies for the three previously pending cases; they do not replace a structured original-construction year or human review."
   },
+  "kik_irpa_historical": {
+    "name": "KIK-IRPA BALaT historical photographs",
+    "url": "https://balat.kikirpa.be/en/photo/search/",
+    "licence": "CC BY 4.0 for the photo assets; CC0 for metadata",
+    "status": "five 1941-1942 pilot previews verified",
+    "note": "The pilot commits five 800px IIIF previews for Grand-Place 6, 9, 21-22, 23 and 26-27. Credit lines and source records are stored per asset; these are source previews, not reviewed change annotations."
+  },
   "bruciel_1996": {
     "name": "BruCiel orthophotos 1996",
     "url": "https://data.mobility.brussels/en/info/d5e0a5dc-e3b7-48ce-a7ae-bac5ec0b38ba/",

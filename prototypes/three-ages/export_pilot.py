@@ -28,6 +28,9 @@ FIELDS = [
     "selection_reason",
     "next_step",
     "image_evidence_count",
+    "image_evidence_ids",
+    "image_evidence_epochs",
+    "image_evidence_urls",
 ]
 
 
@@ -58,6 +61,9 @@ def main() -> None:
                 "selection_reason": case["selection_reason"],
                 "next_step": case["next_step"],
                 "image_evidence_count": len(case["image_evidence"]),
+                "image_evidence_ids": ";".join(str(asset.get("asset_id", "")) for asset in case["image_evidence"]),
+                "image_evidence_epochs": ";".join(str(asset.get("epoch", "")) for asset in case["image_evidence"]),
+                "image_evidence_urls": ";".join(asset.get("source_url", "") for asset in case["image_evidence"]),
             })
     print(f"wrote {OUTPUT.relative_to(ROOT)}")
 

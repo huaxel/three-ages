@@ -13,9 +13,15 @@ This checklist records the first source-access review for the curated MVP. A sou
 - **Other epochs:** BruCiel covers multiple periods, but each layer needs its own licence and completeness check.
 - **Modern urban.brussels orthos:** the [Ortho info page](https://data.mobility.brussels/info/Ortho) states CC0 for the `urbisgrid` ortho layers, while the INSPIRE distribution record requires CC-BY attribution. Either way the 2022 layer is reusable open data; the pilot records attribution for both readings.
 
-**Current status:** the 1996 WMS returned a small PNG extract for a Grand Place bounding box. The equivalent 1944 layer fails every GetMap request with `LayerNotDefined`. The failure is now diagnosed: the capabilities entry `URBAN_DCC_ER:Orthophotoplans_1944` is a `cascaded="1"` layer whose upstream source has gone away, and the `BDU_DEP` workspace documented on the metadata page no longer exists on any GeoServer. The official mobigis viewer itself lists no catalog entry for the layer. The 1944 endpoint is therefore treated as retired by the provider; a second epoch must come from another source (BruCiel photo API, Brussels Archives, or a public-domain photo) rather than this WMS.
+**Current status:** the 1996 WMS returned a small PNG extract for a Grand Place bounding box. The equivalent 1944 layer fails every GetMap request with `LayerNotDefined`. The failure is now diagnosed: the capabilities entry `URBAN_DCC_ER:Orthophotoplans_1944` is a `cascaded="1"` layer whose upstream source has gone away, and the `BDU_DEP` workspace documented on the metadata page no longer exists on any GeoServer. The official mobigis viewer itself lists no catalog entry for the layer. The 1944 endpoint is therefore treated as retired by the provider. A KIK-IRPA BALaT search now supplies five legally reusable 1941–1942 facade photographs (Grand-Place 6, 9, 21–22, 23 and 26–27), stored as 800px previews with per-asset CC BY 4.0 credits. These are facade views, not a replacement for an aerial structural epoch; Grand-Place 24 remains uncovered and all image-derived labels remain pending.
 
 ## Historical photographs
+
+### KIK-IRPA / BALaT
+
+The [KIK-IRPA BALaT catalogue](https://balat.kikirpa.be/en/photo/search/) exposes IIIF images and labels the photo assets **CC BY 4.0** (metadata is CC0). Five source records are committed in the pilot as 800px previews: [T084580](https://balat.kikirpa.be/en/photo/T084580/) (Le Cornet, 1942), [B031587](https://balat.kikirpa.be/en/photo/B031587/) (Le Cygne, 1942), [A102887](https://balat.kikirpa.be/en/photo/A102887/) (Joseph and Anne, 1941), [B024641](https://balat.kikirpa.be/en/photo/B024641/) (L'Ange, 1941) and [B031502](https://balat.kikirpa.be/en/photo/B031502/) (Le Pigeon, 1942). Each pilot record stores the source URL, IIIF URL, epoch, licence, credit line and an explicit `source preview; no reviewer annotation` status. The previews establish a permitted historical facade source, not a structural-change conclusion.
+
+### Brussels Archives
 
 - [Brussels Archives legal notes](https://archives.brussels.be/legal-notes)
 - [Brussels Archives reproduction or image-use request](https://archives.brussels.be/requests-reproduction-or-use-images)
@@ -41,9 +47,10 @@ A direct official-source pass now covers the three previously pending houses: th
 | Source | Intended use | Licence/access status | Next action |
 |---|---|---|---|
 | BruCiel 1996 | structural comparison epoch | CC0 stated; WMS 1.1.1 extract verified and aligned | request parameters preserved; alignment tested against the 2022 urbisgrid ortho (phase-correlation peak 18 sigma, offset ~4 m) |
-| urbisgrid 2022 | modern structural-state epoch | open data (CC0 per Ortho info page; CC-BY per INSPIRE record); extract verified | paired with 1996 as two legally reusable modern epochs; historical epoch still pending |
+| urbisgrid 2022 | modern structural-state epoch | open data (CC0 per Ortho info page; CC-BY per INSPIRE record); extract verified | paired with 1996 as two legally reusable modern epochs; compare with KIK-IRPA facade previews |
 | BruCiel 1944 | second structural epoch | CC0 stated; layer is a dead cascade on all tested endpoints; provider workspace removed | find an alternative 1944-era source or ask the provider to republish the layer |
 | BruCiel other epochs | optional additional evidence | unknown per layer | only add after licence check |
+| KIK-IRPA BALaT | permitted historical facade imagery | five 1941–1942 photo assets verified and committed as CC BY 4.0 previews; 5/6 pilot cases covered | annotate only after reviewer checks source identity and visual observation; find a permitted view for Grand-Place 24 |
 | Brussels Archives | facade/history imagery | permission/reuse request required; submission wizard prepared | run `bash scripts/archives-image-request.sh` and send the enquiry |
 | Grand Place dataset | source identity/history/facade text | current JSON snapshot available; live field inventory checked (34 records, no register year) | pair with heritage inventory dates and document semantics |
 | Brussels architectural heritage inventory | official building descriptions and reconstruction-date proxies | direct inventory pages found for all six pilot cases; three newly added to the pilot | confirm exact register-year interpretation and review each proxy |
