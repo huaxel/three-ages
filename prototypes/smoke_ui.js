@@ -100,7 +100,7 @@ function requireIncludes(value, expected, label) {
 async function testThreeAges() {
   const { context, element } = await loadPrototype("three-ages");
   const source = element("source").textContent;
-  requireIncludes(source, "18 aligned case crops", "Three Ages source summary");
+  requireIncludes(source, "24 aligned case crops", "Three Ages source summary");
   requireIncludes(source, "CC BY 4.0", "Three Ages dataset licence");
   requireIncludes(source, "Behind Brussels, Google Maps", "Three Ages dataset attribution");
   requireIncludes(source, "0 completed register decisions", "Three Ages source summary");
@@ -123,6 +123,16 @@ async function testThreeAges() {
     "No completed register-semantics decision",
     "No completed case-level structural review",
   ]) requireIncludes(content, expected, "Three Ages case rendering");
+  context.show("022");
+  const josephAnne = element("content").innerHTML;
+  for (const expected of [
+    "kik-irpa-A102887.jpg",
+    "kik-irpa-T001802.jpg",
+    "kik-irpa-A133254.jpg",
+    "022-bruciel-grand-place-1971.png",
+  ]) requireIncludes(josephAnne, expected, "Three Ages second-epoch rendering");
+  context.show("005");
+  requireIncludes(element("content").innerHTML, "kik-irpa-E049753.jpg", "Three Ages 1890 ensemble rendering");
   const buildings = JSON.parse(fs.readFileSync(path.join(ROOT, "three-ages/data/grand-place-buildings.json"), "utf8"));
   const nameFor = id => (buildings.records.find(record => record.id === id) || {}).name || id;
   const buildingButtons = context.document.querySelectorAll("#list .building");

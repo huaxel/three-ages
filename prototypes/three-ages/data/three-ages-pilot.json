@@ -23,6 +23,19 @@
       "annotation_status": "area source preview; no reviewer annotation"
     },
     {
+      "asset_id": "bruciel-grand-place-1971",
+      "epoch": 1971,
+      "scope": "Grand Place pilot area",
+      "source_url": "https://data.mobility.brussels/fr/info/ortho_71/",
+      "image_url": "https://gis.urban.brussels/geoserver/wms?service=WMS&version=1.1.1&request=GetMap&layers=URBAN_DCC_ER%3AOrthophotoplans_1971&styles=&format=image%2Fpng&transparent=true&width=640&height=480&srs=EPSG%3A4326&bbox=4.348%2C50.845%2C4.357%2C50.849",
+      "preview": "data/bruciel-1971-grand-place.png",
+      "preview_sha256": "1a6ef5cbae13d1289c31e7f6fe840ecfe60a3a0c9c7fc94da33360e2e2b85bc5",
+      "licence": "CC0",
+      "credit": "Brussels Mobility / urban.brussels, BruCiel Ortho 1971",
+      "observation": "The source preview adds a 1971 intermediate epoch to the same pilot-area bounds; no case-level structural change is assigned.",
+      "annotation_status": "area source preview; no reviewer annotation"
+    },
+    {
       "asset_id": "bruciel-grand-place-1996",
       "epoch": 1996,
       "scope": "Grand Place pilot area",
@@ -77,12 +90,24 @@
       },
       "image_evidence": [
         {
+          "asset_id": "E049753",
+          "epoch": 1890,
+          "source_url": "https://balat.kikirpa.be/en/photo/E049753/",
+          "image_url": "https://iiif.kikirpa.be/iiif/2/e049753/full/!800,800/0/default.jpg",
+          "preview": "data/historical/kik-irpa-E049753.jpg",
+          "preview_sha256": "dfa7c70e2bf747daea4ef97ea1c876b4c1e7d9987ca7469a30b95f1a8655bae3",
+          "licence": "CC BY 4.0",
+          "credit": "KIK-IRPA, Brussels (Belgium), cliché E049753",
+          "observation": "Source record describes an 1890 west-side ensemble view toward rue de la Tête d'Or and rue au Beurre; case-level identity for Maison Le Cornet is unconfirmed and requires reviewer confirmation. No change label assigned.",
+          "annotation_status": "source preview; no reviewer annotation"
+        },
+        {
           "asset_id": "T084580",
           "epoch": 1942,
           "source_url": "https://balat.kikirpa.be/en/photo/T084580/",
           "image_url": "https://iiif.kikirpa.be/iiif/2/t084580/full/!800,800/0/default.jpg",
           "preview": "data/historical/kik-irpa-T084580.jpg",
-          "preview_sha256": "9b55192144b537a50e4584c4b81c0616b850574bd8ae6db798b023157cab1b2d",
+          "preview_sha256": "2245f29d98fef90b9307afb0fc50f53704b08fb1ab583ef5a16b4759137ff85e",
           "licence": "CC BY 4.0",
           "credit": "KIK-IRPA, Brussels (Belgium), cliché T084580",
           "observation": "Source record identifies a facade detail of Maison Le Cornet, Grand-Place 6; no change label assigned.",
@@ -172,6 +197,30 @@
           "licence": "CC BY 4.0",
           "credit": "KIK-IRPA, Brussels (Belgium), cliché A102887",
           "observation": "Source record identifies a facade view of Maison Joseph et Anne, Grand-Place 21-22; no change label assigned.",
+          "annotation_status": "source preview; no reviewer annotation"
+        },
+        {
+          "asset_id": "T001802",
+          "epoch": 1969,
+          "source_url": "https://balat.kikirpa.be/en/photo/T001802/",
+          "image_url": "https://iiif.kikirpa.be/iiif/2/t001802/full/!800,800/0/default.jpg",
+          "preview": "data/historical/kik-irpa-T001802.jpg",
+          "preview_sha256": "3d4cd1dbd26d98cf694e9e3e1de634fb2d83232de35a750aa1479bc6e9a53d6b",
+          "licence": "CC BY 4.0",
+          "credit": "KIK-IRPA, Brussels (Belgium), cliché T001802",
+          "observation": "Source record identifies a 1969 facade view of Maison Joseph et Anne, Grand-Place 21-22, photographed by Raphaël Van de Walle; no change label assigned.",
+          "annotation_status": "source preview; no reviewer annotation"
+        },
+        {
+          "asset_id": "A133254",
+          "epoch": 1984,
+          "source_url": "https://balat.kikirpa.be/en/photo/A133254/",
+          "image_url": "https://iiif.kikirpa.be/iiif/2/a133254/full/!800,800/0/default.jpg",
+          "preview": "data/historical/kik-irpa-A133254.jpg",
+          "preview_sha256": "e632376fb4a6cb3a769d5b3225b90308401324757918d2f738ab1f97696a2f51",
+          "licence": "CC BY 4.0",
+          "credit": "KIK-IRPA, Brussels (Belgium), cliché A133254",
+          "observation": "Source record catalogues a 1984 place-front facades view under Maison Joseph et Anne, Grand-Place 21-22; the frame covers neighbouring facades and exact-case identity still requires reviewer confirmation. No change label assigned.",
           "annotation_status": "source preview; no reviewer annotation"
         }
       ],

@@ -198,7 +198,7 @@ def main() -> None:
         })
         run(str(ROOT / "three-ages" / "export_pilot.py"), "--data-dir", str(around))
         for worksheet, field, expected in (
-            (around / "three-ages-image-review.csv", "facade_observation", 7),
+            (around / "three-ages-image-review.csv", "facade_observation", 10),
             (around / "three-ages-structural-review.csv", "structural_observation", 6),
             (around / "three-ages-register-review.csv", "register_observation", 6),
         ):

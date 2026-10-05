@@ -45,6 +45,14 @@
           "pixel_sha256": "3358ceb1d962cce9f48431fe6d65bba9f4eae0787055f09fd6efd495b9d80728"
         },
         {
+          "asset_id": "bruciel-grand-place-1971",
+          "epoch": 1971,
+          "source_preview": "data/bruciel-1971-grand-place.png",
+          "source_preview_sha256": "1a6ef5cbae13d1289c31e7f6fe840ecfe60a3a0c9c7fc94da33360e2e2b85bc5",
+          "crop_preview": "data/structural/005-bruciel-grand-place-1971.png",
+          "pixel_sha256": "4617a386171c8e067f493a5af1fdc61608471fdfd6e0a7f686ebdf8b46ee5562"
+        },
+        {
           "asset_id": "bruciel-grand-place-1996",
           "epoch": 1996,
           "source_preview": "data/bruciel-1996-grand-place.png",
@@ -86,6 +94,14 @@
           "source_preview_sha256": "d77806ad41785dc7a823b5cf1065705655bdbae9318a1d41e5e3dbb793f756a3",
           "crop_preview": "data/structural/009-bruciel-grand-place-1935.png",
           "pixel_sha256": "8d25f67714165dbf4496173bf4cace4f0f56d67eb3273e5fd0c53c38b906c596"
+        },
+        {
+          "asset_id": "bruciel-grand-place-1971",
+          "epoch": 1971,
+          "source_preview": "data/bruciel-1971-grand-place.png",
+          "source_preview_sha256": "1a6ef5cbae13d1289c31e7f6fe840ecfe60a3a0c9c7fc94da33360e2e2b85bc5",
+          "crop_preview": "data/structural/009-bruciel-grand-place-1971.png",
+          "pixel_sha256": "67188d8cb654df18434bd4c1b35db0fb37992b31da6b12e6f205288a1dc5c65e"
         },
         {
           "asset_id": "bruciel-grand-place-1996",
@@ -131,6 +147,14 @@
           "pixel_sha256": "aabbf1676d82fc20f36a0fac231a0f9d3660d56b3f7d342ead8bd4e172a8076c"
         },
         {
+          "asset_id": "bruciel-grand-place-1971",
+          "epoch": 1971,
+          "source_preview": "data/bruciel-1971-grand-place.png",
+          "source_preview_sha256": "1a6ef5cbae13d1289c31e7f6fe840ecfe60a3a0c9c7fc94da33360e2e2b85bc5",
+          "crop_preview": "data/structural/022-bruciel-grand-place-1971.png",
+          "pixel_sha256": "1215449190ea86ca2c1e3655a6008148aebcbeece89a71a1bc242468b483107e"
+        },
+        {
           "asset_id": "bruciel-grand-place-1996",
           "epoch": 1996,
           "source_preview": "data/bruciel-1996-grand-place.png",
@@ -172,6 +196,14 @@
           "source_preview_sha256": "d77806ad41785dc7a823b5cf1065705655bdbae9318a1d41e5e3dbb793f756a3",
           "crop_preview": "data/structural/023-bruciel-grand-place-1935.png",
           "pixel_sha256": "2d8ed92c18040cb57e2c36846328f182b2155ab9c722c39f73c7da119e85ee28"
+        },
+        {
+          "asset_id": "bruciel-grand-place-1971",
+          "epoch": 1971,
+          "source_preview": "data/bruciel-1971-grand-place.png",
+          "source_preview_sha256": "1a6ef5cbae13d1289c31e7f6fe840ecfe60a3a0c9c7fc94da33360e2e2b85bc5",
+          "crop_preview": "data/structural/023-bruciel-grand-place-1971.png",
+          "pixel_sha256": "56cd703dbcdf39522551441f1f3e65767db442d23870e3c6023cf90e43c8254b"
         },
         {
           "asset_id": "bruciel-grand-place-1996",
@@ -217,6 +249,14 @@
           "pixel_sha256": "e93a2235675b03b14be8dce48e152104ab6c07443d23b4234061fab872c50f02"
         },
         {
+          "asset_id": "bruciel-grand-place-1971",
+          "epoch": 1971,
+          "source_preview": "data/bruciel-1971-grand-place.png",
+          "source_preview_sha256": "1a6ef5cbae13d1289c31e7f6fe840ecfe60a3a0c9c7fc94da33360e2e2b85bc5",
+          "crop_preview": "data/structural/024-bruciel-grand-place-1971.png",
+          "pixel_sha256": "8567257738c850e304304105559dd803b138fec9337ba25614c05e484e7d25c4"
+        },
+        {
           "asset_id": "bruciel-grand-place-1996",
           "epoch": 1996,
           "source_preview": "data/bruciel-1996-grand-place.png",
@@ -258,6 +298,14 @@
           "source_preview_sha256": "d77806ad41785dc7a823b5cf1065705655bdbae9318a1d41e5e3dbb793f756a3",
           "crop_preview": "data/structural/026-bruciel-grand-place-1935.png",
           "pixel_sha256": "d5ec05e1c9db22456a1f0b6488517395554712f94d10bdaade4c04fce257c275"
+        },
+        {
+          "asset_id": "bruciel-grand-place-1971",
+          "epoch": 1971,
+          "source_preview": "data/bruciel-1971-grand-place.png",
+          "source_preview_sha256": "1a6ef5cbae13d1289c31e7f6fe840ecfe60a3a0c9c7fc94da33360e2e2b85bc5",
+          "crop_preview": "data/structural/026-bruciel-grand-place-1971.png",
+          "pixel_sha256": "1999b35f3d737de2695f029a1d419464eed5523cfcd45e9bc45b273dd0c331d1"
         },
         {
           "asset_id": "bruciel-grand-place-1996",

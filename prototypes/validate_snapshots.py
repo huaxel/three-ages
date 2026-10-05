@@ -141,6 +141,7 @@ def main() -> None:
     structural_crops = read_json("three-ages/data/three-ages-structural-crops.json")
     three_ages_inventory = read_json("three-ages/data/source-inventory.json")
     preview_1935_path = ROOT / "three-ages/data/bruciel-1935-grand-place.png"
+    preview_1971_path = ROOT / "three-ages/data/bruciel-1971-grand-place.png"
     preview_path = ROOT / "three-ages/data/bruciel-1996-grand-place.png"
     preview_2022_path = ROOT / "three-ages/data/urbisgrid-2022-grand-place.png"
     pilot_fields, pilot_rows = read_csv("three-ages/data/three-ages-pilot-export.csv")
@@ -163,11 +164,12 @@ def main() -> None:
     require(buildings.get("source_credit") == "Ville de Bruxelles/Data Management; catalogue attributions: Behind Brussels, Google Maps", "building snapshot attribution is missing or stale")
     require(len(pilot["records"]) == 6, "expected six curated pilot records")
     require(pilot.get("review_status") == "source-grounded pilot", "pilot review status is missing")
-    require({"bruciel_app", "grand_place_dataset", "brussels_heritage_inventory", "wikidata_register_proxies", "heritage_collection_1749", "kik_irpa_historical", "wikimedia_commons_balance", "balance_engraving_1878", "bruciel_1935", "bruciel_1996", "bruciel_1944", "brussels_archives", "urbisgrid_2022"} <= set(three_ages_inventory), "Three Ages source inventory is incomplete")
+    require({"bruciel_app", "grand_place_dataset", "brussels_heritage_inventory", "wikidata_register_proxies", "heritage_collection_1749", "kik_irpa_historical", "wikimedia_commons_balance", "balance_engraving_1878", "bruciel_1935", "bruciel_1971", "bruciel_1996", "bruciel_1944", "brussels_archives", "urbisgrid_2022"} <= set(three_ages_inventory), "Three Ages source inventory is incomplete")
     area_images = pilot.get("area_image_evidence", [])
     require(
         [(asset.get("asset_id"), asset.get("epoch"), asset.get("preview")) for asset in area_images] == [
             ("bruciel-grand-place-1935", "1930–1935", "data/bruciel-1935-grand-place.png"),
+            ("bruciel-grand-place-1971", 1971, "data/bruciel-1971-grand-place.png"),
             ("bruciel-grand-place-1996", 1996, "data/bruciel-1996-grand-place.png"),
             ("urbisgrid-grand-place-2022", 2022, "data/urbisgrid-2022-grand-place.png"),
         ],
@@ -222,7 +224,7 @@ def main() -> None:
     require(three_ages_inventory["brussels_heritage_inventory"].get("licence") == "text quotations and reused information permitted with explicit source attribution" and "urban.brussels" in three_ages_inventory["brussels_heritage_inventory"].get("credit", ""), "architectural-inventory text reuse terms or credit are missing")
     require(three_ages_inventory["wikidata_register_proxies"].get("licence") == "CC0 1.0 for structured data" and three_ages_inventory["wikidata_register_proxies"].get("credit", "").startswith("Wikidata contributors"), "Wikidata register-proxy licence or credit is missing")
     require(three_ages_inventory["kik_irpa_historical"].get("licence", "").startswith("CC BY 4.0") and three_ages_inventory["kik_irpa_historical"].get("credit", "").startswith("KIK-IRPA"), "KIK-IRPA licence or credit metadata is missing")
-    require(three_ages_inventory["kik_irpa_historical"].get("status", "").startswith("five 1941-1942"), "KIK-IRPA verification status is missing")
+    require(three_ages_inventory["kik_irpa_historical"].get("status", "").startswith("eight pilot previews verified"), "KIK-IRPA verification status is missing")
     require(three_ages_inventory["wikimedia_commons_balance"].get("licence") == "CC BY-SA 3.0" and three_ages_inventory["wikimedia_commons_balance"].get("credit") == "EmDee, via Wikimedia Commons", "Wikimedia Commons licence or credit metadata is missing")
     require(three_ages_inventory["wikimedia_commons_balance"].get("status", "").startswith("exact-case 2011"), "Wikimedia Commons verification status is missing")
     require("2043-0177/0" in three_ages_inventory["wikimedia_commons_balance"].get("note", "") and "does not state Rue de la Colline 24" in three_ages_inventory["wikimedia_commons_balance"]["note"], "Wikimedia Commons identity metadata is inaccurate")
@@ -235,6 +237,12 @@ def main() -> None:
     require(three_ages_inventory["bruciel_1935"].get("preview") == "data/bruciel-1935-grand-place.png", "1930–1935 BruCiel preview metadata is missing")
     require(preview_1935_path.read_bytes().startswith(b"\x89PNG\r\n\x1a\n"), "1930–1935 BruCiel preview is not a PNG")
     require(_png_has_content(preview_1935_path), "1930–1935 BruCiel preview is blank")
+    require(three_ages_inventory["bruciel_1971"].get("licence", "").startswith("CC0") and three_ages_inventory["bruciel_1971"].get("credit") == area_by_id["bruciel-grand-place-1971"]["credit"], "1971 BruCiel licence or credit metadata is missing")
+    require(three_ages_inventory["bruciel_1971"].get("status", "").startswith("intermediate WMS extract verified"), "1971 BruCiel test status is missing")
+    require(three_ages_inventory["bruciel_1971"].get("layer") == "URBAN_DCC_ER:Orthophotoplans_1971", "1971 BruCiel layer metadata is stale")
+    require(three_ages_inventory["bruciel_1971"].get("preview") == "data/bruciel-1971-grand-place.png", "1971 BruCiel preview metadata is missing")
+    require(preview_1971_path.read_bytes().startswith(b"\x89PNG\r\n\x1a\n"), "1971 BruCiel preview is not a PNG")
+    require(_png_has_content(preview_1971_path), "1971 BruCiel preview is blank")
     require(three_ages_inventory["bruciel_1996"].get("licence", "").startswith("CC0") and three_ages_inventory["bruciel_1996"].get("credit") == area_by_id["bruciel-grand-place-1996"]["credit"], "1996 BruCiel licence or credit metadata is missing")
     require(three_ages_inventory["bruciel_1996"].get("status", "").startswith("WMS extract verified"), "1996 BruCiel test status is missing")
     require(three_ages_inventory["bruciel_1996"].get("preview") == "data/bruciel-1996-grand-place.png", "1996 BruCiel preview metadata is missing")
@@ -283,9 +291,9 @@ def main() -> None:
     require(heritage_identity["address"] == "Rue de la Colline 24" and "Grand-Place ensemble" in heritage_identity["observation"], "heritage identity evidence is incomplete")
     require(all("identity_evidence" not in record for record in pilot["records"] if record["source_id"] != "024"), "identity crosswalk is attached to an unrelated pilot case")
     expected_images = {
-        "005": [("T084580", 1942)],
+        "005": [("E049753", 1890), ("T084580", 1942)],
         "009": [("B031587", 1942)],
-        "022": [("A102887", 1941)],
+        "022": [("A102887", 1941), ("T001802", 1969), ("A133254", 1984)],
         "023": [("B024641", 1941)],
         "024": [("british-library-balance-1878", 1878), ("commons-balance-2011-01", 2011)],
         "026": [("B031502", 1942)],
@@ -325,6 +333,7 @@ def main() -> None:
     require(evidence_by_asset["british-library-balance-1878"]["preview_sha256"] == british_downloader["EXPECTED_SHA256"], "British Library downloader checksum disagrees with pilot provenance")
     area_checksum_scripts = {
         "bruciel-grand-place-1935": "download_bruciel_1935_preview.py",
+        "bruciel-grand-place-1971": "download_bruciel_1971_preview.py",
         "bruciel-grand-place-1996": "download_bruciel_preview.py",
         "urbisgrid-grand-place-2022": "download_urbisgrid_preview.py",
     }
@@ -334,10 +343,10 @@ def main() -> None:
 
     require(len(pilot_rows) == 6 and pilot_fields[:3] == ["source_id", "name", "address"], "Three Ages pilot CSV export is incomplete")
     require(all(field in pilot_fields for field in ("register_source_kind", "register_source_url", "identity_note", "identity_evidence_count", "identity_evidence_ids", "identity_evidence_urls", "image_evidence_ids", "image_evidence_epochs", "image_evidence_urls")), "Three Ages pilot CSV is missing provenance columns")
-    require(len(image_review_rows) == 7 and image_review_fields[:5] == ["source_id", "name", "address", "asset_id", "epoch"], "historical-image review worksheet is incomplete")
+    require(len(image_review_rows) == 10 and image_review_fields[:5] == ["source_id", "name", "address", "asset_id", "epoch"], "historical-image review worksheet is incomplete")
     require(all(field in image_review_fields for field in ("source_observation", "annotation_status", "identity_note", "facade_observation", "structural_observation", "reviewer", "reviewed_at", "confidence")), "historical-image review worksheet is missing review columns")
     require({row["source_id"] for row in image_review_rows} == set(expected_images), "historical-image review worksheet does not cover every pilot case")
-    require({"T084580", "B031587", "A102887", "B024641", "british-library-balance-1878", "commons-balance-2011-01", "B031502"} <= {row["asset_id"] for row in image_review_rows}, "historical-image review worksheet is missing an asset")
+    require({"T084580", "B031587", "A102887", "B024641", "british-library-balance-1878", "commons-balance-2011-01", "B031502", "T001802", "A133254", "E049753"} <= {row["asset_id"] for row in image_review_rows}, "historical-image review worksheet is missing an asset")
     expected_review_rows = {}
     for case in pilot["records"]:
         assets = case["image_evidence"] or [None]
@@ -400,7 +409,7 @@ def main() -> None:
     crop_by_id = {record["source_id"]: record for record in crop_records}
     for row in structural_review_rows:
         key = (row["source_id"], row["comparison_id"])
-        require(row["comparison_id"] == "grand-place-1930-1935-to-2022", f"structural comparison id is stale for {key}")
+        require(row["comparison_id"] == "grand-place-1935-1971-1996-2022", f"structural comparison id is stale for {key}")
         require(all(row[field] == value for field, value in area_joined.items()), f"structural comparison provenance is stale for {key}")
         crop_record = crop_by_id[row["source_id"]]
         center, box, assets = crop_record["source_center_pixels"], crop_record["crop_box_pixels"], crop_record["assets"]

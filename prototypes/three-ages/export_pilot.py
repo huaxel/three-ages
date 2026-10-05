@@ -481,7 +481,7 @@ def main() -> None:
     area_assets = pilot.get("area_image_evidence", [])
     if len(area_assets) < 2:
         raise RuntimeError("structural review requires at least two area image epochs")
-    comparison_id = "grand-place-1930-1935-to-2022"
+    comparison_id = "grand-place-1935-1971-1996-2022"
     structural_existing = {} if args.reset_reviews else read_existing_structural_reviews(structural_output)
     structural_rows = []
     structural_keys = set()
@@ -516,7 +516,7 @@ def main() -> None:
             "crop_size_pixels": structural_crops["crop_size_pixels"],
             "case_crop_previews": ";".join(text(asset.get("crop_preview")) for asset in crop_assets),
             "case_crop_pixel_sha256": ";".join(text(asset.get("pixel_sha256")) for asset in crop_assets),
-            "source_observation": "Aligned building-centred crops from the 1930–1935, 1996 and 2022 pilot-area orthos provide structural context; no case-level change is assigned before review.",
+            "source_observation": "Aligned building-centred crops from the 1930–1935, 1971, 1996 and 2022 pilot-area orthos provide structural context; no case-level change is assigned before review.",
             "annotation_status": "area comparison; no reviewer annotation",
             "identity_note": case.get("identity_note", ""),
             "identity_evidence_ids": ";".join(f"{item.get('source_kind', '')}:{item.get('record_id', '')}" for item in identity_evidence),

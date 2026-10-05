@@ -36,7 +36,7 @@ python3 prototypes/three-ages/generate_structural_crops.py
 python3 prototypes/three-ages/export_pilot.py
 ```
 
-The crop generator projects each building coordinate into shared WMS bounds, applies the same 160-pixel box to all three epochs and records stable pixel hashes. These crops are review aids, not structural observations.
+The crop generator projects each building coordinate into shared WMS bounds, applies the same 160-pixel box to all four epochs and records stable pixel hashes. These crops are review aids, not structural observations.
 
 The exporter produces building, facade-image, structural-comparison and register-semantics worksheets. It preserves completed human fields only while exact source provenance matches. Completed rows require reviewer, ISO-8601 date and `low`, `medium` or `high` confidence. Register decisions use one controlled value:
 
@@ -58,6 +58,7 @@ Refresh checksum-pinned imagery:
 
 ```bash
 python3 prototypes/three-ages/download_bruciel_1935_preview.py
+python3 prototypes/three-ages/download_bruciel_1971_preview.py
 python3 prototypes/three-ages/download_bruciel_preview.py
 python3 prototypes/three-ages/download_urbisgrid_preview.py
 python3 prototypes/three-ages/download_kik_previews.py
@@ -74,9 +75,9 @@ The prototype contains:
 - 34 City of Brussels Grand Place records under catalogue CC BY 4.0 terms;
 - six curated source-linked cases;
 - six explicit register-date proxies with source semantics and comparison state;
-- aligned 1930–1935, 1996 and 2022 area-level ortho previews;
-- eighteen deterministic building-centred structural crops;
-- five 1941–1942 KIK-IRPA facade previews under CC BY 4.0;
+- aligned 1930–1935, 1971, 1996 and 2022 area-level ortho previews;
+- twenty-four deterministic building-centred structural crops;
+- eight KIK-IRPA facade previews under CC BY 4.0 (five 1941–1942, plus 1890, 1969 and 1984);
 - an exact-case 1878 British Library engraving and 2011 Wikimedia Commons photograph for La Balance;
 - separate image, structural and register review channels.
 
