@@ -133,6 +133,10 @@ async function testThreeAges() {
   ]) requireIncludes(josephAnne, expected, "Three Ages second-epoch rendering");
   context.show("005");
   requireIncludes(element("content").innerHTML, "kik-irpa-E049753.jpg", "Three Ages 1890 ensemble rendering");
+  for (const [caseId, preview] of [["005", "kik-irpa-T001817.jpg"], ["009", "kik-irpa-T001820.jpg"], ["023", "kik-irpa-T001803.jpg"], ["026", "kik-irpa-T001805.jpg"]]) {
+    context.show(caseId);
+    requireIncludes(element("content").innerHTML, preview, `Three Ages 1969 rendering for ${caseId}`);
+  }
   const buildings = JSON.parse(fs.readFileSync(path.join(ROOT, "three-ages/data/grand-place-buildings.json"), "utf8"));
   const nameFor = id => (buildings.records.find(record => record.id === id) || {}).name || id;
   const buildingButtons = context.document.querySelectorAll("#list .building");

@@ -77,7 +77,7 @@ The prototype contains:
 - six explicit register-date proxies with source semantics and comparison state;
 - aligned 1930–1935, 1971, 1996 and 2022 area-level ortho previews;
 - twenty-four deterministic building-centred structural crops;
-- eight KIK-IRPA facade previews under CC BY 4.0 (five 1941–1942, plus 1890, 1969 and 1984);
+- twelve KIK-IRPA facade previews under CC BY 4.0 (five 1941–1942, plus 1890, four 1969 and one 1984);
 - an exact-case 1878 British Library engraving and 2011 Wikimedia Commons photograph for La Balance;
 - separate image, structural and register review channels.
 

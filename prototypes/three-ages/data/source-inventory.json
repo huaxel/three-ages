@@ -46,8 +46,8 @@
     "url": "https://balat.kikirpa.be/en/photo/search/",
     "licence": "CC BY 4.0 for the photo assets; CC0 for metadata",
     "credit": "KIK-IRPA; exact cliché identifier recorded per preview",
-    "status": "eight pilot previews verified (five 1941-1942, plus 1890, 1969 and 1984)",
-    "note": "The pilot commits eight 800px IIIF previews: five 1941-1942 views for Grand-Place 6, 9, 21-22, 23 and 26-27, two later Joseph et Anne epochs (1969 T001802, 1984 A133254) and an 1890 west-side ensemble view (E049753) whose case-level identity is still unconfirmed. Credit lines and source records are stored per asset; these are source previews, not reviewed change annotations."
+    "status": "twelve pilot previews verified (five 1941-1942, plus 1890, four 1969 and one 1984)",
+    "note": "The pilot commits twelve 800px IIIF previews: five 1941-1942 views for Grand-Place 6, 9, 21-22, 23 and 26-27, two later Joseph et Anne epochs (1969 T001802, 1984 A133254), an 1890 west-side ensemble view (E049753) whose case-level identity is still unconfirmed, and a 1969 Van de Walle facade view each for Le Cornet (T001817), Le Cygne (T001820), L'Ange (T001803) and Le Pigeon (T001805). Object-level survey found further dated Swan views (1914 B137671, 1917 F000208/F000210, 1952 E023355) held as leads. Credit lines and source records are stored per asset; these are source previews, not reviewed change annotations."
   },
   "wikimedia_commons_balance": {
     "name": "Wikimedia Commons — Maison de la Balance facade",

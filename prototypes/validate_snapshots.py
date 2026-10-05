@@ -224,7 +224,7 @@ def main() -> None:
     require(three_ages_inventory["brussels_heritage_inventory"].get("licence") == "text quotations and reused information permitted with explicit source attribution" and "urban.brussels" in three_ages_inventory["brussels_heritage_inventory"].get("credit", ""), "architectural-inventory text reuse terms or credit are missing")
     require(three_ages_inventory["wikidata_register_proxies"].get("licence") == "CC0 1.0 for structured data" and three_ages_inventory["wikidata_register_proxies"].get("credit", "").startswith("Wikidata contributors"), "Wikidata register-proxy licence or credit is missing")
     require(three_ages_inventory["kik_irpa_historical"].get("licence", "").startswith("CC BY 4.0") and three_ages_inventory["kik_irpa_historical"].get("credit", "").startswith("KIK-IRPA"), "KIK-IRPA licence or credit metadata is missing")
-    require(three_ages_inventory["kik_irpa_historical"].get("status", "").startswith("eight pilot previews verified"), "KIK-IRPA verification status is missing")
+    require(three_ages_inventory["kik_irpa_historical"].get("status", "").startswith("twelve pilot previews verified"), "KIK-IRPA verification status is missing")
     require(three_ages_inventory["wikimedia_commons_balance"].get("licence") == "CC BY-SA 3.0" and three_ages_inventory["wikimedia_commons_balance"].get("credit") == "EmDee, via Wikimedia Commons", "Wikimedia Commons licence or credit metadata is missing")
     require(three_ages_inventory["wikimedia_commons_balance"].get("status", "").startswith("exact-case 2011"), "Wikimedia Commons verification status is missing")
     require("2043-0177/0" in three_ages_inventory["wikimedia_commons_balance"].get("note", "") and "does not state Rue de la Colline 24" in three_ages_inventory["wikimedia_commons_balance"]["note"], "Wikimedia Commons identity metadata is inaccurate")
@@ -291,12 +291,12 @@ def main() -> None:
     require(heritage_identity["address"] == "Rue de la Colline 24" and "Grand-Place ensemble" in heritage_identity["observation"], "heritage identity evidence is incomplete")
     require(all("identity_evidence" not in record for record in pilot["records"] if record["source_id"] != "024"), "identity crosswalk is attached to an unrelated pilot case")
     expected_images = {
-        "005": [("E049753", 1890), ("T084580", 1942)],
-        "009": [("B031587", 1942)],
+        "005": [("E049753", 1890), ("T084580", 1942), ("T001817", 1969)],
+        "009": [("B031587", 1942), ("T001820", 1969)],
         "022": [("A102887", 1941), ("T001802", 1969), ("A133254", 1984)],
-        "023": [("B024641", 1941)],
+        "023": [("B024641", 1941), ("T001803", 1969)],
         "024": [("british-library-balance-1878", 1878), ("commons-balance-2011-01", 2011)],
-        "026": [("B031502", 1942)],
+        "026": [("B031502", 1942), ("T001805", 1969)],
     }
     for record in pilot["records"]:
         evidence = record["image_evidence"]
@@ -343,10 +343,10 @@ def main() -> None:
 
     require(len(pilot_rows) == 6 and pilot_fields[:3] == ["source_id", "name", "address"], "Three Ages pilot CSV export is incomplete")
     require(all(field in pilot_fields for field in ("register_source_kind", "register_source_url", "identity_note", "identity_evidence_count", "identity_evidence_ids", "identity_evidence_urls", "image_evidence_ids", "image_evidence_epochs", "image_evidence_urls")), "Three Ages pilot CSV is missing provenance columns")
-    require(len(image_review_rows) == 10 and image_review_fields[:5] == ["source_id", "name", "address", "asset_id", "epoch"], "historical-image review worksheet is incomplete")
+    require(len(image_review_rows) == 14 and image_review_fields[:5] == ["source_id", "name", "address", "asset_id", "epoch"], "historical-image review worksheet is incomplete")
     require(all(field in image_review_fields for field in ("source_observation", "annotation_status", "identity_note", "facade_observation", "structural_observation", "reviewer", "reviewed_at", "confidence")), "historical-image review worksheet is missing review columns")
     require({row["source_id"] for row in image_review_rows} == set(expected_images), "historical-image review worksheet does not cover every pilot case")
-    require({"T084580", "B031587", "A102887", "B024641", "british-library-balance-1878", "commons-balance-2011-01", "B031502", "T001802", "A133254", "E049753"} <= {row["asset_id"] for row in image_review_rows}, "historical-image review worksheet is missing an asset")
+    require({"T084580", "B031587", "A102887", "B024641", "british-library-balance-1878", "commons-balance-2011-01", "B031502", "T001802", "A133254", "E049753", "T001803", "T001805", "T001820", "T001817"} <= {row["asset_id"] for row in image_review_rows}, "historical-image review worksheet is missing an asset")
     expected_review_rows = {}
     for case in pilot["records"]:
         assets = case["image_evidence"] or [None]
