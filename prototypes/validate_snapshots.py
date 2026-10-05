@@ -127,6 +127,14 @@ def require_unique_ids(records: list[dict], label: str, field: str = "id") -> se
     return set(identifiers)
 
 
+def read_csv(relative: str) -> tuple[list[str], list[dict[str, str]]]:
+    """Parse a worksheet with the csv module so quoted multiline fields stay intact."""
+    path = ROOT / relative
+    with path.open(newline="", encoding="utf-8") as handle:
+        reader = csv.DictReader(handle)
+        return list(reader.fieldnames or []), list(reader)
+
+
 def main() -> None:
     buildings = read_json("three-ages/data/grand-place-buildings.json")
     pilot = read_json("three-ages/data/three-ages-pilot.json")
@@ -135,15 +143,12 @@ def main() -> None:
     preview_1935_path = ROOT / "three-ages/data/bruciel-1935-grand-place.png"
     preview_path = ROOT / "three-ages/data/bruciel-1996-grand-place.png"
     preview_2022_path = ROOT / "three-ages/data/urbisgrid-2022-grand-place.png"
-    pilot_csv = (ROOT / "three-ages/data/three-ages-pilot-export.csv").read_text().splitlines()
-    image_review_csv = (ROOT / "three-ages/data/three-ages-image-review.csv").read_text().splitlines()
-    image_review_rows = list(csv.DictReader(image_review_csv))
+    pilot_fields, pilot_rows = read_csv("three-ages/data/three-ages-pilot-export.csv")
+    image_review_fields, image_review_rows = read_csv("three-ages/data/three-ages-image-review.csv")
     compiled_reviews = read_json("three-ages/data/three-ages-image-reviews.json")
-    structural_review_csv = (ROOT / "three-ages/data/three-ages-structural-review.csv").read_text().splitlines()
-    structural_review_rows = list(csv.DictReader(structural_review_csv))
+    structural_review_fields, structural_review_rows = read_csv("three-ages/data/three-ages-structural-review.csv")
     compiled_structural_reviews = read_json("three-ages/data/three-ages-structural-reviews.json")
-    register_review_csv = (ROOT / "three-ages/data/three-ages-register-review.csv").read_text().splitlines()
-    register_review_rows = list(csv.DictReader(register_review_csv))
+    register_review_fields, register_review_rows = read_csv("three-ages/data/three-ages-register-review.csv")
     compiled_register_reviews = read_json("three-ages/data/three-ages-register-reviews.json")
 
 
@@ -326,12 +331,12 @@ def main() -> None:
         downloader = runpy.run_path(str(ROOT / "three-ages" / script))
         require(area_by_id[asset_id]["preview_sha256"] == downloader["EXPECTED_SHA256"], f"{asset_id} downloader checksum disagrees with pilot provenance")
 
-    require(len(pilot_csv) == 7 and pilot_csv[0].startswith("source_id,name,address"), "Three Ages pilot CSV export is incomplete")
-    require(all(field in pilot_csv[0] for field in ("register_source_kind", "register_source_url", "identity_note", "identity_evidence_count", "identity_evidence_ids", "identity_evidence_urls", "image_evidence_ids", "image_evidence_epochs", "image_evidence_urls")), "Three Ages pilot CSV is missing provenance columns")
-    require(len(image_review_csv) == 8 and image_review_csv[0].startswith("source_id,name,address,asset_id,epoch"), "historical-image review worksheet is incomplete")
-    require(all(field in image_review_csv[0] for field in ("source_observation", "annotation_status", "identity_note", "facade_observation", "structural_observation", "reviewer", "reviewed_at", "confidence")), "historical-image review worksheet is missing review columns")
+    require(len(pilot_rows) == 6 and pilot_fields[:3] == ["source_id", "name", "address"], "Three Ages pilot CSV export is incomplete")
+    require(all(field in pilot_fields for field in ("register_source_kind", "register_source_url", "identity_note", "identity_evidence_count", "identity_evidence_ids", "identity_evidence_urls", "image_evidence_ids", "image_evidence_epochs", "image_evidence_urls")), "Three Ages pilot CSV is missing provenance columns")
+    require(len(image_review_rows) == 7 and image_review_fields[:5] == ["source_id", "name", "address", "asset_id", "epoch"], "historical-image review worksheet is incomplete")
+    require(all(field in image_review_fields for field in ("source_observation", "annotation_status", "identity_note", "facade_observation", "structural_observation", "reviewer", "reviewed_at", "confidence")), "historical-image review worksheet is missing review columns")
     require({row["source_id"] for row in image_review_rows} == set(expected_images), "historical-image review worksheet does not cover every pilot case")
-    require(all(asset_id in "\n".join(image_review_csv) for asset_id in ("T084580", "B031587", "A102887", "B024641", "british-library-balance-1878", "commons-balance-2011-01", "B031502")), "historical-image review worksheet is missing an asset")
+    require({"T084580", "B031587", "A102887", "B024641", "british-library-balance-1878", "commons-balance-2011-01", "B031502"} <= {row["asset_id"] for row in image_review_rows}, "historical-image review worksheet is missing an asset")
     expected_review_rows = {}
     for case in pilot["records"]:
         assets = case["image_evidence"] or [None]
@@ -378,7 +383,7 @@ def main() -> None:
     require({(row["asset_id"], row["epoch"]) for row in balance_image_rows} == {("british-library-balance-1878", "1878"), ("commons-balance-2011-01", "2011")}, "La Balance comparison epochs are missing from the review worksheet")
 
     structural_fields = ("structural_observation", "reviewer", "reviewed_at", "confidence")
-    require(len(structural_review_csv) == 7 and structural_review_csv[0].startswith("source_id,name,address,comparison_id"), "structural review worksheet is incomplete")
+    require(len(structural_review_rows) == 6 and structural_review_fields[:4] == ["source_id", "name", "address", "comparison_id"], "structural review worksheet is incomplete")
     require({row["source_id"] for row in structural_review_rows} == pilot_ids, "structural review worksheet does not cover every pilot case")
     area_joined = {
         "area_asset_ids": ";".join(str(asset["asset_id"]) for asset in area_images),
@@ -434,7 +439,7 @@ def main() -> None:
 
     register_fields = ("register_decision", "register_observation", "reviewer", "reviewed_at", "confidence")
     register_decisions = {"accept proxy for MVP", "retain as reconstruction evidence", "reject source mapping"}
-    require(len(register_review_csv) == 7 and register_review_csv[0].startswith("source_id,name,address,claim_id"), "register review worksheet is incomplete")
+    require(len(register_review_rows) == 6 and register_review_fields[:4] == ["source_id", "name", "address", "claim_id"], "register review worksheet is incomplete")
     require({row["source_id"] for row in register_review_rows} == pilot_ids, "register review worksheet does not cover every pilot case")
     for row in register_review_rows:
         source_id = row["source_id"]

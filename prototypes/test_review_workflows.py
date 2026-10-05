@@ -171,6 +171,90 @@ def main() -> None:
         require_blank(ages / "three-ages-structural-review.csv", STRUCTURAL_REVIEW_FIELDS)
         require_blank(ages / "three-ages-register-review.csv", REGISTER_REVIEW_FIELDS)
 
+    with tempfile.TemporaryDirectory() as regression:
+        regress = Path(regression)
+        around = regress / "ages-data"
+        shutil.copytree(ROOT / "three-ages" / "data", around)
+
+        multiline = "First reviewer observation.\nSecond reviewer observation."
+        update_first_row(around / "three-ages-image-review.csv", {
+            "facade_observation": multiline,
+            "reviewer": "Integration Test",
+            "reviewed_at": "2026-09-20",
+            "confidence": "medium",
+        })
+        update_first_row(around / "three-ages-structural-review.csv", {
+            "structural_observation": multiline,
+            "reviewer": "Integration Test",
+            "reviewed_at": "2026-09-20",
+            "confidence": "medium",
+        })
+        update_first_row(around / "three-ages-register-review.csv", {
+            "register_decision": "retain as reconstruction evidence",
+            "register_observation": multiline,
+            "reviewer": "Integration Test",
+            "reviewed_at": "2026-09-20",
+            "confidence": "medium",
+        })
+        run(str(ROOT / "three-ages" / "export_pilot.py"), "--data-dir", str(around))
+        for worksheet, field, expected in (
+            (around / "three-ages-image-review.csv", "facade_observation", 7),
+            (around / "three-ages-structural-review.csv", "structural_observation", 6),
+            (around / "three-ages-register-review.csv", "register_observation", 6),
+        ):
+            with worksheet.open(newline="", encoding="utf-8") as handle:
+                rows = list(csv.DictReader(handle))
+            if len(rows) != expected:
+                raise AssertionError(f"multiline worksheet parsed {len(rows)} rows, expected {expected}: {worksheet.name}")
+            if rows[0][field] != multiline:
+                raise AssertionError(f"multiline review was not preserved in {worksheet.name}")
+        for compiled in (
+            around / "three-ages-image-reviews.json",
+            around / "three-ages-structural-reviews.json",
+            around / "three-ages-register-reviews.json",
+        ):
+            payload = json.loads(compiled.read_text(encoding="utf-8"))
+            if payload["record_count"] != 1:
+                raise AssertionError(f"multiline review was not compiled in {compiled.name}")
+            if all(multiline not in str(value) for record in payload["records"] for value in record.values()):
+                raise AssertionError(f"multiline review text is missing from {compiled.name}")
+
+        structural_outputs = [path for path in (around / "structural").glob("*.png")]
+        structural_outputs.append(around / "three-ages-structural-crops.json")
+        crops_before = {path: path.read_bytes() for path in structural_outputs}
+        buildings_path = around / "grand-place-buildings.json"
+        buildings_original = buildings_path.read_bytes()
+        pilot = json.loads((around / "three-ages-pilot.json").read_text(encoding="utf-8"))
+        first_id = pilot["records"][0]["source_id"]
+        last_id = pilot["records"][-1]["source_id"]
+        shifted = json.loads(buildings_original)
+        for row in shifted["records"]:
+            if row["id"] == first_id:
+                row["longitude"] += 0.0001
+            if row["id"] == last_id:
+                row["longitude"] = 0
+        buildings_path.write_text(json.dumps(shifted, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        run_fails(
+            str(ROOT / "three-ages" / "generate_structural_crops.py"),
+            "--data-dir", str(around),
+            message="falls outside the aligned area image",
+        )
+        require_unchanged(crops_before)
+        buildings_path.write_bytes(buildings_original)
+
+        drifted = json.loads(buildings_original)
+        for row in drifted["records"]:
+            if row["id"] == first_id:
+                row["longitude"] += 0.0001
+        buildings_path.write_text(json.dumps(drifted, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        run_fails(
+            str(ROOT / "three-ages" / "generate_structural_crops.py"),
+            "--data-dir", str(around),
+            message="has a completed review",
+        )
+        require_unchanged(crops_before)
+        buildings_path.write_bytes(buildings_original)
+
     print("Three Ages review preservation, provenance refusal and explicit reset integration passed")
 
 
