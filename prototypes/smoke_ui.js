@@ -28,6 +28,38 @@ function elementStore(defaultValues = {}) {
   return { elements, element };
 }
 
+function makeQuerySelectorAll(element) {
+  const cache = new Map();
+  function buildFakes(html, attribute) {
+    const pattern = new RegExp(`data-${attribute}="([^"]+)"`, "g");
+    const fakes = [];
+    let match;
+    while ((match = pattern.exec(html)) !== null) {
+      const listeners = {};
+      fakes.push({
+        dataset: attribute === "id" ? { id: match[1] } : { sourceId: match[1] },
+        attributes: {},
+        setAttribute(name, value) { this.attributes[name] = value; },
+        classList: { toggle() {} },
+        addEventListener(type, handler) { (listeners[type] ||= []).push(handler); },
+        click() { (listeners.click || []).forEach(handler => handler()); },
+      });
+    }
+    return fakes;
+  }
+  function buttonsFrom(containerId, attribute) {
+    const html = element(containerId).innerHTML;
+    const key = `${containerId}\n${html}`;
+    if (!cache.has(key)) cache.set(key, buildFakes(html, attribute));
+    return cache.get(key);
+  }
+  return selector => {
+    if (selector === "#list .building") return buttonsFrom("list", "id");
+    if (selector === ".source-building") return buttonsFrom("sourceList", "source-id");
+    return [];
+  };
+}
+
 async function loadPrototype(name, defaultValues = {}) {
   const html = fs.readFileSync(path.join(ROOT, name, "index.html"), "utf8");
   const match = html.match(/<script>([\s\S]*?)<\/script>/);
@@ -35,7 +67,7 @@ async function loadPrototype(name, defaultValues = {}) {
   const { element } = elementStore(defaultValues);
   const document = {
     getElementById: element,
-    querySelectorAll() { return []; },
+    querySelectorAll: makeQuerySelectorAll(element),
   };
   const fetch = async relative => ({
     json: async () => JSON.parse(fs.readFileSync(path.join(ROOT, name, relative), "utf8")),
@@ -91,6 +123,20 @@ async function testThreeAges() {
     "No completed register-semantics decision",
     "No completed case-level structural review",
   ]) requireIncludes(content, expected, "Three Ages case rendering");
+  const buildings = JSON.parse(fs.readFileSync(path.join(ROOT, "three-ages/data/grand-place-buildings.json"), "utf8"));
+  const nameFor = id => (buildings.records.find(record => record.id === id) || {}).name || id;
+  const buildingButtons = context.document.querySelectorAll("#list .building");
+  if (buildingButtons.length !== 6) throw new Error(`Three Ages: expected 6 case buttons, found ${buildingButtons.length}`);
+  const other = buildingButtons.find(button => button.dataset.id !== "024");
+  other.click();
+  requireIncludes(element("content").innerHTML, nameFor(other.dataset.id), "Three Ages case switching");
+  if (other.attributes["aria-pressed"] !== true) throw new Error("Three Ages: clicked building did not become pressed");
+  if (!buildingButtons.filter(button => button !== other).every(button => button.attributes["aria-pressed"] === false)) {
+    throw new Error("Three Ages: unclicked buildings did not become unpressed");
+  }
+  const sourceButtons = context.document.querySelectorAll(".source-building");
+  sourceButtons[0].click();
+  requireIncludes(element("sourceDetail").innerHTML, nameFor(sourceButtons[0].dataset.sourceId), "Three Ages source preview");
 }
 
 (async () => {

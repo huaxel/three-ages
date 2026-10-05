@@ -18,7 +18,6 @@ import csv
 import hashlib
 import json
 import os
-import shutil
 import tempfile
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
@@ -245,9 +244,10 @@ def main() -> None:
             crop_dir.mkdir(parents=True, exist_ok=True)
             crop_dir.chmod(0o755)
             for filename, staged_path in staged.items():
-                final = crop_dir / filename
-                shutil.copyfile(staged_path, final)
-                final.chmod(0o644)
+                # Same filesystem (staging lives under data), so each rename
+                # is atomic: a crash can leave old or new crops, never halves.
+                staged_path.chmod(0o644)
+                os.replace(staged_path, crop_dir / filename)
     finally:
         for image in opened.values():
             image.close()
