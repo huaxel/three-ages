@@ -69,7 +69,12 @@ def fetch_grand_place() -> None:
         maps_url = item.get("google_maps") or ""
         query = parse_qs(urlparse(maps_url).query).get("query", [""])[0]
         query = unquote(query)
-        coords = query.split(",", 1) if "," in query else [None, None]
+        coords = query.split(",", 1)
+        try:
+            latitude, longitude = float(coords[0]), float(coords[1])
+        except (ValueError, IndexError):
+            latitude, longitude = None, None
+        require(latitude is not None and longitude is not None, f"Grand Place API returned a building without coordinates: {item.get('id')}")
         history = item.get("history_and_successive_restorations") or ""
         history_years = [int(year) for year in re.findall(r"\b(1[5-9]\d{2}|20\d{2})\b", history)]
         rows.append(
@@ -77,8 +82,8 @@ def fetch_grand_place() -> None:
                 "id": item.get("id"),
                 "name": item.get("name"),
                 "address": item.get("adresse"),
-                "latitude": float(coords[0]) if coords[0] else None,
-                "longitude": float(coords[1]) if coords[1] else None,
+                "latitude": latitude,
+                "longitude": longitude,
                 "history": history,
                 "history_years": sorted(set(history_years)),
                 "facade": item.get("composition_of_the_facade_and_decorative_program"),

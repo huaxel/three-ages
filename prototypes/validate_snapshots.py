@@ -156,6 +156,7 @@ def main() -> None:
     pilot_ids = require_unique_ids(pilot["records"], "Three Ages pilot", "source_id")
     buildings_by_id = {str(record["id"]): record for record in buildings["records"]}
     require(len(buildings["records"]) == 34, "expected 34 Grand Place records")
+    require(all(isinstance(record.get("latitude"), (int, float)) and isinstance(record.get("longitude"), (int, float)) for record in buildings["records"]), "Grand Place building snapshot contains missing coordinates")
     require(buildings.get("dataset_url", "").startswith("https://"), "building snapshot is missing dataset URL")
     require(buildings.get("dataset_metadata_url") == "https://opendata.brussels.be/api/explore/v2.1/catalog/datasets/description-des-batiments-de-la-grand-place", "building snapshot metadata URL is missing or stale")
     require(buildings.get("source_licence") == "CC BY 4.0", "building snapshot licence is missing or stale")
