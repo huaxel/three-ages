@@ -137,6 +137,8 @@ def read_csv(relative: str) -> tuple[list[str], list[dict[str, str]]]:
 
 def main() -> None:
     buildings = read_json("three-ages/data/grand-place-buildings.json")
+    irismonument = read_json("three-ages/data/irismonument-inventory.json")
+    irismonument_mapping = read_json("three-ages/data/irismonument-style-mapping.json")
     pilot = read_json("three-ages/data/three-ages-pilot.json")
     structural_crops = read_json("three-ages/data/three-ages-structural-crops.json")
     three_ages_inventory = read_json("three-ages/data/source-inventory.json")
@@ -154,6 +156,51 @@ def main() -> None:
 
 
     building_ids = require_unique_ids(buildings["records"], "Grand Place building snapshot")
+    irismonument_rows = irismonument.get("records", [])
+    require(len(irismonument_rows) >= 40000, "Irismonument snapshot is missing records")
+    irismonument_keys = {(r.get("ID_BATI_DMS"), r.get("NUMBER"), r.get("STREET_FR")) for r in irismonument_rows}
+    require(all(k[0] for k in irismonument_keys), "Irismonument snapshot contains a record without ID_BATI_DMS")
+    require(len(irismonument_keys) == len(irismonument_rows), "Irismonument snapshot contains duplicate (ID, number, street) keys")
+    require(irismonument.get("source_licence", "").startswith("CC0"), "Irismonument snapshot licence is missing or stale")
+    require(all("monument.heritage.brussels" in (r.get("URL_FR") or "") for r in irismonument_rows[:50]), "Irismonument snapshot lacks expected fiche URLs")
+    require(all(r.get("crs") == "urn:ogc:def:crs:EPSG::31370" for r in irismonument_rows if r.get("crs")), "Irismonument snapshot CRS is unexpected")
+
+    style_map = irismonument_mapping.get("mapping", {})
+    snapshot_terms = {(r.get("STYLE_FR") or "").strip() for r in irismonument_rows}
+    snapshot_terms.discard("")
+    require(style_map.keys() == snapshot_terms, "Irismonument style mapping does not cover every snapshot term")
+    require(all(not any(c.startswith("UNMAPPED:") for c in entry["classes"]) for entry in style_map.values()), "Irismonument style mapping still contains unmapped terms")
+
+    selection = read_json("three-ages/data/irismonument-case-selection.json")
+    require(len(selection["classes"]) >= 15, "Irismonument case selection is missing classes")
+    require(all(isinstance(info["count"], int) and info["count"] >= 0 for info in selection["classes"].values()), "Irismonument case selection counts are malformed")
+
+    balat = read_json("three-ages/data/balat-photo-provenance.json")
+    balat_records = balat.get("records", [])
+    require(len({r.get("case_id") for r in balat_records}) == len(balat_records), "BALaT provenance contains duplicate case IDs")
+    balat_matched = [r for r in balat_records if r.get("matched")]
+    require(all(r.get("licence") == "CC BY 4.0" and r.get("preview_sha256") and r.get("source_url", "").startswith("https://balat.kikirpa.be/en/photo/") for r in balat_matched), "BALaT provenance contains an unverified match")
+    for record in balat_matched:
+        preview = ROOT / "three-ages" / record["preview"]
+        body = preview.read_bytes()
+        require(body.startswith(b"\xff\xd8\xff"), f"BALaT preview is not a JPEG: {record['photo_id']}")
+        require(hashlib.sha256(body).hexdigest() == record["preview_sha256"], f"BALaT preview checksum is stale: {record['photo_id']}")
+    balat_photos = {r["photo_id"] for r in balat_matched}
+    coverage = balat.get("coverage", {})
+    require(coverage.get("total_cases") == len(balat_records) and coverage.get("unique_photos") == len(balat_photos), "BALaT coverage report disagrees with provenance")
+    balat_worksheet_fields, balat_worksheet_rows = read_csv("three-ages/data/balat-photo-review.csv")
+    require({r["photo_id"] for r in balat_worksheet_rows} == balat_photos, "BALaT review worksheet does not cover every verified photo")
+    require(all(r["annotation_status"] in ("pending reviewer annotation", "reviewed photo annotation") for r in balat_worksheet_rows), "BALaT worksheet contains an unknown annotation status")
+    balat_compiled = read_json("three-ages/data/balat-photo-reviews.json")
+    require(balat_compiled.get("record_count") == len(balat_compiled.get("records", [])), "BALaT compiled review count is stale")
+    require(all(r["facade_label"].strip() for r in balat_compiled.get("records", [])), "BALaT compiled reviews contain a blank label")
+    balat_manifest = read_json("three-ages/data/balat-training-manifest.json")
+    require(balat_manifest.get("record_count") == len(balat_manifest.get("records", [])), "BALaT training manifest count is stale")
+    manifest_groups: dict[str, set[str]] = {}
+    for entry in balat_manifest.get("records", []):
+        require(entry.get("licence", {}).get("photo") == "CC BY 4.0", f"training manifest contains a non-CC-BY photo: {entry.get('photo_id')}")
+        manifest_groups.setdefault(entry["split_group"], set()).add(entry["split"])
+    require(all(len(splits) == 1 for splits in manifest_groups.values()), "training manifest building group straddles splits")
     pilot_ids = require_unique_ids(pilot["records"], "Three Ages pilot", "source_id")
     buildings_by_id = {str(record["id"]): record for record in buildings["records"]}
     require(len(buildings["records"]) == 34, "expected 34 Grand Place records")

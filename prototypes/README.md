@@ -54,6 +54,40 @@ Refresh the City of Brussels Grand Place snapshot and live-check its catalogue l
 python3 prototypes/fetch_open_data.py
 ```
 
+Refresh the Irismonument (Brussels architectural heritage inventory) WFS layer — the multi-era label pool for the training corpus (see `docs/facade-style-vocabulary.md`):
+
+```bash
+python3 prototypes/fetch_irismonument.py
+```
+
+The WFS layer exposes the inventory's own style, build-year, typology, architect, location and first-image fields (~40,900 records). Metadata is CC0 per the BruGIS layer page; the `FIRSTIMAGE` photos on monument.heritage.brussels are © KIK-IRPA/urban.brussels and are not downloaded until their licence is verified (see the training-licence task).
+
+The Irismonument selector currently stores up to ten examples per class (`sample`), not every candidate in each class. BALaT acceptance requires an exact street + whole-house-number match, `rights_consent_status=free`, the photo page's own title matching the address, and a visible CC BY 4.0 badge. Per-photo capture date, represented detail, credit and checksum are recorded. Run a smoke-sized pass or the full bounded selector sample with a separate provenance output:
+
+```bash
+python3 prototypes/fetch_balat_photos.py --selection prototypes/three-ages/data/irismonument-case-selection.json --limit-per-class 1 --output /tmp/balat-validation.json
+python3 prototypes/fetch_balat_photos.py --selection prototypes/three-ages/data/irismonument-case-selection.json --offset-per-class 0 --limit-per-class 10 --output /tmp/balat-selector-sample.json
+python3 prototypes/fetch_balat_photos.py --selection prototypes/three-ages/data/irismonument-case-selection.json --sample-field additional_sample --output /tmp/balat-selector-second-sample.json
+```
+
+The report includes per-class matches/downloads, unique buildings/photos, and catalogue view-scope counts. The default command remains the six-case identity-validation pilot. Unmatched candidates stay visible in provenance and must not enter the training set. The full candidate pool has not yet been exported from the selector, so even all ten stored samples per class are not a full-corpus acquisition run.
+
+Label the verified photos (one row per unique photo) with the signed-off vocabulary term:
+
+```bash
+python3 prototypes/three-ages/export_balat_review.py
+```
+
+This writes `three-ages/data/balat-photo-review.csv` (provenance columns plus blank `facade_label`, observation, reviewer and confidence fields) and compiles completed rows to `three-ages/data/balat-photo-reviews.json`. Regeneration preserves existing reviews and refuses to attach a review after its photo provenance changed. Wide street-level sweeps confirmed the remaining misses are genuine absences (BALaT holds no exact-address photo for those buildings), not query failures.
+
+Export reviewed labels as a training manifest (CC BY 4.0 photos only, deterministic building-grouped train/eval splits):
+
+```bash
+python3 prototypes/three-ages/export_training_manifest.py
+```
+
+Rows with non-vocabulary labels, non-CC-BY licences (including any SPRB-agent photo), or missing checksums/reviewers are excluded and listed, never silently included. Publishing model weights is outside the EHB non-commercial education framing — review before publishing any trained artifact (see `docs/irismonument-image-licence.md`).
+
 Refresh checksum-pinned imagery:
 
 ```bash
