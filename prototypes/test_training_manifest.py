@@ -74,6 +74,18 @@ class TrainingManifestTests(unittest.TestCase):
         out = self.export([row("P1", facade_label="Louis XIV")])
         self.assertEqual(out["record_count"], 1)
 
+    def test_accepts_open_commons_licences_with_sharealike_flag(self):
+        out = self.export([
+            row("commons-a", licence="CC BY-SA 4.0", preview="data/historical/commons/commons-a.jpg"),
+            row("commons-b", licence="CC0", preview="data/historical/commons/commons-b.jpg"),
+            row("commons-c", licence="© Some Photographer"),
+        ])
+        self.assertEqual(out["record_count"], 2)
+        by_id = {r["photo_id"]: r for r in out["records"]}
+        self.assertEqual(by_id["commons-a"]["sharealike"], "yes")
+        self.assertEqual(by_id["commons-b"]["sharealike"], "no")
+        self.assertEqual(out["excluded_photo_ids"], ["commons-c"])
+
 
 if __name__ == "__main__":
     unittest.main()

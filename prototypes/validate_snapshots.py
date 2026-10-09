@@ -197,10 +197,31 @@ def main() -> None:
     balat_manifest = read_json("three-ages/data/balat-training-manifest.json")
     require(balat_manifest.get("record_count") == len(balat_manifest.get("records", [])), "BALaT training manifest count is stale")
     manifest_groups: dict[str, set[str]] = {}
+    commons_licences = {"CC BY 4.0", "CC BY 3.0", "CC BY 2.0", "CC BY-SA 4.0", "CC BY-SA 3.0", "CC0", "Public domain"}
     for entry in balat_manifest.get("records", []):
-        require(entry.get("licence", {}).get("photo") == "CC BY 4.0", f"training manifest contains a non-CC-BY photo: {entry.get('photo_id')}")
+        photo_licence = entry.get("licence", {}).get("photo")
+        if (entry.get("photo_id") or "").startswith("commons-"):
+            require(photo_licence in commons_licences, f"training manifest contains a non-open Commons photo: {entry.get('photo_id')}")
+        else:
+            require(photo_licence == "CC BY 4.0", f"training manifest contains a non-CC-BY photo: {entry.get('photo_id')}")
         manifest_groups.setdefault(entry["split_group"], set()).add(entry["split"])
     require(all(len(splits) == 1 for splits in manifest_groups.values()), "training manifest building group straddles splits")
+    commons = read_json("three-ages/data/commons-photo-provenance.json")
+    commons_records = commons.get("records", [])
+    require(len({r.get("case_id") for r in commons_records}) == len(commons_records), "Commons provenance contains duplicate case IDs")
+    require(all(r.get("licence") in commons_licences and r.get("preview_sha256") and r.get("source_url", "").startswith("https://commons.wikimedia.org/wiki/File:") for r in commons_records), "Commons provenance contains an unverified match")
+    for record in commons_records:
+        preview = ROOT / "three-ages" / record["preview"]
+        body = preview.read_bytes()
+        require(body.startswith(b"\xff\xd8\xff"), f"Commons preview is not a JPEG: {record['photo_id']}")
+        require(hashlib.sha256(body).hexdigest() == record["preview_sha256"], f"Commons preview checksum is stale: {record['photo_id']}")
+    commons_photos = {r["photo_id"] for r in commons_records}
+    commons_worksheet_fields, commons_worksheet_rows = read_csv("three-ages/data/commons-photo-review.csv")
+    require({r["photo_id"] for r in commons_worksheet_rows} == commons_photos, "Commons review worksheet does not cover every staged photo")
+    require(all(r["annotation_status"] in ("pending reviewer annotation", "reviewed photo annotation") for r in commons_worksheet_rows), "Commons worksheet contains an unknown annotation status")
+    commons_compiled = read_json("three-ages/data/commons-photo-reviews.json")
+    require(commons_compiled.get("record_count") == len(commons_compiled.get("records", [])), "Commons compiled review count is stale")
+    require(all(r["facade_label"].strip() for r in commons_compiled.get("records", [])), "Commons compiled reviews contain a blank label")
     pilot_ids = require_unique_ids(pilot["records"], "Three Ages pilot", "source_id")
     buildings_by_id = {str(record["id"]): record for record in buildings["records"]}
     require(len(buildings["records"]) == 34, "expected 34 Grand Place records")

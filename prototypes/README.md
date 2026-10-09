@@ -72,6 +72,15 @@ python3 prototypes/fetch_balat_photos.py --selection prototypes/three-ages/data/
 
 The report includes per-class matches/downloads, unique buildings/photos, and catalogue view-scope counts. The default command remains the six-case identity-validation pilot. Unmatched candidates stay visible in provenance and must not enter the training set. The full candidate pool has not yet been exported from the selector, so even all ten stored samples per class are not a full-corpus acquisition run.
 
+Curate openly licensed Commons facade photos (Wikidata-address join, style-category sweep, WLM filename join) into the same gated flow. Agent-accepted rows only; review fields start blank:
+
+```bash
+python3 prototypes/build_commons_provenance.py
+python3 prototypes/three-ages/export_commons_review.py
+```
+
+This stages `three-ages/data/commons-photo-provenance.json` (match records with per-file licence, ShareAlike flag, artist credit and SHA-256), 800px previews under `three-ages/data/historical/commons/`, and the `commons-photo-review.csv` worksheet (one row per photo) compiling to `commons-photo-reviews.json`. Join hygiene: strip photo dates and parenthetical counters from filenames before number matching, and never substring-match street names. Unviewed candidates stay out of the repo until they pass the visual identity gate.
+
 Label the verified photos (one row per unique photo) with the signed-off vocabulary term:
 
 ```bash
@@ -80,7 +89,7 @@ python3 prototypes/three-ages/export_balat_review.py
 
 This writes `three-ages/data/balat-photo-review.csv` (provenance columns plus blank `facade_label`, observation, reviewer and confidence fields) and compiles completed rows to `three-ages/data/balat-photo-reviews.json`. Regeneration preserves existing reviews and refuses to attach a review after its photo provenance changed. Wide street-level sweeps confirmed the remaining misses are genuine absences (BALaT holds no exact-address photo for those buildings), not query failures.
 
-Export reviewed labels as a training manifest (CC BY 4.0 photos only, deterministic building-grouped train/eval splits):
+Export reviewed labels as a training manifest (BALaT CC BY 4.0 + Commons per-file open licences with ShareAlike flags, deterministic building-grouped train/eval splits):
 
 ```bash
 python3 prototypes/three-ages/export_training_manifest.py

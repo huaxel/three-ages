@@ -1,18 +1,20 @@
 #!/usr/bin/env python3
-"""Export reviewer-completed BALaT photo labels as a training manifest.
+"""Export reviewer-completed photo labels as a training manifest.
 
-Reads data/balat-photo-reviews.json (compiled completed rows) and writes
-data/balat-training-manifest.json: one record per reviewed photo with image
-reference + SHA-256, vocabulary label, capture epoch, provenance and reviewer
-fields, licence matrix entry, and a deterministic building-grouped split
-assignment (all cases of one heritage fiche share one split, so epochs of a
-building never straddle train/eval).
+Reads data/balat-photo-reviews.json and data/commons-photo-reviews.json
+(compiled completed rows) and writes data/balat-training-manifest.json: one
+record per reviewed photo with image reference + SHA-256, vocabulary label,
+capture epoch, provenance and reviewer fields, licence matrix entry, and a
+deterministic building-grouped split assignment (all cases of one heritage
+fiche share one split, so epochs of a building never straddle train/eval).
 
 Gates (refuse rather than guess):
 - facade_label must be a signed-off vocabulary term (CLASS_LABELS values or
   the six Grand Place historical terms in docs/facade-style-vocabulary.md);
-- licence must be exactly "CC BY 4.0" (the KIK-IRPA BALaT route; anything
-  else, including SPRB-agent inventory photos, is excluded);
+- licence must be exactly "CC BY 4.0" for BALaT rows (the KIK-IRPA route;
+  anything else, including SPRB-agent inventory photos, is excluded) or a
+  pinned open licence for Commons rows (ShareAlike flagged; weights
+  publication needs care);
 - preview SHA-256 and reviewer identity must be present.
 """
 from __future__ import annotations
@@ -45,6 +47,13 @@ HISTORICAL_TERMS = (
 ALLOWED_LABELS = frozenset(CLASS_LABELS + HISTORICAL_TERMS + (
     "Baroque", "Baroque with classical features"))
 REQUIRED_LICENCE = "CC BY 4.0"
+# Commons files enter under their own per-file open licence (pinned at
+# acquisition). ShareAlike files ride with a flag; publishing model weights
+# trained on them needs care (see the licence doc) and stays an owner call.
+COMMONS_LICENCES = frozenset({
+    "CC BY 4.0", "CC BY 3.0", "CC BY 2.0",
+    "CC BY-SA 4.0", "CC BY-SA 3.0", "CC0", "Public domain",
+})
 EVAL_FRACTION = 0.2
 
 
@@ -65,7 +74,12 @@ def manifest_record(row: dict) -> dict | None:
     label = (row.get("facade_label") or "").strip()
     if label not in ALLOWED_LABELS:
         return None
-    if (row.get("licence") or "") != REQUIRED_LICENCE:
+    is_commons = (row.get("photo_id") or "").startswith("commons-")
+    licence = row.get("licence") or ""
+    if is_commons:
+        if licence not in COMMONS_LICENCES:
+            return None
+    elif licence != REQUIRED_LICENCE:
         return None
     if (row.get("label_eligibility") or "eligible") != "eligible":
         return None
@@ -86,7 +100,10 @@ def manifest_record(row: dict) -> dict | None:
             "title": row.get("photo_page_title"),
             "credit": row.get("credit"),
         },
-        "licence": {"photo": row.get("licence"), "metadata": "CC0 (BALaT descriptive metadata)"},
+        "licence": {"photo": row.get("licence"), "metadata": (
+            "per-file Commons licence; see file page" if is_commons
+            else "CC0 (BALaT descriptive metadata)")},
+        "sharealike": "yes" if "BY-SA" in (row.get("licence") or "") else "no",
         "reviewer": row.get("reviewer"),
         "reviewed_at": row.get("reviewed_at") or "",
         "confidence": row.get("confidence") or "",
@@ -95,8 +112,12 @@ def manifest_record(row: dict) -> dict | None:
 
 
 def main(data_dir: Path = DATA) -> None:
-    reviews = json.loads((data_dir / "balat-photo-reviews.json").read_text(encoding="utf-8"))
-    rows = reviews.get("records", [])
+    rows = []
+    for name in ("balat-photo-reviews.json", "commons-photo-reviews.json"):
+        path = data_dir / name
+        if path.exists():
+            reviews = json.loads(path.read_text(encoding="utf-8"))
+            rows.extend(reviews.get("records", []))
     records, excluded = [], []
     for row in rows:
         record = manifest_record(row)
@@ -108,7 +129,8 @@ def main(data_dir: Path = DATA) -> None:
     require(all(len(splits) == 1 for splits in group_splits.values()),
             "building group straddles train/eval")
     payload = {
-        "source": "reviewer-completed BALaT labels; CC BY 4.0 photos only; building-grouped splits",
+        "source": ("reviewer-completed BALaT (CC BY 4.0) + Commons (per-file open licence, "
+                   "ShareAlike flagged) labels; building-grouped splits"),
         "record_count": len(records),
         "excluded_count": len(excluded),
         "excluded_photo_ids": sorted(excluded),
