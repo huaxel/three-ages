@@ -23,12 +23,18 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from map_irismonument_corpus import CLASS_LABELS, classify_term, modernism_class
 
-STAGE = Path("/tmp/commons-curation")
+REPO_STAGE = Path(__file__).resolve().parent / "three-ages" / "data" / "commons-stage"
+STAGE = REPO_STAGE if REPO_STAGE.exists() else Path("/tmp/commons-curation")
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "three-ages" / "data"
 OUT_DIR = DATA / "historical" / "commons"
 
-STAGED = ["wikidata-join-candidates.csv", "cat-candidates-clean.csv", "wlm-candidates.csv"]
+STAGED = ["wikidata-join-candidates.csv", "cat-candidates-clean.csv", "wlm-candidates.json"]
+
+
+def require(condition: bool, message: str) -> None:
+    if not condition:
+        raise RuntimeError(message)
 
 
 def view_scope(reason: str) -> str:
@@ -64,13 +70,20 @@ def slug(filename: str) -> str:
 def main() -> None:
     meta = json.loads((STAGE / "canonical-meta.json").read_text(encoding="utf-8"))
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    records = []
-    seen_files: dict[str, str] = {}
+    staged_rows: list[dict] = []
+    stale = STAGE / "wlm-candidates.csv"
+    require(not stale.exists(), f"stale {stale} shadows wlm-candidates.json; delete it")
     for name in STAGED:
         path = STAGE / name
         if not path.exists():
             continue
-        for row in csv.DictReader(path.open(encoding="utf-8")):
+        if path.suffix == ".json":
+            staged_rows.extend(json.loads(path.read_text(encoding="utf-8")))
+        else:
+            staged_rows.extend(csv.DictReader(path.open(encoding="utf-8")))
+    records = []
+    seen_files: dict[str, str] = {}
+    for row in staged_rows:
             if not (row.get("verdict") or "").startswith("accept"):
                 continue
             if not row.get("fiche"):

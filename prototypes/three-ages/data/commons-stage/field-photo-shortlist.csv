@@ -1,0 +1,57 @@
+class,street,number,commune,style,built,lon,lat,fiche
+Modernism (interwar),Rue Héger-Bordet,1,Rue_Heger-Bordet,Modernisme,1934,4.347172,50.833752,https://monument.heritage.brussels/fr/Bruxelles_Pentagone/Rue_Heger-Bordet/1/30199
+Modernism (interwar),Rue des Comédiens,16,Rue_des_Comediens,Modernisme,1935,4.358491,50.850255,https://monument.heritage.brussels/fr/Bruxelles_Pentagone/Rue_des_Comediens/16/33363
+Modernism (interwar),Avenue de l'Uruguay,7,Avenue_de_l_Uruguay,Modernisme,1938,4.393536,50.799581,https://monument.heritage.brussels/fr/Bruxelles_Extension_Sud/Avenue_de_l_Uruguay/7/16222
+Modernism (interwar),Square Coghen,11,Square_Coghen,Modernisme,1929,4.338809,50.807857,https://monument.heritage.brussels/fr/Uccle/Square_Coghen/11/27092
+Modernism (interwar),Rue Marianne,10,Rue_Marianne,Modernisme,1932,4.352078,50.813682,https://monument.heritage.brussels/fr/Uccle/Rue_Marianne/10/27664
+Modernism (interwar),Eden City,22,Chaussaee_de_Bruxelles,Modernisme,1936,4.331197,50.821164,https://monument.heritage.brussels/fr/Forest/Chaussaee_de_Bruxelles/368/38980
+Modernism (interwar),Rue du Cubisme,19,Rue_du_Cubisme,Modernisme,1922,4.328019,50.858751,https://monument.heritage.brussels/fr/Koekelberg/Rue_du_Cubisme/11/35422
+Modernism (interwar),Rue du Cubisme,15,Rue_du_Cubisme,Modernisme,1922,4.328118,50.858714,https://monument.heritage.brussels/fr/Koekelberg/Rue_du_Cubisme/11/35422
+Modernism (post-war),Avenue de la Forêt,176,Avenue_de_la_Foret,Modernisme,1941,4.395839,50.79878,https://monument.heritage.brussels/fr/Bruxelles_Extension_Sud/Avenue_de_la_Foret/176/15881
+Modernism (post-war),Avenue Hippolyte Boulenger,24,Avenue_Hippolyte_Boulenger,Modernisme,1941,4.369765,50.791765,https://monument.heritage.brussels/fr/Uccle/Avenue_Hippolyte_Boulenger/22/39579
+Modernism (post-war),Avenue Hippolyte Boulenger,22,Avenue_Hippolyte_Boulenger,Modernisme,1941,4.369652,50.791789,https://monument.heritage.brussels/fr/Uccle/Avenue_Hippolyte_Boulenger/22/39579
+Modernism (post-war),Chaussée de Louvain,78,Chaussaee_de_Louvain,Modernisme,1942,4.372829,50.849705,https://monument.heritage.brussels/fr/Saint-Josse-ten-Noode/Chaussaee_de_Louvain/80/10887
+Modernism (post-war),Avenue Laure,61,Avenue_Laure,Modernisme,1949,4.30374,50.864233,https://monument.heritage.brussels/fr/Berchem-Sainte-Agathe/Avenue_Laure/61/40907
+Modernism (post-war),Avenue des Dames Blanches,15,Avenue_des_Dames_Blanches,Modernisme,1948,4.459435,50.8248,https://monument.heritage.brussels/fr/Woluwe-Saint-Pierre/Avenue_des_Dames_Blanches/1/25277
+Modernism (post-war),Avenue des Dames Blanches,6,Avenue_des_Dames_Blanches,Modernisme,1948,4.460788,50.825817,https://monument.heritage.brussels/fr/Woluwe-Saint-Pierre/Avenue_des_Dames_Blanches/1/25277
+Modernism (post-war),Avenue des Dames Blanches,3,Avenue_des_Dames_Blanches,Modernisme,1948,4.458818,50.824519,https://monument.heritage.brussels/fr/Woluwe-Saint-Pierre/Avenue_des_Dames_Blanches/1/25277
+Modernism (Expo 58),Rue François-Joseph Navez,110,Rue_Francois-Joseph_Navez,Modernisme,1950,4.373919,50.874491,https://monument.heritage.brussels/fr/Bruxelles_Pentagone/Rue_Francois-Joseph_Navez/110/22720
+Modernism (Expo 58),Avenue Adolphe Buyl,164,Avenue_Adolphe_Buyl,Modernisme,1954,4.385131,50.812861,https://monument.heritage.brussels/fr/Ixelles/Avenue_Adolphe_Buyl/164/23492
+Modernism (Expo 58),Bosveldweg,81,Bosveldweg,Modernisme,1965,4.364413,50.806796,https://monument.heritage.brussels/fr/Uccle/Bosveldweg/81/41644
+Modernism (Expo 58),Avenue Brunard,41,Avenue_Brunard,Modernisme,1960,4.358829,50.808194,https://monument.heritage.brussels/fr/Uccle/Avenue_Brunard/41/37429
+Modernism (Expo 58),Avenue des Gloires Nationales,84,Avenue_des_Gloires_Nationales,Modernisme,1956,4.317652,50.86846,https://monument.heritage.brussels/fr/Ganshoren/Avenue_des_Gloires_Nationales/84/41112
+Modernism (Expo 58),Avenue de Levis Mirepoix,92,Avenue_de_Levis_Mirepoix,Modernisme,1961,4.330255,50.871156,https://monument.heritage.brussels/fr/Jette/Avenue_de_Levis_Mirepoix/92/40885
+Modernism (Expo 58),Avenue Firmin Lecharlier,63,Avenue_de_Levis_Mirepoix,Modernisme,1961,4.330405,50.871097,https://monument.heritage.brussels/fr/Jette/Avenue_de_Levis_Mirepoix/92/40885
+Modernism (Expo 58),Avenue du Manoir d'Anjou,47,Avenue_du_Manoir_d_Anjou,Modernisme,1958,4.452549,50.828986,https://monument.heritage.brussels/fr/Woluwe-Saint-Pierre/Avenue_du_Manoir_d_Anjou/47/41162
+Modernism (late),Chaussée de La Hulpe,177,Chaussee_de_La_Hulpe,Modernisme,1967,4.403437,50.795328,https://monument.heritage.brussels/fr/Watermael-Boitsfort/Chaussee_de_La_Hulpe/177/26281
+Modernism (late),Avenue de Beloeil,20,Avenue_de_Beloeil,Modernisme,1968,4.371448,50.794781,https://monument.heritage.brussels/fr/Uccle/Avenue_de_Beloeil/20/39577
+Modernism (late),Avenue Henri Liebrecht,9,Avenue_Henri_Liebrecht,Modernisme,1975,4.321734,50.886417,https://monument.heritage.brussels/fr/Jette/Avenue_Henri_Liebrecht/3/40795
+Modernism (late),Avenue Henri Liebrecht,3,Avenue_Henri_Liebrecht,Modernisme,1975,4.321539,50.886441,https://monument.heritage.brussels/fr/Jette/Avenue_Henri_Liebrecht/3/40795
+Modernism (late),Clos Comte de Ferraris,8,Clos_Comte_de_Ferraris,Modernisme,1979,4.447856,50.837335,https://monument.heritage.brussels/fr/Woluwe-Saint-Pierre/Clos_Comte_de_Ferraris/8/41242
+Modernism (late),Avenue de la Héronnière,98,Avenue_de_la_Heronniere,Modernisme,1970,4.414314,50.812307,https://monument.heritage.brussels/fr/Watermael-Boitsfort/Avenue_de_la_Heronniere/98/41375
+Modernism (late),Avenue Circulaire,102,Avenue_Circulaire,Modernisme,1966,4.361881,50.79655,https://monument.heritage.brussels/fr/Uccle/Avenue_Circulaire/102/27038
+Modernism (late),Drève du Sénéchal,19,Dreve_du_Senechal,Modernisme,1969,4.37718,50.794554,https://monument.heritage.brussels/fr/Uccle/Dreve_du_Senechal/19/40656
+Modernism (period undetermined),Rue Héger-Bordet,5,Rue_Heger-Bordet,Classicisme moderne,1937,4.347347,50.833422,https://monument.heritage.brussels/fr/Bruxelles_Pentagone/Rue_Heger-Bordet/5/30200
+Modernism (period undetermined),Rue des Éburons,46,Rue_des_Eburons,Modernisme,1864,4.379987,50.848328,https://monument.heritage.brussels/fr/Bruxelles_Extension_Est/Rue_des_Eburons/46/18137
+Modernism (period undetermined),Rue des Éburons,50,Rue_des_Eburons,Modernisme,1864,4.380889,50.848037,https://monument.heritage.brussels/fr/Bruxelles_Extension_Est/Rue_des_Eburons/46/18137
+Modernism (period undetermined),Chaussée d'Ixelles,311,Chaussee_d_Ixelles,"Modernisme, Éclectisme, Mauresque",1908,4.369992,50.829275,https://monument.heritage.brussels/fr/Ixelles/Chaussee_d_Ixelles/311/19828
+Modernism (period undetermined),Rue Franz Gailliard,5,Rue_Franz_Gailliard,Modernisme,,4.340293,50.830192,https://monument.heritage.brussels/fr/Saint-Gilles/Rue_Franz_Gailliard/5/4307
+Modernism (period undetermined),Avenue des Anciens Combattants,135,Avenue_des_Olympiades,Modernisme,1989,4.405855,50.868035,https://monument.heritage.brussels/fr/Evere/Avenue_des_Olympiades/10/37892
+Modernism (period undetermined),Avenue des Olympiades,10,Avenue_des_Olympiades,Modernisme,1989,4.404503,50.8687,https://monument.heritage.brussels/fr/Evere/Avenue_des_Olympiades/10/37892
+Modernism (period undetermined),Rue du Bourdon,354,Rue_du_Bourdon,Modernisme,,4.335163,50.775485,https://monument.heritage.brussels/fr/Uccle/Rue_du_Bourdon/354/38742
+Brutalism,Avenue de la Croix-Rouge,41,Avenue_de_la_Croix-Rouge,Brutalisme,1965,4.35394,50.896898,https://monument.heritage.brussels/fr/Bruxelles_Laeken/Avenue_de_la_Croix-Rouge/41/35808
+Brutalism,Rue des Ailes,71,Rue_des_Ailes,Brutalisme,1894,4.373851,50.868822,https://monument.heritage.brussels/fr/Schaerbeek/Rue_des_Ailes/71/22786
+Brutalism,Avenue de Messidor,207,Avenue_de_Messidor,Brutalisme,,4.348688,50.81027,https://monument.heritage.brussels/fr/Uccle/Avenue_de_Messidor/207/41692
+Brutalism,Avenue des Magnolias,1,Avenue_des_Magnolias,Brutalisme,1972,4.330694,50.897687,https://monument.heritage.brussels/fr/Bruxelles_Laeken/Avenue_des_Magnolias/1/40420
+Brutalism,Rue Van Kalck,93,Rue_Van_Kalck,Brutalisme,1969,4.310807,50.854121,https://monument.heritage.brussels/fr/Molenbeek-Saint-Jean/Rue_Van_Kalck/93/37961
+Brutalism,Place Oscar Ruelens,13,Place_Oscar_Ruelens,Brutalisme,1988,4.298106,50.867176,https://monument.heritage.brussels/fr/Berchem-Sainte-Agathe/Place_Oscar_Ruelens/13/41335
+Brutalism,Avenue Général Lartigue,81,Avenue_General_Lartigue,Brutalisme,1975,4.407433,50.8458,https://monument.heritage.brussels/fr/Woluwe-Saint-Lambert/Avenue_General_Lartigue/81/40033
+Brutalism,Clos Théodore De Cuyper,230,Clos_Theodore_De_Cuyper,Brutalisme,1979,4.441919,50.855395,https://monument.heritage.brussels/fr/Woluwe-Saint-Lambert/Clos_Theodore_De_Cuyper/230/40063
+Postmodernism,Rue des Sablons,19,Rue_des_Sablons,"Éclectisme, Postmodernisme",1872,4.355625,50.839712,https://monument.heritage.brussels/fr/Bruxelles_Pentagone/Rue_des_Sablons/19/30583
+Postmodernism,Rue de Belle-Vue,24,Rue_de_Belle-Vue,Postmodernisme,1977,4.372605,50.820997,https://monument.heritage.brussels/fr/Bruxelles_Extension_Sud/Rue_de_Belle-Vue/24/15796
+Postmodernism,Avenue Paul Héger,1,Avenue_Paul_Heger,Postmodernisme,1992,4.381186,50.81268,https://monument.heritage.brussels/fr/Bruxelles_Extension_Sud/Avenue_Paul_Heger/1/15746
+Postmodernism,Place Voltaire,6,Place_Voltaire,Postmodernisme,,4.335463,50.856862,https://monument.heritage.brussels/fr/Molenbeek-Saint-Jean/Place_Voltaire/1/41455
+Postmodernism,Place Voltaire,5,Place_Voltaire,Postmodernisme,,4.335463,50.856727,https://monument.heritage.brussels/fr/Molenbeek-Saint-Jean/Place_Voltaire/1/41455
+Postmodernism,Rue des Déménageurs,4,Place_Voltaire,Postmodernisme,,4.335059,50.856341,https://monument.heritage.brussels/fr/Molenbeek-Saint-Jean/Place_Voltaire/1/41455
+Postmodernism,Place Voltaire,7,Place_Voltaire,Postmodernisme,,4.335461,50.856778,https://monument.heritage.brussels/fr/Molenbeek-Saint-Jean/Place_Voltaire/1/41455
+Postmodernism,Place Voltaire,2,Place_Voltaire,Postmodernisme,,4.335459,50.856614,https://monument.heritage.brussels/fr/Molenbeek-Saint-Jean/Place_Voltaire/1/41455
