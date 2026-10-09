@@ -67,6 +67,8 @@ def manifest_record(row: dict) -> dict | None:
         return None
     if (row.get("licence") or "") != REQUIRED_LICENCE:
         return None
+    if (row.get("label_eligibility") or "eligible") != "eligible":
+        return None
     if not (row.get("preview_sha256") or "").strip() or not (row.get("reviewer") or "").strip():
         return None
     group_key = (row.get("fiche_urls") or row.get("photo_id") or "").split(";")[0].strip()

@@ -4717,7 +4717,9 @@
       "attribution": "KIK-IRPA, Brussels (Belgium), cliché A029757",
       "source_url": "https://balat.kikirpa.be/en/photo/A029757/",
       "preview": "data/historical/balat/balat-a029757.jpg",
-      "preview_sha256": "19ed48defa584f3788ebc37b2391e9d8a97cee4963ee24abb6596034626d2bd9"
+      "preview_sha256": "19ed48defa584f3788ebc37b2391e9d8a97cee4963ee24abb6596034626d2bd9",
+      "label_eligibility": "ineligible",
+      "label_eligibility_reason": "1942 photo predates the current building: fiche 37935 records a 1962-1971 Piet Dingemans brutalist office block; the photo shows the 19th-century predecessor police station."
     },
     {
       "case_id": "brutalism:29864:41:2",

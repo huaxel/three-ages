@@ -81,6 +81,15 @@ class BalatReviewTests(unittest.TestCase):
         self.assertEqual(compiled["record_count"], 1)
         self.assertEqual(compiled["records"][0]["facade_label"], "Baroque")
 
+    def test_carries_label_eligibility_flag(self):
+        self.write_provenance([case("baroque:1:13:0", "P1", label_eligibility="ineligible",
+                                     label_eligibility_reason="photo predates building")])
+        review.main(self.data)
+        with (self.data / "balat-photo-review.csv").open(encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle))
+        self.assertEqual(rows[0]["label_eligibility"], "ineligible")
+        self.assertIn("predates building", rows[0]["label_eligibility_reason"])
+
     def test_refuses_review_after_provenance_change(self):
         self.write_provenance([case("baroque:1:13:0", "P1")])
         review.main(self.data)

@@ -64,6 +64,12 @@ class TrainingManifestTests(unittest.TestCase):
         self.assertEqual(out["records"][0]["photo_id"], "P4")
         self.assertEqual(sorted(out["excluded_photo_ids"]), ["P1", "P2", "P3"])
 
+    def test_excludes_ineligible_photos_even_when_labeled(self):
+        out = self.export([row("P1", label_eligibility="ineligible",
+                               label_eligibility_reason="photo predates building")])
+        self.assertEqual(out["record_count"], 0)
+        self.assertEqual(out["excluded_photo_ids"], ["P1"])
+
     def test_accepts_historical_vocabulary_terms(self):
         out = self.export([row("P1", facade_label="Louis XIV")])
         self.assertEqual(out["record_count"], 1)

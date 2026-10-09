@@ -31,7 +31,7 @@ PROVENANCE_COLUMNS = (
     "photo_id", "case_ids", "class_labels", "source_styles", "built_years",
     "fiche_urls", "addresses", "photo_date_taken", "photo_represented_detail",
     "photo_view_scope", "photo_page_title", "source_url", "image_url", "preview", "preview_sha256",
-    "licence", "credit",
+    "licence", "credit", "label_eligibility", "label_eligibility_reason",
 )
 REVIEW_COLUMNS = (
     "facade_label", "facade_observation", "reviewer", "reviewed_at", "confidence",
@@ -67,6 +67,8 @@ def unique_photo_rows(records: list[dict]) -> list[dict]:
             "preview_sha256": record.get("preview_sha256") or "",
             "licence": record.get("licence") or "",
             "credit": record.get("credit_line") or record.get("attribution") or "",
+            "label_eligibility": record.get("label_eligibility") or "eligible",
+            "label_eligibility_reason": record.get("label_eligibility_reason") or "",
             "photo_page_title": record.get("photo_page_title") or record.get("title") or "",
         })
         for key, value in (
@@ -130,9 +132,9 @@ def main(data_dir: Path = DATA) -> None:
     existing = {}
     if worksheet_path.exists():
         for row in read_worksheet(worksheet_path):
-            require(set(row.keys()) == set(ALL_COLUMNS),
-                    f"worksheet columns changed in {worksheet_path}")
-            existing[row["photo_id"]] = row
+            unknown = set(row.keys()) - set(ALL_COLUMNS)
+            require(not unknown, f"worksheet has unknown columns in {worksheet_path}: {sorted(unknown)}")
+            existing[row["photo_id"]] = {c: row.get(c, "") for c in ALL_COLUMNS}
 
     merged = []
     for photo_id, row in fresh.items():
