@@ -103,7 +103,7 @@ async function testThreeAges() {
   requireIncludes(source, "24 aligned case crops", "Three Ages source summary");
   requireIncludes(source, "CC BY 4.0", "Three Ages dataset licence");
   requireIncludes(source, "Behind Brussels, Google Maps", "Three Ages dataset attribution");
-  requireIncludes(source, "0 completed register decisions", "Three Ages source summary");
+  requireIncludes(source, "6 completed register decisions", "Three Ages source summary");
   requireIncludes(element("access").innerHTML, "text quotations and reused information permitted with explicit source attribution", "Three Ages heritage text terms");
   requireIncludes(element("access").innerHTML, "CC0 1.0 for structured data", "Three Ages Wikidata terms");
   requireIncludes(element("access").innerHTML, "Wikidata contributors", "Three Ages Wikidata acknowledgement");
@@ -120,7 +120,7 @@ async function testThreeAges() {
     "024-bruciel-grand-place-1935.png",
     "024-bruciel-grand-place-1996.png",
     "024-urbisgrid-grand-place-2022.png",
-    "No completed register-semantics decision",
+    "retain as reconstruction evidence · medium confidence",
     "No completed case-level structural review",
   ]) requireIncludes(content, expected, "Three Ages case rendering");
   context.show("022");

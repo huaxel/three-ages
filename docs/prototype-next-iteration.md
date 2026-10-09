@@ -23,6 +23,16 @@ The current explorer is ready for review as an **evidence-shaped prototype**, no
 - record inter-annotator disagreement before assigning confidence;
 - publish the image licence and a reproducible annotation export.
 
+## Model-training goal (recorded 2026-10-09)
+
+The curated corpus has a second purpose beyond the explorer: its reviewed evidence is the seed for training an architectural-recognition model. Decisions recorded with the project owner on 2026-10-09:
+
+- **Targets, sequenced:** facade style/period recognition first, then structural-change detection across the aligned epochs, reusing the same provenance-safe pipeline.
+- **Data strategy:** scale the reviewed case corpus before any training run; the six-case pilot proves the labeling methodology and is not a training set.
+- **Label vocabulary:** reuse the style terms already used by the City dataset and heritage inventory (for example Baroque, Classical French), agreed with a reviewer as the annotation spec requires.
+
+The curated-MVP boundary below still holds: no automated city-wide classification is attempted before the evidence is reviewed and the corpus is scaled.
+
 ## Decision boundary
 
 Do not add more interface features until the curated-MVP evidence has been reviewed. The next work is human confirmation of identity mappings, register semantics, facade observations and structural comparisons.

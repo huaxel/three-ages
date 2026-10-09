@@ -1,0 +1,2426 @@
+{
+  "source": "Irismonument WFS snapshot (data/irismonument-inventory.json)",
+  "decisions": "reviewer-agreed 2026-10-09; see docs/facade-style-vocabulary.md",
+  "mapping": {
+    "Néo-baroque": {
+      "count": 31,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Néoclassicisme": {
+      "count": 6400,
+      "classes": [
+        "neoclassical"
+      ]
+    },
+    "Architecture régionaliste": {
+      "count": 768,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Éclectisme, Néo-Renaissance flamande": {
+      "count": 332,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme": {
+      "count": 9154,
+      "classes": [
+        "eclecticism"
+      ]
+    },
+    "Art nouveau": {
+      "count": 372,
+      "classes": [
+        "art_nouveau"
+      ]
+    },
+    "Beaux-Arts": {
+      "count": 1361,
+      "classes": [
+        "beaux_arts"
+      ]
+    },
+    "Beaux-Arts, Postmodernisme": {
+      "count": 1,
+      "classes": [
+        "beaux_arts",
+        "postmodernism"
+      ]
+    },
+    "Néo-Renaissance flamande": {
+      "count": 246,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Néo-Renaissance": {
+      "count": 305,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Néoclassicisme, Beaux-Arts": {
+      "count": 16,
+      "classes": [
+        "neoclassical",
+        "beaux_arts"
+      ]
+    },
+    "Architecture traditionnelle": {
+      "count": 105,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Éclectisme, Néoclassicisme": {
+      "count": 896,
+      "classes": [
+        "eclecticism",
+        "neoclassical"
+      ]
+    },
+    "Art Déco": {
+      "count": 1885,
+      "classes": [
+        "art_deco"
+      ]
+    },
+    "Brutalisme": {
+      "count": 742,
+      "classes": [
+        "brutalism"
+      ]
+    },
+    "Éclectisme, Art nouveau, Beaux-Arts": {
+      "count": 4,
+      "classes": [
+        "eclecticism",
+        "art_nouveau",
+        "beaux_arts"
+      ]
+    },
+    "Éclectisme, Architecture traditionnelle": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Néoclassicisme, Art Déco": {
+      "count": 28,
+      "classes": [
+        "neoclassical",
+        "art_deco"
+      ]
+    },
+    "Louis-Philippe, Éclectisme": {
+      "count": 1,
+      "classes": [
+        "historicist_neo",
+        "eclecticism"
+      ]
+    },
+    "Architecture traditionnelle, Néoclassicisme": {
+      "count": 57,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "neoclassical"
+      ]
+    },
+    "Architecture traditionnelle, Renaissance flamande": {
+      "count": 3,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "historicist_neo"
+      ]
+    },
+    "Architecture traditionnelle, Baroque": {
+      "count": 4,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "baroque"
+      ]
+    },
+    "Architecture traditionnelle, Néoclassicisme, Rococo": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "neoclassical",
+        "historicist_neo"
+      ]
+    },
+    "Rococo, Art Déco": {
+      "count": 1,
+      "classes": [
+        "historicist_neo",
+        "art_deco"
+      ]
+    },
+    "Modernisme": {
+      "count": 3058,
+      "classes": [
+        "modernism"
+      ]
+    },
+    "Classicisme moderne": {
+      "count": 59,
+      "classes": [
+        "modernism_other"
+      ]
+    },
+    "Fonctionnalisme": {
+      "count": 66,
+      "classes": [
+        "functionalism"
+      ]
+    },
+    "Néo-Renaissance": {
+      "count": 81,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Art nouveau, Néoclassicisme, Néo-Renaissance flamande": {
+      "count": 4,
+      "classes": [
+        "eclecticism",
+        "art_nouveau",
+        "neoclassical",
+        "historicist_neo"
+      ]
+    },
+    "Postmodernisme": {
+      "count": 339,
+      "classes": [
+        "postmodernism"
+      ]
+    },
+    "Éclectisme, Néogothique": {
+      "count": 77,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Néoclassicisme (du 18e siècle)": {
+      "count": 21,
+      "classes": [
+        "neoclassical"
+      ]
+    },
+    "Éclectisme, Néo-Renaissance flamande, Néoclassicisme": {
+      "count": 8,
+      "classes": [
+        "eclecticism",
+        "historicist_neo",
+        "neoclassical"
+      ]
+    },
+    "Néo-Renaissance, Modernisme, Classicisme moderne": {
+      "count": 5,
+      "classes": [
+        "historicist_neo",
+        "modernism",
+        "modernism_other"
+      ]
+    },
+    "Éclectisme, Beaux-Arts": {
+      "count": 154,
+      "classes": [
+        "eclecticism",
+        "beaux_arts"
+      ]
+    },
+    "Éclectisme, Néo-baroque": {
+      "count": 23,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Art nouveau": {
+      "count": 668,
+      "classes": [
+        "eclecticism",
+        "art_nouveau"
+      ]
+    },
+    "Éclectisme, Postmodernisme": {
+      "count": 6,
+      "classes": [
+        "eclecticism",
+        "postmodernism"
+      ]
+    },
+    "Éclectisme, Néo-roman": {
+      "count": 4,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Néo-Renaissance, Néoclassicisme": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "historicist_neo",
+        "neoclassical"
+      ]
+    },
+    "Néoclassicisme, Éclectisme": {
+      "count": 176,
+      "classes": [
+        "neoclassical",
+        "eclecticism"
+      ]
+    },
+    "Éclectisme, Néoclassicisme, Néo-baroque": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "neoclassical",
+        "historicist_neo"
+      ]
+    },
+    "Néoclassicisme, Architecture traditionnelle": {
+      "count": 3,
+      "classes": [
+        "neoclassical",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Empire": {
+      "count": 37,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Néo-baroque, Éclectisme": {
+      "count": 8,
+      "classes": [
+        "historicist_neo",
+        "eclecticism"
+      ]
+    },
+    "Néoclassicisme, Art nouveau": {
+      "count": 16,
+      "classes": [
+        "neoclassical",
+        "art_nouveau"
+      ]
+    },
+    "Éclectisme, Beaux-Arts, Néo-baroque": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "beaux_arts",
+        "historicist_neo"
+      ]
+    },
+    "Beaux-Arts, Éclectisme": {
+      "count": 56,
+      "classes": [
+        "beaux_arts",
+        "eclecticism"
+      ]
+    },
+    "Éclectisme, Art Déco": {
+      "count": 126,
+      "classes": [
+        "eclecticism",
+        "art_deco"
+      ]
+    },
+    "Éclectisme, Néo-baroque, Néo-Renaissance": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Néoclassicisme, Modernisme": {
+      "count": 11,
+      "classes": [
+        "neoclassical",
+        "modernism"
+      ]
+    },
+    "Néoclassicisme, Éclectisme, Néo-baroque": {
+      "count": 1,
+      "classes": [
+        "neoclassical",
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Néo-baroque, Néoclassicisme": {
+      "count": 5,
+      "classes": [
+        "eclecticism",
+        "historicist_neo",
+        "neoclassical"
+      ]
+    },
+    "Architecture traditionnelle, Architecture d'intégration": {
+      "count": 7,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Modernisme, École d'Amsterdam": {
+      "count": 7,
+      "classes": [
+        "modernism",
+        "modernism_other"
+      ]
+    },
+    "Néoclassicisme, Néogothique": {
+      "count": 6,
+      "classes": [
+        "neoclassical",
+        "historicist_neo"
+      ]
+    },
+    "Empire, Néoclassicisme": {
+      "count": 15,
+      "classes": [
+        "historicist_neo",
+        "neoclassical"
+      ]
+    },
+    "Art nouveau, Éclectisme": {
+      "count": 231,
+      "classes": [
+        "art_nouveau",
+        "eclecticism"
+      ]
+    },
+    "Rococo": {
+      "count": 7,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Historicisme": {
+      "count": 13,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Architecture traditionaliste": {
+      "count": 104,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Renaissance flamande": {
+      "count": 1,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Baroque": {
+      "count": 25,
+      "classes": [
+        "baroque"
+      ]
+    },
+    "Architecture traditionnelle, Néo-baroque, Architecture d'intégration": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "historicist_neo"
+      ]
+    },
+    "Art nouveau, Art Déco, Éclectisme": {
+      "count": 1,
+      "classes": [
+        "art_nouveau",
+        "art_deco",
+        "eclecticism"
+      ]
+    },
+    "Architecture d'intégration": {
+      "count": 6,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Baroque, Renaissance flamande, Architecture traditionnelle": {
+      "count": 1,
+      "classes": [
+        "baroque",
+        "historicist_neo",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Baroque, Architecture traditionnelle": {
+      "count": 1,
+      "classes": [
+        "baroque",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Fonctionnalisme, Modernisme": {
+      "count": 1,
+      "classes": [
+        "functionalism",
+        "modernism"
+      ]
+    },
+    "Baroque, Néoclassicisme": {
+      "count": 3,
+      "classes": [
+        "baroque",
+        "neoclassical"
+      ]
+    },
+    "Néo-roman": {
+      "count": 17,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Régence, Néoclassicisme": {
+      "count": 1,
+      "classes": [
+        "historicist_neo",
+        "neoclassical"
+      ]
+    },
+    "Baroque classicisant, Néoclassicisme (du 18e siècle), Néoclassicisme": {
+      "count": 3,
+      "classes": [
+        "baroque_classical",
+        "neoclassical"
+      ]
+    },
+    "Architecture d'intégration, Architecture traditionnelle": {
+      "count": 11,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Baroque classicisant": {
+      "count": 3,
+      "classes": [
+        "baroque_classical"
+      ]
+    },
+    "Néoclassicisme (du 18e siècle), Néoclassicisme": {
+      "count": 2,
+      "classes": [
+        "neoclassical"
+      ]
+    },
+    "Architecture d'intégration, Néo-baroque": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "historicist_neo"
+      ]
+    },
+    "Historicisme, Rococo": {
+      "count": 1,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Beaux-Arts, Art nouveau": {
+      "count": 11,
+      "classes": [
+        "beaux_arts",
+        "art_nouveau"
+      ]
+    },
+    "Architecture traditionnelle, Régence": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "historicist_neo"
+      ]
+    },
+    "Néoclassicisme, Second Empire": {
+      "count": 6,
+      "classes": [
+        "neoclassical",
+        "second_empire"
+      ]
+    },
+    "Éclectisme, Second Empire": {
+      "count": 10,
+      "classes": [
+        "eclecticism",
+        "second_empire"
+      ]
+    },
+    "Néo-roman, Éclectisme": {
+      "count": 4,
+      "classes": [
+        "historicist_neo",
+        "eclecticism"
+      ]
+    },
+    "Éclectisme, Néoclassicisme, Second Empire": {
+      "count": 9,
+      "classes": [
+        "eclecticism",
+        "neoclassical",
+        "second_empire"
+      ]
+    },
+    "Second Empire, Éclectisme, Néoclassicisme": {
+      "count": 9,
+      "classes": [
+        "second_empire",
+        "eclecticism",
+        "neoclassical"
+      ]
+    },
+    "Néoclassicisme, Néo-Renaissance, Éclectisme": {
+      "count": 8,
+      "classes": [
+        "neoclassical",
+        "historicist_neo",
+        "eclecticism"
+      ]
+    },
+    "Néo-baroque, Architecture d'intégration": {
+      "count": 4,
+      "classes": [
+        "historicist_neo",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Néoclassicisme, Second Empire, Éclectisme": {
+      "count": 1,
+      "classes": [
+        "neoclassical",
+        "second_empire",
+        "eclecticism"
+      ]
+    },
+    "Modernisme, Paquebot": {
+      "count": 28,
+      "classes": [
+        "modernism",
+        "paquebot"
+      ]
+    },
+    "Néoclassicisme, Postmodernisme": {
+      "count": 3,
+      "classes": [
+        "neoclassical",
+        "postmodernism"
+      ]
+    },
+    "Néoclassicisme, Néo-roman": {
+      "count": 6,
+      "classes": [
+        "neoclassical",
+        "historicist_neo"
+      ]
+    },
+    "Art nouveau, Néoclassicisme": {
+      "count": 9,
+      "classes": [
+        "art_nouveau",
+        "neoclassical"
+      ]
+    },
+    "Éclectisme tardif": {
+      "count": 181,
+      "classes": [
+        "eclecticism"
+      ]
+    },
+    "Louis-Philippe, Néoclassicisme": {
+      "count": 1,
+      "classes": [
+        "historicist_neo",
+        "neoclassical"
+      ]
+    },
+    "Second Empire, Néoclassicisme": {
+      "count": 1,
+      "classes": [
+        "second_empire",
+        "neoclassical"
+      ]
+    },
+    "Art Déco, Brutalisme": {
+      "count": 1,
+      "classes": [
+        "art_deco",
+        "brutalism"
+      ]
+    },
+    "Néoclassicisme, Baroque": {
+      "count": 1,
+      "classes": [
+        "neoclassical",
+        "baroque"
+      ]
+    },
+    "Éclectisme, Modernisme": {
+      "count": 24,
+      "classes": [
+        "eclecticism",
+        "modernism"
+      ]
+    },
+    "Éclectisme, Néoclassicisme, Baroque": {
+      "count": 2,
+      "classes": [
+        "eclecticism",
+        "neoclassical",
+        "baroque"
+      ]
+    },
+    "Éclectisme, Néoclassicisme, Art nouveau": {
+      "count": 9,
+      "classes": [
+        "eclecticism",
+        "neoclassical",
+        "art_nouveau"
+      ]
+    },
+    "Néoclassicisme, Empire": {
+      "count": 8,
+      "classes": [
+        "neoclassical",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Architecture pittoresque": {
+      "count": 10,
+      "classes": [
+        "eclecticism",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Second Empire": {
+      "count": 6,
+      "classes": [
+        "second_empire"
+      ]
+    },
+    "Néoclassicisme, Architecture traditionaliste": {
+      "count": 4,
+      "classes": [
+        "neoclassical",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Baroque, Rococo": {
+      "count": 1,
+      "classes": [
+        "baroque",
+        "historicist_neo"
+      ]
+    },
+    "Architecture traditionaliste, Néoclassicisme (du 18e siècle)": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "neoclassical"
+      ]
+    },
+    "Architecture traditionaliste, Néoclassicisme": {
+      "count": 2,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "neoclassical"
+      ]
+    },
+    "Art Déco, Néoclassicisme": {
+      "count": 13,
+      "classes": [
+        "art_deco",
+        "neoclassical"
+      ]
+    },
+    "Éclectisme, Empire": {
+      "count": 2,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Néo-baroque, Néogothique": {
+      "count": 3,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Néo-Renaissance, Néo-baroque, Éclectisme": {
+      "count": 1,
+      "classes": [
+        "historicist_neo",
+        "eclecticism"
+      ]
+    },
+    "Éclectisme, Art Déco, Architecture traditionaliste": {
+      "count": 2,
+      "classes": [
+        "eclecticism",
+        "art_deco",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Art Déco, Éclectisme": {
+      "count": 28,
+      "classes": [
+        "art_deco",
+        "eclecticism"
+      ]
+    },
+    "Éclectisme, Architecture traditionaliste": {
+      "count": 2,
+      "classes": [
+        "eclecticism",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Néoclassicisme, Louis-Philippe": {
+      "count": 5,
+      "classes": [
+        "neoclassical",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Néoclassicisme, Néo-Renaissance": {
+      "count": 3,
+      "classes": [
+        "eclecticism",
+        "neoclassical",
+        "historicist_neo"
+      ]
+    },
+    "Louis-Philippe": {
+      "count": 7,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Postmodernisme, Rococo": {
+      "count": 8,
+      "classes": [
+        "postmodernism",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Néogothique, Néo-Renaissance flamande": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Néo-Renaissance, Néo-baroque": {
+      "count": 5,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Modernisme, Fonctionnalisme": {
+      "count": 4,
+      "classes": [
+        "modernism",
+        "functionalism"
+      ]
+    },
+    "Pré-modernisme": {
+      "count": 4,
+      "classes": [
+        "modernism_other"
+      ]
+    },
+    "Modernisme, Paquebot, Art Déco": {
+      "count": 1,
+      "classes": [
+        "modernism",
+        "paquebot",
+        "art_deco"
+      ]
+    },
+    "Architecture traditionaliste, Baroque": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "baroque"
+      ]
+    },
+    "Rococo, Régence": {
+      "count": 1,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Baroque, Architecture traditionaliste, Néoclassicisme": {
+      "count": 1,
+      "classes": [
+        "baroque",
+        "descriptor (non-period; excluded from positive labels)",
+        "neoclassical"
+      ]
+    },
+    "Modernisme, Art Déco": {
+      "count": 48,
+      "classes": [
+        "modernism",
+        "art_deco"
+      ]
+    },
+    "Architecture traditionaliste, Néoclassicisme, Néo-baroque": {
+      "count": 2,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "neoclassical",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Néo-roman, Néogothique": {
+      "count": 2,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Néoclassicisme, Art nouveau, Modernisme": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "neoclassical",
+        "art_nouveau",
+        "modernism"
+      ]
+    },
+    "Art Déco, Éclectisme, Modernisme": {
+      "count": 1,
+      "classes": [
+        "art_deco",
+        "eclecticism",
+        "modernism"
+      ]
+    },
+    "Néoclassicisme, Fonctionnalisme": {
+      "count": 2,
+      "classes": [
+        "neoclassical",
+        "functionalism"
+      ]
+    },
+    "Néoclassicisme, Architecture traditionnelle, Architecture d'intégration": {
+      "count": 1,
+      "classes": [
+        "neoclassical",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Architecture d'intégration, Architecture traditionnelle, Néoclassicisme": {
+      "count": 5,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "neoclassical"
+      ]
+    },
+    "Architecture traditionnelle, Rococo, Art Déco": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "historicist_neo",
+        "art_deco"
+      ]
+    },
+    "Néo-Renaissance, Néoclassicisme": {
+      "count": 7,
+      "classes": [
+        "historicist_neo",
+        "neoclassical"
+      ]
+    },
+    "Éclectisme, Néogothique, Néo-Renaissance, Néoclassicisme, Art nouveau": {
+      "count": 2,
+      "classes": [
+        "eclecticism",
+        "historicist_neo",
+        "neoclassical",
+        "art_nouveau"
+      ]
+    },
+    "Éclectisme, Classicisme moderne": {
+      "count": 3,
+      "classes": [
+        "eclecticism",
+        "modernism_other"
+      ]
+    },
+    "Éclectisme, Rococo": {
+      "count": 3,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Architecture traditionnelle, Néoclassicisme, Architecture d'intégration": {
+      "count": 2,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "neoclassical"
+      ]
+    },
+    "Art Déco, Modernisme": {
+      "count": 33,
+      "classes": [
+        "art_deco",
+        "modernism"
+      ]
+    },
+    "Néoclassicisme, Néoclassicisme (du 18e siècle)": {
+      "count": 2,
+      "classes": [
+        "neoclassical"
+      ]
+    },
+    "Néogothique": {
+      "count": 102,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Néoclassicisme, Néo-Renaissance": {
+      "count": 3,
+      "classes": [
+        "neoclassical",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Néo-Renaissance, Beaux-Arts, Modernisme": {
+      "count": 4,
+      "classes": [
+        "eclecticism",
+        "historicist_neo",
+        "beaux_arts",
+        "modernism"
+      ]
+    },
+    "Architecture pittoresque, Néo-Renaissance flamande": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "historicist_neo"
+      ]
+    },
+    "Néo-baroque, Beaux-Arts": {
+      "count": 1,
+      "classes": [
+        "historicist_neo",
+        "beaux_arts"
+      ]
+    },
+    "Baroque classicisant, Régence": {
+      "count": 1,
+      "classes": [
+        "baroque_classical",
+        "historicist_neo"
+      ]
+    },
+    "Baroque, Néo-baroque": {
+      "count": 1,
+      "classes": [
+        "baroque",
+        "historicist_neo"
+      ]
+    },
+    "Architecture d'intégration, Baroque": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "baroque"
+      ]
+    },
+    "Néoclassicisme (du 18e siècle), Architecture d'intégration, Architecture traditionnelle": {
+      "count": 1,
+      "classes": [
+        "neoclassical",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Architecture traditionnelle, Néoclassicisme (du 18e siècle), Néoclassicisme": {
+      "count": 2,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "neoclassical"
+      ]
+    },
+    "Néo-Renaissance, Éclectisme": {
+      "count": 8,
+      "classes": [
+        "historicist_neo",
+        "eclecticism"
+      ]
+    },
+    "Beaux-Arts, Néo-Renaissance flamande": {
+      "count": 16,
+      "classes": [
+        "beaux_arts",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Néogothique, Art nouveau": {
+      "count": 4,
+      "classes": [
+        "eclecticism",
+        "historicist_neo",
+        "art_nouveau"
+      ]
+    },
+    "Éclectisme, Néo-égyptien": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Néogothique, Art nouveau": {
+      "count": 3,
+      "classes": [
+        "historicist_neo",
+        "art_nouveau"
+      ]
+    },
+    "Architecture high-tech": {
+      "count": 11,
+      "classes": [
+        "contemporary"
+      ]
+    },
+    "Paquebot": {
+      "count": 11,
+      "classes": [
+        "paquebot"
+      ]
+    },
+    "Architecture pittoresque": {
+      "count": 474,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Beaux-Arts, Mauresque": {
+      "count": 1,
+      "classes": [
+        "beaux_arts",
+        "historicist_neo"
+      ]
+    },
+    "Art nouveau, Néogothique": {
+      "count": 1,
+      "classes": [
+        "art_nouveau",
+        "historicist_neo"
+      ]
+    },
+    "Architecture régionaliste, Architecture pittoresque": {
+      "count": 8,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Architecture régionaliste, Néo-Renaissance flamande, Architecture pittoresque": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "historicist_neo"
+      ]
+    },
+    "Beaux-Arts, Néo-Renaissance": {
+      "count": 2,
+      "classes": [
+        "beaux_arts",
+        "historicist_neo"
+      ]
+    },
+    "Art Déco, Beaux-Arts": {
+      "count": 22,
+      "classes": [
+        "art_deco",
+        "beaux_arts"
+      ]
+    },
+    "Éclectisme, Sécession viennoise": {
+      "count": 7,
+      "classes": [
+        "eclecticism",
+        "art_nouveau"
+      ]
+    },
+    "Architecture pittoresque, Architecture régionaliste": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Modernisme, Éclectisme": {
+      "count": 1,
+      "classes": [
+        "modernism",
+        "eclecticism"
+      ]
+    },
+    "Architecture régionaliste, Néo-Renaissance flamande": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "historicist_neo"
+      ]
+    },
+    "Beaux-Arts, Sécession viennoise": {
+      "count": 2,
+      "classes": [
+        "beaux_arts",
+        "art_nouveau"
+      ]
+    },
+    "Néo-baroque, Architecture traditionaliste, Beaux-Arts": {
+      "count": 1,
+      "classes": [
+        "historicist_neo",
+        "descriptor (non-period; excluded from positive labels)",
+        "beaux_arts"
+      ]
+    },
+    "Architecture high-tech, Néoclassicisme": {
+      "count": 1,
+      "classes": [
+        "contemporary",
+        "neoclassical"
+      ]
+    },
+    "Brutalisme, Modernisme": {
+      "count": 2,
+      "classes": [
+        "brutalism",
+        "modernism"
+      ]
+    },
+    "Modernisme, Néoclassicisme": {
+      "count": 11,
+      "classes": [
+        "modernism",
+        "neoclassical"
+      ]
+    },
+    "Art Déco, Paquebot": {
+      "count": 16,
+      "classes": [
+        "art_deco",
+        "paquebot"
+      ]
+    },
+    "Éclectisme, Gothique": {
+      "count": 7,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Art Déco, Classicisme moderne, Modernisme, Architecture high-tech": {
+      "count": 1,
+      "classes": [
+        "art_deco",
+        "modernism_other",
+        "modernism",
+        "contemporary"
+      ]
+    },
+    "Beaux-Arts, Art Déco": {
+      "count": 50,
+      "classes": [
+        "beaux_arts",
+        "art_deco"
+      ]
+    },
+    "Art Déco, Architecture régionaliste": {
+      "count": 11,
+      "classes": [
+        "art_deco",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Architecture pittoresque, Art nouveau": {
+      "count": 7,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "art_nouveau"
+      ]
+    },
+    "Éclectisme, Architecture pittoresque, Néogothique, Néo-Renaissance, Néo-Renaissance flamande": {
+      "count": 13,
+      "classes": [
+        "eclecticism",
+        "descriptor (non-period; excluded from positive labels)",
+        "historicist_neo"
+      ]
+    },
+    "Architecture régionaliste, Éclectisme": {
+      "count": 38,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "eclecticism"
+      ]
+    },
+    "Néoclassicisme, Néo-Renaissance flamande": {
+      "count": 5,
+      "classes": [
+        "neoclassical",
+        "historicist_neo"
+      ]
+    },
+    "Architecture régionaliste, Art Déco": {
+      "count": 3,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "art_deco"
+      ]
+    },
+    "Éclectisme, Mauresque": {
+      "count": 2,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Beaux-Arts, Néo-Renaissance flamande": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "beaux_arts",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Beaux-Arts, Architecture régionaliste": {
+      "count": 15,
+      "classes": [
+        "eclecticism",
+        "beaux_arts",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Néogothique, Modernisme, Art Déco": {
+      "count": 3,
+      "classes": [
+        "historicist_neo",
+        "modernism",
+        "art_deco"
+      ]
+    },
+    "Modernisme, Art Déco, Paquebot": {
+      "count": 1,
+      "classes": [
+        "modernism",
+        "art_deco",
+        "paquebot"
+      ]
+    },
+    "Modernisme, Beaux-Arts": {
+      "count": 1,
+      "classes": [
+        "modernism",
+        "beaux_arts"
+      ]
+    },
+    "Néo-roman, Art Déco": {
+      "count": 6,
+      "classes": [
+        "historicist_neo",
+        "art_deco"
+      ]
+    },
+    "Éclectisme tardif, Art Déco": {
+      "count": 39,
+      "classes": [
+        "eclecticism",
+        "art_deco"
+      ]
+    },
+    "Art Déco, Néo-baroque": {
+      "count": 1,
+      "classes": [
+        "art_deco",
+        "historicist_neo"
+      ]
+    },
+    "Néo-roman, Modernisme": {
+      "count": 1,
+      "classes": [
+        "historicist_neo",
+        "modernism"
+      ]
+    },
+    "Postmodernisme, Modernisme": {
+      "count": 4,
+      "classes": [
+        "postmodernism",
+        "modernism"
+      ]
+    },
+    "Éclectisme, Néoclassicisme, Modernisme, Brutalisme": {
+      "count": 3,
+      "classes": [
+        "eclecticism",
+        "neoclassical",
+        "modernism",
+        "brutalism"
+      ]
+    },
+    "Néoclassicisme, Éclectisme, Beaux-Arts": {
+      "count": 2,
+      "classes": [
+        "neoclassical",
+        "eclecticism",
+        "beaux_arts"
+      ]
+    },
+    "Éclectisme, Architecture pittoresque, Art nouveau": {
+      "count": 15,
+      "classes": [
+        "eclecticism",
+        "descriptor (non-period; excluded from positive labels)",
+        "art_nouveau"
+      ]
+    },
+    "Art Déco, Architecture pittoresque": {
+      "count": 30,
+      "classes": [
+        "art_deco",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Beaux-Arts, Art Déco, Architecture pittoresque": {
+      "count": 6,
+      "classes": [
+        "beaux_arts",
+        "art_deco",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Paquebot, Modernisme": {
+      "count": 2,
+      "classes": [
+        "paquebot",
+        "modernism"
+      ]
+    },
+    "Éclectisme, Architecture régionaliste": {
+      "count": 20,
+      "classes": [
+        "eclecticism",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Éclectisme, Baroque, Beaux-Arts": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "baroque",
+        "beaux_arts"
+      ]
+    },
+    "Architecture pittoresque, Éclectisme": {
+      "count": 7,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "eclecticism"
+      ]
+    },
+    "Néoclassicisme, Architecture pittoresque": {
+      "count": 2,
+      "classes": [
+        "neoclassical",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Néo-Renaissance flamande, Beaux-Arts": {
+      "count": 4,
+      "classes": [
+        "historicist_neo",
+        "beaux_arts"
+      ]
+    },
+    "Éclectisme tardif, Gothique": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Modernisme, Art Déco, Art nouveau": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "modernism",
+        "art_deco",
+        "art_nouveau"
+      ]
+    },
+    "Architecture rurale, Néoclassicisme": {
+      "count": 2,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "neoclassical"
+      ]
+    },
+    "École d'Amsterdam, Architecture pittoresque": {
+      "count": 166,
+      "classes": [
+        "modernism_other",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Art Déco, Postmodernisme, Modernisme": {
+      "count": 6,
+      "classes": [
+        "art_deco",
+        "postmodernism",
+        "modernism"
+      ]
+    },
+    "Éclectisme, Néogothique, Néo-Renaissance": {
+      "count": 2,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Baroque": {
+      "count": 5,
+      "classes": [
+        "eclecticism",
+        "baroque"
+      ]
+    },
+    "Beaux-Arts, Néo-baroque": {
+      "count": 11,
+      "classes": [
+        "beaux_arts",
+        "historicist_neo"
+      ]
+    },
+    "Néo-Renaissance, Éclectisme, Néoclassicisme": {
+      "count": 4,
+      "classes": [
+        "historicist_neo",
+        "eclecticism",
+        "neoclassical"
+      ]
+    },
+    "Éclectisme, Néo-Renaissance flamande, Néogothique": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Beaux-Arts, Rococo": {
+      "count": 1,
+      "classes": [
+        "beaux_arts",
+        "historicist_neo"
+      ]
+    },
+    "Art Déco, Néo-roman": {
+      "count": 3,
+      "classes": [
+        "art_deco",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Art nouveau, Art Déco": {
+      "count": 7,
+      "classes": [
+        "eclecticism",
+        "art_nouveau",
+        "art_deco"
+      ]
+    },
+    "Éclectisme, Néogothique, Néo-baroque": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Architecture rurale, Architecture pittoresque": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Architecture pittoresque, Art Déco": {
+      "count": 22,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "art_deco"
+      ]
+    },
+    "Architecture pittoresque, Beaux-Arts": {
+      "count": 5,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "beaux_arts"
+      ]
+    },
+    "Éclectisme, Art Déco, Néoclassicisme": {
+      "count": 4,
+      "classes": [
+        "eclecticism",
+        "art_deco",
+        "neoclassical"
+      ]
+    },
+    "Néoclassicisme, Architecture rurale": {
+      "count": 3,
+      "classes": [
+        "neoclassical",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Architecture rurale": {
+      "count": 163,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Néogothique, Éclectisme, Néo-roman": {
+      "count": 1,
+      "classes": [
+        "historicist_neo",
+        "eclecticism"
+      ]
+    },
+    "Art Déco, École d'Amsterdam": {
+      "count": 14,
+      "classes": [
+        "art_deco",
+        "modernism_other"
+      ]
+    },
+    "Éclectisme, Art nouveau, Néo-Renaissance flamande": {
+      "count": 3,
+      "classes": [
+        "eclecticism",
+        "art_nouveau",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Beaux-Arts, Art Déco": {
+      "count": 5,
+      "classes": [
+        "eclecticism",
+        "beaux_arts",
+        "art_deco"
+      ]
+    },
+    "Art nouveau, Architecture pittoresque": {
+      "count": 1,
+      "classes": [
+        "art_nouveau",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Néo-Renaissance flamande, Éclectisme": {
+      "count": 37,
+      "classes": [
+        "historicist_neo",
+        "eclecticism"
+      ]
+    },
+    "Art Déco, Néogothique": {
+      "count": 3,
+      "classes": [
+        "art_deco",
+        "historicist_neo"
+      ]
+    },
+    "Néogothique, Néo-roman": {
+      "count": 2,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Néoclassicisme, Néo-baroque": {
+      "count": 1,
+      "classes": [
+        "neoclassical",
+        "historicist_neo"
+      ]
+    },
+    "Néogothique, Éclectisme": {
+      "count": 15,
+      "classes": [
+        "historicist_neo",
+        "eclecticism"
+      ]
+    },
+    "Néo-Renaissance, Beaux-Arts, Éclectisme": {
+      "count": 4,
+      "classes": [
+        "historicist_neo",
+        "beaux_arts",
+        "eclecticism"
+      ]
+    },
+    "Néo-Renaissance, Néogothique": {
+      "count": 4,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Beaux-Arts, Art nouveau": {
+      "count": 5,
+      "classes": [
+        "eclecticism",
+        "beaux_arts",
+        "art_nouveau"
+      ]
+    },
+    "Néogothique, Art Déco": {
+      "count": 2,
+      "classes": [
+        "historicist_neo",
+        "art_deco"
+      ]
+    },
+    "Art nouveau, Éclectisme tardif": {
+      "count": 5,
+      "classes": [
+        "art_nouveau",
+        "eclecticism"
+      ]
+    },
+    "Beaux-Arts, Architecture pittoresque": {
+      "count": 3,
+      "classes": [
+        "beaux_arts",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Éclectisme, Néo-baroque, Beaux-Arts": {
+      "count": 2,
+      "classes": [
+        "eclecticism",
+        "historicist_neo",
+        "beaux_arts"
+      ]
+    },
+    "Éclectisme, Néo-Renaissance flamande, Architecture pittoresque": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "historicist_neo",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Néo-égyptien": {
+      "count": 1,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Beaux-Arts, Néoclassicisme": {
+      "count": 21,
+      "classes": [
+        "beaux_arts",
+        "neoclassical"
+      ]
+    },
+    "École d'Amsterdam": {
+      "count": 8,
+      "classes": [
+        "modernism_other"
+      ]
+    },
+    "Art nouveau, Architecture pittoresque, Éclectisme": {
+      "count": 4,
+      "classes": [
+        "art_nouveau",
+        "descriptor (non-period; excluded from positive labels)",
+        "eclecticism"
+      ]
+    },
+    "Modernisme, Architecture régionaliste": {
+      "count": 1,
+      "classes": [
+        "modernism",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Néogothique, Néo-Renaissance flamande": {
+      "count": 1,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Néogothique, Néoclassicisme": {
+      "count": 6,
+      "classes": [
+        "eclecticism",
+        "historicist_neo",
+        "neoclassical"
+      ]
+    },
+    "Néo-Renaissance flamande, Postmodernisme": {
+      "count": 3,
+      "classes": [
+        "historicist_neo",
+        "postmodernism"
+      ]
+    },
+    "Néo-Renaissance flamande, Néogothique, Éclectisme": {
+      "count": 3,
+      "classes": [
+        "historicist_neo",
+        "eclecticism"
+      ]
+    },
+    "Art Déco, Art nouveau, Éclectisme": {
+      "count": 1,
+      "classes": [
+        "art_deco",
+        "art_nouveau",
+        "eclecticism"
+      ]
+    },
+    "Modernisme, Architecture high-tech": {
+      "count": 1,
+      "classes": [
+        "modernism",
+        "contemporary"
+      ]
+    },
+    "Architecture high-tech, Modernisme": {
+      "count": 1,
+      "classes": [
+        "contemporary",
+        "modernism"
+      ]
+    },
+    "Éclectisme, Néoclassicisme, Néogothique": {
+      "count": 3,
+      "classes": [
+        "eclecticism",
+        "neoclassical",
+        "historicist_neo"
+      ]
+    },
+    "Art Déco, Architecture traditionaliste": {
+      "count": 25,
+      "classes": [
+        "art_deco",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Néogothique, Néo-Renaissance": {
+      "count": 2,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Néogothique, Modernisme": {
+      "count": 4,
+      "classes": [
+        "historicist_neo",
+        "modernism"
+      ]
+    },
+    "Classicisme moderne, Modernisme": {
+      "count": 1,
+      "classes": [
+        "modernism_other",
+        "modernism"
+      ]
+    },
+    "Architecture traditionaliste, Néogothique": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "historicist_neo"
+      ]
+    },
+    "Architecture traditionaliste, Art Déco": {
+      "count": 2,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "art_deco"
+      ]
+    },
+    "Éclectisme, Architecture d'intégration": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Sécession viennoise": {
+      "count": 5,
+      "classes": [
+        "art_nouveau"
+      ]
+    },
+    "Néo-Renaissance flamande, Éclectisme, Néogothique": {
+      "count": 2,
+      "classes": [
+        "historicist_neo",
+        "eclecticism"
+      ]
+    },
+    "Modernisme, Éclectisme, Mauresque": {
+      "count": 1,
+      "classes": [
+        "modernism",
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Classicisme moderne, Architecture traditionaliste": {
+      "count": 2,
+      "classes": [
+        "modernism_other",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Éclectisme, Néoclassicisme, Beaux-Arts": {
+      "count": 5,
+      "classes": [
+        "eclecticism",
+        "neoclassical",
+        "beaux_arts"
+      ]
+    },
+    "Beaux-Arts, Modernisme": {
+      "count": 6,
+      "classes": [
+        "beaux_arts",
+        "modernism"
+      ]
+    },
+    "Éclectisme, Classicisme moderne, Art Déco, Modernisme": {
+      "count": 3,
+      "classes": [
+        "eclecticism",
+        "modernism_other",
+        "art_deco",
+        "modernism"
+      ]
+    },
+    "Art nouveau, Éclectisme, Beaux-Arts": {
+      "count": 3,
+      "classes": [
+        "art_nouveau",
+        "eclecticism",
+        "beaux_arts"
+      ]
+    },
+    "Beaux-Arts, Nieuwe eenvoud": {
+      "count": 1,
+      "classes": [
+        "beaux_arts",
+        "modernism_other"
+      ]
+    },
+    "Architecture traditionaliste, Néo-Renaissance flamande": {
+      "count": 3,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "historicist_neo"
+      ]
+    },
+    "Architecture traditionaliste, Néo-baroque": {
+      "count": 4,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "historicist_neo"
+      ]
+    },
+    "Architecture traditionaliste, Néo-Renaissance": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "historicist_neo"
+      ]
+    },
+    "Roman": {
+      "count": 1,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Fonctionnalisme": {
+      "count": 3,
+      "classes": [
+        "eclecticism",
+        "functionalism"
+      ]
+    },
+    "Beaux-Arts, Classicisme moderne": {
+      "count": 1,
+      "classes": [
+        "beaux_arts",
+        "modernism_other"
+      ]
+    },
+    "Architecture régionaliste, Historicisme": {
+      "count": 2,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "historicist_neo"
+      ]
+    },
+    "Beaux-Arts, Éclectisme tardif": {
+      "count": 2,
+      "classes": [
+        "beaux_arts",
+        "eclecticism"
+      ]
+    },
+    "Classicisme moderne, Architecture régionaliste": {
+      "count": 2,
+      "classes": [
+        "modernism_other",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Postmodernisme, Néoclassicisme, Éclectisme, Beaux-Arts, Art nouveau": {
+      "count": 3,
+      "classes": [
+        "postmodernism",
+        "neoclassical",
+        "eclecticism",
+        "beaux_arts",
+        "art_nouveau"
+      ]
+    },
+    "Éclectisme, Néo-baroque, Néoclassicisme, Beaux-Arts": {
+      "count": 7,
+      "classes": [
+        "eclecticism",
+        "historicist_neo",
+        "neoclassical",
+        "beaux_arts"
+      ]
+    },
+    "Néo-Renaissance flamande, Néo-Renaissance": {
+      "count": 2,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Art nouveau, Beaux-Arts, Classicisme moderne": {
+      "count": 1,
+      "classes": [
+        "art_nouveau",
+        "beaux_arts",
+        "modernism_other"
+      ]
+    },
+    "Postmodernisme, Fonctionnalisme": {
+      "count": 2,
+      "classes": [
+        "postmodernism",
+        "functionalism"
+      ]
+    },
+    "Art Déco, Éclectisme, Néoclassicisme": {
+      "count": 2,
+      "classes": [
+        "art_deco",
+        "eclecticism",
+        "neoclassical"
+      ]
+    },
+    "Architecture pittoresque, Éclectisme, Modernisme, Néoclassicisme, Néo-Renaissance flamande, Postmodernisme": {
+      "count": 2,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "eclecticism",
+        "modernism",
+        "neoclassical",
+        "historicist_neo",
+        "postmodernism"
+      ]
+    },
+    "Éclectisme, Néo-Renaissance, Empire": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme, Néo-Renaissance, Art nouveau": {
+      "count": 2,
+      "classes": [
+        "eclecticism",
+        "historicist_neo",
+        "art_nouveau"
+      ]
+    },
+    "Éclectisme, Néoclassicisme, Modernisme": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "neoclassical",
+        "modernism"
+      ]
+    },
+    "Postmodernisme, Éclectisme": {
+      "count": 3,
+      "classes": [
+        "postmodernism",
+        "eclecticism"
+      ]
+    },
+    "Néo-Renaissance, Néoclassicisme, Éclectisme": {
+      "count": 1,
+      "classes": [
+        "historicist_neo",
+        "neoclassical",
+        "eclecticism"
+      ]
+    },
+    "Art Déco, Éclectisme, Modernisme, Néogothique": {
+      "count": 1,
+      "classes": [
+        "art_deco",
+        "eclecticism",
+        "modernism",
+        "historicist_neo"
+      ]
+    },
+    "Art nouveau, Beaux-Arts": {
+      "count": 5,
+      "classes": [
+        "art_nouveau",
+        "beaux_arts"
+      ]
+    },
+    "Modernisme, Postmodernisme": {
+      "count": 3,
+      "classes": [
+        "modernism",
+        "postmodernism"
+      ]
+    },
+    "Éclectisme, Historicisme": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Art nouveau, Néo-Renaissance flamande": {
+      "count": 1,
+      "classes": [
+        "art_nouveau",
+        "historicist_neo"
+      ]
+    },
+    "Art nouveau, Éclectisme, Néoclassicisme": {
+      "count": 3,
+      "classes": [
+        "art_nouveau",
+        "eclecticism",
+        "neoclassical"
+      ]
+    },
+    "Art Déco, Fonctionnalisme": {
+      "count": 3,
+      "classes": [
+        "art_deco",
+        "functionalism"
+      ]
+    },
+    "Éclectisme, Modernisme, Néoclassicisme": {
+      "count": 4,
+      "classes": [
+        "eclecticism",
+        "modernism",
+        "neoclassical"
+      ]
+    },
+    "Art Déco, Éclectisme tardif": {
+      "count": 1,
+      "classes": [
+        "art_deco",
+        "eclecticism"
+      ]
+    },
+    "Néo-baroque, École d'Amsterdam": {
+      "count": 1,
+      "classes": [
+        "historicist_neo",
+        "modernism_other"
+      ]
+    },
+    "Éclectisme, Néo-Renaissance flamande, Art nouveau": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "historicist_neo",
+        "art_nouveau"
+      ]
+    },
+    "Art Déco, Architecture traditionaliste, Éclectisme": {
+      "count": 7,
+      "classes": [
+        "art_deco",
+        "descriptor (non-period; excluded from positive labels)",
+        "eclecticism"
+      ]
+    },
+    "Architecture traditionaliste, Architecture pittoresque": {
+      "count": 2,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Architecture pittoresque, Éclectisme tardif": {
+      "count": 6,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "eclecticism"
+      ]
+    },
+    "Éclectisme tardif, Architecture pittoresque": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Néo-Renaissance flamande, Modernisme": {
+      "count": 4,
+      "classes": [
+        "historicist_neo",
+        "modernism"
+      ]
+    },
+    "Éclectisme tardif, Beaux-Arts": {
+      "count": 16,
+      "classes": [
+        "eclecticism",
+        "beaux_arts"
+      ]
+    },
+    "Baroque, Architecture traditionaliste": {
+      "count": 1,
+      "classes": [
+        "baroque",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Architecture d'intégration, Postmodernisme": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "postmodernism"
+      ]
+    },
+    "Architecture traditionaliste, Néo-roman": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "historicist_neo"
+      ]
+    },
+    "Architecture pittoresque, Sécession viennoise": {
+      "count": 2,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)",
+        "art_nouveau"
+      ]
+    },
+    "Éclectisme tardif, Art nouveau": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "art_nouveau"
+      ]
+    },
+    "Éclectisme, Art nouveau, Néogothique": {
+      "count": 2,
+      "classes": [
+        "eclecticism",
+        "art_nouveau",
+        "historicist_neo"
+      ]
+    },
+    "Éclectisme tardif, Architecture d'intégration": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Éclectisme tardif, Beaux-Arts, Art Déco": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "beaux_arts",
+        "art_deco"
+      ]
+    },
+    "Art Déco, Sécession viennoise": {
+      "count": 1,
+      "classes": [
+        "art_deco",
+        "art_nouveau"
+      ]
+    },
+    "Éclectisme tardif, Néo-Renaissance flamande": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Beaux-Arts, Néo-roman": {
+      "count": 3,
+      "classes": [
+        "beaux_arts",
+        "historicist_neo"
+      ]
+    },
+    "Art Déco, Classicisme moderne": {
+      "count": 1,
+      "classes": [
+        "art_deco",
+        "modernism_other"
+      ]
+    },
+    "Néogothique, Néoclassicisme": {
+      "count": 2,
+      "classes": [
+        "historicist_neo",
+        "neoclassical"
+      ]
+    },
+    "Beaux-Arts, Éclectisme, Art nouveau": {
+      "count": 1,
+      "classes": [
+        "beaux_arts",
+        "eclecticism",
+        "art_nouveau"
+      ]
+    },
+    "Éclectisme, Néoclassicisme (du 18e siècle)": {
+      "count": 3,
+      "classes": [
+        "eclecticism",
+        "neoclassical"
+      ]
+    },
+    "Néo-Renaissance flamande, Art nouveau": {
+      "count": 2,
+      "classes": [
+        "historicist_neo",
+        "art_nouveau"
+      ]
+    },
+    "Néo-Renaissance flamande, Éclectisme, Néoclassicisme": {
+      "count": 2,
+      "classes": [
+        "historicist_neo",
+        "eclecticism",
+        "neoclassical"
+      ]
+    },
+    "Néoclassicisme, Éclectisme, Modernisme": {
+      "count": 2,
+      "classes": [
+        "neoclassical",
+        "eclecticism",
+        "modernism"
+      ]
+    },
+    "Néo-Renaissance flamande, Néoclassicisme, Art nouveau": {
+      "count": 2,
+      "classes": [
+        "historicist_neo",
+        "neoclassical",
+        "art_nouveau"
+      ]
+    },
+    "Éclectisme, Néo-baroque, Néo-Renaissance flamande": {
+      "count": 2,
+      "classes": [
+        "eclecticism",
+        "historicist_neo"
+      ]
+    },
+    "Modernisme, Éclectisme, Néoclassicisme": {
+      "count": 4,
+      "classes": [
+        "modernism",
+        "eclecticism",
+        "neoclassical"
+      ]
+    },
+    "Postmodernisme, Architecture régionaliste": {
+      "count": 1,
+      "classes": [
+        "postmodernism",
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    },
+    "Modernisme, Brutalisme": {
+      "count": 1,
+      "classes": [
+        "modernism",
+        "brutalism"
+      ]
+    },
+    "Art nouveau, Néoclassicisme (du 18e siècle)": {
+      "count": 1,
+      "classes": [
+        "art_nouveau",
+        "neoclassical"
+      ]
+    },
+    "Éclectisme, Modernisme, Brutalisme": {
+      "count": 1,
+      "classes": [
+        "eclecticism",
+        "modernism",
+        "brutalism"
+      ]
+    },
+    "Mauresque": {
+      "count": 1,
+      "classes": [
+        "historicist_neo"
+      ]
+    },
+    "Nieuwe eenvoud": {
+      "count": 10,
+      "classes": [
+        "modernism_other"
+      ]
+    },
+    "Architecture d'intégration, Architecture rurale": {
+      "count": 1,
+      "classes": [
+        "descriptor (non-period; excluded from positive labels)"
+      ]
+    }
+  }
+}

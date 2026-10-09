@@ -69,6 +69,20 @@ def require_blank(path: Path, fields: tuple[str, ...]) -> None:
         raise AssertionError(f"reset left completed review fields in {path}")
 
 
+def expected_counts_after_first_row(data_dir: Path) -> dict[str, int]:
+    """Completed-record counts after update_first_row touches the first worksheet row.
+
+    The first-row update overwrites existing completed rows, so a channel that already
+    has completed rows keeps its committed count; a blank channel gains exactly one.
+    """
+    channels = (
+        ("image", "three-ages-image-reviews.json"),
+        ("structural", "three-ages-structural-reviews.json"),
+        ("register", "three-ages-register-reviews.json"),
+    )
+    return {key: (record_count(data_dir / name) or 1) for key, name in channels}
+
+
 def main() -> None:
     with tempfile.TemporaryDirectory() as temporary:
         temp = Path(temporary)
@@ -96,12 +110,13 @@ def main() -> None:
         })
 
         run(str(ROOT / "three-ages" / "export_pilot.py"), "--data-dir", str(ages))
-        expected_completed = (
-            ages / "three-ages-image-reviews.json",
-            ages / "three-ages-structural-reviews.json",
-            ages / "three-ages-register-reviews.json",
-        )
-        if any(record_count(path) != 1 for path in expected_completed):
+        expected_completed = expected_counts_after_first_row(ages)
+        completed_paths = {
+            "image": ages / "three-ages-image-reviews.json",
+            "structural": ages / "three-ages-structural-reviews.json",
+            "register": ages / "three-ages-register-reviews.json",
+        }
+        if any(record_count(completed_paths[key]) != expected for key, expected in expected_completed.items()):
             raise AssertionError("ordinary regeneration did not preserve every completed Three Ages review")
 
         review_outputs = (
@@ -161,7 +176,7 @@ def main() -> None:
             for path, mutable_fields in reset_contracts
         }
         run(str(ROOT / "three-ages" / "export_pilot.py"), "--data-dir", str(ages), "--reset-reviews")
-        if any(record_count(path) != 0 for path in expected_completed):
+        if any(record_count(path) != 0 for path in completed_paths.values()):
             raise AssertionError("explicit reset left a compiled completed review")
 
         for path, mutable_fields in reset_contracts:
@@ -208,13 +223,15 @@ def main() -> None:
                 raise AssertionError(f"multiline worksheet parsed {len(rows)} rows, expected {expected}: {worksheet.name}")
             if rows[0][field] != multiline:
                 raise AssertionError(f"multiline review was not preserved in {worksheet.name}")
-        for compiled in (
-            around / "three-ages-image-reviews.json",
-            around / "three-ages-structural-reviews.json",
-            around / "three-ages-register-reviews.json",
-        ):
+        expected_regression_counts = expected_counts_after_first_row(around)
+        regression_paths = {
+            "image": around / "three-ages-image-reviews.json",
+            "structural": around / "three-ages-structural-reviews.json",
+            "register": around / "three-ages-register-reviews.json",
+        }
+        for key, compiled in regression_paths.items():
             payload = json.loads(compiled.read_text(encoding="utf-8"))
-            if payload["record_count"] != 1:
+            if payload["record_count"] != expected_regression_counts[key]:
                 raise AssertionError(f"multiline review was not compiled in {compiled.name}")
             if all(multiline not in str(value) for record in payload["records"] for value in record.values()):
                 raise AssertionError(f"multiline review text is missing from {compiled.name}")
