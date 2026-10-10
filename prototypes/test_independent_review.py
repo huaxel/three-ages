@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests for blinded facade and structural second-annotator handoffs."""
+"""Tests for blind pilot and scaled-corpus second-annotator handoffs."""
 from __future__ import annotations
 
 import csv
@@ -9,7 +9,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "three-ages"))
 from export_independent_review import (
-    IMAGE_EVIDENCE, IMAGE_REVIEW, STRUCTURAL_EVIDENCE, STRUCTURAL_REVIEW, export,
+    BALAT_EVIDENCE, COMMONS_EVIDENCE, IMAGE_EVIDENCE, IMAGE_REVIEW,
+    PHOTO_REVIEW, STRUCTURAL_EVIDENCE, STRUCTURAL_REVIEW, export,
 )
 
 
@@ -34,12 +35,7 @@ def main() -> None:
             "structural_observation", "reviewer", "reviewed_at", "confidence",
         )
         image = {field: f"evidence:{field}" for field in IMAGE_EVIDENCE}
-        image.update({
-            "asset_id": "photo-1", "annotation_status": "reviewed image annotation",
-            "identity_note": "PRIMARY SECRET", "facade_observation": "PRIMARY SECRET",
-            "structural_observation": "PRIMARY SECRET", "reviewer": "primary",
-            "reviewed_at": "2026-01-01", "confidence": "high",
-        })
+        image.update({"asset_id": "photo-1", "annotation_status": "reviewed image annotation", "identity_note": "PRIMARY SECRET", "facade_observation": "PRIMARY SECRET", "structural_observation": "PRIMARY SECRET", "reviewer": "primary", "reviewed_at": "2026-01-01", "confidence": "high"})
         write_csv(data / "three-ages-image-review.csv", image_fields, [image])
 
         structural_fields = STRUCTURAL_EVIDENCE + (
@@ -48,41 +44,43 @@ def main() -> None:
             "structural_observation", "reviewer", "reviewed_at", "confidence",
         )
         structural = {field: f"evidence:{field}" for field in STRUCTURAL_EVIDENCE}
-        structural.update({
-            "comparison_id": "comparison-1", "annotation_status": "reviewed structural comparison",
-            "identity_note": "PRIMARY SECRET", "structural_observation": "PRIMARY SECRET",
-            "reviewer": "primary", "reviewed_at": "2026-01-01", "confidence": "high",
-        })
+        structural.update({"comparison_id": "comparison-1", "annotation_status": "reviewed structural comparison", "identity_note": "PRIMARY SECRET", "structural_observation": "PRIMARY SECRET", "reviewer": "primary", "reviewed_at": "2026-01-01", "confidence": "high"})
         write_csv(data / "three-ages-structural-review.csv", structural_fields, [structural])
 
-        image_output, structural_output = export(data)
+        scaled_paths = {}
+        for stem, evidence_fields in (("balat", BALAT_EVIDENCE), ("commons", COMMONS_EVIDENCE)):
+            source_fields = evidence_fields + ("facade_label", "facade_observation", "reviewer", "reviewed_at", "confidence", "annotation_status")
+            source = {field: f"evidence:{field}" for field in evidence_fields}
+            source.update({"photo_id": f"{stem}-photo", "facade_label": "PRIMARY SECRET", "facade_observation": "PRIMARY SECRET", "reviewer": "Primary", "reviewed_at": "2026-01-01", "confidence": "high", "annotation_status": "reviewed photo annotation"})
+            write_csv(data / f"{stem}-photo-review.csv", source_fields, [source])
+            scaled_paths[stem] = data / f"{stem}-independent-photo-review.csv"
+
+        image_output, structural_output, balat_output, commons_output = export(data)
         image_columns, image_rows = read_csv(image_output)
-        if image_columns != list(IMAGE_EVIDENCE + IMAGE_REVIEW):
-            raise AssertionError("independent image worksheet columns do not match blind schema")
-        if any(image_rows[0][field] for field in IMAGE_REVIEW):
-            raise AssertionError("independent image annotation fields should start blank")
-        if any("PRIMARY SECRET" in value for value in image_rows[0].values()):
-            raise AssertionError("primary image review leaked into independent worksheet")
-
+        if image_columns != list(IMAGE_EVIDENCE + IMAGE_REVIEW) or any(image_rows[0][field] for field in IMAGE_REVIEW):
+            raise AssertionError("independent image worksheet schema or blank fields are wrong")
         structural_columns, structural_rows = read_csv(structural_output)
-        if structural_columns != list(STRUCTURAL_EVIDENCE + STRUCTURAL_REVIEW):
-            raise AssertionError("independent structural worksheet columns do not match blind schema")
-        if any(structural_rows[0][field] for field in STRUCTURAL_REVIEW):
-            raise AssertionError("independent structural annotation fields should start blank")
-        if any("PRIMARY SECRET" in value for value in structural_rows[0].values()):
-            raise AssertionError("primary structural review leaked into independent worksheet")
+        if structural_columns != list(STRUCTURAL_EVIDENCE + STRUCTURAL_REVIEW) or any(structural_rows[0][field] for field in STRUCTURAL_REVIEW):
+            raise AssertionError("independent structural worksheet schema or blank fields are wrong")
+        for path in (image_output, structural_output, balat_output, commons_output):
+            _, rows = read_csv(path)
+            if any("PRIMARY SECRET" in value for row in rows for value in row.values()):
+                raise AssertionError(f"primary annotation leaked into {path.name}")
 
-        image_rows[0].update({"facade_label": "Baroque", "facade_observation": "Independent observation", "reviewer": "Reviewer B", "reviewed_at": "2026-01-02"})
-        write_csv(image_output, image_columns, image_rows)
-        structural_rows[0].update({"structural_observation": "Independent comparison", "reviewer": "Reviewer B", "reviewed_at": "2026-01-02"})
-        write_csv(structural_output, structural_columns, structural_rows)
+        for output, fields, rows, key in (
+            (image_output, image_columns, image_rows, "facade_observation"),
+            (structural_output, structural_columns, structural_rows, "structural_observation"),
+        ):
+            rows[0][key] = "Independent annotation"
+            rows[0]["reviewer"] = "Reviewer B"
+            rows[0]["reviewed_at"] = "2026-01-02"
+            write_csv(output, fields, rows)
+        scaled_row = read_csv(balat_output)[1][0]
+        scaled_row.update({"identity_verdict": "confirmed", "facade_label": "Art Nouveau", "facade_observation": "Independent scaled review", "reviewer": "Reviewer B", "reviewed_at": "2026-01-02"})
+        write_csv(balat_output, list(read_csv(balat_output)[0]), [scaled_row])
         export(data)
-        _, preserved_image = read_csv(image_output)
-        _, preserved_structural = read_csv(structural_output)
-        if preserved_image[0]["facade_observation"] != "Independent observation":
-            raise AssertionError("regeneration discarded independent facade annotation")
-        if preserved_structural[0]["structural_observation"] != "Independent comparison":
-            raise AssertionError("regeneration discarded independent structural annotation")
+        if read_csv(balat_output)[1][0]["facade_observation"] != "Independent scaled review":
+            raise AssertionError("regeneration discarded scaled independent draft")
 
         changed = dict(image)
         changed["preview_sha256"] = "changed"
@@ -95,7 +93,7 @@ def main() -> None:
         else:
             raise AssertionError("changed evidence did not refuse preserved independent annotation")
 
-    print("blinded independent image/structural handoff and provenance refusal passed")
+    print("blind pilot/scaled review handoffs and provenance refusal passed")
 
 
 if __name__ == "__main__":

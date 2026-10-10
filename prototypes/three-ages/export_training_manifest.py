@@ -15,11 +15,14 @@ Gates (refuse rather than guess):
   anything else, including SPRB-agent inventory photos, is excluded) or a
   pinned open licence for Commons rows (ShareAlike flagged; weights
   publication needs care);
-- preview SHA-256 and reviewer identity must be present.
+- preview SHA-256 and reviewer identity must be present;
+- independent reviewer must differ from the primary reviewer, and a complete
+  agreement/rationale/disposition with a resolved vocabulary label is required.
 """
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import os
@@ -62,6 +65,20 @@ def require(condition: bool, message: str) -> None:
         raise RuntimeError(message)
 
 
+def read_unique_csv_index(path: Path, key_field: str) -> dict[str, dict[str, str]]:
+    with path.open(newline="", encoding="utf-8") as handle:
+        reader = csv.DictReader(handle)
+        if not reader.fieldnames or key_field not in reader.fieldnames:
+            raise RuntimeError(f"{path.name} is missing required key column {key_field}")
+        indexed = {}
+        for row in reader:
+            key = (row.get(key_field) or "").strip()
+            if not key or key in indexed:
+                raise RuntimeError(f"{path.name} contains missing or duplicate {key_field}: {key}")
+            indexed[key] = row
+    return indexed
+
+
 def split_for(group_key: str) -> str:
     """Deterministic building-grouped split: stable across runs and machines."""
     digest = hashlib.sha256(group_key.encode("utf-8")).hexdigest()
@@ -69,9 +86,12 @@ def split_for(group_key: str) -> str:
     return "eval" if int(digest[:8], 16) < threshold else "train"
 
 
-def manifest_record(row: dict) -> dict | None:
-    """Return a manifest record, or None when the row fails a gate (reported)."""
-    label = (row.get("facade_label") or "").strip()
+def manifest_record(row: dict, adjudication: dict | None = None,
+                    independent: dict | None = None) -> dict | None:
+    """Return a manifest record only after a current independent disposition."""
+    adjudication = adjudication or {}
+    independent = independent or {}
+    label = (adjudication.get("resolved_facade_label") or "").strip()
     if label not in ALLOWED_LABELS:
         return None
     is_commons = (row.get("photo_id") or "").startswith("commons-")
@@ -84,6 +104,29 @@ def manifest_record(row: dict) -> dict | None:
     if (row.get("label_eligibility") or "eligible") != "eligible":
         return None
     if not (row.get("preview_sha256") or "").strip() or not (row.get("reviewer") or "").strip():
+        return None
+    if (adjudication.get("agreement") or "") not in {"agree", "partial", "disagree"}:
+        return None
+    if not all((adjudication.get(field) or "").strip() for field in (
+            "rationale", "disposition", "adjudicator", "adjudicated_at",
+            "primary_reviewer", "independent_reviewer", "independent_reviewed_at", "primary_annotation",
+            "independent_annotation")):
+        return None
+    if adjudication.get("primary_reviewer") == adjudication.get("independent_reviewer"):
+        return None
+    primary_text = "\n".join(
+        f"{field}: {(row.get(field) or '').strip()}"
+        for field in ("facade_label", "facade_observation")
+        if (row.get(field) or "").strip())
+    independent_text = "\n".join(
+        f"{field}: {(independent.get(field) or '').strip()}"
+        for field in ("identity_verdict", "facade_label", "facade_observation")
+        if (independent.get(field) or "").strip())
+    if (adjudication.get("primary_reviewer") != row.get("reviewer")
+            or adjudication.get("primary_annotation") != primary_text
+            or adjudication.get("independent_reviewer") != independent.get("reviewer")
+            or adjudication.get("independent_reviewed_at") != independent.get("reviewed_at")
+            or adjudication.get("independent_annotation") != independent_text):
         return None
     group_key = (row.get("fiche_urls") or row.get("photo_id") or "").split(";")[0].strip()
     return {
@@ -108,19 +151,37 @@ def manifest_record(row: dict) -> dict | None:
         "reviewed_at": row.get("reviewed_at") or "",
         "confidence": row.get("confidence") or "",
         "facade_observation": row.get("facade_observation") or "",
+        "adjudication": {
+            "agreement": adjudication["agreement"],
+            "rationale": adjudication["rationale"],
+            "disposition": adjudication["disposition"],
+            "primary_reviewer": adjudication["primary_reviewer"],
+            "independent_reviewer": adjudication["independent_reviewer"],
+            "independent_reviewed_at": adjudication["independent_reviewed_at"],
+            "independent_annotation": adjudication["independent_annotation"],
+            "adjudicator": adjudication["adjudicator"],
+            "adjudicated_at": adjudication["adjudicated_at"],
+        },
     }
 
 
 def main(data_dir: Path = DATA) -> None:
     rows = []
-    for name in ("balat-photo-reviews.json", "commons-photo-reviews.json"):
+    for name, adjudication_name, independent_name in (
+        ("balat-photo-reviews.json", "balat-photo-adjudication.csv", "balat-independent-photo-review.csv"),
+        ("commons-photo-reviews.json", "commons-photo-adjudication.csv", "commons-independent-photo-review.csv"),
+    ):
         path = data_dir / name
+        adjudication_path = data_dir / adjudication_name
+        adjudications = read_unique_csv_index(adjudication_path, "photo_id") if adjudication_path.exists() else {}
+        independent_path = data_dir / independent_name
+        independent = read_unique_csv_index(independent_path, "photo_id") if independent_path.exists() else {}
         if path.exists():
             reviews = json.loads(path.read_text(encoding="utf-8"))
-            rows.extend(reviews.get("records", []))
+            rows.extend((row, adjudications.get(row.get("photo_id", "")), independent.get(row.get("photo_id", ""))) for row in reviews.get("records", []))
     records, excluded = [], []
-    for row in rows:
-        record = manifest_record(row)
+    for row, adjudication, independent in rows:
+        record = manifest_record(row, adjudication, independent)
         (records if record else excluded).append(record or row.get("photo_id"))
     # Split-safety invariant: one group, one split.
     group_splits = {}
@@ -129,8 +190,8 @@ def main(data_dir: Path = DATA) -> None:
     require(all(len(splits) == 1 for splits in group_splits.values()),
             "building group straddles train/eval")
     payload = {
-        "source": ("reviewer-completed BALaT (CC BY 4.0) + Commons (per-file open licence, "
-                   "ShareAlike flagged) labels; building-grouped splits"),
+        "source": ("independently reviewed and adjudicated BALaT (CC BY 4.0) + Commons "
+                   "(per-file open licence, ShareAlike flagged) labels; building-grouped splits"),
         "record_count": len(records),
         "excluded_count": len(excluded),
         "excluded_photo_ids": sorted(excluded),

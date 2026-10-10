@@ -11,7 +11,10 @@ import zipfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "three-ages"))
-from build_independent_review_bundle import IMAGE_ALLOWED_FIELDS, STRUCTURAL_ALLOWED_FIELDS, build
+from build_independent_review_bundle import (
+    BALAT_ALLOWED_FIELDS, BALAT_WORKSHEET, COMMONS_ALLOWED_FIELDS, COMMONS_WORKSHEET,
+    IMAGE_ALLOWED_FIELDS, STRUCTURAL_ALLOWED_FIELDS, build,
+)
 
 
 def write_csv(path: Path, fields: tuple[str, ...], row: dict[str, str]) -> None:
@@ -39,10 +42,22 @@ def main() -> None:
         structural = {field: "" for field in structural_fields}
         structural.update({"source_id": "case-1", "comparison_id": "epochs-1", "case_crop_previews": "data/structural/crop.png", "case_crop_pixel_sha256": "abc", "structural_observation": "Independent comparison", "reviewer": "Reviewer B", "reviewed_at": "2026-01-02"})
         write_csv(data / "three-ages-independent-structural-review.csv", structural_fields, structural)
+        (data / "historical" / "balat.jpg").write_bytes(b"balat")
+        (data / "historical" / "commons.jpg").write_bytes(b"commons")
+        for filename, allowed, photo, preview in (
+            (BALAT_WORKSHEET, BALAT_ALLOWED_FIELDS, "balat-1", "data/historical/balat.jpg"),
+            (COMMONS_WORKSHEET, COMMONS_ALLOWED_FIELDS, "commons-1", "data/historical/commons.jpg"),
+        ):
+            scaled = {field: "" for field in allowed}
+            scaled.update({"photo_id": photo, "preview": preview, "licence": "CC BY 4.0", "credit": "credit", "facade_label": "Baroque", "reviewer": "Reviewer B", "reviewed_at": "2026-01-02"})
+            write_csv(data / filename, allowed, scaled)
         output = build(data, Path(temp) / "review.zip")
         with zipfile.ZipFile(output) as archive:
             names = set(archive.namelist())
-            if "evidence/data/historical/photo.jpg" not in names or "evidence/data/structural/crop.png" not in names:
+            if not {
+                "evidence/data/historical/photo.jpg", "evidence/data/structural/crop.png",
+                "evidence/data/historical/balat.jpg", "evidence/data/historical/commons.jpg",
+            } <= names:
                 raise AssertionError("bundle omitted referenced evidence")
             if any("primary" in name.lower() for name in names):
                 raise AssertionError("bundle contains primary review artifacts")

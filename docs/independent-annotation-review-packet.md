@@ -12,8 +12,9 @@ python3 prototypes/three-ages/build_independent_review_bundle.py
 
 This writes `/tmp/three-ages-independent-review.zip` (override with `--output`). It contains the two independent worksheets, the referenced evidence images, a README and SHA-256 manifest. The ZIP builder rejects unexpected worksheet columns rather than risk including hidden primary labels.
 
-- Facade/photo worksheet: [`prototypes/three-ages/data/three-ages-independent-image-review.csv`](../prototypes/three-ages/data/three-ages-independent-image-review.csv) — 14 licensed evidence rows across six cases.
-- Structural worksheet: [`prototypes/three-ages/data/three-ages-independent-structural-review.csv`](../prototypes/three-ages/data/three-ages-independent-structural-review.csv) — six case-level comparisons using aligned 1930–1935, 1971, 1996 and 2022 crops.
+- Pilot facade/photo worksheet: [`three-ages-independent-image-review.csv`](../prototypes/three-ages/data/three-ages-independent-image-review.csv) — 14 evidence rows across six cases.
+- Pilot structural worksheet: [`three-ages-independent-structural-review.csv`](../prototypes/three-ages/data/three-ages-independent-structural-review.csv) — six case-level comparisons across aligned epochs.
+- Scaled photo worksheets: [`balat-independent-photo-review.csv`](../prototypes/three-ages/data/balat-independent-photo-review.csv) and [`commons-independent-photo-review.csv`](../prototypes/three-ages/data/commons-independent-photo-review.csv).
 - Annotation rules and regeneration behavior: [`independent-annotation-handoff.md`](independent-annotation-handoff.md).
 
 Image paths are relative to `prototypes/three-ages/`; open each `preview` path in the image worksheet. Structural crop paths are likewise under that directory and listed in `case_crop_previews`. Use the supplied source links, dates, checksums, licences and credits as evidence context. Do not inspect the primary review worksheet until your independent pass is complete.
@@ -21,7 +22,7 @@ Image paths are relative to `prototypes/three-ages/`; open each `preview` path i
 ## Reviewer instructions
 
 1. Work independently. Do not copy labels or observations from another review.
-2. For every image row, fill `identity_verdict`, `facade_label`, `facade_observation`, `reviewer` and ISO `reviewed_at`. Use explicit uncertainty (such as `uncertain` or `not-visible`) rather than guessing.
+2. For every image/photo row, fill `identity_verdict`, `facade_label`, `facade_observation`, `reviewer` and ISO `reviewed_at`. Use explicit uncertainty (such as `uncertain` or `not-visible`) rather than guessing. Use the project's agreed controlled vocabulary in `docs/facade-style-vocabulary.md` for positive labels; keep uncertainty explicit.
 3. For every structural row, record the observed building-volume change or state that the imagery is insufficient; fill `reviewer` and ISO `reviewed_at`. Facade similarity alone does not establish structural continuity.
 4. Keep the evidence and annotation separate: a catalogued identity is not automatically a visually confirmed match; a reconstruction date is not a visual structural label.
 5. Return both CSVs without changing evidence/provenance columns.
@@ -40,6 +41,6 @@ Then generate the paired adjudication worksheets:
 python3 prototypes/three-ages/compare_independent_reviews.py
 ```
 
-The second command only succeeds when the primary and independent annotations are complete and name different reviewers. In the resulting `three-ages-image-adjudication.csv` and `three-ages-structural-adjudication.csv`, complete the agreement category, rationale, disposition, adjudicator and date. Preserve both annotations. Do not use adjudication output as a training manifest.
+The second command only succeeds when the primary and independent annotations are complete and name different reviewers. In the resulting adjudication CSVs, complete the agreement category, rationale, disposition, adjudicator and date; for photo channels, also set `resolved_facade_label`. Preserve both annotations. The BALaT and Commons photo adjudications are required by the training-manifest gate; the pilot worksheets are not. Do not use adjudication output itself as a training manifest.
 
 **Gate:** These files are review inputs, not approved training data. No new confidence assignment or training run should rely on them until disagreement and disposition are recorded. The scripts do not simulate or replace a human second reviewer.

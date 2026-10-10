@@ -31,6 +31,21 @@ STRUCTURAL_EVIDENCE = (
     "case_crop_previews", "case_crop_pixel_sha256", "source_observation",
 )
 STRUCTURAL_REVIEW = ("structural_observation", "reviewer", "reviewed_at")
+BALAT_SOURCE = "balat-photo-review.csv"
+BALAT_OUTPUT = "balat-independent-photo-review.csv"
+BALAT_EVIDENCE = (
+    "photo_id", "fiche_urls", "addresses", "photo_date_taken", "photo_represented_detail",
+    "photo_view_scope", "photo_page_title", "source_url", "image_url", "preview",
+    "preview_sha256", "licence", "credit",
+)
+COMMONS_SOURCE = "commons-photo-review.csv"
+COMMONS_OUTPUT = "commons-independent-photo-review.csv"
+COMMONS_EVIDENCE = (
+    "photo_id", "commons_file", "fiche_urls", "addresses", "photo_view_scope",
+    "photo_page_title", "source_url", "image_url", "preview", "preview_sha256",
+    "licence", "sharealike", "credit", "attribution",
+)
+PHOTO_REVIEW = ("identity_verdict", "facade_label", "facade_observation", "reviewer", "reviewed_at")
 
 
 def read_rows(path: Path) -> tuple[list[str], list[dict[str, str]]]:
@@ -95,19 +110,22 @@ def export_channel(data_dir: Path, source_name: str, output_name: str,
     return output_path
 
 
-def export(data_dir: Path = DATA) -> tuple[Path, Path]:
-    image = export_channel(data_dir, IMAGE_SOURCE, IMAGE_OUTPUT, IMAGE_EVIDENCE, IMAGE_REVIEW, "asset_id", "image")
-    structural = export_channel(data_dir, STRUCTURAL_SOURCE, STRUCTURAL_OUTPUT, STRUCTURAL_EVIDENCE, STRUCTURAL_REVIEW, "source_id|comparison_id", "structural")
-    return image, structural
+def export(data_dir: Path = DATA) -> tuple[Path, ...]:
+    return (
+        export_channel(data_dir, IMAGE_SOURCE, IMAGE_OUTPUT, IMAGE_EVIDENCE, IMAGE_REVIEW, "asset_id", "image"),
+        export_channel(data_dir, STRUCTURAL_SOURCE, STRUCTURAL_OUTPUT, STRUCTURAL_EVIDENCE, STRUCTURAL_REVIEW, "source_id|comparison_id", "structural"),
+        export_channel(data_dir, BALAT_SOURCE, BALAT_OUTPUT, BALAT_EVIDENCE, PHOTO_REVIEW, "photo_id", "BALaT"),
+        export_channel(data_dir, COMMONS_SOURCE, COMMONS_OUTPUT, COMMONS_EVIDENCE, PHOTO_REVIEW, "photo_id", "Commons"),
+    )
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data-dir", type=Path, default=DATA)
     args = parser.parse_args()
-    image, structural = export(args.data_dir)
-    print(f"blind independent image-review worksheet: {image}")
-    print(f"blind independent structural-review worksheet: {structural}")
+    outputs = export(args.data_dir)
+    for label, output in zip(("pilot image", "pilot structural", "BALaT photo", "Commons photo"), outputs):
+        print(f"blind independent {label}-review worksheet: {output}")
 
 
 if __name__ == "__main__":

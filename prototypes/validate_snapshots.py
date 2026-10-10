@@ -206,6 +206,16 @@ def main() -> None:
             require(photo_licence == "CC BY 4.0", f"training manifest contains a non-CC-BY photo: {entry.get('photo_id')}")
         manifest_groups.setdefault(entry["split_group"], set()).add(entry["split"])
     require(all(len(splits) == 1 for splits in manifest_groups.values()), "training manifest building group straddles splits")
+    for entry in balat_manifest.get("records", []):
+        review = entry.get("adjudication", {})
+        require(review.get("primary_reviewer") and review.get("independent_reviewer")
+                and review.get("primary_reviewer") != review.get("independent_reviewer"),
+                f"training record lacks distinct primary and independent reviewers: {entry.get('photo_id')}")
+        require(review.get("agreement") in {"agree", "partial", "disagree"}
+                and review.get("rationale") and review.get("disposition")
+                and review.get("adjudicator") and review.get("adjudicated_at")
+                and review.get("independent_annotation"),
+                f"training record lacks complete adjudication: {entry.get('photo_id')}")
     commons = read_json("three-ages/data/commons-photo-provenance.json")
     commons_records = commons.get("records", [])
     require(len({r.get("case_id") for r in commons_records}) == len(commons_records), "Commons provenance contains duplicate case IDs")

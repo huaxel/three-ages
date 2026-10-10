@@ -89,13 +89,15 @@ python3 prototypes/three-ages/export_balat_review.py
 
 This writes `three-ages/data/balat-photo-review.csv` (provenance columns plus blank `facade_label`, observation, reviewer and confidence fields) and compiles completed rows to `three-ages/data/balat-photo-reviews.json`. Regeneration preserves existing reviews and refuses to attach a review after its photo provenance changed. Wide street-level sweeps confirmed the remaining misses are genuine absences (BALaT holds no exact-address photo for those buildings), not query failures.
 
-Export reviewed labels as a training manifest (BALaT CC BY 4.0 + Commons per-file open licences with ShareAlike flags, deterministic building-grouped train/eval splits):
+Before any training export, prepare blind independent worksheets for the pilot and scaled photo sources, then generate adjudication sheets after both reviewers finish:
 
 ```bash
-python3 prototypes/three-ages/export_training_manifest.py
+python3 prototypes/three-ages/export_independent_review.py
+python3 prototypes/three-ages/compare_independent_reviews.py --channel balat
+python3 prototypes/three-ages/compare_independent_reviews.py --channel commons
 ```
 
-Rows with non-vocabulary labels, non-CC-BY licences (including any SPRB-agent photo), or missing checksums/reviewers are excluded and listed, never silently included. Publishing model weights is outside the EHB non-commercial education framing — review before publishing any trained artifact (see `docs/irismonument-image-licence.md`).
+Record agreement, rationale, disposition, adjudicator, date and resolved facade label in each photo adjudication CSV. The training exporter now requires distinct primary and independent reviewers plus a complete, resolved adjudication; non-comparable cases, unresolved labels, non-vocabulary labels, non-CC-BY licences (including SPRB-agent photos), or missing checksums are excluded and listed. The resolved label—not a provisional primary label—is exported. Publishing model weights is outside the EHB non-commercial education framing — review before publishing any trained artifact (see `docs/irismonument-image-licence.md`).
 
 Refresh checksum-pinned imagery:
 

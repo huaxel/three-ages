@@ -41,7 +41,7 @@ def main() -> None:
         rows[0].update({
             "agreement": "agree", "rationale": "Both identify the gable as Baroque.",
             "disposition": "Retain label; note evidence limits.", "adjudicator": "Reviewer C",
-            "adjudicated_at": "2026-01-03",
+            "adjudicated_at": "2026-01-03", "resolved_facade_label": "Baroque",
         })
         with output.open("w", newline="", encoding="utf-8") as handle:
             writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
@@ -71,6 +71,19 @@ def main() -> None:
         _, structural_rows = read(structural_output)
         if structural_rows[0]["primary_annotation"] != "structural_observation: stable volume" or structural_rows[0]["independent_annotation"] != "structural_observation: volume changed":
             raise AssertionError("structural annotations were not paired in adjudication output")
+
+        for channel in ("balat", "commons"):
+            filename = "balat-photo" if channel == "balat" else "commons-photo"
+            write(data / f"{filename}-review.csv", (
+                "photo_id", "facade_label", "facade_observation", "reviewer", "reviewed_at",
+            ), {"photo_id": f"{channel}-1", "facade_label": "Art Nouveau", "facade_observation": "Primary label", "reviewer": "Reviewer A", "reviewed_at": "2026-01-01"})
+            write(data / f"{filename.replace('-photo', '-independent-photo')}-review.csv", (
+                "photo_id", "identity_verdict", "facade_label", "facade_observation", "reviewer", "reviewed_at",
+            ), {"photo_id": f"{channel}-1", "identity_verdict": "confirmed", "facade_label": "Eclecticism", "facade_observation": "Independent label", "reviewer": "Reviewer B", "reviewed_at": "2026-01-02"})
+            paired = compare(data, channel)
+            _, paired_rows = read(paired)
+            if paired_rows[0]["independent_reviewer"] != "Reviewer B":
+                raise AssertionError(f"{channel} annotations were not paired")
 
         # Every independent field must be supplied before pairing.
         incomplete = {"asset_id": "photo-1", "identity_verdict": "confirmed", "facade_label": "", "facade_observation": "A different view", "reviewer": "Reviewer B", "reviewed_at": "2026-01-02"}

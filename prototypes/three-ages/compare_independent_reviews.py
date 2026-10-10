@@ -23,6 +23,7 @@ CHANNELS = {
         "primary_annotation": ("identity_note", "facade_observation"),
         "primary_reviewer": "reviewer",
         "primary_date": "reviewed_at",
+        "photo": True,
     },
     "structural": {
         "primary": "three-ages-structural-review.csv",
@@ -34,8 +35,31 @@ CHANNELS = {
         "primary_reviewer": "reviewer",
         "primary_date": "reviewed_at",
     },
+    "balat": {
+        "primary": "balat-photo-review.csv",
+        "independent": "balat-independent-photo-review.csv",
+        "output": "balat-photo-adjudication.csv",
+        "key": ("photo_id",),
+        "annotation": ("identity_verdict", "facade_label", "facade_observation"),
+        "primary_annotation": ("facade_label", "facade_observation"),
+        "primary_reviewer": "reviewer",
+        "primary_date": "reviewed_at",
+        "photo": True,
+    },
+    "commons": {
+        "primary": "commons-photo-review.csv",
+        "independent": "commons-independent-photo-review.csv",
+        "output": "commons-photo-adjudication.csv",
+        "key": ("photo_id",),
+        "annotation": ("identity_verdict", "facade_label", "facade_observation"),
+        "primary_annotation": ("facade_label", "facade_observation"),
+        "primary_reviewer": "reviewer",
+        "primary_date": "reviewed_at",
+        "photo": True,
+    },
 }
 DECISION_FIELDS = ("agreement", "rationale", "disposition", "adjudicator", "adjudicated_at")
+PHOTO_DECISION_FIELDS = DECISION_FIELDS + ("resolved_facade_label",)
 DECISION_OPTIONS = {"agree", "partial", "disagree", "not-comparable"}
 
 
@@ -82,13 +106,14 @@ def compare(data_dir: Path, channel: str) -> Path:
     if primary.keys() != independent.keys():
         raise RuntimeError(f"{channel} primary and independent worksheets cover different evidence")
 
+    decision_fields = PHOTO_DECISION_FIELDS if config.get("photo") else DECISION_FIELDS
     output = data_dir / config["output"]
     prior = {}
     if output.exists():
         with output.open(newline="", encoding="utf-8") as handle:
             reader = csv.DictReader(handle)
             expected_prefix = list(keys) + ["primary_reviewer", "primary_reviewed_at", "primary_annotation", "independent_reviewer", "independent_reviewed_at", "independent_annotation"]
-            if not reader.fieldnames or reader.fieldnames[:len(expected_prefix)] != expected_prefix or reader.fieldnames[len(expected_prefix):] != list(DECISION_FIELDS):
+            if not reader.fieldnames or reader.fieldnames[:len(expected_prefix)] != expected_prefix or reader.fieldnames[len(expected_prefix):] != list(decision_fields):
                 raise RuntimeError(f"existing {channel} adjudication worksheet has unexpected columns")
             for row in reader:
                 key = key_for(row, keys)
@@ -99,7 +124,7 @@ def compare(data_dir: Path, channel: str) -> Path:
     fields = list(keys) + [
         "primary_reviewer", "primary_reviewed_at", "primary_annotation",
         "independent_reviewer", "independent_reviewed_at", "independent_annotation",
-        *DECISION_FIELDS,
+        *decision_fields,
     ]
     result = []
     for key in sorted(primary):
@@ -125,10 +150,10 @@ def compare(data_dir: Path, channel: str) -> Path:
             "independent_reviewed_at": s_date,
             "independent_annotation": s_text,
         }
-        prefix = fields[:len(fields) - len(DECISION_FIELDS)]
+        prefix = fields[:len(fields) - len(decision_fields)]
         if old and any(old.get(field, "") != provenance[field] for field in prefix):
             raise RuntimeError(f"refusing to preserve adjudication for {key} after annotations changed")
-        decision = {field: old.get(field, "") for field in DECISION_FIELDS}
+        decision = {field: old.get(field, "") for field in decision_fields}
         if decision["agreement"] and decision["agreement"] not in DECISION_OPTIONS:
             raise RuntimeError(f"{channel} adjudication {key} has invalid agreement value")
         if any(decision.values()) and not all(decision.values()):

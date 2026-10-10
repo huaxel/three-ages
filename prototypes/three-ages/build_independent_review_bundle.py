@@ -14,10 +14,16 @@ import json
 import zipfile
 from pathlib import Path
 
+from export_independent_review import (
+    BALAT_EVIDENCE, COMMONS_EVIDENCE, IMAGE_EVIDENCE, IMAGE_REVIEW,
+    PHOTO_REVIEW, STRUCTURAL_EVIDENCE, STRUCTURAL_REVIEW,
+)
+
 DATA = Path(__file__).resolve().parent / "data"
-ROOT = Path(__file__).resolve().parents[2]
 IMAGE_WORKSHEET = "three-ages-independent-image-review.csv"
 STRUCTURAL_WORKSHEET = "three-ages-independent-structural-review.csv"
+BALAT_WORKSHEET = "balat-independent-photo-review.csv"
+COMMONS_WORKSHEET = "commons-independent-photo-review.csv"
 IMAGE_ALLOWED_FIELDS = (
     "source_id", "name", "address", "asset_id", "epoch", "source_url", "image_url",
     "preview", "preview_sha256", "licence", "credit", "source_observation",
@@ -31,6 +37,8 @@ STRUCTURAL_ALLOWED_FIELDS = (
     "case_crop_previews", "case_crop_pixel_sha256", "source_observation",
     "structural_observation", "reviewer", "reviewed_at",
 )
+BALAT_ALLOWED_FIELDS = BALAT_EVIDENCE + PHOTO_REVIEW
+COMMONS_ALLOWED_FIELDS = COMMONS_EVIDENCE + PHOTO_REVIEW
 
 README = """# Independent annotation review bundle
 
@@ -42,8 +50,17 @@ worksheets until both independent worksheets are complete.
 
 - `three-ages-independent-image-review.csv`: one row per historical facade image.
   Fill identity_verdict, facade_label, facade_observation, reviewer, reviewed_at.
-- `three-ages-independent-structural-review.csv`: one row per building comparison.
+- `three-ages-independent-structural-review.csv`: one row per pilot building comparison.
   Fill structural_observation, reviewer, reviewed_at.
+- `balat-independent-photo-review.csv` and `commons-independent-photo-review.csv`:
+  one row per scaled-corpus photo. Fill identity_verdict, facade_label,
+  facade_observation, reviewer, reviewed_at.
+- Positive facade labels use the agreed vocabulary: Baroque; Baroque with classical
+  features; Neoclassical; Second Empire; Eclecticism; Historicist neo-styles;
+  Beaux-Arts; Art Nouveau; Art Deco; Paquebot style; Functionalism; Modernism
+  (interwar, post-war, Expo 58, late, period undetermined); Brutalism;
+  Postmodernism; Contemporary; Louis XIV; Antique classical orders; Mixed
+  Antique+Baroque; Baroque with Renaissance elements. Record uncertainty explicitly.
 - Evidence images are under `evidence/`; CSV preview paths point into this folder.
   Source URLs, epochs, checksums, licence and credit remain in the worksheets.
 
@@ -79,48 +96,32 @@ def evidence_path(data_dir: Path, relative: str) -> Path:
     return candidate
 
 
-def add_evidence(archive: zipfile.ZipFile, data_dir: Path, relative: str) -> str:
-    source = evidence_path(data_dir, relative)
-    archive_name = f"evidence/{relative}"
-    archive.write(source, archive_name)
-    return archive_name
-
-
 def build(data_dir: Path = DATA, output: Path = Path("/tmp/three-ages-independent-review.zip")) -> Path:
-    image_path = data_dir / IMAGE_WORKSHEET
-    structural_path = data_dir / STRUCTURAL_WORKSHEET
-    image_fields, image_rows = rows(image_path)
-    structural_fields, structural_rows = rows(structural_path)
-    if image_fields != list(IMAGE_ALLOWED_FIELDS) or structural_fields != list(STRUCTURAL_ALLOWED_FIELDS):
-        raise RuntimeError("independent worksheets have unexpected columns; refusing to bundle possibly non-blind data")
-
-    image_outputs = []
-    image_files = {}
-    for row in image_rows:
-        relative = row.get("preview", "")
-        if not relative:
-            raise RuntimeError(f"image review row {row.get('asset_id')} has no preview")
-        arc = f"evidence/{relative}"
-        image_files[relative] = evidence_path(data_dir, relative)
-        image_outputs.append({**row, "preview": arc})
-
-    structural_outputs = []
-    for row in structural_rows:
-        relative_paths = row.get("case_crop_previews", "").split(";")
-        if not relative_paths or any(not value for value in relative_paths):
-            raise RuntimeError(f"structural review row {row.get('source_id')} has incomplete crop paths")
-        arcs = []
-        for relative in relative_paths:
-            image_files[relative] = evidence_path(data_dir, relative)
-            arcs.append(f"evidence/{relative}")
-        structural_outputs.append({**row, "case_crop_previews": ";".join(arcs)})
+    channels = (
+        (IMAGE_WORKSHEET, IMAGE_ALLOWED_FIELDS, "three-ages-independent-image-review.csv", "preview", "asset_id"),
+        (STRUCTURAL_WORKSHEET, STRUCTURAL_ALLOWED_FIELDS, "three-ages-independent-structural-review.csv", "case_crop_previews", "source_id"),
+        (BALAT_WORKSHEET, BALAT_ALLOWED_FIELDS, BALAT_WORKSHEET, "preview", "photo_id"),
+        (COMMONS_WORKSHEET, COMMONS_ALLOWED_FIELDS, COMMONS_WORKSHEET, "preview", "photo_id"),
+    )
+    contents = {"README-review.md": README.encode("utf-8")}
+    image_files: dict[str, Path] = {}
+    for source_name, allowed_fields, archive_csv, preview_field, key in channels:
+        fields, source_rows = rows(data_dir / source_name)
+        if fields != list(allowed_fields):
+            raise RuntimeError(f"{source_name} has unexpected columns; refusing to bundle possibly non-blind data")
+        outputs = []
+        for row in source_rows:
+            relative_paths = row.get(preview_field, "").split(";") if preview_field == "case_crop_previews" else [row.get(preview_field, "")]
+            if not relative_paths or any(not value for value in relative_paths):
+                raise RuntimeError(f"review row {row.get(key)} has incomplete evidence paths")
+            archive_paths = []
+            for relative in relative_paths:
+                image_files[relative] = evidence_path(data_dir, relative)
+                archive_paths.append(f"evidence/{relative}")
+            outputs.append({**row, preview_field: ";".join(archive_paths)})
+        contents[archive_csv] = csv_bytes(fields, outputs)
 
     output.parent.mkdir(parents=True, exist_ok=True)
-    contents = {
-        "README-review.md": README.encode("utf-8"),
-        "three-ages-independent-image-review.csv": csv_bytes(image_fields, image_outputs),
-        "three-ages-independent-structural-review.csv": csv_bytes(structural_fields, structural_outputs),
-    }
     contents.update({f"evidence/{relative}": source.read_bytes() for relative, source in image_files.items()})
     manifest = {
         "purpose": "blind independent annotation only; not training data",

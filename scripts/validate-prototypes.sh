@@ -21,6 +21,7 @@ python3 prototypes/test_review_workflows.py
 python3 prototypes/test_independent_review.py
 python3 prototypes/test_independent_adjudication.py
 python3 prototypes/test_independent_bundle.py
+python3 -m unittest prototypes.test_training_manifest
 python3 -m compileall -q prototypes
 node prototypes/smoke_ui.js
 python3 - <<'PY'
