@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import html
 import io
 import json
 import zipfile
@@ -62,6 +63,7 @@ worksheets until both independent worksheets are complete.
   Postmodernism; Contemporary; Louis XIV; Antique classical orders; Mixed
   Antique+Baroque; Baroque with Renaissance elements. Record uncertainty explicitly.
 - Evidence images are under `evidence/`; CSV preview paths point into this folder.
+  Open `gallery.html` for an offline visual index across all four worksheets.
   Source URLs, epochs, checksums, licence and credit remain in the worksheets.
 
 Use explicit uncertainty where the evidence is insufficient. Similar facade
@@ -88,6 +90,34 @@ def csv_bytes(fields: list[str], values: list[dict[str, str]]) -> bytes:
     return handle.getvalue().encode("utf-8")
 
 
+def gallery_html(sections: list[tuple[str, list[dict[str, str]], str, str]]) -> bytes:
+    parts = ["<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width'>",
+             "<title>Blind independent review gallery</title><style>body{font:16px system-ui;max-width:1200px;margin:2rem auto;padding:0 1rem}section{margin:3rem 0}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}.card{border:1px solid #bbb;border-radius:8px;padding:1rem}.images{display:flex;gap:.5rem;flex-wrap:wrap}.images img{max-width:100%;max-height:320px;object-fit:contain}.images figure{margin:.25rem;max-width:48%}dt{font-weight:600}dd{margin:0 0 .4rem}</style></head><body><h1>Blind independent review gallery</h1>",
+             "<p>Images and captions use only the independent worksheets; primary annotations are excluded.</p>"]
+    for title, rows, image_field, epoch_field in sections:
+        parts.append(f"<section><h2>{html.escape(title)}</h2><div class='cards'>")
+        for row in rows:
+            key = row.get("photo_id") or row.get("asset_id") or row.get("source_id", "case")
+            label = f"{row.get('name', '')} {row.get('address', '')}".strip()
+            if row.get("photo_id"):
+                label = f"{row.get('addresses', '')} — {row.get('photo_id')}".strip(" —")
+            parts.append(f"<article class='card'><h3>{html.escape(label or key)}</h3><p>{html.escape(key)}</p><div class='images'>")
+            paths = row.get(image_field, "").split(";")
+            epochs = row.get(epoch_field, "").split(";") if epoch_field else []
+            for index, path in enumerate(paths):
+                caption = epochs[index] if index < len(epochs) else row.get("epoch", "") or row.get("photo_date_taken", "")
+                parts.append(f"<figure><a href='{html.escape(path, quote=True)}'><img loading='lazy' src='{html.escape(path, quote=True)}' alt='{html.escape(label or key, quote=True)}'></a><figcaption>{html.escape(caption)}</figcaption></figure>")
+            parts.append("</div><dl>")
+            for field in ("photo_view_scope", "photo_represented_detail", "source_observation"):
+                value = row.get(field, "").strip()
+                if value:
+                    parts.append(f"<dt>{html.escape(field.replace('_', ' ').title())}</dt><dd>{html.escape(value)}</dd>")
+            parts.append("</dl></article>")
+        parts.append("</div></section>")
+    parts.append("</body></html>")
+    return "\n".join(parts).encode("utf-8")
+
+
 def evidence_path(data_dir: Path, relative: str) -> Path:
     project_root = data_dir.resolve().parent
     candidate = (project_root / relative).resolve()
@@ -105,6 +135,7 @@ def build(data_dir: Path = DATA, output: Path = Path("/tmp/three-ages-independen
     )
     contents = {"README-review.md": README.encode("utf-8")}
     image_files: dict[str, Path] = {}
+    gallery_sections = []
     for source_name, allowed_fields, archive_csv, preview_field, key in channels:
         fields, source_rows = rows(data_dir / source_name)
         if fields != list(allowed_fields):
@@ -120,6 +151,9 @@ def build(data_dir: Path = DATA, output: Path = Path("/tmp/three-ages-independen
                 archive_paths.append(f"evidence/{relative}")
             outputs.append({**row, preview_field: ";".join(archive_paths)})
         contents[archive_csv] = csv_bytes(fields, outputs)
+        gallery_sections.append((archive_csv.removesuffix(".csv").replace("-", " ").title(), outputs,
+                                 preview_field, "area_epochs" if preview_field == "case_crop_previews" else ""))
+    contents["gallery.html"] = gallery_html(gallery_sections)
 
     output.parent.mkdir(parents=True, exist_ok=True)
     contents.update({f"evidence/{relative}": source.read_bytes() for relative, source in image_files.items()})

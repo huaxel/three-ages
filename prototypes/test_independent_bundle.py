@@ -61,6 +61,9 @@ def main() -> None:
                 raise AssertionError("bundle omitted referenced evidence")
             if any("primary" in name.lower() for name in names):
                 raise AssertionError("bundle contains primary review artifacts")
+            gallery = archive.read("gallery.html")
+            if b"evidence/data/historical/photo.jpg" not in gallery or b"PRIMARY SECRET" in gallery:
+                raise AssertionError("gallery omitted evidence or leaked primary review text")
             payload = b"\n".join(archive.read(name) for name in names if name.endswith(".csv"))
             if b"confidence" in payload or b"Independent observation" not in payload:
                 raise AssertionError("bundle unexpectedly contains a confidence field or lost reviewer input")

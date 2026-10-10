@@ -10,7 +10,7 @@ To create a self-contained archive that excludes primary-review files, run:
 python3 prototypes/three-ages/build_independent_review_bundle.py
 ```
 
-This writes `/tmp/three-ages-independent-review.zip` (override with `--output`). It contains the two independent worksheets, the referenced evidence images, a README and SHA-256 manifest. The ZIP builder rejects unexpected worksheet columns rather than risk including hidden primary labels.
+This writes `/tmp/three-ages-independent-review.zip` (override with `--output`). It contains all four pilot/scaled independent worksheets, referenced evidence images, an offline `gallery.html`, a README and SHA-256 manifest. Extract the ZIP and open `gallery.html` for visual review. The ZIP builder rejects unexpected worksheet columns rather than risk including hidden primary labels.
 
 - Pilot facade/photo worksheet: [`three-ages-independent-image-review.csv`](../prototypes/three-ages/data/three-ages-independent-image-review.csv) — 14 evidence rows across six cases.
 - Pilot structural worksheet: [`three-ages-independent-structural-review.csv`](../prototypes/three-ages/data/three-ages-independent-structural-review.csv) — six case-level comparisons across aligned epochs.
