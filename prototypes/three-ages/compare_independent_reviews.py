@@ -59,7 +59,7 @@ CHANNELS = {
     },
 }
 DECISION_FIELDS = ("agreement", "rationale", "disposition", "adjudicator", "adjudicated_at")
-PHOTO_DECISION_FIELDS = DECISION_FIELDS + ("resolved_facade_label",)
+PHOTO_DECISION_FIELDS = DECISION_FIELDS + ("resolved_facade_label", "resolved_confidence")
 DECISION_OPTIONS = {"agree", "partial", "disagree", "not-comparable"}
 
 
@@ -158,6 +158,8 @@ def compare(data_dir: Path, channel: str) -> Path:
             raise RuntimeError(f"{channel} adjudication {key} has invalid agreement value")
         if any(decision.values()) and not all(decision.values()):
             raise RuntimeError(f"{channel} adjudication {key} is incomplete; fill all disposition fields together")
+        if decision.get("resolved_confidence") and decision["resolved_confidence"] not in {"low", "medium", "high"}:
+            raise RuntimeError(f"{channel} adjudication {key} has invalid resolved confidence")
         result.append({**provenance, **decision})
     write_rows(output, tuple(fields), result)
     return output

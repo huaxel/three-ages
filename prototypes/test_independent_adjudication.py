@@ -42,6 +42,7 @@ def main() -> None:
             "agreement": "agree", "rationale": "Both identify the gable as Baroque.",
             "disposition": "Retain label; note evidence limits.", "adjudicator": "Reviewer C",
             "adjudicated_at": "2026-01-03", "resolved_facade_label": "Baroque",
+            "resolved_confidence": "medium",
         })
         with output.open("w", newline="", encoding="utf-8") as handle:
             writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")

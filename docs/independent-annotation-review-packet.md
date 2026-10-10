@@ -41,6 +41,6 @@ Then generate the paired adjudication worksheets:
 python3 prototypes/three-ages/compare_independent_reviews.py
 ```
 
-The second command only succeeds when the primary and independent annotations are complete and name different reviewers. In the resulting adjudication CSVs, complete the agreement category, rationale, disposition, adjudicator and date; for photo channels, also set `resolved_facade_label`. Preserve both annotations. The BALaT and Commons photo adjudications are required by the training-manifest gate; the pilot worksheets are not. Do not use adjudication output itself as a training manifest.
+The second command only succeeds when the primary and independent annotations are complete and name different reviewers. In the resulting adjudication CSVs, complete the agreement category, rationale, disposition, adjudicator and date; for photo channels, also set `resolved_facade_label` and post-adjudication `resolved_confidence` (`low`, `medium`, or `high`). Preserve both annotations. The BALaT and Commons photo adjudications are required by the training-manifest gate; the pilot worksheets are not. Do not use adjudication output itself as a training manifest.
 
 **Gate:** These files are review inputs, not approved training data. No new confidence assignment or training run should rely on them until disagreement and disposition are recorded. The scripts do not simulate or replace a human second reviewer.

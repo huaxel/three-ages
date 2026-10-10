@@ -212,6 +212,7 @@ def main() -> None:
                 and review.get("primary_reviewer") != review.get("independent_reviewer"),
                 f"training record lacks distinct primary and independent reviewers: {entry.get('photo_id')}")
         require(review.get("agreement") in {"agree", "partial", "disagree"}
+                and review.get("resolved_confidence") in {"low", "medium", "high"}
                 and review.get("rationale") and review.get("disposition")
                 and review.get("adjudicator") and review.get("adjudicated_at")
                 and review.get("independent_annotation"),

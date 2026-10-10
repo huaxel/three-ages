@@ -109,7 +109,8 @@ def manifest_record(row: dict, adjudication: dict | None = None,
         return None
     if not all((adjudication.get(field) or "").strip() for field in (
             "rationale", "disposition", "adjudicator", "adjudicated_at",
-            "primary_reviewer", "independent_reviewer", "independent_reviewed_at", "primary_annotation",
+            "resolved_confidence", "primary_reviewer", "primary_reviewed_at",
+            "independent_reviewer", "independent_reviewed_at", "primary_annotation",
             "independent_annotation")):
         return None
     if adjudication.get("primary_reviewer") == adjudication.get("independent_reviewer"):
@@ -123,6 +124,7 @@ def manifest_record(row: dict, adjudication: dict | None = None,
         for field in ("identity_verdict", "facade_label", "facade_observation")
         if (independent.get(field) or "").strip())
     if (adjudication.get("primary_reviewer") != row.get("reviewer")
+            or adjudication.get("primary_reviewed_at") != row.get("reviewed_at")
             or adjudication.get("primary_annotation") != primary_text
             or adjudication.get("independent_reviewer") != independent.get("reviewer")
             or adjudication.get("independent_reviewed_at") != independent.get("reviewed_at")
@@ -149,10 +151,11 @@ def manifest_record(row: dict, adjudication: dict | None = None,
         "sharealike": "yes" if "BY-SA" in (row.get("licence") or "") else "no",
         "reviewer": row.get("reviewer"),
         "reviewed_at": row.get("reviewed_at") or "",
-        "confidence": row.get("confidence") or "",
+        "confidence": adjudication["resolved_confidence"],
         "facade_observation": row.get("facade_observation") or "",
         "adjudication": {
             "agreement": adjudication["agreement"],
+            "resolved_confidence": adjudication["resolved_confidence"],
             "rationale": adjudication["rationale"],
             "disposition": adjudication["disposition"],
             "primary_reviewer": adjudication["primary_reviewer"],

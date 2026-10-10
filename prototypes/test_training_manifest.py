@@ -53,7 +53,8 @@ class TrainingManifestTests(unittest.TestCase):
         adjudications = adjudications or [
             {"photo_id": item["photo_id"], "agreement": "agree", "rationale": "Both reviews support the label.",
              "disposition": "Use resolved label.", "adjudicator": "Reviewer C", "adjudicated_at": "2026-10-10",
-             "resolved_facade_label": item.get("facade_label", ""), "primary_reviewer": item.get("reviewer", ""),
+             "resolved_facade_label": item.get("facade_label", ""), "resolved_confidence": "medium",
+             "primary_reviewer": item.get("reviewer", ""), "primary_reviewed_at": item.get("reviewed_at", ""),
              "primary_annotation": f"facade_label: {item.get('facade_label', '')}\nfacade_observation: {item.get('facade_observation', '')}",
              "independent_reviewer": "Reviewer B", "independent_reviewed_at": "2026-10-10",
              "independent_annotation": f"identity_verdict: confirmed\nfacade_label: {item.get('facade_label', '')}\nfacade_observation: independent observation"}
@@ -118,7 +119,8 @@ class TrainingManifestTests(unittest.TestCase):
         complete = {"photo_id": "P1", "agreement": "disagree", "rationale": "Independent label differs.",
                     "disposition": "Accept the independent label.", "adjudicator": "Reviewer C",
                     "adjudicated_at": "2026-10-10", "resolved_facade_label": "Eclecticism",
-                    "primary_reviewer": "Reviewer", "primary_annotation": "facade_label: Art Nouveau\nfacade_observation: obs",
+                    "resolved_confidence": "high", "primary_reviewer": "Reviewer",
+                    "primary_reviewed_at": "2026-10-09", "primary_annotation": "facade_label: Art Nouveau\nfacade_observation: obs",
                     "independent_reviewer": "Reviewer B", "independent_reviewed_at": "2026-10-10",
                     "independent_annotation": "identity_verdict: confirmed\nfacade_label: Eclecticism\nfacade_observation: independent observation"}
         second = {"photo_id": "P1", "identity_verdict": "confirmed", "facade_label": "Eclecticism",
@@ -126,9 +128,13 @@ class TrainingManifestTests(unittest.TestCase):
         out = self.export([photo], [complete], [second])
         self.assertEqual(out["record_count"], 1)
         self.assertEqual(out["records"][0]["facade_label"], "Eclecticism")
+        self.assertEqual(out["records"][0]["confidence"], "high")
         self.assertEqual(out["records"][0]["adjudication"]["independent_reviewer"], "Reviewer B")
         stale = {**second, "facade_observation": "changed after adjudication"}
         out = self.export([photo], [complete], [stale])
+        self.assertEqual(out["record_count"], 0)
+        stale_primary = row("P1", reviewed_at="2026-10-11")
+        out = self.export([stale_primary], [complete], [second])
         self.assertEqual(out["record_count"], 0)
 
     def test_accepts_open_commons_licences_with_sharealike_flag(self):

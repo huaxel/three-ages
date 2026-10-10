@@ -97,7 +97,7 @@ python3 prototypes/three-ages/compare_independent_reviews.py --channel balat
 python3 prototypes/three-ages/compare_independent_reviews.py --channel commons
 ```
 
-Record agreement, rationale, disposition, adjudicator, date and resolved facade label in each photo adjudication CSV. The training exporter now requires distinct primary and independent reviewers plus a complete, resolved adjudication; non-comparable cases, unresolved labels, non-vocabulary labels, non-CC-BY licences (including SPRB-agent photos), or missing checksums are excluded and listed. The resolved label—not a provisional primary label—is exported. Publishing model weights is outside the EHB non-commercial education framing — review before publishing any trained artifact (see `docs/irismonument-image-licence.md`).
+Record agreement, rationale, disposition, adjudicator, date, resolved facade label and post-adjudication confidence in each photo adjudication CSV. The training exporter now requires distinct primary and independent reviewers plus a complete, current disposition; non-comparable cases, unresolved labels, non-vocabulary labels, non-CC-BY licences (including SPRB-agent photos), or missing checksums are excluded and listed. The resolved label and confidence—not provisional primary values—are exported. Publishing model weights is outside the EHB non-commercial education framing — review before publishing any trained artifact (see `docs/irismonument-image-licence.md`).
 
 Refresh checksum-pinned imagery:
 
