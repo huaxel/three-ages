@@ -18,6 +18,8 @@ python3 prototypes/three-ages/generate_structural_crops.py
 python3 prototypes/three-ages/export_pilot.py
 python3 prototypes/validate_snapshots.py
 python3 prototypes/test_review_workflows.py
+python3 prototypes/test_independent_review.py
+python3 prototypes/test_independent_adjudication.py
 python3 -m compileall -q prototypes
 node prototypes/smoke_ui.js
 python3 - <<'PY'
