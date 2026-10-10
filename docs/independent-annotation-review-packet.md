@@ -4,6 +4,14 @@
 
 ## Materials
 
+To create a self-contained archive that excludes primary-review files, run:
+
+```sh
+python3 prototypes/three-ages/build_independent_review_bundle.py
+```
+
+This writes `/tmp/three-ages-independent-review.zip` (override with `--output`). It contains the two independent worksheets, the referenced evidence images, a README and SHA-256 manifest. The ZIP builder rejects unexpected worksheet columns rather than risk including hidden primary labels.
+
 - Facade/photo worksheet: [`prototypes/three-ages/data/three-ages-independent-image-review.csv`](../prototypes/three-ages/data/three-ages-independent-image-review.csv) — 14 licensed evidence rows across six cases.
 - Structural worksheet: [`prototypes/three-ages/data/three-ages-independent-structural-review.csv`](../prototypes/three-ages/data/three-ages-independent-structural-review.csv) — six case-level comparisons using aligned 1930–1935, 1971, 1996 and 2022 crops.
 - Annotation rules and regeneration behavior: [`independent-annotation-handoff.md`](independent-annotation-handoff.md).
