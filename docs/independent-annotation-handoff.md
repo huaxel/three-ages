@@ -1,5 +1,7 @@
 # Independent annotation handoff
 
+For a reviewer-ready checklist, use the [independent annotation packet](independent-annotation-review-packet.md).
+
 The pilot now has blind second-review worksheets for image-level facade review and case-level structural comparison:
 
 - `prototypes/three-ages/data/three-ages-independent-image-review.csv`
