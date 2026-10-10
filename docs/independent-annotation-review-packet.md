@@ -25,11 +25,17 @@ Image paths are relative to `prototypes/three-ages/`; open each `preview` path i
 2. For every image/photo row, fill `identity_verdict`, `facade_label`, `facade_observation`, `reviewer` and ISO `reviewed_at`. Use explicit uncertainty (such as `uncertain` or `not-visible`) rather than guessing. Use the project's agreed controlled vocabulary in `docs/facade-style-vocabulary.md` for positive labels; keep uncertainty explicit.
 3. For every structural row, record the observed building-volume change or state that the imagery is insufficient; fill `reviewer` and ISO `reviewed_at`. Facade similarity alone does not establish structural continuity.
 4. Keep the evidence and annotation separate: a catalogued identity is not automatically a visually confirmed match; a reconstruction date is not a visual structural label.
-5. Return both CSVs without changing evidence/provenance columns.
+5. Return the edited ZIP or all four CSVs without changing evidence/provenance columns.
 
 ## After the independent pass
 
-From the repository root, regenerate the handoff (it preserves review fields and rejects changed evidence):
+Import a returned ZIP from the repository root. The importer verifies the ZIP manifest, matches every row against local evidence, and copies only independent annotation fields without extracting archive paths:
+
+```sh
+python3 prototypes/three-ages/import_independent_review_bundle.py --bundle /path/to/returned-review.zip
+```
+
+To regenerate worksheets after import, use the handoff exporter; it preserves review fields and rejects changed evidence:
 
 ```sh
 python3 prototypes/three-ages/export_independent_review.py

@@ -13,7 +13,10 @@ Regenerate them with:
 
 ```sh
 python3 prototypes/three-ages/export_independent_review.py
+python3 prototypes/three-ages/build_independent_review_bundle.py
 ```
+
+Import a reviewer-returned ZIP with `python3 prototypes/three-ages/import_independent_review_bundle.py --bundle <zip>`. It verifies the evidence files and local provenance, and only copies annotation fields; it never extracts archive paths to disk.
 
 The export copies evidence provenance but omits the primary annotator's identity notes, labels, observations, reviewer, date, confidence, and review status. The second reviewer should work from these files without first consulting the primary review worksheets. Independent fields are preserved on regeneration; a changed evidence key or provenance causes a refusal rather than silently reattaching a review.
 

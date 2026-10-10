@@ -89,7 +89,7 @@ python3 prototypes/three-ages/export_balat_review.py
 
 This writes `three-ages/data/balat-photo-review.csv` (provenance columns plus blank `facade_label`, observation, reviewer and confidence fields) and compiles completed rows to `three-ages/data/balat-photo-reviews.json`. Regeneration preserves existing reviews and refuses to attach a review after its photo provenance changed. Wide street-level sweeps confirmed the remaining misses are genuine absences (BALaT holds no exact-address photo for those buildings), not query failures.
 
-Before any training export, prepare blind independent worksheets for the pilot and scaled photo sources, then generate adjudication sheets after both reviewers finish:
+Before any training export, prepare blind independent worksheets for the pilot and scaled photo sources, create the standalone ZIP with `build_independent_review_bundle.py`, and import its returned copy with `import_independent_review_bundle.py --bundle <zip>`. Then generate adjudication sheets after both reviewers finish:
 
 ```bash
 python3 prototypes/three-ages/export_independent_review.py
