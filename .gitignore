@@ -12,4 +12,8 @@ venv/
 .vscode/
 .idea/
 
+# Local agent working state
+.pi/
+.worksheets/
+
 # Prototype snapshots and derived review artifacts are intentionally tracked.
