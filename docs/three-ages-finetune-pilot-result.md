@@ -307,3 +307,49 @@ back the original "zip queries against the gallery rows" defect makes two of the
 fail, so they are not decorative. One caught a defect in the tests themselves —
 the first fixture used `rows[0]` as its query, which hid the bug entirely; the
 replacement queries a building that is not the first row.
+
+## A different regime: hard negatives (measured, not assumed)
+
+Epoch two showed the objective saturating rather than the encoder improving, which
+points at the negatives: randomly shuffled batches pair a townhouse with a
+warehouse, so the loss can fall without learning what distinguishes lookalikes.
+Two attempts, and the first one failed:
+
+1. **Grouping by location** (batchmates from the same ~33 m grid cell). Measured
+   loss dropped to 0.45 against ~2.1 for random order — *easier*, not harder —
+   because a cell's pairs mostly belong to the same few buildings, and
+   same-building items are positives under the building-aware loss. Abandoned
+   after 500 steps.
+2. **Visual hard negatives.** Each batch is one anchor building plus its k=8 most
+   similar *other* buildings, chosen by frozen-embedding centroid, so negatives
+   are plausible confusions. Verified before training: mean cross-building cosine
+   within a batch rises 0.569 → 0.686, at the cost of fewer distinct buildings per
+   batch (16.0 → 8.7). All 78,343 pairs are used exactly once (4,897 batches).
+
+Validation, same galleries and denominators as every table above, two seeds:
+
+| metric | frozen | random 42 | random 7 | hard 42 | hard 7 |
+|---|---:|---:|---:|---:|---:|
+| publisher top5 | 31.24% | 33.51% | 34.10% | 33.95% | **35.28%** |
+| publisher cross-era top5 (fair) | 0.87% | 3.80% | 3.80% | 4.06% | **4.54%** |
+| cross-pole top5 | 1.36% | 4.68% | 3.96% | **5.25%** | 4.82% |
+| cross-pole cross-era top5 | 0.00% | 0.68% | 0.72% | **1.21%** | 0.87% |
+| neighbour control, cluster top-1 | 80.17% | 82.90% | — | 83.17% | 83.48% |
+| neighbour control, full-gallery top-1 | 14.44% | 17.17% | — | 16.54% | 17.52% |
+
+Hard negatives beat random order on **all four retrieval metrics in both seeds**
+(8/8 pairwise): mean publisher top5 34.62% vs 33.81%, publisher cross-era 4.30% vs
+3.80%, cross-pole top5 5.04% vs 4.32%, cross-pole cross-era 1.04% vs 0.70%. The
+per-metric margins are small and the seeds disagree on which is largest, so the
+defensible claim is a consistent direction, not a precise effect size. For
+cross-pole cross-era alone the 95% intervals of the two regimes touch at one seed
+(28/4,141 vs 50/4,141), which is exactly why the second seed matters.
+
+Identity discrimination is essentially unchanged (cluster top-1 83.2–83.5% versus
+82.9%), the expected shape: this regime buys cross-condition matching, not
+neighbour resolution. It also avoids the epoch-2 collapse (full-gallery top-1
+stays ~16.5–17.5%, where a second random epoch fell to 14.3%).
+
+Nothing here retrains on the test split; the test numbers in the table above still
+come from the seed-42 random-order checkpoint, so the hard-negative variant has
+**no test-split result** and should not be quoted as if it did.
