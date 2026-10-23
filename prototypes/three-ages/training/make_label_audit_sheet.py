@@ -35,16 +35,32 @@ def main() -> None:
     ap.add_argument('--publisher-per-row', type=int, default=3)
     ap.add_argument('--seed', type=int, default=0)
     ap.add_argument('--out', default=str(DATA / 'label-audit.html'))
+    ap.add_argument('--split', default='train',
+                    help="only buildings whose pairs come from this split "
+                         "(the model never trains on val/test)")
+    ap.add_argument('--include-drawings', action='store_true',
+                    help='also show publisher images flagged as drawings; training '
+                         'excludes them, so the default matches the training set')
     args = ap.parse_args()
 
     pub = load(DATA / 'manifest.csv')
     mp = load(DATA / 'mapillary_manifest.csv')
+
+    def usable(row: dict) -> bool:
+        if args.split and row.get('split') != args.split:
+            return False
+        if not args.include_drawings and str(row.get('drawing_flag')).lower() in ('1', 'true'):
+            return False
+        return True
+
     by_building = defaultdict(list)
     for row in pub:
-        by_building[row['building_id']].append(row)
+        if usable(row):
+            by_building[row['building_id']].append(row)
     frames = defaultdict(list)
     for row in mp:
-        frames[row['building_id']].append(row)
+        if usable(row):
+            frames[row['building_id']].append(row)
 
     shared = sorted(b for b in frames if b in by_building)
     if not shared:
@@ -95,7 +111,11 @@ that have both, seed {args.seed}.</p>
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(document, encoding='utf-8')
     print(json.dumps({'out': str(out), 'buildings': len(chosen),
-                      'available': len(shared), 'seed': args.seed}, indent=2))
+                      'available': len(shared), 'seed': args.seed,
+                      'split': args.split,
+                      'drawings_included': bool(args.include_drawings),
+                      'note': 'sampled from the same pairs training uses'},
+                     indent=2))
 
 
 if __name__ == '__main__':
