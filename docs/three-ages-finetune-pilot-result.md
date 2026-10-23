@@ -60,7 +60,7 @@ differ.
 ## One honest test-split evaluation
 
 Run once after the pilot was fixed on validation, via
-`local/training/eval_test_once.py`. Both arms use caches built by the **same
+`prototypes/three-ages/training/eval_test_once.py`. Both arms use caches built by the **same
 toolchain** in this venv, and the report records SHA-256 of every input plus the
 checkpoint, so the numbers can be attributed to specific weights.
 
@@ -230,13 +230,13 @@ catch.
 ## Reproducing
 
 ```bash
-~/.venvs/rocm/bin/python local/training/train_local_pilot.py --run-dir local/training/pilot-X
+~/.venvs/rocm/bin/python prototypes/three-ages/training/train_local_pilot.py --run-dir local/training/pilot-X
 # bounded variant with a 2h watchdog and lifecycle record:
-python3 local/training/run_pilot_job.py local/training/pilot-X --seed 7
+python3 prototypes/three-ages/training/run_pilot_job.py local/training/pilot-X --seed 7
 # continue training from a checkpoint:
-python3 local/training/run_pilot_job.py local/training/pilot-X --resume <ckpt>
+python3 prototypes/three-ages/training/run_pilot_job.py local/training/pilot-X --resume <ckpt>
 # summary (refuses incomplete runs):
-python3 local/training/summarise_pilot.py local/training/pilot-X
+python3 prototypes/three-ages/training/summarise_pilot.py local/training/pilot-X
 ```
 
 Frozen-baseline re-encoding check:
@@ -265,7 +265,7 @@ original cache bit-exactly under system Python.
   cached baseline within 0.05 pp, ~45× smaller than the measured deltas.
 - Independent read-only reviews: pre-launch (three findings fixed) and
   post-hoc adversarial audit of these numbers (six defects fixed, see below).
-- 7 offline CPU tests (`local/training/test_local_pilot.py`); kernel taint 0
+- 7 offline CPU tests (`prototypes/three-ages/training/test_local_pilot.py`); kernel taint 0
   through every run.
 - Out-of-source check on a third archive (KIK-IRPA/IDPS/Commons): no collapse,
   no measurable gain either way (`report_curated_slice.json`).
@@ -310,13 +310,13 @@ The audit found and this revision fixes:
 
 ## Using it
 
-`local/training/three_ages.py` is the encoder made usable — give it a building or
+`prototypes/three-ages/training/three_ages.py` is the encoder made usable — give it a building or
 a photograph and it ranks the corpus by similarity:
 
 ```bash
-python3 local/training/three_ages.py --building 37300 --topk 5 --cross-era
-python3 local/training/three_ages.py --image local/monument-inbox/13130/10401112_0049_P01.JPG --cross-era
-python3 local/training/three_ages.py --building 37300 --cross-era --index frozen   # before/after
+python3 prototypes/three-ages/training/three_ages.py --building 37300 --topk 5 --cross-era
+python3 prototypes/three-ages/training/three_ages.py --image local/monument-inbox/13130/10401112_0049_P01.JPG --cross-era
+python3 prototypes/three-ages/training/three_ages.py --building 37300 --cross-era --index frozen   # before/after
 ```
 
 `--cross-era` restricts hits to a different capture era; `--index frozen` runs the
@@ -351,7 +351,7 @@ counting cross-era hits across the whole corpus gives 180 validation queries for
 the default checkpoint, which is 4.6213% of the 3,895 eligible, the same figure
 its run report states.
 
-Regression coverage for the utility lives in `local/training/test_three_ages.py`
+Regression coverage for the utility lives in `prototypes/three-ages/training/test_three_ages.py`
 (7 offline tests, no index or model). The tests were mutation-checked: putting
 back the original "zip queries against the gallery rows" defect makes two of them
 fail, so they are not decorative. One caught a defect in the tests themselves —

@@ -26,4 +26,6 @@ node_modules/
 
 # Local-only image cache for sources without bulk image reuse terms.
 # Pixels stay out of the repository; only openly licensed sources are committed.
+# The tests assert that nothing under local/ is tracked (test_local_ingest.py),
+# which is why the training code lives in prototypes/three-ages/training/.
 local/
