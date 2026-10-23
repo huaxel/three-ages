@@ -88,6 +88,8 @@ scraped records and adds three columns to the queue:
 | `notice_excerpt` | up to three sentences from the notice that mention a year or construction verb, verbatim |
 | `notice_sources` | which record field they came from (`description`, `details:Intervenant(s)`, ...) |
 | `notice_years` | every four-digit year appearing in those sentences |
+| `primary_years` | years from sentences that name a construction verb |
+| `evidence_strength` | `construction`, `contextual` or `none` |
 
 Two things this deliberately does not do. It never fills `construction_era` — the
 reviewer still decides, because catalogue years are exactly the proxies that make
@@ -96,8 +98,23 @@ embeds as tooltips (`<a class="info">éclectique<span>Période : env. 1840-1914
 </span></a>`), whose years describe the style rather than the building; before
 that fix, building 37300 was credited with 1860 and 1914 from glossary text.
 
-Coverage: all 60 rows carry year evidence. One quote was checked against the live
-notice page (`37300`: "érigé entre 1894 et 1909") and matches.
+Coverage, measured rather than assumed. All 60 rows carry year evidence, and in
+49 of them the years come from a sentence with a construction verb (construit,
+érigé, édifié). But the evidence resolves to a **single era for only 17 rows**;
+the other 43 mention works from different periods — a founding, an extension, a
+restoration — so the reviewer must still judge which phase the label means. My
+first version credited all 60 rows with a single "reading a cell" decision; the
+measurement says otherwise, and the column set now separates `primary_years`
+(construction verbs) from `notice_years` (everything mentioned) so that
+distinction is visible instead of glossed.
+
+That disagreement is itself informative: of the 17 unambiguous rows, **10 agree
+with the catalogue's proxy year and 7 do not**. A ~40% disagreement rate on the
+easiest cases is the strongest argument yet that the proxy cannot stand in for
+reviewed labels.
+
+One quote was checked against the live notice page (`37300`: "érigé entre 1894
+et 1909") and matches.
 
 Order matters: run `build_taskb_queue.py` first, then
 `extract_notice_evidence.py --force`, because rebuilding the queue writes a fresh

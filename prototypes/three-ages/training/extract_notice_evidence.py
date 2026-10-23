@@ -22,6 +22,8 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[2]
 DATA = REPO / 'local' / 'training'
 
+STRONG = re.compile(r'\b(érig|erig|constru|construit|bâti|bati|édifi|edifi|reconstru)',
+                   re.I)
 CUES = re.compile(
     r'\b(érig|erig|constru|bâti|bati|édifi|edifi|datant|remonte|vers|entre|'
     r'siècle|siecle|incendi|reconstru|restaur|transform|agrandi)', re.I)
@@ -51,7 +53,14 @@ def sentences(text: str):
             yield part
 
 
-def extract(record: dict) -> tuple[str, str, list[int]]:
+def extract(record: dict) -> dict:
+    """Quote the notice and separate construction years from incidental ones.
+
+    A building notice mentions many years: a founding, a fire, a later wing.
+    Treating them all as construction evidence made 47 of 60 rows look
+    multi-era, so sentences are graded: those with a construction verb carry the
+    primary years, incidental years are kept separately as context.
+    """
     blobs = []
     description = record.get('description') or {}
     if isinstance(description, dict) and description.get('html'):
@@ -62,25 +71,30 @@ def extract(record: dict) -> tuple[str, str, list[int]]:
             if isinstance(value, (str, dict, list)):
                 blobs.append((f'details:{key}', plain(value)))
 
-    excerpts, sources, years = [], set(), set()
+    strong, contextual, sources = [], [], set()
     for label, text in blobs:
         for sentence in sentences(text):
-            found = YEAR.findall(sentence)
-            if not found and not CUES.search(sentence):
+            years = [int(y) for y in YEAR.findall(sentence)]
+            if not years and not CUES.search(sentence):
                 continue
-            if not found and len(excerpts) >= 1:
-                continue  # prefer sentences that carry an actual year
-            excerpt = sentence[:MAX_CHARS]
-            if any(excerpt[:60] == existing[:60] for existing in excerpts):
-                continue
-            excerpts.append(excerpt)
-            sources.add(label)
-            years.update(int(y) for y in found)
-            if len(excerpts) >= MAX_EXCERPTS:
-                break
-        if len(excerpts) >= MAX_EXCERPTS:
-            break
-    return ' | '.join(excerpts), ';'.join(sorted(sources)), sorted(years)
+            bucket = strong if (years and STRONG.search(sentence)) else contextual
+            if years:
+                bucket.append((sentence, years))
+                sources.add(label)
+
+    excerpts = [s_ for s_, _ in (strong + contextual)][:MAX_EXCERPTS]
+    primary = sorted({y for _, years in strong for y in years})
+    strength = 'construction' if strong else ('contextual' if contextual else 'none')
+    if not primary:
+        primary = sorted({y for _, years in contextual for y in years})
+    every = sorted({y for _, years in strong + contextual for y in years})
+    return {
+        'notice_excerpt': ' | '.join(e[:MAX_CHARS] for e in excerpts),
+        'notice_sources': ';'.join(sorted(sources)),
+        'notice_years': ';'.join(str(y) for y in every),
+        'primary_years': ';'.join(str(y) for y in primary),
+        'evidence_strength': strength,
+    }
 
 
 def main() -> None:
@@ -117,15 +131,14 @@ def main() -> None:
             record = json.loads(path.read_text(encoding='utf-8'))
         except (OSError, json.JSONDecodeError):
             record = {}
-        excerpt, sources, years = extract(record if isinstance(record, dict) else {})
-        row['notice_excerpt'] = excerpt
-        row['notice_sources'] = sources
-        row['notice_years'] = ';'.join(str(y) for y in years)
-        if years:
+        found = extract(record if isinstance(record, dict) else {})
+        row.update(found)
+        if found.get('primary_years'):
             covered += 1
 
     fields = list(rows[0].keys())
-    for extra in ('notice_excerpt', 'notice_sources', 'notice_years'):
+    for extra in ('notice_excerpt', 'notice_sources', 'notice_years',
+                  'primary_years', 'evidence_strength'):
         if extra not in fields:
             fields.append(extra)
     with out.open('w', newline='', encoding='utf-8') as fh:
