@@ -325,18 +325,31 @@ fine-tune bought. Matches are model **candidates**, not verified identifications
 the catalogue stays the authority, and external images are reported as
 identity-unknown rather than guessed.
 
-A concrete case (`13130/10401112_0049_P01.JPG`, 1990–2009):
+A concrete case (`15653/12100092_0151_P01.JPG`, 1990–2009):
 
 | | top-1 cross-era hit |
 |---|---|
-| tuned | `13130/10401112_0049_W01.jpg` (1900–1929), score 0.701 — same building |
-| frozen | unrelated building, score 0.428 — same building absent from top-3 |
+| tuned (default) | `15653/12100092_0151_P05.jpg` (2010+), score 0.854 — same building |
+| frozen | unrelated building, 0.537 — no picture of that building in the top 3 |
+
+Two honesty notes on such examples. Individual queries vary: 48 validation
+queries are ones where the tuned model puts the right building at rank 1 and the
+frozen model misses it entirely, but cases also exist in the other direction, so
+an anecdote is illustration, not evidence. And this example was selected by
+searching for a case where tuned succeeds and frozen fails, which is exactly the
+kind of cherry-picking the aggregate tables exist to prevent.
+
+The default index (`--index tuned`) is the checkpoint chosen on validation: hard
+negatives, two epochs, fresh pair sample per epoch. Older checkpoints stay
+addressable as `--index hard1` and `--index random1` so comparisons do not drift
+silently.
 
 Verified invariants: the query never appears in its own results, a corpus image
 resolves its real metadata, external images are flagged unknown, and
 `--topk`/`--json` shapes hold. The tool also reproduces the evaluation exactly —
-counting cross-era hits across the whole corpus gives 148 validation queries,
-the same figure the seed analysis reports.
+counting cross-era hits across the whole corpus gives 180 validation queries for
+the default checkpoint, which is 4.6213% of the 3,895 eligible, the same figure
+its run report states.
 
 Regression coverage for the utility lives in `local/training/test_three_ages.py`
 (7 offline tests, no index or model). The tests were mutation-checked: putting
