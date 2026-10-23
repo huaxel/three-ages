@@ -282,6 +282,24 @@ cross-pole top-5 against a 0.0065% chance floor, about 143x, which shows the
 pairs carry signal without saying how clean they are. A real audit needs human
 eyes on a sample of frames.
 
+## Which checkpoint for which task
+
+There is no single best checkpoint, and the table above says why. Pick by use:
+
+| task | checkpoint | cache |
+|---|---|---|
+| finding the same building across eras / photographers | hard negatives, 2 epochs, refreshed pairs | `embeddings_refresh2e.npz` (`--index tuned`) |
+| drawing vs photograph gate, photo dating | frozen laion2b (best on both) | `embeddings_frozen_venv.npz` (`--index frozen`) |
+| reproducing the first pilot's numbers | random order, 1 epoch | `embeddings_tuned_seed42.npz` (`--index random1`) |
+
+The tuned encoders are worse at dating than the frozen one; that is the measured
+cost of their retrieval gain, not a defect to hide. A pipeline that needs both
+should run the two encoders rather than compromising on one — 512-d vectors for
+77k images is 158 MB, and encoding the corpus twice costs about 20 minutes here.
+
+`three_ages.py` defaults to the retrieval task because that is the question the
+project exists to answer; `--index frozen` switches it in one flag.
+
 ## Reproducing
 
 ```bash

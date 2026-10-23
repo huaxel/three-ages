@@ -41,7 +41,7 @@ this before quoting a number. The narrative lives in
 - `pilot-epoch2-20261023-105251/` — second epoch from the seed-42 checkpoint; kept because the negative result is the point.
 - `pilot-hard3-*` and `pilot-hard-seed7-*` — **best validation results** (visual hard negatives, one epoch each, seeds 42 and 7).
 - `pilot-hard-epoch2-*` — second epoch on hard negatives; **rejects** the "easy negatives caused saturation" explanation.
-- `pilot-refresh2e-*` — two epochs drawing a **fresh pair sample each epoch**; the collapse disappears, so the cause was repeating fixed pairs.
+- `pilot-refresh2e-*` — two epochs drawing a **fresh pair sample each epoch**; the collapse disappears, so the cause was repeating fixed pairs. This is the checkpoint to use for retrieval (`--index tuned`); the frozen caches stay better for the drawing and dating probes, as the results document shows.
 - `pilot-hardneg-*`, `pilot-hard2-*` — abandoned attempts: location-grouped batches made negatives easier (measured), and the first hard-batch builder skipped pairs (coverage bug, caught by a unit test).
 - `resume-smoke-*`, `pilot-smoke-*` — plumbing checks, not results.
 
