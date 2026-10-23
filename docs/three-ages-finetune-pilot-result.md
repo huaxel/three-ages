@@ -350,6 +350,22 @@ Identity discrimination is essentially unchanged (cluster top-1 83.2–83.5% ver
 neighbour resolution. It also avoids the epoch-2 collapse (full-gallery top-1
 stays ~16.5–17.5%, where a second random epoch fell to 14.3%).
 
-Nothing here retrains on the test split; the test numbers in the table above still
-come from the seed-42 random-order checkpoint, so the hard-negative variant has
-**no test-split result** and should not be quoted as if it did.
+### Test split for the selected checkpoint
+
+The hard-negative model was chosen on validation (8/8 metric wins across two
+seeds), so its test result is a confirmation rather than a selection step:
+
+| test metric | frozen | random order | hard negatives |
+|---|---:|---:|---:|
+| publisher cross-era top5 (fair) | 0.64% | 4.58% | **5.42%** [4.75–6.17] |
+| publisher top5 | 32.00% | **34.91%** | 34.26% |
+| cross-pole top5 | 0.93% | 4.21% | **4.73%** [4.14–5.39] |
+| cross-pole cross-era top5 | 0.02% | 1.33% | **1.61%** |
+
+The test split now agrees with validation: hard negatives improve the two
+cross-condition metrics and give back 0.65 pp on broad same-era top-5, which is
+the same trade the validation table shows. **Disclosure:** the test split has now
+been evaluated twice — once for the random-order checkpoint, once for the
+hard-negative one, with the choice between them made only on validation. Any
+further model selection must not consult these numbers; if another variant is
+tried, it gets validation only.
