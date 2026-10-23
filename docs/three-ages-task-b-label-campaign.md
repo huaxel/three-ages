@@ -6,6 +6,44 @@ by design: `train_probe.py` refuses `--head construction_era` without
 Contributor years and style windows are proxies, not training truth. This card
 defines the campaign that produces the labels file and wires the head.
 
+## The label definition is undefined, and that is load-bearing
+
+The contract says `construction_era` is one of six bins. It does not say *which
+phase* of a building counts. Measuring the queue's own evidence shows why that
+matters:
+
+| measurement | value |
+|---|---|
+| rows whose primary years fall in one bin | 17 of 60 |
+| rows spanning two bins | 19 |
+| rows spanning three or more | 24 |
+| rows that change bin if the rule is "latest year" instead of "earliest" | **43 of 60** |
+| median span of a building's primary years | **72 years** |
+
+So the label is mostly determined by an unwritten rule, not by the evidence. Two
+reviewers applying "construction era" honestly could disagree with each other on
+43 of these buildings. Labels like that would make task B unlearnable for reasons
+that have nothing to do with the corpus.
+
+**Proposed rule, for Juan to confirm or replace before the first label is
+written.** The era is that of the building's *principal construction campaign*:
+the earliest documented construction of the surviving principal volume, ignoring
+later restorations, refits and rear extensions — but using a rebuild instead of
+the original when the notice says the building was rebuilt or replaced (register
+024, "reconstruction in 1704 on the preserved cellars", would be 1704, not
+whatever stood before).
+
+To keep that auditable, each label should also record the phase it came from:
+
+| column | content |
+|---|---|
+| `construction_era` | the bin the rule selects |
+| `phase_years` | the years of that campaign, e.g. `1894-1909` |
+| `evidence` | the quoted sentence, as already supplied by `notice_excerpt` |
+
+Two labels that disagree are then comparable ("they chose different phases")
+rather than opaque ("one of them was wrong").
+
 ## Label contract
 
 `local/training/reviewed_construction_eras.csv`, one row per building:
@@ -13,7 +51,8 @@ defines the campaign that produces the labels file and wires the head.
 | column | meaning |
 |---|---|
 | `building_id` | corpus id (joins to manifest + register review) |
-| `construction_era` | one of `CONSTRUCTION_ERAS` in `epoch_data.py`: pre-1850, 1850-1892, 1893-1914, 1918-1940, 1945-1975, post-1975 |
+| `construction_era` | one of `CONSTRUCTION_ERAS` in `epoch_data.py`: pre-1850, 1850-1892, 1893-1914, 1918-1940, 1945-1975, post-1975 — selected by the phase rule above |
+| `phase_years` | optional but recommended: the years of the campaign the label came from (`1894-1909`) |
 | `evidence` | source field + short quote that justifies the bin (notice text, register entry, dated plaque photo) |
 | `reviewer`, `reviewed_at`, `confidence` | same convention as the image/register review CSVs |
 
