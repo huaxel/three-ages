@@ -40,7 +40,7 @@ A critical methodological boundary of the Three Ages project is the strict isola
    - Assigned by human reviewers from visual inspection of historical images.
    - Constrained to the controlled vocabulary (`baroque`, `classical french`, `renaissance-inspired`, `mixed`, `other`, `uncertain`, `not assessable`).
    - Requires explicit reviewer identification, ISO 8601 timestamp, observation notes, and confidence rating (`low`, `medium`, `high`).
-   - Currently, 0 of 72 images carry completed reviewer style labels; the committed dataset is entirely in a **pending review** state.
+   - Currently, 0 of 77 images carry completed reviewer style labels in this manifest; the committed dataset is entirely in a **pending review** state. (Seventeen curated pilot image reviews live in `three-ages-image-review.csv`; this manifest carries source-described weak labels only.)
 
 ---
 
@@ -89,7 +89,7 @@ A meaningful held-out recognition score requires that:
 **Current Dataset State**:
 - Total records: 34
 - Facade units: 27
-- Historical images: 72
+- Historical images: 77
 - Reviewed style labels: 0
 - **Held-out recognition score feasibility: INFEASIBLE (insufficient data; all rows pending).**
 

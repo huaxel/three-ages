@@ -373,16 +373,17 @@ def test_prototype_committed_dataset_audit() -> None:
     readiness = report["label_readiness"]
     split = report["split_feasibility"]
 
-    assert prov["total_rows"] == 72
+    assert prov["total_rows"] == 77
     assert prov["unique_facade_units_count"] == 27
     assert prov["unique_buildings_count"] == 27
-    assert prov["unique_image_assets_count"] == 72
-    assert prov["unique_image_checksums_count"] == 72
+    assert prov["unique_image_assets_count"] == 77
+    assert prov["unique_image_checksums_count"] == 77
     assert len(prov["csv_sha256"]) == 64
 
-    assert weak["rows_with_weak_label"] == 67
-    assert readiness["reviewed_rows_count"] == 0
-    assert readiness["pending_rows_count"] == 72
+    assert weak["rows_with_weak_label"] == 72
+    assert readiness["reviewed_rows_count"] == 17
+    assert readiness["pending_rows_count"] == 60
+    assert readiness["per_class_unique_units"] == {"baroque": 4, "classical french": 1, "renaissance-inspired": 1}
     assert readiness["incomplete_review_rows_count"] == 0
     assert readiness["invalid_styles_count"] == 0
 

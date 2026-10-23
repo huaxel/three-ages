@@ -140,7 +140,10 @@ async function testThreeAges() {
   const buildings = JSON.parse(fs.readFileSync(path.join(ROOT, "three-ages/data/grand-place-buildings.json"), "utf8"));
   const nameFor = id => (buildings.records.find(record => record.id === id) || {}).name || id;
   const buildingButtons = context.document.querySelectorAll("#list .building");
-  if (buildingButtons.length !== 6) throw new Error(`Three Ages: expected 6 case buttons, found ${buildingButtons.length}`);
+  if (buildingButtons.length !== 27) throw new Error(`Three Ages: expected 27 facade-unit buttons, found ${buildingButtons.length}`);
+  for (const pilotId of ["005", "009", "022", "023", "024", "026"]) {
+    if (!buildingButtons.some(button => button.dataset.id === pilotId)) throw new Error(`Three Ages: pilot case button missing: ${pilotId}`);
+  }
   const other = buildingButtons.find(button => button.dataset.id !== "024");
   other.click();
   requireIncludes(element("content").innerHTML, nameFor(other.dataset.id), "Three Ages case switching");

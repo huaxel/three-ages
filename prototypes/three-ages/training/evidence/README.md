@@ -12,7 +12,7 @@ stay in `local/training/` and are ignored.
 | `report_neighbour_epochs.json` | same control, epoch 1 vs epoch 2 |
 | `report_neighbour_hardneg.json` | same control for the hard-negative seeds |
 | `report_curated_slice.json` | out-of-source check on KIK-IRPA/IDPS/Commons previews |
-| `report_drawing_*` / `report_capture_era_*` | the frozen and tuned linear probes |
+| `report_drawing_*` / `report_capture_era_*` | the linear probes for frozen, random-order and the recommended checkpoint |
 
 `../verify_documented_numbers.py` asserts every headline figure in
 `docs/three-ages-finetune-pilot-result.md` against these files and runs as part of

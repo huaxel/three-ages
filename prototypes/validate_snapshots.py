@@ -148,6 +148,14 @@ def main() -> None:
     preview_2022_path = ROOT / "three-ages/data/urbisgrid-2022-grand-place.png"
     pilot_fields, pilot_rows = read_csv("three-ages/data/three-ages-pilot-export.csv")
     image_review_fields, image_review_rows = read_csv("three-ages/data/three-ages-image-review.csv")
+    facade_units = read_json("three-ages/data/facade-units.json")
+    facade_supplement = read_json("three-ages/data/facade-image-supplement.json")
+    commons_supplement = read_json("three-ages/data/facade-image-commons.json")
+    unit_by_record = {
+        record_id: unit["unit_id"]
+        for unit in facade_units["units"]
+        for record_id in unit["records"]
+    }
     compiled_reviews = read_json("three-ages/data/three-ages-image-reviews.json")
     structural_review_fields, structural_review_rows = read_csv("three-ages/data/three-ages-structural-review.csv")
     compiled_structural_reviews = read_json("three-ages/data/three-ages-structural-reviews.json")
@@ -422,9 +430,9 @@ def main() -> None:
 
     require(len(pilot_rows) == 6 and pilot_fields[:3] == ["source_id", "name", "address"], "Three Ages pilot CSV export is incomplete")
     require(all(field in pilot_fields for field in ("register_source_kind", "register_source_url", "identity_note", "identity_evidence_count", "identity_evidence_ids", "identity_evidence_urls", "image_evidence_ids", "image_evidence_epochs", "image_evidence_urls")), "Three Ages pilot CSV is missing provenance columns")
-    require(len(image_review_rows) == 17 and image_review_fields[:5] == ["source_id", "name", "address", "asset_id", "epoch"], "historical-image review worksheet is incomplete")
-    require(all(field in image_review_fields for field in ("source_observation", "annotation_status", "identity_note", "facade_observation", "structural_observation", "reviewer", "reviewed_at", "confidence")), "historical-image review worksheet is missing review columns")
-    require({row["source_id"] for row in image_review_rows} == set(expected_images), "historical-image review worksheet does not cover every pilot case")
+    require(image_review_fields[:2] == ["source_id", "facade_unit_id"], "historical-image review worksheet is incomplete")
+    require(all(field in image_review_fields for field in ("name", "address", "asset_id", "epoch", "source_observation", "annotation_status", "identity_note", "source_style_text", "source_label_kind", "facade_style", "facade_observation", "structural_observation", "reviewer", "reviewed_at", "confidence")), "historical-image review worksheet is missing review columns")
+    require(set(expected_images) <= {row["source_id"] for row in image_review_rows}, "historical-image review worksheet does not cover every pilot case")
     require({"T084580", "B031587", "A102887", "B024641", "british-library-balance-1878", "commons-balance-2011-01", "B031502", "T001802", "A133254", "E049753", "T001803", "T001805", "T001820", "T001817", "B198870", "B137671", "E023355"} <= {row["asset_id"] for row in image_review_rows}, "historical-image review worksheet is missing an asset")
     expected_review_rows = {}
     for case in pilot["records"]:
@@ -433,6 +441,7 @@ def main() -> None:
             asset = asset or {}
             key = (case["source_id"], asset.get("asset_id", ""))
             expected_review_rows[key] = {
+                "facade_unit_id": unit_by_record[case["source_id"]],
                 "epoch": str(asset.get("epoch", "")),
                 "source_url": asset.get("source_url", ""),
                 "image_url": asset.get("image_url", ""),
@@ -442,10 +451,32 @@ def main() -> None:
                 "credit": asset.get("credit", ""),
                 "source_observation": asset.get("observation", "No permitted historical preview is attached."),
                 "identity_note": case.get("identity_note", ""),
+                "source_style_text": case.get("facade", {}).get("value", ""),
+                "source_label_kind": "curated source-described style",
                 "_source_annotation_status": asset.get("annotation_status", "pending historical source"),
             }
+    for candidate in facade_supplement.get("records", []) + commons_supplement.get("records", []):
+        record = next(item for item in buildings["records"] if str(item["id"]) == candidate["source_id"])
+        asset = candidate["asset"]
+        key = (candidate["source_id"], asset.get("asset_id", ""))
+        require(key not in expected_review_rows, f"supplement worksheet row duplicates pilot evidence: {key}")
+        expected_review_rows[key] = {
+            "facade_unit_id": candidate.get("facade_unit_id") or unit_by_record[candidate["source_id"]],
+            "epoch": str(asset.get("epoch", "")),
+            "source_url": asset.get("source_url", ""),
+            "image_url": asset.get("image_url", ""),
+            "preview": asset.get("preview", ""),
+            "preview_sha256": asset.get("preview_sha256", ""),
+            "licence": asset.get("licence", ""),
+            "credit": asset.get("credit", ""),
+            "source_observation": asset.get("observation", "No permitted historical preview is attached."),
+            "identity_note": "",
+            "source_style_text": record.get("facade") or "",
+            "source_label_kind": "raw city facade description",
+            "_source_annotation_status": "source preview; no reviewer annotation",
+        }
     require(len(image_review_rows) == len(expected_review_rows), "historical-image review worksheet has unexpected rows")
-    review_fields = ("facade_observation", "structural_observation", "reviewer", "reviewed_at", "confidence")
+    review_fields = ("facade_style", "facade_observation", "structural_observation", "reviewer", "reviewed_at", "confidence")
     for row in image_review_rows:
         key = (row["source_id"], row["asset_id"])
         require(key in expected_review_rows, f"historical-image review worksheet has an unexpected case or asset: {key}")
@@ -469,7 +500,7 @@ def main() -> None:
     require(compiled_reviews.get("record_count") == len(completed_review_rows), "compiled image-review count is stale")
     require(compiled_reviews.get("records") == completed_review_rows, "compiled image reviews do not match the completed worksheet rows")
     balance_image_rows = [row for row in image_review_rows if row["source_id"] == "024"]
-    require({(row["asset_id"], row["epoch"]) for row in balance_image_rows} == {("british-library-balance-1878", "1878"), ("commons-balance-2011-01", "2011")}, "La Balance comparison epochs are missing from the review worksheet")
+    require({("british-library-balance-1878", "1878"), ("commons-balance-2011-01", "2011")} <= {(row["asset_id"], row["epoch"]) for row in balance_image_rows}, "La Balance comparison epochs are missing from the review worksheet")
 
     structural_fields = ("structural_observation", "reviewer", "reviewed_at", "confidence")
     require(len(structural_review_rows) == 6 and structural_review_fields[:4] == ["source_id", "name", "address", "comparison_id"], "structural review worksheet is incomplete")
@@ -571,7 +602,7 @@ def main() -> None:
     generated_review = {field: "" for field in review_export["IMAGE_FIELDS"]}
     generated_review.update({"source_id": "test-case", "asset_id": "test-asset", "source_url": "https://example.test/evidence", "annotation_status": "source preview; no reviewer annotation"})
     existing_review = {field: str(generated_review[field]) for field in review_export["IMAGE_FIELDS"]}
-    existing_review.update({"facade_observation": "Test observation", "reviewer": "Test reviewer", "reviewed_at": "2026-09-20", "confidence": "medium"})
+    existing_review.update({"facade_style": "baroque", "facade_observation": "Test observation", "reviewer": "Test reviewer", "reviewed_at": "2026-09-20", "confidence": "medium"})
     preserved_review = review_export["preserve_review"](dict(generated_review), existing_review)
     require(preserved_review["facade_observation"] == "Test observation" and preserved_review["annotation_status"] == "reviewed image annotation", "completed historical-image reviews are not preserved")
     changed_review = dict(generated_review)
@@ -617,6 +648,7 @@ def main() -> None:
         "date_semantics": "test semantics",
         "source_comparison": "test comparison",
         "annotation_status": "proxy semantics; no reviewer decision",
+        "identity_gate": "not applicable",
     })
     existing_register = {field: str(generated_register[field]) for field in review_export["REGISTER_FIELDS"]}
     existing_register.update({

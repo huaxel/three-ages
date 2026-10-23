@@ -99,6 +99,14 @@ def main() -> None:
         # 1. A gated building must refuse image reviews until the gate is resolved.
         # Match the exact asset: matching on source_id alone would touch all of the
         # building's images and leave stray reviews that then compile.
+        # The repository may ship a resolved gate; simulate the unresolved state first.
+        update(data / "three-ages-register-review.csv", {"source_id": "024"}, {
+            "identity_gate": "pending",
+            "identity_gate_note": "",
+        })
+        base_images = json.loads((data / "three-ages-image-reviews.json").read_text(encoding="utf-8"))
+        base_image_assets = {(r["source_id"], r["asset_id"]) for r in base_images["records"]}
+        base_register_count = json.loads((data / "three-ages-register-reviews.json").read_text(encoding="utf-8"))["record_count"]
         gate_asset = IMAGE_REVIEWS[-1][1]
         update(data / "three-ages-image-review.csv", {"source_id": "024", "asset_id": gate_asset}, {
             "facade_style": "classical french",
@@ -136,19 +144,22 @@ def main() -> None:
         run(tree, "prototypes/three-ages/generate_review_briefing.py")
 
         compiled_images = json.loads((data / "three-ages-image-reviews.json").read_text(encoding="utf-8"))
-        if compiled_images["record_count"] != len(IMAGE_REVIEWS):
-            raise AssertionError(f"expected {len(IMAGE_REVIEWS)} compiled image reviews, got {compiled_images['record_count']}")
+        new_image_assets = {(s, a) for s, a, _, _, _ in IMAGE_REVIEWS} - base_image_assets
+        if compiled_images["record_count"] != base_images["record_count"] + len(new_image_assets):
+            raise AssertionError(f"expected {base_images['record_count'] + len(new_image_assets)} compiled image reviews, got {compiled_images['record_count']}")
         compiled_register = json.loads((data / "three-ages-register-reviews.json").read_text(encoding="utf-8"))
-        if compiled_register["record_count"] != 1:
-            raise AssertionError(f"expected 1 compiled register review, got {compiled_register['record_count']}")
+        if compiled_register["record_count"] != base_register_count:
+            raise AssertionError(f"expected {base_register_count} compiled register reviews, got {compiled_register['record_count']}")
 
         # The resolved gate must survive regeneration, and a completed review must not be lost.
         gate = next(row for row in csv.DictReader((data / "three-ages-register-review.csv").open(newline="", encoding="utf-8")) if row["source_id"] == "024")
         if gate["identity_gate"] != REGISTER_GATE:
             raise AssertionError("the resolved identity gate did not survive regeneration")
-        reviewed_assets = {record["asset_id"] for record in compiled_images["records"]}
-        if reviewed_assets != {asset for _, asset, _, _, _ in IMAGE_REVIEWS}:
+        reviewed_assets = {(record["source_id"], record["asset_id"]) for record in compiled_images["records"]}
+        if not {(s, a) for s, a, _, _, _ in IMAGE_REVIEWS} <= reviewed_assets:
             raise AssertionError(f"a completed image review was lost: {reviewed_assets}")
+        if not base_image_assets <= reviewed_assets:
+            raise AssertionError(f"a pre-existing image review was lost: {reviewed_assets}")
 
         # 4. The UI must render the completed state, not only the empty one.
         run(tree, "node", "prototypes/smoke_ui.js")

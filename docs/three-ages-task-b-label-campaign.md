@@ -45,7 +45,7 @@ without re-running every reported number.
   register-level convention to extend).
 - Protocol: `docs/three-ages-annotation-spec.md`.
 - Facade-unit adjudication follows the Grand-Place pilot pattern
-  (`three-ages-image-review.csv`, 72 rows).
+  (`three-ages-image-review.csv`, 77 rows).
 
 ## Done means
 

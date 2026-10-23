@@ -11,9 +11,10 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-IMAGE_REVIEW_FIELDS = ("facade_observation", "structural_observation", "reviewer", "reviewed_at", "confidence")
+IMAGE_REVIEW_FIELDS = ("facade_style", "facade_observation", "structural_observation", "reviewer", "reviewed_at", "confidence")
 STRUCTURAL_REVIEW_FIELDS = ("structural_observation", "reviewer", "reviewed_at", "confidence")
 REGISTER_REVIEW_FIELDS = ("register_decision", "register_observation", "reviewer", "reviewed_at", "confidence")
+REGISTER_GATE_FIELDS = ("identity_gate", "identity_gate_note")
 
 
 def update_first_row(path: Path, values: dict[str, str]) -> None:
@@ -169,7 +170,7 @@ def main() -> None:
         reset_contracts = (
             (ages / "three-ages-image-review.csv", IMAGE_REVIEW_FIELDS + ("annotation_status",)),
             (ages / "three-ages-structural-review.csv", STRUCTURAL_REVIEW_FIELDS + ("annotation_status",)),
-            (ages / "three-ages-register-review.csv", REGISTER_REVIEW_FIELDS + ("annotation_status",)),
+            (ages / "three-ages-register-review.csv", REGISTER_REVIEW_FIELDS + REGISTER_GATE_FIELDS + ("annotation_status",)),
         )
         source_fields_before_reset = {
             path: csv_rows_without(path, mutable_fields)
@@ -213,7 +214,7 @@ def main() -> None:
         })
         run(str(ROOT / "three-ages" / "export_pilot.py"), "--data-dir", str(around))
         for worksheet, field, expected in (
-            (around / "three-ages-image-review.csv", "facade_observation", 17),
+            (around / "three-ages-image-review.csv", "facade_observation", 77),
             (around / "three-ages-structural-review.csv", "structural_observation", 6),
             (around / "three-ages-register-review.csv", "register_observation", 6),
         ):

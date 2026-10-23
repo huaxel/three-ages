@@ -76,7 +76,7 @@ For each row, verify the linked source, compare the reported date with the City 
 
 ### Historical images — `three-ages-image-review.csv`
 
-Rows: 72 covering all 27 facade units, at least two views each. Every one of them is reachable in the workbench and displayable in the explorer (`index.html`); both read the generated `three-ages-image-cases.json` rather than a hand-listed subset. Fifteen are the curated-pilot and exact-case assets (`004`, `005`, `006`, `009`, `011`, `022`, `023`, `024`, `026`); the remaining 52 are Commons candidates listed in `facade-image-commons.json`.
+Rows: 77 covering all 27 facade units, at least two views each. Every one of them is reachable in the workbench and displayable in the explorer (`index.html`); both read the generated `three-ages-image-cases.json` rather than a hand-listed subset. Seventeen are the curated-pilot assets (`005`, `009`, `022`, `023`, `024`, `026`); three are supplement views (`004`, `006`, `011`); the remaining 57 are Commons candidates listed in `facade-image-commons.json`.
 
 Use `facade-style-candidates.csv` to work through them; it pairs every asset with its building, source URL, licence, credit and source-described style text. The Commons candidates carry the raw City facade description as their weak label, which is source text and not a visual judgment.
 
@@ -125,7 +125,7 @@ The exporter preserves completed annotations only while their source provenance 
 
 The curated MVP is ready for a product decision when the identity gate is resolved, all rows have complete review metadata, and at least one subset has an independent second review with disagreement recorded.
 
-**Reviewing 72 images does not by itself make this an evaluation set.** The source-described weak labels are
+**Reviewing 77 images does not by itself make this an evaluation set.** The source-described weak labels are
 not separable by style at unit level — one `renaissance-inspired` unit, three `classical french`, ten units with
 no source style term at all (see [Dataset viability at unit level](three-ages-annotation-spec.md#dataset-viability-at-unit-level)).
 Reviewer labels are what would make the vocabulary usable, and a three-class evaluation needs enough independent
