@@ -24,8 +24,13 @@ DATA = REPO / 'local' / 'training'
 
 STRONG = re.compile(r'\b(érig|erig|constru|construit|bâti|bati|édifi|edifi|reconstru)',
                    re.I)
-REBUILD = re.compile(r'\b(reconstru|rebâti|rebati|réédifi|reedifi|remplacé|remplace)',
-                     re.I)
+# Over-flagging is cheap (a human glance); under-flagging lets a wrong suggestion
+# through, so destruction vocabulary counts too: a building that was demolished,
+# burnt or bombed and then rebuilt is exactly the case the rule must adjudicate.
+# Stems, so a trailing \w* is required: with a closing \b, "reconstru" would stop
+# matching "reconstruction" and eighteen rows silently lost their flag.
+REBUILD = re.compile(r'\b(?:reconstru|rebâti|rebati|réédifi|reedifi|remplac|démoli|demoli|'
+                     r'détruit|detruit|incendi|bombard|rasé|rase)\w*', re.I)
 CUES = re.compile(
     r'\b(érig|erig|constru|bâti|bati|édifi|edifi|datant|remonte|vers|entre|'
     r'siècle|siecle|incendi|reconstru|restaur|transform|agrandi)', re.I)
@@ -93,13 +98,25 @@ def extract(record: dict) -> dict:
                 bucket.append((sentence, years))
                 sources.add(label)
 
-    excerpts = [s_ for s_, _ in (strong + contextual)][:MAX_EXCERPTS]
+    # A flag the reviewer cannot see is useless: if the rebuild sentence fell
+    # outside the excerpt budget, quote it explicitly.
+    rebuild_sentence = next((s_ for s_, _ in strong + contextual if REBUILD.search(s_)), '')
+    excerpts = [s_ for s_, _ in (strong + contextual) if s_ != rebuild_sentence][:MAX_EXCERPTS]
+    if rebuild_sentence:
+        # Quote around the triggering words: a long sentence truncated at the
+        # front can hide the very word the flag is about.
+        hit = REBUILD.search(rebuild_sentence)
+        start = max(0, hit.start() - 80) if hit else 0
+        quoted = rebuild_sentence[start:start + MAX_CHARS]
+        if start:
+            quoted = '… ' + quoted
+        excerpts = [quoted] + excerpts[:MAX_EXCERPTS - 1]
     primary = sorted({y for _, years in strong for y in years})
     strength = 'construction' if strong else ('contextual' if contextual else 'none')
     if not primary:
         primary = sorted({y for _, years in contextual for y in years})
     every = sorted({y for _, years in strong + contextual for y in years})
-    rebuild = any(REBUILD.search(sentence) for sentence, _ in strong + contextual)
+    rebuild = bool(rebuild_sentence)
     return {
         'suggested_era': bin_of(primary[0]) if primary else '',
         'rebuild_flag': 'review' if rebuild else '',

@@ -56,8 +56,17 @@ text:
 
 Across the 60 rows: every row gets a suggestion, spread pre-1850 (14),
 1850-1892 (12), 1893-1914 (11), 1918-1940 (8), 1945-1975 (6), post-1975 (9), and
-**27 rows are flagged** because a rebuild is mentioned — those are the ones where
-the rule needs a human, not the arithmetic.
+**33 rows are flagged** because the notice mentions rebuilding or destruction —
+those are the ones where the rule needs a human, not the arithmetic.
+
+Two defects were found by checking the flag against its own evidence. The first
+regex ended with `\b`, so the stem `reconstru` stopped matching "reconstruction"
+and eighteen rows silently lost their flag (the count moved *down* after adding
+terms, which is what exposed it). The second: fifteen flags pointed at sentences
+that the three-excerpt budget had dropped, so a reviewer would see "review" with
+no visible reason. Flagged rows now always quote the triggering sentence, centred
+on the words that triggered it, and the flag is verified to match the quoted
+excerpt on all 60 rows.
 
 So the review is now: confirm the suggestion, or overrule it where the flag says
 a rebuild happened. `construction_era` stays blank until a reviewer writes it.
