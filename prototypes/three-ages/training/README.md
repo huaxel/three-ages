@@ -120,3 +120,23 @@ and torch, which is why they pass in a bare checkout:
 A venv is recommended rather than required: on this machine the system Python has
 a CUDA build of torch that cannot see the AMD GPU, while `~/.venvs/rocm` has the
 ROCm build.
+
+## Script contract
+
+Every script here takes its inputs from `local/` and never writes into the
+repository, so a run cannot dirty the working tree:
+
+| script | reads | writes |
+|---|---|---|
+| `build_mapillary_manifest.py` | `local/mapillary-inbox/` | `local/training/mapillary_manifest.csv` |
+| `build_taskb_queue.py` | `local/scraped/`, manifests | `local/training/taskb_queue.csv` |
+| `build_colab_pack.py` | manifests, image roots | `local/training/colab-pack/` |
+| `build_tuned_embeddings.py` | manifests, image roots, `--checkpoint` | `--out` (default under `local/training/`) |
+| `verify_baseline_reproduction.py` | manifests, caches | `--out` directory |
+
+Scripts that need an output path require it explicitly (`--out`), so a typo
+fails with a usage error instead of silently launching a ten-minute GPU encode.
+
+Reproducibility spot checks, both rerun on this machine: the Mapillary manifest
+builder regenerates all 41,046 rows with identical ids and columns, and the
+task-B queue builder regenerates the same 60 buildings.

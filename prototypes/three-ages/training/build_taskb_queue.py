@@ -21,7 +21,8 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 from epoch_data import CONSTRUCTION_ERAS  # noqa: E402
 
-ROOT = HERE
+REPO = HERE.parents[2]
+DATA = REPO / 'local' / 'training'
 PER_BIN = 10
 
 
@@ -73,10 +74,10 @@ def image_stats(manifest: Path) -> dict[str, dict]:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument('--scraped', default=str(HERE.parent / 'scraped'))
-    ap.add_argument('--manifest', default=str(HERE / 'manifest.csv'))
-    ap.add_argument('--mapillary-manifest', default=str(HERE / 'mapillary_manifest.csv'))
-    ap.add_argument('--out', default=str(HERE / 'taskb_queue.csv'))
+    ap.add_argument('--scraped', default=str(REPO / 'local' / 'scraped'))
+    ap.add_argument('--manifest', default=str(DATA / 'manifest.csv'))
+    ap.add_argument('--mapillary-manifest', default=str(DATA / 'mapillary_manifest.csv'))
+    ap.add_argument('--out', default=str(DATA / 'taskb_queue.csv'))
     ap.add_argument('--force', action='store_true',
                     help='overwrite a queue with no reviewer edits in it')
     args = ap.parse_args()

@@ -23,7 +23,12 @@ from epoch_data import capture_era, split_of  # noqa: E402
 
 
 def main() -> None:
-    inbox = ROOT.parent / "mapillary-inbox"
+    import argparse
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0] if __doc__ else "")
+    ap.add_argument('--inbox', default=str(DATA.parent / 'mapillary-inbox'))
+    ap.add_argument('--out', default=str(DATA / 'mapillary_manifest.csv'))
+    args = ap.parse_args()
+    inbox = Path(args.inbox)
     rows = []
     for manifest_path in sorted(inbox.glob("*/manifest.json")):
         building_id = manifest_path.parent.name
@@ -52,7 +57,7 @@ def main() -> None:
                 "username": image.get("username", ""),
                 "page_url": image.get("page_url", ""),
             })
-    out = ROOT / "mapillary_manifest.csv"
+    out = Path(args.out)
     with open(out, "w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0].keys()))
         writer.writeheader()

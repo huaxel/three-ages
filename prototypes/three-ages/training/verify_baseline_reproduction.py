@@ -20,7 +20,14 @@ from train_local_pilot import (  # noqa: E402
     load_rows)
 
 def main() -> None:
-    out = Path(sys.argv[1])
+    import argparse
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument('--out', required=True,
+                    help='directory for report.json; must not already exist')
+    ap.add_argument('--batch-size', type=int, default=64)
+    ap.add_argument('--workers', type=int, default=2)
+    args = ap.parse_args()
+    out = Path(args.out)
     out.mkdir(parents=True, exist_ok=False)
     healthy()
     pub = load_rows(DATA / 'manifest.csv', REPO / 'local' / 'monument-inbox', 'pub')
@@ -42,8 +49,8 @@ def main() -> None:
         MODEL, pretrained=PRETRAINED, device='cuda')
     model.eval()
     print('encoding full gallery with untrained weights', flush=True)
-    pvec = encode(model, pub, val_tf, 64, 2)
-    mvec = encode(model, mapval, val_tf, 64, 2)
+    pvec = encode(model, pub, val_tf, args.batch_size, args.workers)
+    mvec = encode(model, mapval, val_tf, args.batch_size, args.workers)
     result = evaluate(pub, pvec, mapval, mvec)
     healthy()
     report = {'check': 'untrained weights through pilot encode path',
