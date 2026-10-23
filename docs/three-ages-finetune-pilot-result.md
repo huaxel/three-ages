@@ -199,12 +199,31 @@ easy negatives, which predicted that harder negatives would fix it. They do not:
 
 Same shape as the random-order run: loss halves, broad retrieval collapses back
 below frozen, cross-condition metrics stagnate or slip. Hard negatives improve
-*one* epoch's worth of learning; they do not change what a second epoch does. So
-the degradation is intrinsic to this setup — ~78k pairs distilled to 4,897
-repeated fixed pairs at lr 3e-6 — and the remaining levers are optimisation
-(lower lr, larger batch, fresh pairs per epoch, or an actual validation-based
-stopping rule), not negative mining. Claiming otherwise would have been tidy and
-wrong. Note that falling training loss is not evidence of
+*one* epoch's worth of learning; they do not change what a second epoch does.
+
+That pointed at the fixed pair set rather than the negatives, which is testable:
+`--refresh-pairs` re-mines a different 78,343-pair sample each epoch (seeds differ
+by epoch; 58,365 of 78,343 pairs overlap, so the sample genuinely moves).
+
+| validation | hard, epoch 1 | epoch 2, same pairs | epoch 2, refreshed |
+|---|---:|---:|---:|
+| publisher top5 | 33.95% | 28.41% | **33.13%** |
+| publisher cross-era top5 (fair) | 4.06% | 4.16% | **4.62%** |
+| cross-pole top5 | 5.25% | 4.44% | 5.13% |
+| cross-pole cross-era top5 | 1.21% | 0.89% | **1.45%** |
+| neighbour control, cluster top-1 | 83.17% | — | 83.55% |
+
+So the collapse was caused by *re-running the same pairs*, not by the objective
+saturating: with a fresh sample the broad metric holds instead of falling back
+below frozen, and both cross-condition metrics improve. It is a mechanism
+confirmed, not a breakthrough — the gains over one epoch are +0.56 pp (publisher
+cross-era) and +0.24 pp (cross-pole cross-era), while broad top-5 stays slightly
+below the one-epoch figure. Identity discrimination is unmoved (83.55% vs 83.17%,
+chance 79.07%).
+
+Practical rule that follows: epochs must draw fresh pairs, and the stopping point
+should be chosen on validation rather than training loss, which keeps falling
+while held-out retrieval does not. Note that falling training loss is not evidence of
 learning anything generalisable — that trap is what this measurement exists to
 catch.
 
