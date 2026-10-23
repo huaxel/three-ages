@@ -82,11 +82,24 @@ Linear probes retrained on tuned embeddings; both frozen columns come from the
 same 77,171-row caches, and the tuned delta is quoted against the
 **same-toolchain** column:
 
-| probe | frozen (cache) | frozen (same toolchain) | tuned | delta vs same-toolchain |
+| probe | frozen | random e1 | hard e1 | hard + refreshed e2 |
 |---|---:|---:|---:|---:|
-| drawing detection | 97.79% | 97.77% | 97.68% | −0.09 pp |
-| capture-era top1 | 90.30% | 90.40% | 88.70% | −1.70 pp |
-| capture-era within-one-era | 99.13% | 99.13% | 98.91% | −0.22 pp |
+| drawing detection | 97.77% | 97.68% | 97.61% | 97.51% |
+| capture-era top1 | 90.40% | 88.70% | 87.33% | 87.41% |
+| capture-era within-one-era | 99.13% | 98.91% | 98.81% | 98.87% |
+| validation cross-era top5 | 0.87% | 3.80% | 4.06% | **4.62%** |
+
+Two things this table changes. First, the recommended checkpoint is not the
+friendliest trade: against the random-order pilot it gives +0.82 pp cross-era for
+−1.29 pp photo dating, so which to ship genuinely depends on whether dating or
+cross-era matching matters more. Second, and more interestingly, within the
+hard-negative family the extra refreshed epoch **costs nothing**: photo dating
+moves 87.33% → 87.41% (a hair better) while cross-era retrieval rises 4.06% →
+4.62%. The damage comes from the first hard-negative epoch, not from training
+longer; that contradicts the simpler story that more training always trades
+breadth for matching.
+
+The drawing gate survives in every variant (≥97.5%).
 
 The drawn-vs-photo gate is intact. Photo dating gives up 1.70 pp (7,143 test
 rows, ~121 flips) while cross-era retrieval gains 3.94 pp on the test leg and

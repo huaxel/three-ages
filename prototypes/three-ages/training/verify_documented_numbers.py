@@ -96,6 +96,15 @@ def main() -> None:
     tc = load('report_capture_era_tuned.json')
     check('capture-era probe frozen', fc['top1_test'], 0.904000)
     check('capture-era probe tuned', tc['top1_test'], 0.887000)
+    # The recommended checkpoint, whose forgetting profile was measured later.
+    fd2 = load('report_drawing_refresh2e.json')
+    tc2 = load('report_capture_era_refresh2e.json')
+    check('drawing probe, hard + refreshed', fd2['top1_test'], 0.975100)
+    check('capture-era probe, hard + refreshed', tc2['top1_test'], 0.874100)
+    fd1 = load('report_drawing_hard42.json')
+    tc1 = load('report_capture_era_hard42.json')
+    check('drawing probe, hard e1', fd1['top1_test'], 0.976100)
+    check('capture-era probe, hard e1', tc1['top1_test'], 0.873300)
 
     failures = 0
     for label, actual, expected, ok in CHECKS:
