@@ -1,0 +1,65 @@
+{
+  "state": "complete",
+  "config": {
+    "run_dir": "/home/juan/projects/ehb/three-ages/local/training/pilot-seed7-20261023-002018",
+    "batch_size": 16,
+    "workers": 2,
+    "max_steps": 0,
+    "seed": 7
+  },
+  "model": "ViT-B-32",
+  "pretrained": "laion2b_s34b_b79k",
+  "kernel": "7.3.0-4-cachyos",
+  "torch": "2.14.1+rocm7.2",
+  "pairs": 78343,
+  "pair_kinds": {
+    "cross_era": 17925,
+    "cross_pole": 60418
+  },
+  "query_split": "val",
+  "gallery": 77171,
+  "excluded_cache_ids": [
+    "pub/17387/11500227_0192_P04.jpg"
+  ],
+  "sha256": {
+    "code": "974a8e2848dad39f8a534390f75e5f2d626aa896712e1d004448588c7f8a8cf8",
+    "publisher_manifest": "7978b91a345fd2b35cf3561b065f0357b4acc999fc43ad1b924b27d5e6e3917e",
+    "mapillary_manifest": "0fe975b771d02812a897f747ff476aa2786460be7920b4d4cc9923e1cb258185"
+  },
+  "note": "Full gallery incl. all splits; only validation queries scored",
+  "frozen_validation": {
+    "publisher": {
+      "queries_with_mates": 6574,
+      "top5": 0.31244295710374204,
+      "cross_era_eligible_queries": 3895,
+      "cross_era_top5_fair": 0.008729139922978177
+    },
+    "cross_pole": {
+      "queries_with_mates": 4192,
+      "top5": 0.01359732824427481,
+      "cross_era_eligible_queries": 4141,
+      "cross_era_top5_fair": 0.0
+    }
+  },
+  "training": {
+    "steps": 4897,
+    "pairs_seen": 78343,
+    "mean_loss": 1.2986705652209087,
+    "seconds": 1902.0925232139998,
+    "peak_allocated_gib": 2.2711849212646484
+  },
+  "tuned_validation": {
+    "publisher": {
+      "queries_with_mates": 6574,
+      "top5": 0.34104046242774566,
+      "cross_era_eligible_queries": 3895,
+      "cross_era_top5_fair": 0.037997432605905004
+    },
+    "cross_pole": {
+      "queries_with_mates": 4192,
+      "top5": 0.03959923664122137,
+      "cross_era_eligible_queries": 4141,
+      "cross_era_top5_fair": 0.007244626901714562
+    }
+  }
+}

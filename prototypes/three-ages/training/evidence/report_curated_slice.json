@@ -1,0 +1,42 @@
+{
+  "slice": "curated Grand-Place previews (KIK-IRPA / IDPS / Commons)",
+  "note": "out-of-source sanity check; 72 images / 27 units; not a headline",
+  "images": 72,
+  "units": 27,
+  "units_with_multiple_eras": 20,
+  "epoch_range": [
+    1878,
+    2026
+  ],
+  "checkpoint": "pilot-20261022-232106/checkpoint.pt",
+  "frozen": {
+    "queries": 72,
+    "top5_same_unit": 0.5277777777777778,
+    "top5_same_unit_ci95": [
+      0.414,
+      0.6387
+    ],
+    "top5_same_unit_chance": 0.1284,
+    "top5_cross_era_same_unit": 0.2638888888888889,
+    "top5_cross_era_ci95": [
+      0.1759,
+      0.3758
+    ],
+    "top5_cross_era_chance": 0.0855
+  },
+  "tuned": {
+    "queries": 72,
+    "top5_same_unit": 0.5277777777777778,
+    "top5_same_unit_ci95": [
+      0.414,
+      0.6387
+    ],
+    "top5_same_unit_chance": 0.1284,
+    "top5_cross_era_same_unit": 0.2638888888888889,
+    "top5_cross_era_ci95": [
+      0.1759,
+      0.3758
+    ],
+    "top5_cross_era_chance": 0.0855
+  }
+}

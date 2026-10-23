@@ -1,0 +1,22 @@
+{
+  "hard-42": {
+    "val_queries_with_neighbours": 3344,
+    "gallery_images": 15333,
+    "full_gallery_top1_same_building": 0.1653708133971292,
+    "full_gallery_top1_neighbour_confusion": 0.030801435406698566,
+    "cluster_gallery_queries": 2894,
+    "cluster_gallery_top1_same_building": 0.831720801658604,
+    "cluster_gallery_chance": 0.7907419629572958,
+    "cluster_above_chance_normalised": 0.19582922252561039
+  },
+  "hard-7": {
+    "val_queries_with_neighbours": 3344,
+    "gallery_images": 15333,
+    "full_gallery_top1_same_building": 0.17523923444976078,
+    "full_gallery_top1_neighbour_confusion": 0.026614832535885168,
+    "cluster_gallery_queries": 2894,
+    "cluster_gallery_top1_same_building": 0.8348306841741534,
+    "cluster_gallery_chance": 0.7907419629572958,
+    "cluster_above_chance_normalised": 0.21069069479926456
+  }
+}

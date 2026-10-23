@@ -23,7 +23,20 @@ python3 prototypes/test_independent_adjudication.py
 python3 prototypes/test_independent_bundle.py
 python3 prototypes/test_independent_bundle_import.py
 python3 -m unittest prototypes.test_training_manifest
-python3 -m compileall -q prototypes
+python3 prototypes/test_crop_workflows.py
+python3 prototypes/test_local_ingest.py
+python3 prototypes/test_monument_scraper.py
+python3 prototypes/test_derive_previews.py
+python3 prototypes/test_summarise_places.py
+python3 prototypes/test_corpus_pipeline.py
+python3 prototypes/test_bonsai_data_contract.py
+python3 prototypes/test_reviewed_state.py
+python3 prototypes/test_epoch_model.py
+python3 prototypes/three-ages/training/verify_documented_numbers.py
+python3 prototypes/test_audit_facade_dataset.py
+python3 prototypes/audit_facade_dataset.py
+python3 scripts/test_review_sessions.py
+python3 -m compileall -q prototypes scripts/*.py
 node prototypes/smoke_ui.js
 python3 - <<'PY'
 import json

@@ -1,0 +1,69 @@
+{
+  "state": "complete",
+  "config": {
+    "run_dir": "/home/juan/projects/ehb/three-ages/local/training/pilot-hard-seed7-20261023-132129",
+    "batch_size": 16,
+    "workers": 2,
+    "max_steps": 0,
+    "seed": 7,
+    "negatives": "hard",
+    "resume": ""
+  },
+  "model": "ViT-B-32",
+  "pretrained": "laion2b_s34b_b79k",
+  "kernel": "7.3.0-4-cachyos",
+  "torch": "2.14.1+rocm7.2",
+  "pairs": 78343,
+  "pair_kinds": {
+    "cross_era": 17925,
+    "cross_pole": 60418
+  },
+  "query_split": "val",
+  "gallery": 77171,
+  "excluded_cache_ids": [
+    "pub/17387/11500227_0192_P04.jpg"
+  ],
+  "sha256": {
+    "code": "2a5aedf3024607739c7a21f2498b51eebf8d9a056e857ba9360861e3bebfea71",
+    "publisher_manifest": "7978b91a345fd2b35cf3561b065f0357b4acc999fc43ad1b924b27d5e6e3917e",
+    "mapillary_manifest": "0fe975b771d02812a897f747ff476aa2786460be7920b4d4cc9923e1cb258185"
+  },
+  "note": "Full gallery incl. all splits; only validation queries scored",
+  "frozen_validation": {
+    "publisher": {
+      "queries_with_mates": 6574,
+      "top5": 0.31244295710374204,
+      "cross_era_eligible_queries": 3895,
+      "cross_era_top5_fair": 0.008729139922978177
+    },
+    "cross_pole": {
+      "queries_with_mates": 4192,
+      "top5": 0.01359732824427481,
+      "cross_era_eligible_queries": 4141,
+      "cross_era_top5_fair": 0.0
+    }
+  },
+  "negatives": "hard",
+  "batches": 4897,
+  "training": {
+    "steps": 4897,
+    "pairs_seen": 78343,
+    "mean_loss": 1.343901419835726,
+    "seconds": 2070.170255119003,
+    "peak_allocated_gib": 2.2711849212646484
+  },
+  "tuned_validation": {
+    "publisher": {
+      "queries_with_mates": 6574,
+      "top5": 0.3527532704593855,
+      "cross_era_eligible_queries": 3895,
+      "cross_era_top5_fair": 0.04544287548138639
+    },
+    "cross_pole": {
+      "queries_with_mates": 4192,
+      "top5": 0.048187022900763356,
+      "cross_era_eligible_queries": 4141,
+      "cross_era_top5_fair": 0.008693552282057475
+    }
+  }
+}

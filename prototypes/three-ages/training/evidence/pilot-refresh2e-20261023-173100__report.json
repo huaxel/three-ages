@@ -1,0 +1,88 @@
+{
+  "state": "complete",
+  "config": {
+    "run_dir": "/home/juan/projects/ehb/three-ages/local/training/pilot-refresh2e-20261023-173100",
+    "batch_size": 16,
+    "workers": 2,
+    "max_steps": 0,
+    "seed": 42,
+    "epochs": 2,
+    "refresh_pairs": true,
+    "negatives": "hard",
+    "resume": ""
+  },
+  "model": "ViT-B-32",
+  "pretrained": "laion2b_s34b_b79k",
+  "kernel": "7.3.0-4-cachyos",
+  "torch": "2.14.1+rocm7.2",
+  "pairs": 78343,
+  "pair_kinds": {
+    "cross_era": 17925,
+    "cross_pole": 60418
+  },
+  "query_split": "val",
+  "gallery": 77171,
+  "excluded_cache_ids": [
+    "pub/17387/11500227_0192_P04.jpg"
+  ],
+  "sha256": {
+    "code": "744497150960dce6f4fab4492b87485465888e8d19f40fa7af34d6fbc89b99b9",
+    "publisher_manifest": "7978b91a345fd2b35cf3561b065f0357b4acc999fc43ad1b924b27d5e6e3917e",
+    "mapillary_manifest": "0fe975b771d02812a897f747ff476aa2786460be7920b4d4cc9923e1cb258185"
+  },
+  "note": "Full gallery incl. all splits; only validation queries scored",
+  "frozen_validation": {
+    "publisher": {
+      "queries_with_mates": 6574,
+      "top5": 0.31244295710374204,
+      "cross_era_eligible_queries": 3895,
+      "cross_era_top5_fair": 0.008729139922978177
+    },
+    "cross_pole": {
+      "queries_with_mates": 4192,
+      "top5": 0.01359732824427481,
+      "cross_era_eligible_queries": 4141,
+      "cross_era_top5_fair": 0.0
+    }
+  },
+  "negatives": "hard",
+  "per_epoch": [
+    {
+      "epoch": 1,
+      "pairs": 78343,
+      "kinds": {
+        "cross_era": 17925,
+        "cross_pole": 60418
+      }
+    },
+    {
+      "epoch": 2,
+      "pairs": 78343,
+      "kinds": {
+        "cross_era": 17925,
+        "cross_pole": 60418
+      }
+    }
+  ],
+  "training": {
+    "steps": 9794,
+    "pairs_seen": 156686,
+    "mean_loss": 1.0778302665956156,
+    "seconds": 4143.156915853993,
+    "peak_allocated_gib": 2.2711844444274902
+  },
+  "tuned_validation": {
+    "publisher": {
+      "queries_with_mates": 6574,
+      "top5": 0.33130514146638274,
+      "cross_era_eligible_queries": 3895,
+      "cross_era_top5_fair": 0.04621309370988447
+    },
+    "cross_pole": {
+      "queries_with_mates": 4192,
+      "top5": 0.051288167938931296,
+      "cross_era_eligible_queries": 4141,
+      "cross_era_top5_fair": 0.014489253803429124
+    }
+  }
+}

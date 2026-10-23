@@ -1,0 +1,98 @@
+{
+  "note": "Single test-split evaluation; pilot selected on validation. Deterministic recomputation from hashed artifacts, not a second look.",
+  "created_utc": "2026-10-23T09:49:53Z",
+  "publisher_gallery": 77171,
+  "cross_pole_queries": 4421,
+  "inputs": {
+    "manifest.csv": "7978b91a345fd2b35cf3561b065f0357b4acc999fc43ad1b924b27d5e6e3917e",
+    "mapillary_manifest.csv": "0fe975b771d02812a897f747ff476aa2786460be7920b4d4cc9923e1cb258185",
+    "embeddings_frozen_venv.npz": "1caebfc07ea4945f650092154c23bc205261a78c396601d64ca0992723825c52",
+    "mapillary_embeddings.npz": "5e0c81f627dfb70231aefd9230eb2569cd8b2df2eb4fd85203e7332d4333a83f",
+    "embeddings_tuned_seed42.npz": "5db607eb11901a360bb79fd593197f3dcd873429119c9cbc86014b5b9069d316",
+    "mapillary_embeddings_tuned_seed42.npz": "161343449cff7a6f6080fcf66846eb8fc38af233fa055512b7ceabdd5854942c"
+  },
+  "checkpoint": {
+    "path": "pilot-20261022-232106/checkpoint.pt",
+    "sha256": "76ce6483e1b1c41bdc90fdc17e823836629941b24d04677fe5fbc7789c105bb5"
+  },
+  "toolchains": {
+    "frozen": "python3.13.15 torch2.14.1+rocm7.2 torchvision0.29.1+rocm7.2",
+    "tuned": "unrecorded"
+  },
+  "frozen": {
+    "publisher_test": {
+      "queries_with_mates": 6579,
+      "top5": 0.3199574403404773,
+      "cross_era_eligible_queries": 3933,
+      "cross_era_top5_fair": 0.006356470887363336,
+      "cross_era_top5_fair_ci95": [
+        0.00431,
+        0.00937
+      ],
+      "cross_era_top5_fair_hits": [
+        25,
+        3933
+      ],
+      "top5_ci95": [
+        0.30879,
+        0.33133
+      ],
+      "top5_hits": [
+        2105,
+        6579
+      ]
+    },
+    "cross_pole_test": {
+      "queries_with_mates": 4421,
+      "top5": 0.009273919927618186,
+      "cross_era_eligible_queries": 4351,
+      "cross_era_top5_fair": 0.00022983222247759135,
+      "top5_ci95": [
+        0.00684,
+        0.01256
+      ],
+      "top5_hits": [
+        41,
+        4421
+      ]
+    }
+  },
+  "tuned": {
+    "publisher_test": {
+      "queries_with_mates": 6579,
+      "top5": 0.34914120687034506,
+      "cross_era_eligible_queries": 3933,
+      "cross_era_top5_fair": 0.04576659038901602,
+      "cross_era_top5_fair_ci95": [
+        0.03967,
+        0.05275
+      ],
+      "cross_era_top5_fair_hits": [
+        180,
+        3933
+      ],
+      "top5_ci95": [
+        0.33771,
+        0.36075
+      ],
+      "top5_hits": [
+        2297,
+        6579
+      ]
+    },
+    "cross_pole_test": {
+      "queries_with_mates": 4421,
+      "top5": 0.04207192942773128,
+      "cross_era_eligible_queries": 4351,
+      "cross_era_top5_fair": 0.0133302689037003,
+      "top5_ci95": [
+        0.03654,
+        0.0484
+      ],
+      "top5_hits": [
+        186,
+        4421
+      ]
+    }
+  }
+}

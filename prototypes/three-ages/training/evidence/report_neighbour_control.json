@@ -1,0 +1,38 @@
+{
+  "cell_degrees": 0.0003,
+  "cell_extent_metres": "~33 m N-S x ~21 m E-W at 50.8 N",
+  "gallery_policy": "train rows excluded for BOTH arms; tuned saw them, frozen did not",
+  "note": "validation queries only; test rows are distractors, never queries",
+  "caches": {
+    "frozen": {
+      "file": "embeddings_frozen_venv.npz",
+      "toolchain": "python3.13.15 torch2.14.1+rocm7.2 torchvision0.29.1+rocm7.2",
+      "sha256": "1caebfc07ea4945f"
+    },
+    "tuned": {
+      "file": "embeddings_tuned_seed42.npz",
+      "toolchain": "",
+      "sha256": "5db607eb11901a36"
+    }
+  },
+  "frozen": {
+    "val_queries_with_neighbours": 3344,
+    "gallery_images": 15333,
+    "full_gallery_top1_same_building": 0.1444377990430622,
+    "full_gallery_top1_neighbour_confusion": 0.02721291866028708,
+    "cluster_gallery_queries": 2894,
+    "cluster_gallery_top1_same_building": 0.801658604008293,
+    "cluster_gallery_chance": 0.7907419629572958,
+    "cluster_above_chance_normalised": 0.05216832388028855
+  },
+  "tuned": {
+    "val_queries_with_neighbours": 3344,
+    "gallery_images": 15333,
+    "full_gallery_top1_same_building": 0.17165071770334928,
+    "full_gallery_top1_neighbour_confusion": 0.031399521531100476,
+    "cluster_gallery_queries": 2894,
+    "cluster_gallery_top1_same_building": 0.8289564616447823,
+    "cluster_gallery_chance": 0.7907419629572958,
+    "cluster_above_chance_normalised": 0.18261902494902932
+  }
+}
