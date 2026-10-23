@@ -1,7 +1,7 @@
 {
   "slice": "curated Grand-Place previews (KIK-IRPA / IDPS / Commons)",
   "note": "out-of-source sanity check; 72 images / 27 units; not a headline",
-  "images": 72,
+  "images": 77,
   "units": 27,
   "units_with_multiple_eras": 20,
   "epoch_range": [
@@ -10,33 +10,33 @@
   ],
   "checkpoint": "pilot-20261022-232106/checkpoint.pt",
   "frozen": {
-    "queries": 72,
-    "top5_same_unit": 0.5277777777777778,
+    "queries": 77,
+    "top5_same_unit": 0.5454545454545454,
     "top5_same_unit_ci95": [
-      0.414,
-      0.6387
+      0.4347,
+      0.6519
     ],
-    "top5_same_unit_chance": 0.1284,
-    "top5_cross_era_same_unit": 0.2638888888888889,
+    "top5_same_unit_chance": 0.1448,
+    "top5_cross_era_same_unit": 0.33766233766233766,
     "top5_cross_era_ci95": [
-      0.1759,
-      0.3758
+      0.242,
+      0.4488
     ],
-    "top5_cross_era_chance": 0.0855
+    "top5_cross_era_chance": 0.1169
   },
   "tuned": {
-    "queries": 72,
-    "top5_same_unit": 0.5277777777777778,
+    "queries": 77,
+    "top5_same_unit": 0.5584415584415584,
     "top5_same_unit_ci95": [
-      0.414,
-      0.6387
+      0.4474,
+      0.6639
     ],
-    "top5_same_unit_chance": 0.1284,
-    "top5_cross_era_same_unit": 0.2638888888888889,
+    "top5_same_unit_chance": 0.1448,
+    "top5_cross_era_same_unit": 0.35064935064935066,
     "top5_cross_era_ci95": [
-      0.1759,
-      0.3758
+      0.2535,
+      0.462
     ],
-    "top5_cross_era_chance": 0.0855
+    "top5_cross_era_chance": 0.1169
   }
 }

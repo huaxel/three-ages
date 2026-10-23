@@ -84,8 +84,16 @@ def main() -> None:
     check('neighbour cluster top1, tuned',
           nc['tuned']['cluster_gallery_top1_same_building'], 0.829000)
     cs = load('report_curated_slice.json')
-    check('out-of-source top5, tuned', cs['tuned']['top5_same_unit'], 0.527800)
-    check('out-of-source chance', cs['tuned']['top5_same_unit_chance'], 0.128400)
+    check('out-of-source top5, tuned', cs['tuned']['top5_same_unit'], 0.558400)
+    check('out-of-source cross-era, tuned', cs['tuned']['top5_cross_era_same_unit'], 0.350600)
+    check('out-of-source chance', cs['tuned']['top5_same_unit_chance'], 0.144800)
+    # Drift guard: the worksheet is a living file. If it grows, the slice numbers
+    # above describe data that no longer exists and this check must fail.
+    worksheet = (HERE.parent / 'data' / 'three-ages-image-review.csv')
+    if worksheet.is_file():
+        import csv as _csv
+        rows = sum(1 for _ in _csv.DictReader(worksheet.open(encoding='utf-8')))
+        check('curated slice image count matches worksheet', cs['images'], rows, tol=0)
 
     # Forgetting check.
     fd = load('report_drawing_frozen_venv.json')
@@ -109,7 +117,9 @@ def main() -> None:
     failures = 0
     for label, actual, expected, ok in CHECKS:
         status = 'ok  ' if ok else 'FAIL'
-        print(f'{status} {label:46} evidence {pct(actual):>8}  doc {pct(expected):>8}')
+        # Rates are printed as percentages; counts (e.g. image totals) as integers.
+        fmt = (lambda v: pct(v)) if expected <= 1.5 else (lambda v: f'{int(round(v))}')
+        print(f'{status} {label:46} evidence {fmt(actual):>8}  doc {fmt(expected):>8}')
         failures += not ok
     print(f'\n{len(CHECKS) - failures}/{len(CHECKS)} documented numbers trace to evidence')
     if failures:

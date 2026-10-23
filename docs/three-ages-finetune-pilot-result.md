@@ -164,14 +164,16 @@ Grand-Place pilot holds 72 previews from KIK-IRPA / IDPS / Commons — different
 photographers, different scans, 1878–2026 — covering 27 facade units, 20 of them
 across multiple years. Ranking those 72 against each other:
 
-| metric (top-5, n=72) | frozen | tuned | chance |
+| metric (top-5, n=77) | frozen | tuned | chance |
 |---|---:|---:|---:|
-| same facade unit | 52.8% | 52.8% | 12.8% |
-| same unit, different year | 26.4% | 26.4% | 8.6% |
+| same facade unit | 54.6% | **55.8%** | 14.5% |
+| same unit, different year | 33.8% | **35.1%** | 11.7% |
 
-The headline is a non-result, and reporting it as one matters: the percentages are
-*identical*, but the hit sets are not — 38 hits in each arm sharing only 32
-queries, with top-1 at 22/72 vs 23/72. At n=72 the difference is inside noise.
+The headline is still a non-result: tuned leads by 1.3–1.4 pp, and at n=77 with
+these intervals the two arms are indistinguishable. (An earlier version of this
+section used a 72-row version of the worksheet and reported *identical*
+percentages; the worksheet has since grown to 77 rows, so the check was rerun
+rather than left quoting stale data.)
 
 So on an archive the encoder has never seen, fine-tuning neither helps nor hurts
 measurably, and both arms sit far above chance. What this supports is narrow but
