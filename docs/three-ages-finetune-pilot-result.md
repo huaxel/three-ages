@@ -375,13 +375,22 @@ The audit found and this revision fixes:
 
 ## Next steps, in order of value
 
-1. Facade-level positives/negatives (same building, same facade): the only way
-   to test disentanglement rather than assume it. Needs the label campaign.
-2. A different training regime if more is wanted: lower lr or larger batch with
-   harder negatives, judged on validation — never on the spent test split.
-3. Wire the tuned encoder into the corpus embedding path so downstream probes
-   and retrieval share one feature set (the `--checkpoint` flag exists; the
-   corpus-wide run is unstarted).
+1. **Review the 60-building queue** (`local/training/taskb_queue.csv`, evidence
+   pre-extracted). Facade-level and construction-era labels are the only route to
+   testing disentanglement rather than assuming it.
+2. **Glance at the cross-pole audit sheet** (`local/training/label-audit.html`,
+   40 training pairs). It is the one thing that would tell us whether the
+   present-day pairing is trustworthy; no automated check could decide it.
+3. **Optimisation, only if more retrieval is wanted.** Negative mining has been
+   explored and measured: hard negatives beat random order on all four metrics
+   in both seeds, and the second-epoch collapse was traced to repeating fixed
+   pairs, now fixed by `--refresh-pairs`. What remains untried is the optimiser
+   itself — lower learning rate or larger batch — judged on validation, never on
+   the spent test split.
+
+Not on the list because it is done: the tuned encoder is already in the corpus
+embedding path (`embeddings_refresh2e.npz`, built with
+`build_embeddings.py --checkpoint`) and is what `three_ages.py` uses by default.
 
 ## Using it
 
