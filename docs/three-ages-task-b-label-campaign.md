@@ -77,6 +77,32 @@ through `load_reviewed_labels` and joins correctly — so the reviewer's real
 output will not hit a schema surprise after hours of work. The simulated file was
 written to a temporary directory and discarded; no fake labels exist in the repo.
 
+### Notice evidence is pre-extracted (quoted, not decided)
+
+The reviewer should not have to open 60 pages to find out what the notice says.
+`prototypes/three-ages/training/extract_notice_evidence.py` reads the already
+scraped records and adds three columns to the queue:
+
+| column | meaning |
+|---|---|
+| `notice_excerpt` | up to three sentences from the notice that mention a year or construction verb, verbatim |
+| `notice_sources` | which record field they came from (`description`, `details:Intervenant(s)`, ...) |
+| `notice_years` | every four-digit year appearing in those sentences |
+
+Two things this deliberately does not do. It never fills `construction_era` — the
+reviewer still decides, because catalogue years are exactly the proxies that make
+task B a campaign rather than a join. And it strips the style glossaries the site
+embeds as tooltips (`<a class="info">éclectique<span>Période : env. 1840-1914
+</span></a>`), whose years describe the style rather than the building; before
+that fix, building 37300 was credited with 1860 and 1914 from glossary text.
+
+Coverage: all 60 rows carry year evidence. One quote was checked against the live
+notice page (`37300`: "érigé entre 1894 et 1909") and matches.
+
+Order matters: run `build_taskb_queue.py` first, then
+`extract_notice_evidence.py --force`, because rebuilding the queue writes a fresh
+fixed column set. Both refuse to overwrite a queue containing reviewer edits.
+
 ### Queue quality checks
 
 - All 60 `notice_url` values return **HTTP 200** (checked one request per second,
