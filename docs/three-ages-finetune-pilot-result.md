@@ -185,8 +185,26 @@ validation did not follow:
 The extra epoch buys lower pair loss and essentially nothing else: cluster-
 restricted accuracy creeps up 0.5 pp, while full-gallery top-1 falls below the
 frozen baseline. So one epoch is the right stopping point at this learning rate.
-Further gains would need a different regime (lower lr, larger batch, harder
-negatives), not more steps. Note that falling training loss is not evidence of
+
+**The obvious explanation was tested and rejected.** I first attributed this to
+easy negatives, which predicted that harder negatives would fix it. They do not:
+
+| validation | hard, epoch 1 | hard, epoch 2 |
+|---|---:|---:|
+| training loss | 1.352 | **0.600** |
+| publisher top5 | 33.95% | 28.41% |
+| publisher cross-era top5 (fair) | 4.06% | 4.16% |
+| cross-pole top5 | **5.25%** | 4.44% |
+| cross-pole cross-era top5 | **1.21%** | 0.89% |
+
+Same shape as the random-order run: loss halves, broad retrieval collapses back
+below frozen, cross-condition metrics stagnate or slip. Hard negatives improve
+*one* epoch's worth of learning; they do not change what a second epoch does. So
+the degradation is intrinsic to this setup — ~78k pairs distilled to 4,897
+repeated fixed pairs at lr 3e-6 — and the remaining levers are optimisation
+(lower lr, larger batch, fresh pairs per epoch, or an actual validation-based
+stopping rule), not negative mining. Claiming otherwise would have been tidy and
+wrong. Note that falling training loss is not evidence of
 learning anything generalisable — that trap is what this measurement exists to
 catch.
 
