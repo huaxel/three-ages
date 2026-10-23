@@ -24,6 +24,8 @@ DATA = REPO / 'local' / 'training'
 
 STRONG = re.compile(r'\b(érig|erig|constru|construit|bâti|bati|édifi|edifi|reconstru)',
                    re.I)
+REBUILD = re.compile(r'\b(reconstru|rebâti|rebati|réédifi|reedifi|remplacé|remplace)',
+                     re.I)
 CUES = re.compile(
     r'\b(érig|erig|constru|bâti|bati|édifi|edifi|datant|remonte|vers|entre|'
     r'siècle|siecle|incendi|reconstru|restaur|transform|agrandi)', re.I)
@@ -51,6 +53,15 @@ def sentences(text: str):
         part = part.strip(' .;')
         if 20 <= len(part) <= 400:
             yield part
+
+
+def bin_of(year: int) -> str:
+    if year < 1850: return 'pre-1850'
+    if year < 1893: return '1850-1892'
+    if year < 1915: return '1893-1914'
+    if year < 1941: return '1918-1940'
+    if year < 1976: return '1945-1975'
+    return 'post-1975'
 
 
 def extract(record: dict) -> dict:
@@ -88,7 +99,10 @@ def extract(record: dict) -> dict:
     if not primary:
         primary = sorted({y for _, years in contextual for y in years})
     every = sorted({y for _, years in strong + contextual for y in years})
+    rebuild = any(REBUILD.search(sentence) for sentence, _ in strong + contextual)
     return {
+        'suggested_era': bin_of(primary[0]) if primary else '',
+        'rebuild_flag': 'review' if rebuild else '',
         'notice_excerpt': ' | '.join(e[:MAX_CHARS] for e in excerpts),
         'notice_sources': ';'.join(sorted(sources)),
         'notice_years': ';'.join(str(y) for y in every),
@@ -138,7 +152,8 @@ def main() -> None:
 
     fields = list(rows[0].keys())
     for extra in ('notice_excerpt', 'notice_sources', 'notice_years',
-                  'primary_years', 'evidence_strength'):
+                  'primary_years', 'evidence_strength', 'suggested_era',
+                  'rebuild_flag'):
         if extra not in fields:
             fields.append(extra)
     with out.open('w', newline='', encoding='utf-8') as fh:

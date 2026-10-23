@@ -130,7 +130,7 @@ repository, so a run cannot dirty the working tree:
 |---|---|---|
 | `build_mapillary_manifest.py` | `local/mapillary-inbox/` | `local/training/mapillary_manifest.csv` |
 | `build_taskb_queue.py` | `local/scraped/`, manifests | `local/training/taskb_queue.csv` |
-| `extract_notice_evidence.py` | `local/scraped/`, the queue | the queue, plus notice excerpts and years |
+| `extract_notice_evidence.py` | `local/scraped/`, the queue | the queue, plus excerpts, years, `suggested_era` and a rebuild flag |
 | `make_label_audit_sheet.py` | manifests, both image roots | `local/training/label-audit.html` (defaults to train split, no drawings) |
 | `build_colab_pack.py` | manifests, image roots | `local/training/colab-pack/` |
 | `build_tuned_embeddings.py` | manifests, image roots, `--checkpoint` | `--out` (default under `local/training/`) |

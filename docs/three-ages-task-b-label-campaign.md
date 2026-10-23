@@ -25,8 +25,8 @@ reviewers applying "construction era" honestly could disagree with each other on
 43 of these buildings. Labels like that would make task B unlearnable for reasons
 that have nothing to do with the corpus.
 
-**Proposed rule, for Juan to confirm or replace before the first label is
-written.** The era is that of the building's *principal construction campaign*:
+**Rule, confirmed by Juan on 2026-10-23.** The era is that of the building's
+*principal construction campaign*:
 the earliest documented construction of the surviving principal volume, ignoring
 later restorations, refits and rear extensions — but using a rebuild instead of
 the original when the notice says the building was rebuilt or replaced (register
@@ -43,6 +43,24 @@ To keep that auditable, each label should also record the phase it came from:
 
 Two labels that disagree are then comparable ("they chose different phases")
 rather than opaque ("one of them was wrong").
+
+### The rule is applied as far as it can be automated
+
+`extract_notice_evidence.py` now writes two more columns from the same quoted
+text:
+
+| column | meaning |
+|---|---|
+| `suggested_era` | bin of the *earliest* primary year — the rule's mechanical answer |
+| `rebuild_flag` | `review` when the notice mentions reconstruction/rebuilding, i.e. where the earliest year may be the building that was replaced |
+
+Across the 60 rows: every row gets a suggestion, spread pre-1850 (14),
+1850-1892 (12), 1893-1914 (11), 1918-1940 (8), 1945-1975 (6), post-1975 (9), and
+**27 rows are flagged** because a rebuild is mentioned — those are the ones where
+the rule needs a human, not the arithmetic.
+
+So the review is now: confirm the suggestion, or overrule it where the flag says
+a rebuild happened. `construction_era` stays blank until a reviewer writes it.
 
 ## Label contract
 
