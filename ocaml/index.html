@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Three Ages — OCaml/Bonsai slice</title>
+  <style>
+    :root { font: 16px/1.5 system-ui, sans-serif; color: #20252b; background: #faf9f7; }
+    body { max-width: 980px; margin: 0 auto; padding: 2rem; }
+    .lede, .muted { color: #68717a; }
+    .case-list { display: flex; gap: .5rem; flex-wrap: wrap; margin: 1.5rem 0; }
+    button { border: 1px solid #d8c6cc; background: white; border-radius: 6px; padding: .6rem .8rem; cursor: pointer; }
+    textarea { display: block; width: 100%; min-height: 5rem; margin: .75rem 0; padding: .5rem; font: inherit; }
+    button:hover, button.selected { background: #f1e9ec; border-color: #8b3f55; }
+    .claims { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .claim, .evidence { background: white; border: 1px solid #e1e5e8; border-radius: 8px; padding: 1rem; }
+    .evidence img { display: block; max-width: 100%; border-radius: 5px; }
+    .claim-value { font-size: 1.4rem; font-weight: 700; }
+    .status { display: inline-block; margin-top: .4rem; color: #8b3f55; font-weight: 700; }
+    @media (max-width: 700px) { .claims { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="notice">
+    <b>Experimental UI:</b> Python remains the source-of-truth pipeline.
+    <a href="../prototypes/three-ages/data/three-ages-image-review.csv" download>Facade worksheet</a> ·
+    <a href="../prototypes/three-ages/data/three-ages-structural-review.csv" download>Structural worksheet</a> ·
+    <a href="../prototypes/three-ages/data/three-ages-register-review.csv" download>Register worksheet</a> ·
+    <a href="../prototypes/three-ages/data/three-ages-pilot-export.csv" download>Pilot export</a> ·
+    <a href="../prototypes/three-ages/data/source-inventory.json">Source inventory</a>
+  </div>
+  <div id="app">Loading Bonsai…</div>
+  <script src="_build/default/main.bc.js"></script>
+</body>
+</html>

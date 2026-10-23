@@ -1,0 +1,82 @@
+(include_subdirs unqualified)
+
+(rule
+ (targets pilot_data.ml)
+ (deps ../prototypes/three-ages/data/three-ages-pilot.json)
+ (action
+  (run ocaml-embed-file %{deps} -output pilot_data -output-dir .)))
+
+(rule
+ (targets buildings_data.ml)
+ (deps ../prototypes/three-ages/data/grand-place-buildings.json)
+ (action
+  (run ocaml-embed-file %{deps} -output buildings_data -output-dir .)))
+
+(rule
+ (targets image_reviews_data.ml)
+ (deps ../prototypes/three-ages/data/three-ages-image-reviews.json)
+ (action (run ocaml-embed-file %{deps} -output image_reviews_data -output-dir .)))
+
+(rule
+ (targets structural_reviews_data.ml)
+ (deps ../prototypes/three-ages/data/three-ages-structural-reviews.json)
+ (action (run ocaml-embed-file %{deps} -output structural_reviews_data -output-dir .)))
+
+(rule
+ (targets register_reviews_data.ml)
+ (deps ../prototypes/three-ages/data/three-ages-register-reviews.json)
+ (action (run ocaml-embed-file %{deps} -output register_reviews_data -output-dir .)))
+
+(rule
+ (targets structural_data.ml)
+ (deps ../prototypes/three-ages/data/three-ages-structural-crops.json)
+ (action (run ocaml-embed-file %{deps} -output structural_data -output-dir .)))
+
+(library
+ (name three_ages_core)
+ (wrapped false)
+ (modules model draft)
+ (libraries core yojson)
+ (preprocess (pps ppx_jane)))
+
+(library
+ (name three_ages_reviews)
+ (wrapped false)
+ (modules reviews image_reviews_data structural_reviews_data register_reviews_data)
+ (libraries core yojson)
+ (preprocess (pps ppx_jane)))
+
+(library
+ (name three_ages_app)
+ (wrapped false)
+ (modules app data pilot_data buildings_data structural_data)
+ (libraries bonsai.web uri yojson three_ages_core three_ages_reviews)
+ (preprocess (pps bonsai.ppx_bonsai ppx_jane)))
+
+(executable
+ (name main)
+ (modes byte js)
+ (modules main)
+ (libraries bonsai.web three_ages_app))
+
+(executable
+ (name draft_test)
+ (modes byte)
+ (libraries core yojson three_ages_core)
+ (modules draft_test)
+ (preprocess (pps ppx_jane)))
+
+(executable
+ (name reviews_test)
+ (modes byte)
+ (libraries core yojson three_ages_reviews)
+ (modules reviews_test)
+ (preprocess (pps ppx_jane)))
+
+(executable
+ (name app_test)
+ (modes js)
+ (libraries core bonsai.web_test uri yojson three_ages_app)
+ (modules app_test)
+ (preprocess (pps ppx_jane)))
+

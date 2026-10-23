@@ -26,7 +26,8 @@
   <a id="pilotExportLink" class="muted" href="data/three-ages-pilot-export.csv" download hidden>Download the pilot annotation worksheet</a><br>
   <a id="imageReviewLink" class="muted" href="data/three-ages-image-review.csv" download hidden>Download the facade-image review worksheet</a><br>
   <a id="structuralReviewLink" class="muted" href="data/three-ages-structural-review.csv" download hidden>Download the structural-comparison review worksheet</a><br>
-  <a id="registerReviewLink" class="muted" href="data/three-ages-register-review.csv" download hidden>Download the register-semantics review worksheet</a>
+  <a id="registerReviewLink" class="muted" href="data/three-ages-register-review.csv" download hidden>Download the register-semantics review worksheet</a><br>
+ <a class="muted" href="review.html">Open the review workbench</a>
   <div class="layout">
     <aside class="panel"><h2>Case set</h2><p class="muted">Select a building to inspect its three ages and evidence.</p><div id="list"></div><h3>Public source preview</h3><div id="sourceList" class="muted">Loading records…</div><div id="sourceDetail" class="evidence"></div><div id="protocol" class="evidence"></div><div id="access" class="evidence"></div><div id="structuralContext" class="evidence"><h3>Structural context</h3><p class="muted">Loading area-level image epochs…</p></div></aside>
     <section class="card"><div id="content"></div></section>
@@ -35,19 +36,33 @@
 <script>
 const $=id=>document.getElementById(id);
 const escapeHTML=value=>String(value ?? '').replace(/[&<>"']/g, character=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+const safeExternalUrl=value=>{
+  try {
+    const url=new URL(String(value));
+    return url.protocol==='https:' ? url.href : '#';
+  } catch {
+    return '#';
+  }
+};
+const safeAssetPath=value=>{
+  const path=String(value ?? '');
+  const match=path.match(/^data\/(?:historical\/|structural\/)?([A-Za-z0-9._-]+)$/);
+  return match && match[1]!=='.' && match[1]!=='..' ? path : '';
+};
 let sourceRecords=new Map();
 let pilotRecords=[];
 let imageReviews=new Map();
 let structuralReviews=new Map();
 let structuralCrops=new Map();
 let registerReviews=new Map();
+let imageCasesBySource=new Map();
 let pilotStatus='source-grounded pilot';
 
 function sourceFor(pilot){ return sourceRecords.get(pilot.source_id) || {}; }
 function reviewKey(sourceId,assetId){ return `${sourceId}:${assetId}`; }
 function valueOrPending(field){ return field.value || 'Pending'; }
 function renderList(){
-  $('list').innerHTML=pilotRecords.map(p=>{
+  $('list').innerHTML=explorerRecords().map(p=>{
     const source=sourceFor(p);
     return `<button type="button" class="building" aria-pressed="false" data-id="${escapeHTML(p.source_id)}"><b>${escapeHTML(source.name || p.source_id)}</b><small>${escapeHTML(source.address || 'address unavailable')}</small></button>`;
   }).join('');
@@ -56,16 +71,16 @@ function renderList(){
 }
 function ageCard(number,label,field,description){
   const sourceUrl=field.source?.url || field.source?.claim_url;
-  const sourceLink=sourceUrl ? `<p><a href="${escapeHTML(sourceUrl)}" target="_blank" rel="noopener">Open evidence source</a></p>` : '';
+  const sourceLink=sourceUrl ? `<p><a href="${escapeHTML(safeExternalUrl(sourceUrl))}" target="_blank" rel="noopener">Open evidence source</a></p>` : '';
   return `<article class="age"><span>${number} · ${label}</span><div class="year">${escapeHTML(valueOrPending(field))}</div><span class="status">${escapeHTML(field.status)}</span><p>${escapeHTML(description || field.note)}</p>${sourceLink}</article>`;
 }
 function historicalEvidence(pilot){
-  const assets=pilot.image_evidence || [];
+  const assets=imageCasesBySource.get(pilot.source_id) || [];
   if(!assets.length) return '<div class="evidence"><h3>Image source previews</h3><p class="muted">No permitted image preview is attached yet.</p></div>';
   return `<div class="evidence"><h3>Image source previews</h3><p class="muted">These reusable source previews remain separate from reviewer observations.</p>${assets.map(asset=>{
     const review=imageReviews.get(reviewKey(pilot.source_id,asset.asset_id));
-    const reviewSummary=review?`<div class="source-note"><b>Reviewed annotation · ${escapeHTML(review.confidence)} confidence</b>${review.facade_observation?`<p><b>Facade:</b> ${escapeHTML(review.facade_observation)}</p>`:''}${review.structural_observation?`<p><b>Structure:</b> ${escapeHTML(review.structural_observation)}</p>`:''}<small>Reviewed by ${escapeHTML(review.reviewer)} · ${escapeHTML(review.reviewed_at)}</small></div>`:'<p class="muted">No completed reviewer annotation.</p>';
-    return `<figure class="source-preview"><img src="${escapeHTML(asset.preview)}" alt="${escapeHTML(asset.epoch+' source preview '+asset.asset_id)}"><figcaption>${escapeHTML(asset.epoch)} · ${escapeHTML(asset.licence)} · ${escapeHTML(asset.credit)} · <span>${escapeHTML(review?.annotation_status || asset.annotation_status)}</span> · <a href="${escapeHTML(asset.source_url)}" target="_blank" rel="noopener">Open source record</a><p>${escapeHTML(asset.observation)}</p></figcaption>${reviewSummary}</figure>`;
+    const reviewSummary=review?`<div class="source-note"><b>Reviewed annotation · ${escapeHTML(review.confidence)} confidence</b>${review.facade_style?`<p><b>Style:</b> ${escapeHTML(review.facade_style)}</p>`:''}${review.facade_observation?`<p><b>Facade:</b> ${escapeHTML(review.facade_observation)}</p>`:''}${review.structural_observation?`<p><b>Structure:</b> ${escapeHTML(review.structural_observation)}</p>`:''}<small>Reviewed by ${escapeHTML(review.reviewer)} · ${escapeHTML(review.reviewed_at)}</small></div>`:'<p class="muted">No completed reviewer annotation.</p>';
+    return `<figure class="source-preview"><img src="${escapeHTML(safeAssetPath(asset.preview))}" alt="${escapeHTML(asset.epoch+' source preview '+asset.asset_id)}"><figcaption>${escapeHTML(asset.epoch)} · ${escapeHTML(asset.licence)} · ${escapeHTML(asset.credit)} · <span>${escapeHTML(review?.annotation_status || asset.annotation_status)}</span> · <a href="${escapeHTML(safeExternalUrl(asset.source_url))}" target="_blank" rel="noopener">Open source record</a><p>${escapeHTML(asset.observation)}</p></figcaption>${reviewSummary}</figure>`;
   }).join('')}</div>`;
 }
 function registerReviewSummary(pilot){
@@ -76,21 +91,32 @@ function registerReviewSummary(pilot){
 }
 function identityCrosswalk(pilot){
   if(!pilot.identity_note && !pilot.identity_evidence?.length) return '';
-  const records=(pilot.identity_evidence || []).map(item=>`<li><b>${escapeHTML(item.label)}</b> · ${escapeHTML(item.address)} · <a href="${escapeHTML(item.source_url)}" target="_blank" rel="noopener">${escapeHTML(item.source_kind)} ${escapeHTML(item.record_id)}</a><br><small>${escapeHTML(item.observation)}</small></li>`).join('');
+  const records=(pilot.identity_evidence || []).map(item=>`<li><b>${escapeHTML(item.label)}</b> · ${escapeHTML(item.address)} · <a href="${escapeHTML(safeExternalUrl(item.source_url))}" target="_blank" rel="noopener">${escapeHTML(item.source_kind)} ${escapeHTML(item.record_id)}</a><br><small>${escapeHTML(item.observation)}</small></li>`).join('');
   return `<div class="source-note"><b>Identity check · pending reviewer confirmation</b><p>${escapeHTML(pilot.identity_note)}</p>${records?`<ul>${records}</ul>`:''}</div>`;
 }
 function structuralReviewSummary(pilot){
   const review=structuralReviews.get(pilot.source_id);
   const crop=structuralCrops.get(pilot.source_id);
   const cropAssets=crop?.assets || [];
-  const cropGrid=cropAssets.length?`<div class="case-crop-grid">${cropAssets.map(asset=>`<figure class="case-crop"><span class="case-crop-frame"><img src="${escapeHTML(asset.crop_preview)}" alt="${escapeHTML(asset.epoch+' building-centred structural crop for '+pilot.source_id)}"><i class="case-crop-marker" aria-hidden="true"></i></span><figcaption>${escapeHTML(asset.epoch)} · coordinate at centre</figcaption></figure>`).join('')}</div>`:'<p class="muted">No derived case crops are available.</p>';
+  const cropGrid=cropAssets.length?`<div class="case-crop-grid">${cropAssets.map(asset=>`<figure class="case-crop"><span class="case-crop-frame"><img src="${escapeHTML(safeAssetPath(asset.crop_preview))}" alt="${escapeHTML(asset.epoch+' building-centred structural crop for '+pilot.source_id)}"><i class="case-crop-marker" aria-hidden="true"></i></span><figcaption>${escapeHTML(asset.epoch)} · coordinate at centre</figcaption></figure>`).join('')}</div>`:'<p class="muted">No derived case crops are available.</p>';
   const annotation=review?`<div class="source-note"><b>Reviewed annotation · ${escapeHTML(review.confidence)} confidence</b><p>${escapeHTML(review.structural_observation)}</p><small>Reviewed by ${escapeHTML(review.reviewer)} · ${escapeHTML(review.reviewed_at)} · ${escapeHTML(review.comparison_id)}</small></div>`:'<p class="muted">No completed case-level structural review. Compare the aligned crops, then use the structural-comparison worksheet.</p>';
   return `<div class="evidence"><h3>Structural comparison review</h3><p class="muted">Identical ${escapeHTML(crop?.crop_size_pixels || '')} px boxes derived from the aligned area orthos. The red ring marks the source coordinate; crops are review aids, not change claims.</p>${cropGrid}${annotation}</div>`;
 }
+function explorerRecords(){
+  // Every building with a reviewable image must be reachable, not just the curated pilot:
+  // otherwise a recorded facade review has nowhere to appear.
+  const ids=[...new Set([...pilotRecords.map(r=>r.source_id),...imageCasesBySource.keys()])];
+  return ids.map(id=>pilotRecords.find(r=>r.source_id===id) || {source_id:id,facade_only:true});
+}
 function show(id){
-  const pilot=pilotRecords.find(record=>record.source_id===id);
-  if(!pilot) return;
-  const source=sourceFor(pilot);
+  const source=sourceRecords.get(String(id)) || {};
+  const base=pilotRecords.find(record=>record.source_id===id);
+  // Facade-only buildings carry image evidence but no register claim or structural
+  // comparison, so they need placeholder claims to render in the same shell.
+  const pilot=base || {source_id:id,facade_only:true,
+    register:{status:'facade-only case',value:null,date_semantics:'',source_comparison:'',source:{},note:'This building carries facade image evidence but has no register claim or structural comparison in the curated pilot.'},
+    facade:{status:'source description',value:source.facade||null,note:'',source:null},
+    structure:{status:'facade-only case',value:null,note:'No structural comparison is attached to this building in the curated pilot.',source:null}};
   const registerReview=registerReviews.get(pilot.source_id);
   const structuralReview=structuralReviews.get(pilot.source_id);
   const registerDescription=registerReview
@@ -100,7 +126,7 @@ function show(id){
     ? `Reviewer comparison (${structuralReview.confidence} confidence): ${structuralReview.structural_observation} The displayed date remains a documented source proxy.`
     : 'A dated reconstruction is a historical proxy, not a structural-age conclusion.';
   document.querySelectorAll('#list .building').forEach(button=>{ const selected=button.dataset.id===id; button.classList.toggle('active',selected); button.setAttribute('aria-pressed',selected); });
-  $('content').innerHTML=`<div class="hero"><div><h2>${escapeHTML(source.name || id)}</h2><p class="muted">${escapeHTML(source.address || 'Address unavailable')} · source record ${escapeHTML(id)}</p></div><span class="badge">${escapeHTML(pilotStatus)}</span></div><div class="timeline">${ageCard(1,'Register/source date',pilot.register,registerDescription)} ${ageCard(2,'Facade evidence',pilot.facade,source.facade)} ${ageCard(3,'Structural evidence',pilot.structure,structuralDescription)}</div>${registerReviewSummary(pilot)}<div class="evidence"><h3>Evidence trail</h3><p><b>Why this case:</b> ${escapeHTML(pilot.selection_reason)}</p>${identityCrosswalk(pilot)}<p><b>History source:</b></p><blockquote>${escapeHTML(source.history || 'No history text.')}</blockquote><p><b>Facade source:</b></p><blockquote>${escapeHTML(source.facade || 'No facade description.')}</blockquote><p class="source-note"><b>Next annotation step:</b> ${escapeHTML(pilot.next_step)}<br><span class="muted">Image evidence attached: ${(pilot.image_evidence || []).length || 'none yet'}.</span></p><p><a href="${escapeHTML(source.source_url || '#')}" target="_blank" rel="noopener">Open source location</a></p></div>${historicalEvidence(pilot)}${structuralReviewSummary(pilot)}`;
+  $('content').innerHTML=`<div class="hero"><div><h2>${escapeHTML(source.name || id)}</h2><p class="muted">${escapeHTML(source.address || 'Address unavailable')} · source record ${escapeHTML(id)}</p></div><span class="badge">${escapeHTML(pilotStatus)}</span></div><div class="timeline">${ageCard(1,'Register/source date',pilot.register,registerDescription)} ${ageCard(2,'Facade evidence',pilot.facade,source.facade)} ${ageCard(3,'Structural evidence',pilot.structure,structuralDescription)}</div>${registerReviewSummary(pilot)}<div class="evidence"><h3>Evidence trail</h3><p><b>Why this case:</b> ${escapeHTML(pilot.selection_reason)}</p>${identityCrosswalk(pilot)}<p><b>History source:</b></p><blockquote>${escapeHTML(source.history || 'No history text.')}</blockquote><p><b>Facade source:</b></p><blockquote>${escapeHTML(source.facade || 'No facade description.')}</blockquote><p class="source-note"><b>Next annotation step:</b> ${escapeHTML(pilot.next_step)}<br><span class="muted">Image evidence attached: ${(pilot.image_evidence || []).length || 'none yet'}.</span></p><p><a href="${escapeHTML(safeExternalUrl(source.source_url))}" target="_blank" rel="noopener">Open source location</a></p></div>${historicalEvidence(pilot)}${structuralReviewSummary(pilot)}`;
 }
 function showSource(record){
   if(!record) return;
@@ -113,21 +139,24 @@ Promise.all([
   fetch('data/three-ages-image-reviews.json').then(response=>response.json()),
   fetch('data/three-ages-structural-reviews.json').then(response=>response.json()),
   fetch('data/three-ages-structural-crops.json').then(response=>response.json()),
-  fetch('data/three-ages-register-reviews.json').then(response=>response.json())
-]).then(([source,pilot,inventory,reviews,structuralReviewData,structuralCropData,registerReviewData])=>{
+  fetch('data/three-ages-register-reviews.json').then(response=>response.json()),
+  fetch('data/three-ages-image-cases.json').then(response=>response.json())
+]).then(([source,pilot,inventory,reviews,structuralReviewData,structuralCropData,registerReviewData,imageCaseData])=>{
   sourceRecords=new Map(source.records.map(record=>[record.id,record]));
   pilotRecords=pilot.records.filter(record=>sourceRecords.has(record.source_id));
   imageReviews=new Map(reviews.records.map(review=>[reviewKey(review.source_id,review.asset_id),review]));
   structuralReviews=new Map(structuralReviewData.records.map(review=>[review.source_id,review]));
   structuralCrops=new Map(structuralCropData.records.map(record=>[record.source_id,{...record,crop_size_pixels:structuralCropData.crop_size_pixels}]));
   registerReviews=new Map(registerReviewData.records.map(review=>[review.source_id,review]));
+  imageCasesBySource=new Map();
+  for(const item of imageCaseData.cases||[]){if(!imageCasesBySource.has(item.source_id))imageCasesBySource.set(item.source_id,[]);imageCasesBySource.get(item.source_id).push(item)}
   pilotStatus=pilot.review_status || pilotStatus;
   const withHistory=source.records.filter(record=>record.history).length;
-  const imageAssets=pilotRecords.flatMap(record=>record.image_evidence || []);
+  const imageAssets=pilotRecords.flatMap(record=>imageCasesBySource.get(record.source_id) || []);
   const imageEpochs=[...new Set(imageAssets.map(asset=>asset.epoch))].sort((a,b)=>a-b).join(', ');
   const areaAssets=pilot.area_image_evidence || [];
   $('source').textContent=`Public source connected: City of Brussels Grand Place dataset — ${source.source} buildings; ${withHistory} include restoration/history text; ${source.source_licence}, ${source.source_credit}. The pilot currently contains ${pilotRecords.length} source-linked cases, ${imageAssets.length} reusable case-level facade previews (epochs ${imageEpochs}), ${areaAssets.length} area-level structural previews, ${structuralCropData.record_count*areaAssets.length} aligned case crops, ${reviews.record_count} completed facade annotation${reviews.record_count===1?'':'s'}, ${structuralReviewData.record_count} completed structural annotation${structuralReviewData.record_count===1?'':'s'} and ${registerReviewData.record_count} completed register decision${registerReviewData.record_count===1?'':'s'}.`;
-  $('datasetLink').href=source.dataset_url || '#';
+  $('datasetLink').href=safeExternalUrl(source.dataset_url);
   $('datasetLink').hidden=!source.dataset_url;
   $('pilotExportLink').hidden=false;
   $('imageReviewLink').hidden=false;
@@ -136,8 +165,8 @@ Promise.all([
   renderList();
   $('sourceList').innerHTML=pilotRecords.map(p=>{ const record=sourceFor(p); return `<button type="button" class="building source-building" data-source-id="${escapeHTML(record.id)}"><b>${escapeHTML(record.name || record.id)}</b><small>${escapeHTML(record.address || 'address unavailable')}</small></button>`; }).join('');
   $('protocol').innerHTML=`<h3>Pilot protocol</h3><ul>${Object.entries(pilot.annotation_protocol).map(([label,note])=>`<li><b>${escapeHTML(label)}:</b> ${escapeHTML(note)}</li>`).join('')}</ul>`;
-  $('access').innerHTML=`<h3>Source access</h3><ul>${Object.values(inventory).map(source=>`<li><a href="${escapeHTML(source.url)}" target="_blank" rel="noopener">${escapeHTML(source.name)}</a> — ${escapeHTML(source.status)}${source.licence ? ` (${escapeHTML(source.licence)})` : ''}${source.credit ? ` · ${escapeHTML(source.credit)}` : ''}${source.metadata ? ` · <a href="${escapeHTML(source.metadata)}" target="_blank" rel="noopener">metadata</a>` : ''}${source.terms ? ` · <a href="${escapeHTML(source.terms)}" target="_blank" rel="noopener">terms</a>` : ''}</li>`).join('')}</ul>`;
-  $('structuralContext').innerHTML=`<h3>Structural context</h3><p class="muted">These aligned pilot-area previews are source context, not reviewed case-level change claims.</p>${areaAssets.map(asset=>`<figure class="source-preview"><img src="${escapeHTML(asset.preview)}" alt="${escapeHTML(asset.epoch+' '+asset.scope+' structural source preview')}"><figcaption>${escapeHTML(asset.epoch)} · ${escapeHTML(asset.licence)} · ${escapeHTML(asset.credit)} · <span>${escapeHTML(asset.annotation_status)}</span> · <a href="${escapeHTML(asset.source_url)}" target="_blank" rel="noopener">Open source record</a><p>${escapeHTML(asset.observation)}</p></figcaption></figure>`).join('')}`;
+  $('access').innerHTML=`<h3>Source access</h3><ul>${Object.values(inventory).map(source=>`<li><a href="${escapeHTML(safeExternalUrl(source.url))}" target="_blank" rel="noopener">${escapeHTML(source.name)}</a> — ${escapeHTML(source.status)}${source.licence ? ` (${escapeHTML(source.licence)})` : ''}${source.credit ? ` · ${escapeHTML(source.credit)}` : ''}${source.metadata ? ` · <a href="${escapeHTML(safeExternalUrl(source.metadata))}" target="_blank" rel="noopener">metadata</a>` : ''}${source.terms ? ` · <a href="${escapeHTML(safeExternalUrl(source.terms))}" target="_blank" rel="noopener">terms</a>` : ''}</li>`).join('')}</ul>`;
+  $('structuralContext').innerHTML=`<h3>Structural context</h3><p class="muted">These aligned pilot-area previews are source context, not reviewed case-level change claims.</p>${areaAssets.map(asset=>`<figure class="source-preview"><img src="${escapeHTML(safeAssetPath(asset.preview))}" alt="${escapeHTML(asset.epoch+' '+asset.scope+' structural source preview')}"><figcaption>${escapeHTML(asset.epoch)} · ${escapeHTML(asset.licence)} · ${escapeHTML(asset.credit)} · <span>${escapeHTML(asset.annotation_status)}</span> · <a href="${escapeHTML(safeExternalUrl(asset.source_url))}" target="_blank" rel="noopener">Open source record</a><p>${escapeHTML(asset.observation)}</p></figcaption></figure>`).join('')}`;
   document.querySelectorAll('.source-building').forEach(button=>button.addEventListener('click',()=>showSource(sourceRecords.get(button.dataset.sourceId))));
   showSource(sourceRecords.get(pilotRecords[0]?.source_id));
 }).catch(()=>{

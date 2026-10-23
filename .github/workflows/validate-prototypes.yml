@@ -37,3 +37,30 @@ jobs:
 
       - name: Regenerate and validate Three Ages
         run: scripts/validate-prototypes.sh --check-clean
+
+  validate-bonsai:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up OCaml
+        uses: ocaml/setup-ocaml@93303b622b2522e4411e295f9e77411a24912ac7 # v3.9.0
+        with:
+          ocaml-compiler: "5.2"
+          dune-cache: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22"
+
+      - name: Install Bonsai dependencies
+        run: opam install -y ./ocaml/three_ages.opam --deps-only
+
+      - name: Install Bonsai test runtime
+        run: npm ci --prefix ocaml
+
+      - name: Validate Bonsai slice
+        run: scripts/validate-bonsai.sh

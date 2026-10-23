@@ -9,7 +9,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urlparse
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parent
@@ -22,9 +22,17 @@ EXPECTED_DESCRIPTION = "Grand-Place - Maison de la Balance"
 EXPECTED_SHA256 = "8af4305c92db16d063ce19f901afc9841e1721e5be4c70d39b9cb3deed9bce03"
 USER_AGENT = "final-work-three-ages/1.0"
 MAX_RESPONSE_BYTES = 20 * 1024 * 1024
+ALLOWED_HOSTS = {"commons.wikimedia.org", "upload.wikimedia.org"}
+
+
+def validate_url(url: str) -> None:
+    parsed = urlparse(url)
+    if parsed.scheme != "https" or parsed.hostname not in ALLOWED_HOSTS:
+        raise RuntimeError(f"refusing unexpected Wikimedia URL: {url}")
 
 
 def request(url: str) -> bytes:
+    validate_url(url)
     with urlopen(Request(url, headers={"User-Agent": USER_AGENT}), timeout=60) as response:
         body = response.read(MAX_RESPONSE_BYTES + 1)
     if len(body) > MAX_RESPONSE_BYTES:

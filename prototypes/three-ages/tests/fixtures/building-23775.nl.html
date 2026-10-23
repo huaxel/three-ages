@@ -1,0 +1,1126 @@
+<!DOCTYPE html> 
+<html lang="nl">
+<head>
+  	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+	<meta name='viewport' content='width=device-width, initial-scale=1.0' >
+	<title> &ndash; Inventaris van het bouwkundig erfgoed</title>
+	<link rel="shortcut icon" href="/img/urban_favicon.png" type="image/vnd.microsoft.icon" />
+	<meta content="" name="description">
+	<meta name="DC.title" content=" &ndash; Inventaris van het bouwkundig erfgoed" />	<meta property="og:title" content=" &ndash; Inventaris van het bouwkundig erfgoed" />
+	<meta property="og:type" content="Place" />
+	<meta property="og:description" content="" />
+	<meta property="og:locale" content="nl_NL" />
+	<meta property="og:image" content="https://monument.heritage.brussels/medias/500/buildings/10831042_0053_P01.jpg" />
+	<meta property="og:image:url" content="https://monument.heritage.brussels/medias/500/buildings/10831042_0053_P01.jpg" />
+	<meta property="og:image:height" content="500" />
+	<style>@import url("/_integration/heritage/assets/css/style.css");</style>
+	<style>@import url("/_integration/shame.monuments.css");</style>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+  crossorigin=""/>
+  <link rel="stylesheet" media="all" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+<link rel="stylesheet" media="all" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+  
+  
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+  integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+  crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+  
+
+  <script src="/_integration/Control.FullScreen.js"></script>
+  
+  
+  <script src="/_integration/heritage/assets/js/dist/libs.js?v=1"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  <script src="/_integration/heritage/assets/js/dist/hierarchy-select.js?v=1"></script>
+  <script src="/_integration/heritage/assets/js/dist/scripts.js?v=3"></script>
+  <script src="/_integration/heritage/assets/js/dist/connection.js?v=3"></script>
+  <!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<style>
+.blocker{z-index:999998;}
+.modal{z-index:999999;padding: 10px 0px;border-radius:0px;}
+</style>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NCJ1RPJXJX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NCJ1RPJXJX');
+</script>
+</head>
+
+<body class="front  nl monuments">
+<div id="phrise">
+
+<a href='/nl/Ganshoren/Landsroemlaan/17/23746' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0017_P01.jpg' loading='lazy' alt="Landsroemlaan 17"></a><a href='/nl/Ganshoren/Landsroemlaan/19/23748' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0019_P01.jpg' loading='lazy' alt="Landsroemlaan 19"></a><a href='/nl/Ganshoren/Landsroemlaan/21/23750' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0021_P01.jpg' loading='lazy' alt="Landsroemlaan 21"></a><a href='/nl/Ganshoren/Landsroemlaan/23/23752' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0023_P01.jpg' loading='lazy' alt="Landsroemlaan 23"></a><a href='/nl/Ganshoren/Landsroemlaan/25/23754' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0025_P01.jpg' loading='lazy' alt="Landsroemlaan 25"></a><a href='/nl/Ganshoren/Landsroemlaan/27/23756' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0027_P01.jpg' loading='lazy' alt="Landsroemlaan 27"></a><a href='/nl/Ganshoren/Landsroemlaan/29/23757' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0029_P01.jpg' loading='lazy' alt="Landsroemlaan 29"></a><a href='/nl/Ganshoren/Landsroemlaan/31/23759' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0031_P01.jpg' loading='lazy' alt="Landsroemlaan 31"></a><a href='/nl/Ganshoren/Landsroemlaan/33/23761' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0033_P01.jpg' loading='lazy' alt="Landsroemlaan 33"></a><a href='/nl/Ganshoren/Landsroemlaan/35/23763' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0035_P01.jpg' loading='lazy' alt="Landsroemlaan 35"></a><a href='/nl/Ganshoren/Landsroemlaan/37/23765' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0037_P01.jpg' loading='lazy' alt="Landsroemlaan 37"></a><a href='/nl/Ganshoren/Landsroemlaan/39/23767' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0039_P01.jpg' loading='lazy' alt="Landsroemlaan 39"></a><a href='/nl/Ganshoren/Landsroemlaan/41/23769' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0041_P01.jpg' loading='lazy' alt="Landsroemlaan 41"></a><a href='/nl/Ganshoren/Landsroemlaan/43/23770' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0043_P01.jpg' loading='lazy' alt="Landsroemlaan 43, 44"></a><a href='/nl/Ganshoren/Landsroemlaan/47/23772' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0047_P01.jpg' loading='lazy' alt="Landsroemlaan 47"></a><a href='/nl/Ganshoren/Landsroemlaan/51/23774' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0051_P01.jpg' loading='lazy' alt="Landsroemlaan 51, 52"></a><a href='/nl/Ganshoren/Landsroemlaan/55/23777' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0055_P01.jpg' loading='lazy' alt="Landsroemlaan 55-&#8203;56"></a><a href='/nl/Ganshoren/Landsroemlaan/57/23778' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0057_P01.jpg' loading='lazy' alt="Landsroemlaan 57"></a><a href='/nl/Ganshoren/Landsroemlaan/59/23779' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0059_P01.jpg' loading='lazy' alt="Landsroemlaan 59"></a><a href='/nl/Ganshoren/Landsroemlaan/63/23781' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0063_P01.jpg' loading='lazy' alt="Landsroemlaan 63, 64"></a><a href='/nl/Ganshoren/Hertog_Janlaan/3/40981' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/inv39-99/10831034_0003_P01.jpg' loading='lazy' alt="Hertog Janlaan 3<br>Landsroemlaan 75"></a><a href='/nl/Ganshoren/Landsroemlaan/84/41112' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/inv39-99/10831042_0084_P01.jpg' loading='lazy' alt="Landsroemlaan 84-&#8203;85"></a><a href='/nl/Ganshoren/Landsroemlaan/18/23747' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0018_P01.jpg' loading='lazy' alt="Landsroemlaan 18"></a><a href='/nl/Ganshoren/Landsroemlaan/20/23749' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0020_P01.jpg' loading='lazy' alt="Landsroemlaan 20"></a><a href='/nl/Ganshoren/Landsroemlaan/22/23751' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0022_P01.jpg' loading='lazy' alt="Landsroemlaan 22"></a><a href='/nl/Ganshoren/Landsroemlaan/24/23753' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0024_P01.jpg' loading='lazy' alt="Landsroemlaan 24"></a><a href='/nl/Ganshoren/Landsroemlaan/26/23755' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0026_P01.jpg' loading='lazy' alt="Landsroemlaan 26"></a><a href='/nl/Ganshoren/Landsroemlaan/30/23758' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0030_P01.jpg' loading='lazy' alt="Landsroemlaan 30"></a><a href='/nl/Ganshoren/Landsroemlaan/32/23760' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0032_P01.jpg' loading='lazy' alt="Landsroemlaan 32"></a><a href='/nl/Ganshoren/Landsroemlaan/34/23762' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0034_P01.jpg' loading='lazy' alt="Landsroemlaan 34"></a><a href='/nl/Ganshoren/Landsroemlaan/36/23764' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0036_P01.jpg' loading='lazy' alt="Landsroemlaan 36"></a><a href='/nl/Ganshoren/Landsroemlaan/38/23766' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0038_P01.jpg' loading='lazy' alt="Landsroemlaan 38"></a><a href='/nl/Ganshoren/Landsroemlaan/40/23768' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0040_P01.jpg' loading='lazy' alt="Landsroemlaan 40"></a><a href='/nl/Ganshoren/Landsroemlaan/42/40777' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/inv39-99/10831042_0042_P01.jpg' loading='lazy' alt="Landsroemlaan 42"></a><a href='/nl/Ganshoren/Landsroemlaan/43/23770' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0043_P01.jpg' loading='lazy' alt="Landsroemlaan 43, 44"></a><a href='/nl/Ganshoren/Landsroemlaan/46/23771' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0046_P01.jpg' loading='lazy' alt="Landsroemlaan 46"></a><a href='/nl/Ganshoren/Landsroemlaan/48/23773' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0048_P01.jpg' loading='lazy' alt="Landsroemlaan 48"></a><a href='/nl/Ganshoren/Landsroemlaan/51/23774' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0051_P01.jpg' loading='lazy' alt="Landsroemlaan 51, 52"></a><a href='/nl/Ganshoren/Landsroemlaan/54/23776' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0054_P01.jpg' loading='lazy' alt="Landsroemlaan 54"></a><a href='/nl/Ganshoren/Landsroemlaan/55/23777' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0055_P01.jpg' loading='lazy' alt="Landsroemlaan 55-&#8203;56"></a><a href='/nl/Ganshoren/Landsroemlaan/60/23780' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0060_P01.jpg' loading='lazy' alt="Landsroemlaan 60"></a><a href='/nl/Ganshoren/Landsroemlaan/63/23781' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0063_P01.jpg' loading='lazy' alt="Landsroemlaan 63, 64"></a><a href='/nl/Ganshoren/Landsroemlaan/82/40194' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042/10831042_0082_P01.jpg' loading='lazy' alt="Landsroemlaan 82"></a><a href='/nl/Ganshoren/Landsroemlaan/84/41112' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/inv39-99/10831042_0084_P01.jpg' loading='lazy' alt="Landsroemlaan 84-&#8203;85"></a><a href='/nl/Ganshoren/Landsroemlaan/126/23782' class='imginfo'><img src='https://monument.heritage.brussels/medias/66/buildings/10831042_0126_P01.jpg' loading='lazy' alt="Landsroemlaan 126"></a>
+
+
+</div>
+<div class="site-wrapper container">
+	<div class="row">
+		<header id="main-header" class="col-md-4 d-print-none">
+			<div id="logo2"><img src="/_integration/heritage/assets/css/images/logo/logo-iris.png" alt="Région de Bruxelles Capitale" class="logo-bxl-cap" ><p>Région de Bruxelles-Capitale</p>
+</div>
+<div id="navigation" class="d-flex flex-column align-items-end" >
+			<div id="header">
+
+					<div id="logo">
+						<p>Brussels Hoofdstedelijk Gewest</p>
+						<div class="baseline"><a href="/nl/">Inventaris van het<br> bouwkundig erfgoed</a></div>
+					</div>
+
+					<!-- Toggle Menu -->
+
+		            <div class="toggle-wrapper">
+		                <a id="nav-toggle" class="hamburger-menu toggle-menu" href="#primary-nav" aria-label="Ouvrir le menu principal"><div class="bar"></div></a>
+		            </div>
+
+					<div id="menu-1">
+						<nav>
+							<ul id="menu">
+								<li class="first"><a href="/nl/inventaire/">Inventaris</a></li>
+
+<li class="first"><a href="/nl/map/">Kaart</a></li>
+<li class="first"><a href="/nl/cities/">Gemeenten</a></li>
+<li class="first"><a href="/nl/inventories/">Thema's</a></li>
+<li class="first"><a href="/index.php?section=glossary&lg=nl&glossarycat=1">Stijlen</a></li>
+<li class="first"><a href="/nl/glossary/">Glossarium</a></li>
+<li class="first"><a href="/nl/liens/">Links</a></li>
+								
+							</ul>
+						</nav>
+
+					</div>
+
+				</div>
+
+				<div class="header-search-wrapper">
+					<form action="/index.php" method="GET" name="qsearch" style="margin-top:0px;">
+						<!-- <a href="javascript:affichePage(85);"><img src="/img/info.gif" alt="info" class="help_button"></a> -->
+						<input id="quick_search" class="field" type="text" name="quick_search" value="" placeholder="Snel zoeken">
+						<input type="hidden" name="section" value="buildings">
+						<input type="hidden" name="lg" value="nl">
+						<input class="submit" type="submit" value="ok">
+					</form>
+					
+					
+					
+					<div class="adv-search"><a href="#">Geavanceerd zoeken</a></div>
+					<div id="menu_select">
+					<form action="/index.php" method="GET" name="building_search">
+	<div>
+	
+		<div class="dropdown hierarchy-select hiearchy" id="city" default="">
+		    <button type="button" class="btn btn-secondary dropdown-toggle" id="city-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+		    <div class="dropdown-menu" aria-labelledby="city-button">
+<div class="hs-searchbox">
+		            <input type="text" class="form-control" autocomplete="off">
+		        </div>
+				<div class="hs-menu-inner">
+				<a href="#" class="dropdown-item" data-value="" data-level="1">Alle gemeentes</a>
+			 
+				<a href="#" class="dropdown-item" data-value="1070" data-level="1" >Anderlecht</a>
+				<a href="#" class="dropdown-item" data-value="1130" data-level="1" >Brussel Haren</a>
+				<a href="#" class="dropdown-item" data-value="1020" data-level="1" >Brussel Laken</a>
+				<a href="#" class="dropdown-item" data-value="1120" data-level="1" >Brussel Neder-O.-H.</a>
+				<a href="#" class="dropdown-item" data-value="1003" data-level="1" >Brussel Uitbreiding Noord</a>
+				<a href="#" class="dropdown-item" data-value="1002" data-level="1" >Brussel Uitbreiding Oost</a>
+				<a href="#" class="dropdown-item" data-value="1001" data-level="1" >Brussel Uitbreiding Zuid</a>
+				<a href="#" class="dropdown-item" data-value="1000" data-level="1" >Brussel Vijfhoek</a>
+				<a href="#" class="dropdown-item" data-value="1050" data-level="1" >Elsene</a>
+				<a href="#" class="dropdown-item" data-value="1040" data-level="1" >Etterbeek</a>
+				<a href="#" class="dropdown-item" data-value="1140" data-level="1" >Evere</a>
+				<a href="#" class="dropdown-item" data-value="1083" data-level="1" >Ganshoren</a>
+				<a href="#" class="dropdown-item" data-value="1090" data-level="1" >Jette</a>
+				<a href="#" class="dropdown-item" data-value="1081" data-level="1" >Koekelberg</a>
+				<a href="#" class="dropdown-item" data-value="1160" data-level="1" >Oudergem</a>
+				<a href="#" class="dropdown-item" data-value="1030" data-level="1" >Schaarbeek</a>
+				<a href="#" class="dropdown-item" data-value="1082" data-level="1" >Sint-Agatha-Berchem</a>
+				<a href="#" class="dropdown-item" data-value="1060" data-level="1" >Sint-Gillis</a>
+				<a href="#" class="dropdown-item" data-value="1080" data-level="1" >Sint-Jans-Molenbeek</a>
+				<a href="#" class="dropdown-item" data-value="1210" data-level="1" >Sint-Joost-ten-Node</a>
+				<a href="#" class="dropdown-item" data-value="1200" data-level="1" >Sint-Lambrechts-Woluwe</a>
+				<a href="#" class="dropdown-item" data-value="1150" data-level="1" >Sint-Pieters-Woluwe</a>
+				<a href="#" class="dropdown-item" data-value="1180" data-level="1" >Ukkel</a>
+				<a href="#" class="dropdown-item" data-value="1190" data-level="1" >Vorst</a>
+				<a href="#" class="dropdown-item" data-value="1170" data-level="1" >Watermaal-Bosvoorde</a>			    </div>
+			</div>
+			<input class="d-none" name="city" readonly="readonly" aria-hidden="true" type="text"/>
+		</div>
+	</div>
+	<div>
+		<div class="dropdown hierarchy-select hiearchy hierarchystreets">
+		    <button type="button" class="btn btn-secondary dropdown-toggle" id="streets-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+		    <div class="dropdown-menu" aria-labelledby="streets-button">
+<div class="hs-searchbox">
+		            <input type="text" class="form-control" autocomplete="off">
+		        </div>
+				<div class="hs-menu-inner streets_to_populate">
+			      <a href="#" class="dropdown-item" data-value="" data-level="1">Alle straten</a>	
+				</div>
+			</div>
+			<input class="d-none" name="street" readonly="readonly" aria-hidden="true" type="text"/>
+		</div>
+		
+	</div>
+	<div>
+		<input class="wplaceh" id="number" placeholder="Alle huisnummers" name="number" value="" type="text" style="width:110px;"/>
+	</div>
+	
+	<div>
+		<div class="dropdown hierarchy-select hiearchy">
+		    <button type="button" class="btn btn-secondary dropdown-toggle" id="actors-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+		    <div class="dropdown-menu" aria-labelledby="actors-button">
+<div class="hs-searchbox">
+		            <input type="text" class="form-control" autocomplete="off">
+		        </div>
+				<div class="hs-menu-inner architectes_to_populate">
+			      <a href="#" class="dropdown-item" data-value="" data-level="1">Alle architecten, kunstenaars, ...</a>			
+				</div>
+			</div>
+			<input class="d-none" name="actor" readonly="readonly" aria-hidden="true" type="text"/>
+		</div>
+	</div>
+	
+	
+	<div>
+		<div class="dropdown hierarchy-select hiearchy levelstypo" id="select_types">
+		    <button type="button" class="btn btn-secondary dropdown-toggle" id="types-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+		    <div class="dropdown-menu" aria-labelledby="types-one-button">
+		        <!--<div class="hs-searchbox">
+		            <input type="text" class="form-control" autocomplete="off">
+		        </div>-->
+				<div class="hs-menu-inner">
+			      <a href="#" class="dropdown-item" data-value="" data-level="1">Alle typologieën  </a>
+			      
+				<a href="#" class="dropdown-item" data-value="162" data-level="1" >Eengezinswoning</a>
+				<a href="#" class="dropdown-item" data-value="163" data-level="1" >Meergezinswoning</a>
+				<a href="#" class="dropdown-item" data-value="166" data-level="1" >Commerciële architectuur</a>
+				<a href="#" class="dropdown-item" data-value="177" data-level="1" >Funerair erfgoed</a>
+				<a href="#" class="dropdown-item" data-value="169" data-level="1" >Industriële architectuur</a>
+				<a href="#" class="dropdown-item" data-value="167" data-level="1" >Burelen</a>
+				<a href="#" class="dropdown-item" data-value="172" data-level="1" >Religie & levensbeschouwing</a>
+				<a href="#" class="dropdown-item" data-value="164" data-level="1" >Kasteel en Paleis</a>
+				<a href="#" class="dropdown-item" data-value="165" data-level="1" >Rurale architectuur</a>
+				<a href="#" class="dropdown-item" data-value="176" data-level="1" >Culturele Infrastructuur</a>
+				<a href="#" class="dropdown-item" data-value="175" data-level="1" >SportInfrastructuur</a>
+				<a href="#" class="dropdown-item" data-value="174" data-level="1" >Onderwijs</a>
+				<a href="#" class="dropdown-item" data-value="179" data-level="1" >Wegennet</a>
+				<a href="#" class="dropdown-item" data-value="168" data-level="1" >Horeca</a>
+				<a href="#" class="dropdown-item" data-value="178" data-level="1" >Straat meubilair</a>
+				<a href="#" class="dropdown-item" data-value="173" data-level="1" >Gezondheidszorg</a>
+				<a href="#" class="dropdown-item" data-value="171" data-level="1" >Openbaar vervoer</a>
+				<a href="#" class="dropdown-item" data-value="170" data-level="1" >Lokale Overheidsdiensten</a>
+				<a href="#" class="dropdown-item" data-value="180" data-level="1" >	 Varia</a>				  
+				  
+				  
+				 
+			    </div>
+			</div>
+			<input class="d-none" name="type" readonly="readonly" aria-hidden="true" type="text"/>
+		</div>
+	</div>
+	<div class='stypeajax'></div>
+	
+	
+
+	
+	<div>
+		<div class="dropdown hierarchy-select hiearchy">
+		    <button type="button" class="btn btn-secondary dropdown-toggle" id="style-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+		    <div class="dropdown-menu" aria-labelledby="style-button">
+<div class="hs-searchbox">
+		            <input type="text" class="form-control" autocomplete="off">
+		        </div>
+				<div class="hs-menu-inner">
+			      <a href="#" class="dropdown-item" data-value="" data-level="1">Alle stijlen</a>
+			     
+				<a href="#" class="dropdown-item" data-value="532" data-level="1" >Amsterdamse School</a>
+				<a href="#" class="dropdown-item" data-value="500" data-level="1" >Art deco</a>
+				<a href="#" class="dropdown-item" data-value="501" data-level="1" >Art nouveau</a>
+				<a href="#" class="dropdown-item" data-value="544" data-level="1" >Barok</a>
+				<a href="#" class="dropdown-item" data-value="503" data-level="1" >Beaux-Artsstijl</a>
+				<a href="#" class="dropdown-item" data-value="539" data-level="1" >Brutalisme</a>
+				<a href="#" class="dropdown-item" data-value="564" data-level="1" >Classicerende barok</a>
+				<a href="#" class="dropdown-item" data-value="550" data-level="1" >Classicisme</a>
+				<a href="#" class="dropdown-item" data-value="506" data-level="1" >Eclectisme</a>
+				<a href="#" class="dropdown-item" data-value="508" data-level="1" >Empire</a>
+				<a href="#" class="dropdown-item" data-value="556" data-level="1" >Functionalisme</a>
+				<a href="#" class="dropdown-item" data-value="548" data-level="1" >Gotiek</a>
+				<a href="#" class="dropdown-item" data-value="562" data-level="1" >Hightech architectuur</a>
+				<a href="#" class="dropdown-item" data-value="533" data-level="1" >Historicisme</a>
+				<a href="#" class="dropdown-item" data-value="653" data-level="1" >Integratiearchitectuur</a>
+				<a href="#" class="dropdown-item" data-value="546" data-level="1" >Laat-eclecticisme</a>
+				<a href="#" class="dropdown-item" data-value="531" data-level="1" >Landelijke architectuur</a>
+				<a href="#" class="dropdown-item" data-value="551" data-level="1" >Louis-Philippe</a>
+				<a href="#" class="dropdown-item" data-value="538" data-level="1" >Modern classicisme</a>
+				<a href="#" class="dropdown-item" data-value="511" data-level="1" >Modernisme</a>
+				<a href="#" class="dropdown-item" data-value="535" data-level="1" >Moorse stijl</a>
+				<a href="#" class="dropdown-item" data-value="514" data-level="1" >Neo-Egyptisch</a>
+				<a href="#" class="dropdown-item" data-value="522" data-level="1" >Neo-Vlaamse renaissance</a>
+				<a href="#" class="dropdown-item" data-value="502" data-level="1" >Neobarok</a>
+				<a href="#" class="dropdown-item" data-value="513" data-level="1" >Neobyzantijns</a>
+				<a href="#" class="dropdown-item" data-value="512" data-level="1" >Neoclassicisme</a>
+				<a href="#" class="dropdown-item" data-value="509" data-level="1" >Neogotiek</a>
+				<a href="#" class="dropdown-item" data-value="521" data-level="1" >Neorenaissance</a>
+				<a href="#" class="dropdown-item" data-value="523" data-level="1" >Neoromaans</a>
+				<a href="#" class="dropdown-item" data-value="654" data-level="1" >Nieuwe eenvoud</a>
+				<a href="#" class="dropdown-item" data-value="527" data-level="1" >Pakketbootstijl</a>
+				<a href="#" class="dropdown-item" data-value="505" data-level="1" >Pittoreske architectuur</a>
+				<a href="#" class="dropdown-item" data-value="529" data-level="1" >Postmodernisme</a>
+				<a href="#" class="dropdown-item" data-value="541" data-level="1" >Pre-modernisme</a>
+				<a href="#" class="dropdown-item" data-value="560" data-level="1" >Régence</a>
+				<a href="#" class="dropdown-item" data-value="536" data-level="1" >Regionalistische architectuur</a>
+				<a href="#" class="dropdown-item" data-value="540" data-level="1" >Rococo</a>
+				<a href="#" class="dropdown-item" data-value="547" data-level="1" >Romaans</a>
+				<a href="#" class="dropdown-item" data-value="558" data-level="1" >Second Empirestijl</a>
+				<a href="#" class="dropdown-item" data-value="537" data-level="1" >Traditionalistische architectuur</a>
+				<a href="#" class="dropdown-item" data-value="553" data-level="1" >Traditionele architectuur</a>
+				<a href="#" class="dropdown-item" data-value="549" data-level="1" >Vlaamse Renaissance</a>
+				<a href="#" class="dropdown-item" data-value="534" data-level="1" >Wiener Secession</a>			    </div>
+			</div>
+			<input class="d-none" name="style" readonly="readonly" aria-hidden="true" type="text"/>
+		</div>
+	</div>	
+	
+	
+	
+	
+	
+	
+
+	<div>
+		<div class="dropdown hierarchy-select hiearchy">
+		    <button type="button" class="btn btn-secondary dropdown-toggle" id="inventories-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+		    <div class="dropdown-menu" aria-labelledby="inventories-button">
+<div class="hs-searchbox">
+		            <input type="text" class="form-control" autocomplete="off">
+		        </div>
+				<div class="hs-menu-inner">
+			      <a href="#" class="dropdown-item" data-value="" data-level="1">Alle inventarissen</a>
+			     
+				<a href="#" class="dropdown-item" data-value="2" data-level="1" >Actualisatie van de Urgentie-Inventaris</a>
+				<a href="#" class="dropdown-item" data-value="7" data-level="1" >Actualisatie van het inventarisatieproject van het Bouwkundig Erfgoed</a>
+				<a href="#" class="dropdown-item" data-value="6" data-level="1" >Inventaris van de Bioscoopzalen</a>
+				<a href="#" class="dropdown-item" data-value="4" data-level="1" >Inventaris van de Industriële Architectuur</a>
+				<a href="#" class="dropdown-item" data-value="10" data-level="1" >Inventaris van engineering erfgoed</a>
+				<a href="#" class="dropdown-item" data-value="40" data-level="1" >Inventaris van het Bouwkundig Erfgoed 1939-1999</a>
+				<a href="#" class="dropdown-item" data-value="3" data-level="1" >Inventaris van het Hedendaags Erfgoed</a>
+				<a href="#" class="dropdown-item" data-value="5" data-level="1" >Inventaris van het Industrieel Erfgoed</a>
+				<a href="#" class="dropdown-item" data-value="47" data-level="1" >Inventaris van koloniale sporen</a>
+				<a href="#" class="dropdown-item" data-value="11" data-level="1" >Permanente actualisatie van de inventaris van het Bouwkundig Erfgoed</a>
+				<a href="#" class="dropdown-item" data-value="13" data-level="1" >Urgentie-inventaris van het bouwkundig erfgoed van de Brusselse agglomeratie</a>			    </div>
+			</div>
+			<input class="d-none" name="inventories" readonly="readonly" aria-hidden="true" type="text"/>
+		</div>
+	</div>
+	<div>
+	<div class="annees">
+		van <input type="text" maxlength="5" id="from" name="search_from" value="" placeholder="jaar" style="width:50px;margin-bottom:-1px;" class="auto"> tot <input type="text" maxlength="5" id="to" name="search_to" value="" placeholder="jaar" style="width:50px;margin-bottom:-1px;" class="auto">	
+	</div>
+
+	<div class="annees">
+		ID <input type="text" maxlength="5" id="from" name="search_id" value="" placeholder="id" style="width:50px;margin-bottom:-1px;" class="auto">	
+	</div>	
+	
+	<div class="listed_c">
+		<label for="listed">Beschermd erfgoed </label><input type="checkbox" id="listed" name="listed" value="y" >	
+	</div>
+	
+	
+	
+	</div>
+		<input type='hidden' name='section' value='buildings'>
+	<input type='hidden' name='lg' value='nl'>
+		<input class="submit" type="submit" value="zoeken">
+	    <input class="submit" type="button" id="reset" value="reset">
+	    </form>					</div>					
+					
+				</div>
+			
+
+			
+		
+			
+			<div id="views">
+				<div class="size-switcher">
+				<ul>
+					<li><a class="S-selected tooltip-link" title="" onClick="sessionStorage.size = 'size-S'; console.log(sessionStorage.size);" href="#">A</a></li>
+					<li><a class="L-selected tooltip-link" title="" onClick="sessionStorage.size = 'size-L'; console.log(sessionStorage.size);" href="#">A</a></li>
+					<li><a class="XL-selected tooltip-link" title="" onClick="sessionStorage.size = 'size-XL'; console.log(sessionStorage.size);" href="#">A</a></li>
+				</ul>
+			</div>
+				<a href="/fr/buildings/23775" title="Français" lang="FR" class="tooltip-link">FR</a></div>
+
+							
+			<div id="suggestions" class="c1" style="max-width:400px;">
+					<h2>Extra</h2></div>	
+
+	<div id="footer" class="c2"><a href="#iframeContainer" onclick="myContact()">Contact</a> - <a href="/nl/legal/">Wettelijke melding</a> - <a href="/nl/privacy/">Vertrouwensbeleid</a><br>&copy; <a href="http://erfgoed.brussels" target="_blank">erfgoed.brussels</a> - <a href="/nl/credits/">Credits</a>
+		<div class="footer-logos">
+			<div class="iris"><a href="http://urban.brussels" target="_blank"><img src="/img/urban_footer.png" alt="urban.brussels" style="height:40px !important;width:auto !important;"></a></div>
+		</div>
+	</div>
+	
+</div>
+		</header>
+
+		<main class="main-content col-md-8">
+			
+<!-- CONTENT -->		
+
+	<div id="content">
+								
+		<div class="d-print-none">
+    <div id='previews' class='print-main'>
+    <div class="pswp" tabindex="100" role="dialog" aria-hidden="true" >
+                            <div class="pswp__bg">
+
+                            </div>
+                                        <div class="pswp__scroll-wrap">
+
+                            <div class="pswp__container">
+                                <div class="pswp__item"></div>
+                                <div class="pswp__item"></div>
+                                <div class="pswp__item"></div>
+                            </div>
+                                            <div class="pswp__ui pswp__ui--hidden">
+                                <div class="pswp__top-bar">
+                                     <div class="pswp__counter"></div>
+                                        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                                        <button class="pswp__button pswp__button--share" title="Share"></button>
+                                        <div class="pswp__preloader">
+                                        <div class="pswp__preloader__icn">
+                                            <div class="pswp__preloader__cut">
+                                                <div class="pswp__preloader__donut"></div>
+                                             </div>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                                    <div class="pswp__share-tooltip"></div>
+                                </div>
+                                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+                                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+                                <div class="pswp__caption">
+                                    <div class="pswp__caption__center"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="my-gallery" itemscope="" itemtype="http://schema.org/ImageGallery" data-pswp-uid="1">
+                                            <div class="my-gallery-2">
+                        <figure itemprop="associatedMedia">
+                            <a href="https://monument.heritage.brussels/medias/buildings/10831042_0053_P01.jpg" itemprop="contentUrl" data-size="1642x1094">
+                            <img id="first-figure" src="https://monument.heritage.brussels/medias/500/buildings/10831042_0053_P01.jpg" alt="s Landsroemlaan 53, 2014" style="max-height:500px;">
+                            </a>
+                            <figcaption itemprop="caption description">s Landsroemlaan 53, 2014</figcaption>
+                        </figure>
+                        </div>
+
+                    
+                    
+                    </div>
+    </div>
+</div>
+
+<div class="d-none d-print-block">
+    <div class="print-header">
+        <div id="header">
+            <div id="logo">
+                <p>Brussels Hoofdstedelijk Gewest</p>
+                <div class="baseline">
+                    <a href="/fr/">Inventaris van het<br> bouwkundig erfgoed</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="offset-col">
+        <div class="main-img-header">
+            <figure >
+                <img src="https://monument.heritage.brussels/medias/buildings/10831042_0053_P01.jpg" >
+                <figcaption>s Landsroemlaan 53, 2014</figcaption>
+            </figure>
+        </div>
+    </div>
+</div>
+
+
+<div class="print-column-wrapper">
+    <div class='print-main'>
+
+			<div class="object-header print-bkg-none">
+				<div class="icons-wrapper d-print-none">
+					<a href="#" onclick="window.print(); return false;"><img src="/_integration/heritage/assets/css/images/icons/download.svg" alt="" /></a>
+										<a href="#" class="map-toggle-link"><img src="/_integration/heritage/assets/css/images/icons/location.svg" alt="Voir sur la carte" /></a>
+											
+<div id="socialBar">
+	<a href="#" class="share shareBtn fa fa-share-alt"><img src="/_integration/heritage/assets/css/images/icons/share.svg" alt="" class="open"> <img src="/_integration/heritage/assets/css/images/icons/cross-white.svg" alt="" class="close"></a>
+	<a href="mailto:?body= 
+	http%3A%2F%2Fmonument.heritage.brussels%2Fnl%2Fbuildings%2F23775" class="share shareBtn fa fa-instagram"><img src="/_integration/heritage/assets/css/images/icons/mail.svg" alt="" class=""></a>
+	<a href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Fmonument.heritage.brussels%2Fnl%2Fbuildings%2F23775" class="share shareBtn fa fa-facebook" target=_blank><img src="/_integration/heritage/assets/css/images/icons/facebook-white.svg" alt="" class=""></a>
+	<a href="https://twitter.com/intent/tweet?text=+%0A%09http%3A%2F%2Fmonument.heritage.brussels%2Fnl%2Fbuildings%2F23775" class="share shareBtn fa fa-twitter" target=_blank><img src="/_integration/heritage/assets/css/images/icons/twitter-white.svg" alt="" class=""></a>
+</div>					
+				</div>
+				<div class="map-popup d-print-none">
+				<a href="#" class="map-close"><img src="/_integration/heritage/assets/css/images/icons/cross.svg" alt="close the map"></a>
+					<div id="map-container" class="unactive">
+
+					</div>
+				</div>
+				
+								
+				<div class="location-wrapper print-bkg-none"><a href='/nl/city/1083' style='color:white;'>Ganshoren</a></div>
+				<div class="main-info-wrapper">
+				<h1><a href='/nl/Ganshoren/Landsroemlaan/10831042'>Landsroemlaan</a> 53</h1>				</div>
+			</div>
+
+
+			<div class="object-main">
+				<div class="object-info list">
+	
+					<div class="single-list">
+						<h4 class="label">Juridisch statuut</h4>
+						<div class="list-content"><p>Ingeschreven in de wettelijke inventaris op  19 augustus 2024</div>
+					</div><div class='single-list'><h4 class='label'>Inventaris(sen)</h4><div class='list-content'><ul><li><a href='/nl/inventories/2'>Actualisatie van de Urgentie-Inventaris</a> (Sint-Lukasarchief - 1993-1994)</li><li><a href='/nl/inventories/7'>Actualisatie van het inventarisatieproject van het Bouwkundig Erfgoed</a> (DMS-DML - 1995-1998)</li><li><a href='/nl/inventories/11'>Permanente actualisatie van de inventaris van het Bouwkundig Erfgoed</a> (DPC-DCE)</li></ul></div></div><div class='single-list'><h4 class='label'>Dit (deze) goed(eren) bezit(ten) de volgende waarde(n)</h4><div class='list-content'><ul><li><a href='#' class='info'>Artistiek
+			<span>Het ontwerp van een onroerend goed (gebouw) door een gerenommeerde kunstenaar (architect) kan maar zeer zelden als criterium worden beschouwd. Om het belang van de selectie van dit onroerend goed te beoordelen, en de plaats dat het inneemt in het oeuvre van een kunstenaar (architect), is dit een criterium dat moet worden afgewogen met de architectonische kwaliteit (compositie en interne structuur), de uitvoering (materialen, technische beheersing), de plaats in de architectuurgeschiedenis dewelke een getuigenis zijn van een fase of aspect van landschapsarchitectuur of de bouwkunst in het verleden. Zodoende gelden koppelingen naar volgende criteria: zeldzaamheid (typologie, stijl, materiaalgebruik, bronnen), representativiteit (idem), authenticiteit (idem + de kwaliteit van de uitvoering) en integriteit (bewaringstoestand, oorspronkelijke elementen)). Een goed bevat ook artistieke waarde als het kunstwerken omvat (beeldhouwwerken, reliëfs ontworpen voor het goed, enz.) of decoratieve elementen uit de oorspronkelijke bouwperiode of met bijzondere kwaliteit (gesigneerd glasramen, sgraffito, lichtbeuk, enz.).</span></a><li><a href='#' class='info'>Esthetisch
+			<span>Historisch gezien werd die waarde aangewend om waardevolle groene ruimten en natuurlijke of halfnatuurlijke gebieden aan te duiden. De waarde kan ook gelden voor grote gehelen van gebouwen in een stedelijk gebied, met of zonder natuurlijke elementen, of monumenten die het stadslandschap markeren. Een afweging met andere waarden dringt zich tevens op: de artistieke, de landschappelijke (integratie van het werk in het stedelijk landschap, oriëntatiepunten in de stad) en de stedenbouwkundige waarde (spontane of rationele stedelijke gehelen).  De volgende selectiecriteria worden er eveneens aan gekoppeld: de ensemblewaarde en de contextuele waarde.</span></a><li><a href='#' class='info'>Historisch
+			<span>Het onroerend goed heeft een historische waarde :
+-	als het getuigt van een bijzondere periode in de geschiedenis van de streek of de gemeente;
+
+-	of als getuigenis van een periode en/of een zeldzame ontwikkeling van een periode (bv. tuinstad die representatief is voor een bouwwijze die werd toegepast in het kader van de grote bouwcampagnes na de Tweede Wereldoorlog; dorpskernen die de eerste gegroepeerde bouwwerken van de gemeenten van de tweede ring illustreren; de Hallepoort als overblijfsel van de tweede omwalling; 
+
+-	of als getuigenis van een bepaalde stedelijke (en/of landschappelijke) ontwikkeling van de stad (bv. gebouwen aan de centrale lanen of in de Leopoldswijk);
+
+-	of wanneer het een band vertoont met een belangrijke historische figuur – met inbegrip van persoonlijke huizen van architecten en kunstenaarsateliers (bv. het geboortehuis van Constantin Meunier, het huis van Magritte);
+
+-	of in verband kan worden gebracht met een belangrijke historische gebeurtenis (bv. huizen van de wederopbouw na het bombardement van 1695, de Congreskolom);
+
+-	of een typologische representativiteit vertoont die kenmerkend is voor een commerciële of culturele beroepsactiviteit (bv. kerken, bioscopen, industriële architectuur, apotheken);
+
+-	of als het representatief is van het oeuvre van een belangrijke architect in de architectuurgeschiedenis op internationaal, nationaal, regionaal of lokaal niveau (dit betreft zowel befaamde architecten als V. Horta, V. Bourgeois, M. Polak als secundaire architecten, die lokaal verbonden worden aan een gemeente zoals Fernand Lefever in Koekelberg of Emile Hoebeke in Sint-Agatha-Berchem).
+</span></a><li><a href='#' class='info'>Stedenbouwkundig
+			<span>Sommige bouwkundige goederen of landschappen hebben in het verleden  een prominente rol gespeeld in de planmatige inrichting van de bebouwde ruimte en de stedelijke ruimte. Meestal bepalen zij andere stedenbouwkundige (plan)vormen zodat er zich een wisselwerking voortdoet tussen bebouwde en niet-bebouwde (of open) ruimte. Die inrichting omvat ook de samenhang tussen verschillende schaalniveaus. Een onroerend goed heeft stedenbouwkundige waarde wanneer het daarin een rol speelt, bijvoorbeeld :
+-	hoekgebouwen;
+
+-	coherente pleinen of homogene huizenrijen (gevels die een ensemble vormen van dezelfde stijl, periode en volume);
+
+-	tuinwijken,
+
+-	deskundig ingeplante torens (hoogbouw) en hun relatie tot hun onmiddellijke kwaliteitsvolle omgeving die coherent kan zijn, maar ook contrastrijk,
+
+-	relicten van stedenbouwkundige concepten en hoe die architecturaal (en typologisch) zijn of werden ingevuld, zoals bijvoorbeeld de nog bewaarde eclectische stadspaleizen en/of herenhuizen in de Leopoldswijk.</span></a></ul></div></div><div class="single-list">
+						<h4 class="label">Onderzoek en redactie</h4>
+						<div class="list-content">2016</div>
+					</div>					<div class="single-list">
+						<h4 class="label">id</h4>
+						<div class="list-content">
+						Urban : 23775						</div>
+					</div>
+
+									</div>
+
+				<div class='d-print-none'></div><div class='d-print-none'><h3 class='underline'>Opmerkelijke bomen in de nabijheid</h3><div class='wysiwyg flexwrap'><div class='arborescence_results'><a href='https://sites.heritage.brussels/nl/trees/1541'>
+		<figure><img src='https://sites.heritage.brussels/medias/66/trees/1541-8-Platanus_x_hispanica.JPG' alt='Koekelberg <br>Parc Elisabeth' class='thumb'></figure>
+		<b>Platane à feuille d'érable</b>
+		<div class='address'>Koekelberg <br>Parc Elisabeth</div></a></div><div class='arborescence_results'><a href='https://sites.heritage.brussels/nl/trees/4788'>
+		<figure><img src='https://sites.heritage.brussels/medias/66/trees/4788-7-Araucaria_araucana.JPG' alt='Ganshoren <br>Rue Georges Simpson, 44' class='thumb'></figure>
+		<b>Araucaria du Chili</b>
+		<div class='address'>Ganshoren <br>Rue Georges Simpson, 44</div></a></div><div class='arborescence_results'><a href='https://sites.heritage.brussels/nl/trees/1546'>
+		<figure><img src='https://sites.heritage.brussels/medias/66/trees/1546-1-Acer_saccharinum_var._laciniatum.jpg' alt='Koekelberg <br>Parc Elisabeth' class='thumb'></figure>
+		<b>Acer saccharinum var. laciniatum</b>
+		<div class='address'>Koekelberg <br>Parc Elisabeth</div></a></div><div class='arborescence_results'><a href='https://sites.heritage.brussels/nl/trees/1566'>
+		<figure><img src='https://sites.heritage.brussels/medias/66/trees/1566-1-Tilia_americana.JPG' alt='Koekelberg <br>Parc Elisabeth' class='thumb'></figure>
+		<b>Tilleul d'Amérique</b>
+		<div class='address'>Koekelberg <br>Parc Elisabeth</div></a></div></div></div>                <div class="d-none d-print-block print-img-list" style="page-break-before: always; margin-top: 40px;">
+                    <h3 class="underline"></h3>
+                                    </div>
+				
+                			</div>
+            
+    </div> </div> <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+
+
+		</div>
+		</main>
+	</div>
+</div>
+      <div id="iframeContainer">
+        <div role="button" id="iframeCloseButton" onClick="togglePopupFrame()">
+          <img src="/_integration/heritage/assets/css/images/icons/cross.svg" alt="Close" />
+        </div>
+        <iframe id="popupIframe" title="myframe">
+        </iframe>
+      </div>
+
+
+
+<script>
+
+$('#reset').click(function(e) {
+
+   $('#menu_select .dropdown').each(function() {
+		$( this ).children( "button" ).html($(this).children('div').children('div').children('a:first-of-type').html());
+		$( this ).children( "input" ).val('');
+		$( this ).children( "button" ).removeClass('actived');
+		$('.stypeajax').empty();
+		});
+	$('#from').val('');	
+	$('#to').val('');	
+	return false;
+});
+$('#reset2').click(function(e) {
+   $('#glossaryselect .dropdown').each(function() {
+		$( this ).children( "button" ).html($(this).children('div').children('div').children('a:first-of-type').html());
+		$( this ).children( "input" ).val('');
+		$( this ).children( "button" ).removeClass('actived');
+		});
+	$('#term').val('');		
+	return false;
+});
+
+$('#collections_thumbs').click(function(e) {
+    $('.thumbnail-feed.free-grid').addClass('visibles');
+	$('.thumbnail-feed.liste').removeClass('visibles');
+	$('#collections_list').removeClass('is-active');
+	$(this).addClass('is-active');
+	return false;
+});
+
+$('#collections_list').click(function(e) {
+    $('.thumbnail-feed.free-grid').removeClass('visibles');
+	$('.thumbnail-feed.liste').addClass('visibles');
+	$('#collections_thumbs').removeClass('is-active');
+	$(this).addClass('is-active');
+	return false;
+});
+
+$( document ).ready(function() {
+	console.log( "ready" );
+$('#sortby-button').change(function() {
+  console.log( "on trie autrement" );
+});
+$('#sortby').on('change', function(e){
+  console.log( "on trie autrement" );
+});
+
+});
+
+$('.map-toggle-link, .map-close').click(function(e) {
+    e.preventDefault();
+    $('.map-popup').toggleClass('is-active');
+
+    if ($('#map-container').hasClass('unactive')) {
+				var deviceAgent = navigator.userAgent.toLowerCase();
+
+				if (deviceAgent.match(/(iphone|ipod|ipad|android|blackberry|symbianos|^sonyericsson|^nokia|^samsung|^lg)/)) {
+					var mymap = L.map('map-container',{
+					    center: [50.866737752527, 4.3222264028787],
+					    zoom: 15,
+					    scrollwheelzoom: false,
+					  	dragging: false
+					});
+				} else {
+					var mymap = L.map('map-container',{
+					    center: [50.866737752527, 4.3222264028787],
+					    zoom: 15,
+					    scrollwheelzoom: false,    
+					});
+				}
+
+   				L.tileLayer.wms('https://geoservices-basemap.irisnet.be/geoserver/BaseMaps/ows', { layers: 'UrbISDutchLabeledGray ',  format: 'image/png', transparent: true}).addTo(mymap);
+
+
+   				mymap.scrollWheelZoom.disable();
+
+   				// Icon
+
+
+				var IconActeur = L.icon({iconUrl: '/img/marker-white.svg',iconSize: [32,32],
+						 iconAnchor:   [16, 32],
+						 popupAnchor:  [0, -36] });
+
+
+				var popup = "<div class='popup-wraper'><div class='popup-container'><h3 class='h3'><a href='/nl/Ganshoren/Landsroemlaan/10831042'>Landsroemlaan</a> 53</h3><address><a href='/nl/Ganshoren/Landsroemlaan/10831042'>Landsroemlaan</a> 53</address></div></div>";
+
+
+				
+
+				L.marker([50.866737752527, 4.3222264028787], {icon: IconActeur}).addTo(mymap).bindPopup(popup);
+				
+				
+				/* cluser options http://leaflet.github.io/Leaflet.markercluster/  */
+				
+				var markers = L.markerClusterGroup({
+					showCoverageOnHover: false,
+					chunkedLoading: true,
+					removeOutsideVisibleBounds: true,
+					spiderfyOnMaxZoom: false,
+					disableClusteringAtZoom:17,
+					iconCreateFunction: function(cluster) {
+						return L.divIcon({ 
+						html: cluster.getChildCount(), 
+						className: 'myCluster myClustergreen', 
+						iconSize: null 
+						});
+						}
+					});
+				
+				
+				jQuery.getJSON('/medias/monuments.nl.json',function(data){
+					var MarkerIoa = L.icon({
+						iconUrl: '/img/marker.svg',
+						iconSize: [32,32],
+						iconAnchor:   [16, 32],
+						popupAnchor:  [0, -36] 
+						});
+					// add GeoJSON layer to the mymap once the file is loaded
+					var monuments = L.geoJson(data,{
+						pointToLayer: function(feature,latlng){
+							var marker = L.marker(latlng,{icon: MarkerIoa});
+							
+							if (feature.properties.nom=='')
+								feature.properties.nom=feature.properties.name;
+							
+							marker.bindPopup("<div class='popup-wraper'><div class='popup-container'><h3 class='h3'>"+feature.properties.nom+"</h3><a href='/nl/buildings/"+feature.properties.id+"'><img src='https://monument.heritage.brussels/medias/66/buildings/"+feature.properties.firstimage+"'></a><br><a href='/nl/buildings/"+feature.properties.id+"'>Zien</a></div></div>");
+							
+							return marker;
+						}
+					});
+					markers.addLayer(monuments);
+					mymap.addLayer(markers);
+					});
+				
+				
+
+    }
+
+    $('#map-container').removeClass('unactive')
+});
+
+	$('#map-container').click(function(e){
+	  e.stopPropagation();
+	});
+	
+</script>
+
+	
+<script type="text/javascript">
+
+console.log('script.monuments.js 2');
+ (function($) {
+        $('form').submit(function() { // ## Clean GET on Submit
+            $('form input').each(function() { // ## Check each Input
+                if ($(this).val().length == 0) { // ## If Empty
+                    $(this).attr('disabled', true); // ## Disable Input
+                }
+            });
+        });
+    })(jQuery);
+$("form[name='building_search']").submit(function() { // ## Clean GET on Submit
+		console.log('form submit');
+            $("form[name='building_search'] input").each(function() { // ## Check each Input
+                if ($(this).val().length == 0 && $(this).attr('name') != 'stype') { // ## If Empty
+                   $(this).attr('disabled', true); // ## Disable Input
+                }
+            });
+        });
+
+window.onload = function() {
+		
+	$_GET = {};
+	document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
+    function decode(s) {
+        return decodeURIComponent(s.split("+").join(" "));
+    }
+    $_GET[decode(arguments[1])] = decode(arguments[2]);
+	});
+	
+	
+	console.log($_GET['lg']);
+	
+	console.log('archi-start');
+	let dropdown = $('.architectes_to_populate');
+	
+	$(".inner_illustration").each(function () {
+    $(this).children('a').children('img').after('<span>Zoom</span><br>'+$(this).children('a').children('img').attr('alt')+'<br>');
+	$(this).children('a').children('a').children('span').remove();
+    });
+
+	const url = '/medias/monuments.architects.json';
+
+	// Populate liste des architectes
+	$.getJSON(url, function (data) {
+		$.each(data, function (key, entry) {
+		
+		if ($_GET["actor"] === entry.id)
+		{
+			dropdown.append($('<a href="#" class="dropdown-item" data-value="'+entry.id+'" data-level="1" data-default-selected>'+entry.name+'</a>'));
+			$('#actors-button').addClass('actived').html(entry.name);
+			$("input[name='actor']").val(entry.id);
+			console.log('default architect');
+			$('span.result.summary').html($('span.result.summary').html()+', '+entry.name);
+		}
+		else
+			dropdown.append($('<a href="#" class="dropdown-item" data-value="'+entry.id+'" data-level="1">'+entry.name+'</a>'));
+		})
+	});
+	
+	if ($_GET["street"] != '' && $_GET["street"] != undefined)
+	{
+				if ($('#city').attr('default') != '')
+			city=$('#city').attr('default');
+		else
+			city='';
+		console.log('streets-clicked '+city);
+		
+		if (alreadystreets && city=='') {
+			console.log('déjà');
+			console.log(alreadystreets);
+		}
+		else
+		{
+		console.log('streets-start '+city);
+		$('.hierarchystreets .jsadded').remove();
+		
+		
+		let dropdown2 = $('.streets_to_populate');
+
+		const url2 = '/medias/monuments.streets.'+$('html').attr("lang")+'.json';
+
+		// Populate liste des rues
+		$.getJSON(url2, function (data) {
+		
+		$.each(data, function (key, entry) {
+		if (city != '')
+			{
+			
+			if (entry.city == city)
+			{
+			if ($_GET["street"] === entry.id)
+				{
+				dropdown2.append($('<a href="#" class="dropdown-item" data-value="'+entry.id+'" data-level="1" data-default-selected>'+entry.name+'<span class=nodisplay> '+entry.completename+'</span></a>'));
+				$('#streets-button').addClass('actived').html(entry.name);
+				console.log('default street 2');
+				$("input[name='street']").val(entry.id);
+				$('span.result.summary').html($('span.result.summary').html()+', '+entry.name);
+				}
+			else
+				dropdown2.append($('<a href="#" class="dropdown-item jsadded" data-value="'+entry.id+'" data-level="1">'+entry.name+'<span class=nodisplay> '+entry.completename+'</span></a>'));
+			}
+			}
+		else
+			{
+				
+			if ($_GET["street"] === entry.id)
+			{
+			dropdown2.append($('<a href="#" class="dropdown-item" data-value="'+entry.id+'" data-level="1" data-default-selected>'+entry.name+'</a>'));
+			$('#streets-button').addClass('actived').html(entry.name);
+			console.log('default street 2');
+			$("input[name='street']").val(entry.id);
+			}
+			else
+				dropdown2.append($('<a href="#" class="dropdown-item" data-value="'+entry.id+'" data-level="1">'+entry.name+'</a>'));
+			}
+		},$('.hierarchystreets').hierarchySelect({width: 'auto'}))
+	});
+	
+	alreadystreets = true
+		}
+	}
+
+	
+	
+
+	
+}
+
+
+$( document ).ready(function() {
+	alreadystreets = false;
+	if ($('#city').attr('default') != '')
+			city=$('#city').attr('default');
+		else
+			city='';
+		
+	$('#streets-button').click(function() {
+		if ($('#city').attr('default') != '')
+			city=$('#city').attr('default');
+		else
+			city='';
+		console.log('streets-clicked '+city);
+		
+		if (alreadystreets && city=='') {
+			console.log('déjà');
+			console.log(alreadystreets);
+		}
+		else
+		{
+		console.log('streets-start '+city);
+		$('.hierarchystreets .jsadded').remove();
+		
+		
+		let dropdown2 = $('.streets_to_populate');
+
+		const url2 = '/medias/monuments.streets.'+$('html').attr("lang")+'.json';
+
+		// Populate liste des rues
+		$.getJSON(url2, function (data) {
+		
+		$.each(data, function (key, entry) {
+		if (city != '')
+			{
+			
+			if (entry.city == city)
+			{
+			if ($_GET["street"] === entry.id)
+				{
+				dropdown2.append($('<a href="#" class="dropdown-item" data-value="'+entry.id+'" data-level="1" data-default-selected>'+entry.name+'<span class=nodisplay> '+entry.completename+'</span></a>'));
+				$('#streets-button').addClass('actived').html(entry.name);
+				console.log('default street 2');
+				$("input[name='street']").val(entry.id);
+				$('span.result.summary').html($('span.result.summary').html()+', '+entry.name);
+				}
+			else
+				dropdown2.append($('<a href="#" class="dropdown-item jsadded" data-value="'+entry.id+'" data-level="1">'+entry.name+'<span class=nodisplay> '+entry.completename+'</span></a>'));
+			}
+			}
+		else
+			{
+				
+			if ($_GET["street"] === entry.id)
+			{
+			dropdown2.append($('<a href="#" class="dropdown-item" data-value="'+entry.id+'" data-level="1" data-default-selected>'+entry.name+'</a>'));
+			$('#streets-button').addClass('actived').html(entry.name);
+			console.log('default street 2');
+			$("input[name='street']").val(entry.id);
+			}
+			else
+				dropdown2.append($('<a href="#" class="dropdown-item" data-value="'+entry.id+'" data-level="1">'+entry.name+'<span class=nodisplay> '+entry.completename+'</span></a>'));
+			}
+		},$('.hierarchystreets').hierarchySelect({width: 'auto'}))
+	});
+	
+	alreadystreets = true
+		}
+	});		
+	
+		$('.toggleresults').click(function() {
+				console.log('toggle resuls');
+				if ($(this).hasClass('streets'))
+				{
+					$('.streetsresults').show();
+					$('.buildingsresults').hide();
+					$('.toggleresults.streets').addClass('active');
+					$('.toggleresults.buildings').removeClass('active');
+				}
+				else
+				{
+					$('.streetsresults').hide();
+					$('.buildingsresults').show();
+					$('.toggleresults.streets').removeClass('active');
+					$('.toggleresults.buildings').addClass('active');
+				}					
+				return false;
+				});
+	});				/* PHOTOSWIPE */
+
+'use strict';
+var initPhotoSwipeFromDOM = function(gallerySelector) {
+  var parseThumbnailElements = function(el) {
+    var all = document.querySelectorAll(gallerySelector);
+    var items = [];
+    for(var j = 0 ; j < all.length; j++){
+      var el = all[j];
+      var thumbElements = el.parentNode.childNodes;
+      var numNodes = thumbElements.length,
+        figureEl,
+        linkEl,
+        size,
+        item;
+      for(var i = 0; i < numNodes; i++) {
+        figureEl = thumbElements[i];
+
+        if(figureEl.nodeType !== 1) {
+            continue;
+        }
+        linkEl = figureEl.children[0];
+        size = linkEl.getAttribute('data-size').split('x');
+        item = {
+            src: linkEl.getAttribute('href'),
+            w: parseInt(size[0], 10),
+            h: parseInt(size[1], 10),
+            minZoom: 3
+        };
+        if(figureEl.children.length > 1) {
+            item.title = figureEl.children[1].innerHTML;
+        }
+        if(linkEl.children.length > 0) {
+            item.msrc = linkEl.children[0].getAttribute('src');
+        }
+
+        item.el = figureEl;
+        items.push(item);
+      }
+    }
+    return items;
+  };
+  var closest = function closest(el, fn) {
+    return el && ( fn(el) ? el : closest(el.parentNode, fn) );
+  };
+  var onThumbnailsClick = function(e) {
+    e = e || window.event;
+    e.preventDefault ? e.preventDefault() : e.returnValue = false;
+    var eTarget = e.target || e.srcElement;
+    var clickedListItem = closest(eTarget, function(el) {
+      return (el.tagName && el.tagName.toUpperCase() === 'FIGURE');
+    });
+    if(!clickedListItem) {
+      return;
+    }
+    var clickedGallery = clickedListItem.parentNode,
+      childNodes = document.querySelectorAll(gallerySelector),
+      numChildNodes = childNodes.length,
+      nodeIndex = 0,
+      index;
+    for (var i = 0; i < numChildNodes; i++) {
+      if(childNodes[i].nodeType !== 1) {
+        continue;
+      }
+      if(childNodes[i] === clickedListItem) {
+        index = nodeIndex;
+        break;
+      }
+      nodeIndex++;
+    }
+    if(index >= 0) {
+      openPhotoSwipe( index, clickedGallery );
+    }
+    return false;
+  };
+  var photoswipeParseHash = function() {
+    var hash = window.location.hash.substring(1),
+    params = {};
+    if(hash.length < 5) {
+      return params;
+    }
+    var vars = hash.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      if(!vars[i]) {
+        continue;
+      }
+      var pair = vars[i].split('=');
+      if(pair.length < 2) {
+        continue;
+      }
+      params[pair[0]] = pair[1];
+    }
+    if(params.gid) {
+      params.gid = parseInt(params.gid, 10);
+    }
+    return params;
+  };
+
+  var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
+    var pswpElement = document.querySelectorAll('.pswp')[0],
+      gallery,
+      options,
+      items;
+    items = parseThumbnailElements(galleryElement);
+    options = {
+      maxSpreadZoom: 5,
+      galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+      getThumbBoundsFn: function(index) {
+        var thumbnail = items[index].el.getElementsByTagName('img')[0],
+          pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+          rect = thumbnail.getBoundingClientRect();
+        return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+      },
+      minZoom: 3
+    };
+    if(fromURL) {
+      if(options.galleryPIDs) {
+        for(var j = 0; j < items.length; j++) {
+          if(items[j].pid == index) {
+            options.index = j;
+            break;
+          }
+        }
+      } else {
+        options.index = parseInt(index, 10) - 1;
+      }
+    } else {
+      options.index = parseInt(index, 10);
+    }
+    if( isNaN(options.index) ) {
+      return;
+    }
+    if(disableAnimation) {
+      options.showAnimationDuration = 0;
+    }
+    gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+    return gallery.init();
+  };
+  var galleryElements = document.querySelectorAll( gallerySelector );
+  for(var i = 0, l = galleryElements.length; i < l; i++) {
+    galleryElements[i].setAttribute('data-pswp-uid', i+1);
+    galleryElements[i].onclick = onThumbnailsClick;
+  }
+  var hashData = photoswipeParseHash();
+  if(hashData.pid && hashData.gid) {
+    openPhotoSwipe( hashData.pid ,  galleryElements[ hashData.gid - 1 ], true, true );
+  }
+};
+
+// execute above function
+initPhotoSwipeFromDOM('.my-gallery figure');
+
+
+
+
+
+
+
+
+
+$( document ).ready(function() {
+    
+    /* global cookie_pop_text */
+    (function ( $ ) {
+  
+    'use strict';
+  
+    if ( 'setcookie' !== $.cookie( 'cookie-pop' ) ) {
+        console.log('annonce cookie');
+        $( 'body' ).prepend(
+            '<div class="no-print cookie-pop">Wij gebruiken cookies op deze website om uw ervaring als gebruiker te verbeteren.   <a href=\"/nl/legal/\">Meer weten over cookies</a>. <button class="bouton" id="accept-cookie">OK</button></div>'
+        );
+  
+        $( '#accept-cookie' ).click(function () {
+			let date = new Date(Date.now() + 8640000000);
+			date = date.toUTCString();
+			document.cookie = 'cookie-pop=setcookie; path=/;domain=monument.heritage.brussels;expires=' + date;
+            $( '.cookie-pop' ).remove();
+			console.log('cookie placé');
+  
+        });
+  
+    }
+  
+}( jQuery ) );
+    
+    
+});
+</script>
+</body>
+</html>

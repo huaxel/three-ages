@@ -8,8 +8,10 @@ set -euo pipefail
 # Run:  bash scripts/archives-image-request.sh
 # Writes captured values to docs/archives-request-state.env (KEY=VALUE lines).
 
+ROOT=$(cd -- "$(dirname -- "$0")/.." && pwd)
 TOTAL_STAGES=5
-ENV_FILE="docs/archives-request-state.env"
+ENV_FILE="$ROOT/docs/archives-request-state.env"
+ENV_DISPLAY="docs/archives-request-state.env"
 CURRENT_STAGE=0
 
 stage() {
@@ -33,13 +35,6 @@ step() {
 pause() {
   local prompt=${1:-Press Enter when ready}
   read -r -p "$prompt " _
-}
-
-confirm() {
-  local prompt=${1:-Continue?}
-  local answer
-  read -r -p "$prompt [y/N] " answer
-  [[ "$answer" =~ ^[Yy]([Ee][Ss])?$ ]]
 }
 
 open_url() {
@@ -68,15 +63,8 @@ ask() {
   printf -v "$__result" '%s' "$answer"
 }
 
-ask_secret() {
-  local __result=$1 prompt=$2 answer
-  read -r -s -p "$prompt " answer
-  printf '\n'
-  printf -v "$__result" '%s' "$answer"
-}
-
 write_env() {
-  local key=$1 value=$2 dir tmp
+  local key=$1 value=$2 dir tmp escaped
   [[ "$key" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]] || {
     printf 'Invalid environment variable name: %s\n' "$key" >&2
     return 1
@@ -86,7 +74,8 @@ write_env() {
   touch "$ENV_FILE"
   chmod 600 "$ENV_FILE"
   tmp=$(mktemp "${ENV_FILE}.tmp.XXXXXX")
-  WIZARD_ENV_VALUE=$value awk -v key="$key" '
+  printf -v escaped '%q' "$value"
+  WIZARD_ENV_VALUE=$escaped awk -v key="$key" '
     BEGIN { value = ENVIRON["WIZARD_ENV_VALUE"]; replaced = 0 }
     $0 ~ ("^" key "=") {
       if (!replaced) print key "=" value
@@ -98,24 +87,6 @@ write_env() {
   ' "$ENV_FILE" >"$tmp"
   chmod 600 "$tmp"
   mv "$tmp" "$ENV_FILE"
-}
-
-set_secret() {
-  local name=$1 value=$2
-  command -v gh >/dev/null 2>&1 || {
-    say "gh is not installed; skipped GitHub secret $name"
-    return 0
-  }
-  printf '%s' "$value" | gh secret set "$name"
-}
-
-set_var() {
-  local name=$1 value=$2
-  command -v gh >/dev/null 2>&1 || {
-    say "gh is not installed; skipped GitHub variable $name"
-    return 0
-  }
-  printf '%s' "$value" | gh variable set "$name"
 }
 
 finish() {
@@ -211,7 +182,7 @@ stage "Summary"
 say "Captured request state:"
 grep -E "^(REQUEST_|RESPONSE_)" "$ENV_FILE" 2>/dev/null | sed 's/^/  /' || true
 say ""
-say "Saved to: $ENV_FILE"
+say "Saved to: $ENV_DISPLAY"
 say ""
 say "When the archives reply, tell the agent the outcome so it can update"
 say "docs/three-ages-source-access.md and the pilot evidence notes."

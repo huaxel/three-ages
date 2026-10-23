@@ -4,6 +4,8 @@
   "dataset_metadata_url": "https://opendata.brussels.be/api/explore/v2.1/catalog/datasets/description-des-batiments-de-la-grand-place",
   "source_licence": "CC BY 4.0",
   "source_credit": "Ville de Bruxelles/Data Management; catalogue attributions: Behind Brussels, Google Maps",
+  "retrieved_at": null,
+  "provenance_note": "Retrieval date was not recorded when this snapshot was captured; it entered version control on 2026-09-19 (commit b477fa9), so its currency relative to the publisher cannot be established from the artifact. Refreshing it is not an automated fetch: opendata.brussels.be/robots.txt disallows /api/ and /explore/dataset/*/download for this project's user-agent (only Googlebot is permitted under /api/), so a permitted refresh needs a manual export or an enquiry to the publisher. Upstream fidelity has therefore not been re-verified.",
   "completeness": {
     "history": 34,
     "history_years": 34,

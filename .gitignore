@@ -4,9 +4,10 @@ __pycache__/
 .venv/
 venv/
 
-# Local tooling and operating-system files
+# Local tooling, request state, and operating-system files
 .DS_Store
 *.log
+docs/archives-request-state.env
 
 # Editor state
 .vscode/
@@ -17,3 +18,12 @@ venv/
 .worksheets/
 
 # Prototype snapshots and derived review artifacts are intentionally tracked.
+
+# Project-local OCaml/opam switch and build outputs
+_opam/
+_build/
+node_modules/
+
+# Local-only image cache for sources without bulk image reuse terms.
+# Pixels stay out of the repository; only openly licensed sources are committed.
+local/

@@ -1,0 +1,8 @@
+# Heavy ML dependencies for the facade-epoch probes only.
+# Kept separate from prototypes/requirements.txt so the prototype gate stays light:
+# epoch_data.py and test_epoch_model.py import standard library only.
+open-clip-torch
+scikit-learn
+numpy
+# torch CPU build is sufficient (no GPU on the training box):
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu

@@ -1,0 +1,7 @@
+{
+  "name": "three-ages-bonsai-tests",
+  "private": true,
+  "devDependencies": {
+    "deasync": "0.1.31"
+  }
+}

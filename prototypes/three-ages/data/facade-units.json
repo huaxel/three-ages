@@ -1,0 +1,429 @@
+{
+  "source": "City of Brussels Grand Place building snapshot",
+  "basis": "Grouped from the City dataset's own facade and history text plus the Commons house categories. A unit is an architecturally independent facade; several City records can share one unit when the square presents a single designed composition. Style observations are per unit, not per record.",
+  "record_count": 34,
+  "unit_count": 27,
+  "multi_record_units": [
+    "gp-13-19-ducs-de-brabant",
+    "gp-36-37-petit-renard"
+  ],
+  "units": [
+    {
+      "unit_id": "gp-13-19-ducs-de-brabant",
+      "label": "The Dukes of Brabant (Maison des Ducs de Brabant)",
+      "records": [
+        "014",
+        "015",
+        "016",
+        "017",
+        "018",
+        "019",
+        "020"
+      ],
+      "facade_sharing": "single-composition",
+      "addresses": [
+        "Grand-Place, 13",
+        "Grand-Place, 14",
+        "Grand-Place, 15",
+        "Grand-Place, 16",
+        "Grand-Place, 17",
+        "Grand-Place, 18",
+        "Grand-Place, 19"
+      ],
+      "note": "One monumental Baroque composition by Willem De Bruyn (1696-1698) across Grand-Place 13-19. The City dataset gives the same base facade description for 14-19, varying only the house emblem, and records the site as 'already unified brick houses from 1441'. Record 014 (Grand-Place 13) states it has no facade of its own because it sits inside the block. Treat this group as ONE facade unit: an image of the composition is not a facade observation for any single house. Commons files the seven houses as Renommée (13), Ermitage (14), Fortune (15), Moulin à vent (16), Pot d'étain (17), Colline (18) and Bourse (19), each carrying a Brussels monument record 2043-0065/013-019. City record 014 (Grand-Place 13) is named 'Fortune', which is Grand-Place 15; the monument record for Grand-Place 13 is Maison de la Renommée. The City name is not corrected here, only recorded."
+    },
+    {
+      "unit_id": "gp-36-37-petit-renard",
+      "label": "The Little Fox and the Oak",
+      "records": [
+        "031",
+        "032"
+      ],
+      "facade_sharing": "single-house",
+      "addresses": [
+        "Grand-Place, 36",
+        "Grand-Place, 37"
+      ],
+      "note": "The City dataset gives Grand-Place 36 and 37 the same reconstruction and restoration history, and Commons files both under the single category 'Maison du Petit Renard et du Chêne'. Treat as one house split across two City records."
+    },
+    {
+      "unit_id": "gp-005",
+      "label": "The Horn",
+      "records": [
+        "005"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 6"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-009",
+      "label": "The Swan",
+      "records": [
+        "009"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 9"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-027",
+      "label": "The Arms of the Duchy  of  Brabant",
+      "records": [
+        "027"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 28"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-011",
+      "label": "The Rose",
+      "records": [
+        "011"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 11"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-022",
+      "label": "Joseph and Anne",
+      "records": [
+        "022"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 21-22"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-024",
+      "label": "The  Weighing  Scales",
+      "records": [
+        "024"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 24"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-026",
+      "label": "The Pigeon",
+      "records": [
+        "026"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 26-27"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-023",
+      "label": "The Angel",
+      "records": [
+        "023"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 23"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-029",
+      "label": "The Helm",
+      "records": [
+        "029"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 34"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-008",
+      "label": "The Star",
+      "records": [
+        "008"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 9"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-028",
+      "label": "The King's House",
+      "records": [
+        "028"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 29-33"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-006",
+      "label": "The Fox",
+      "records": [
+        "006"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 7"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-034",
+      "label": "The House of the Donkey",
+      "records": [
+        "034"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 39"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-030",
+      "label": "The Peacock",
+      "records": [
+        "030"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 35"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-025",
+      "label": "The Golden Boat",
+      "records": [
+        "025"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 24-25"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-033",
+      "label": "Saint Barbara",
+      "records": [
+        "033"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 38"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-007",
+      "label": "City Hall",
+      "records": [
+        "007"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 8"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-010",
+      "label": "The Brewers House (The Golden Tree)",
+      "records": [
+        "010"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 10"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-021",
+      "label": "The Stag",
+      "records": [
+        "021"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 20"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-001",
+      "label": "The King of Spain",
+      "records": [
+        "001"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 1"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-002",
+      "label": "The Wheelbarrow",
+      "records": [
+        "002"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 2-3"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-003",
+      "label": "The Sack",
+      "records": [
+        "003"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 4"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-012",
+      "label": "Mount Tabor",
+      "records": [
+        "012"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 12"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-004",
+      "label": "The She-Wolf",
+      "records": [
+        "004"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 5"
+      ],
+      "note": ""
+    },
+    {
+      "unit_id": "gp-013",
+      "label": "The King of Bavaria",
+      "records": [
+        "013"
+      ],
+      "facade_sharing": "single-building",
+      "addresses": [
+        "Grand-Place, 12a"
+      ],
+      "note": ""
+    }
+  ],
+  "known_conflicts": [
+    {
+      "records": [
+        "014"
+      ],
+      "city_name": "The Dukes of Brabant  - Fortune",
+      "commons_name": "Maison de la Renommée",
+      "monument_id": "2043-0065/013",
+      "address": "Grand-Place, 13",
+      "note": "Commons and the Brussels monument record name Grand-Place 13 'Maison de la Renommée'. The City dataset names it 'Fortune', which is the house at Grand-Place 15 (City record 016). Recorded, not resolved."
+    },
+    {
+      "records": [
+        "027"
+      ],
+      "city_name": "The Arms of the Duchy  of  Brabant",
+      "commons_name": "Maison du Marchand d'Or",
+      "monument_id": null,
+      "address": "Grand-Place, 28",
+      "note": "Commons states Grand-Place 28 is Maison du Marchand d'Or; the City dataset names record 027 'The Arms of the Duchy of Brabant'. The address agrees and the house name disagrees. Recorded, not resolved."
+    }
+  ],
+  "conflict_count": 2,
+  "notice_groups": {
+    "basis": "The Brussels architectural heritage inventory publishes one notice per entry, and a notice can cover several City dataset records. Read from the inventory notices, not from the City facade text, so these groups are not the same as the facade-composition units above.",
+    "source": "https://monument.heritage.brussels/fr/buildings/<id>",
+    "groups": [
+      {
+        "notice_id": "31130",
+        "record_ids": [
+          "014",
+          "015",
+          "016",
+          "017",
+          "018",
+          "019",
+          "020"
+        ],
+        "addresses": [
+          "Grand-Place, 13",
+          "Grand-Place, 14",
+          "Grand-Place, 15",
+          "Grand-Place, 16",
+          "Grand-Place, 17",
+          "Grand-Place, 18",
+          "Grand-Place, 19"
+        ],
+        "note": "Matches gp-13-19-ducs-de-brabant."
+      },
+      {
+        "notice_id": "31145",
+        "record_ids": [
+          "030",
+          "031",
+          "032",
+          "033"
+        ],
+        "addresses": [
+          "Grand-Place, 35",
+          "Grand-Place, 36",
+          "Grand-Place, 37",
+          "Grand-Place, 38"
+        ],
+        "note": "Wider than gp-36-37-petit-renard, which groups only records 36 and 37 by facade composition."
+      },
+      {
+        "notice_id": "31140",
+        "record_ids": [
+          "024",
+          "025"
+        ],
+        "addresses": [
+          "Grand-Place, 24",
+          "Grand-Place, 24-25"
+        ],
+        "note": "No facade-composition unit covers this pair."
+      }
+    ]
+  }
+}

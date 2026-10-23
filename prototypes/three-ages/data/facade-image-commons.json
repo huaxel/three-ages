@@ -1,0 +1,922 @@
+{
+  "source": "Wikimedia Commons Grand-Place house categories",
+  "label_source": "City of Brussels Grand Place building snapshot",
+  "status": "supplemental open-licence facade candidates; source descriptions are weak labels, not reviewer visual classifications",
+  "selection_note": "Images were selected from the Commons house categories for whole-facade views; sculptural details, ornament close-ups and interior shots were excluded after visual inspection. House of the Dukes of Brabant block photographs were excluded because a single frame spans several City dataset records (Grand-Place 13-19) and cannot be attributed to one record. A second pass extended coverage to the three remaining buildings with usable open-licence imagery: the Town Hall (City Hall, Grand-Place 8), the King of Bavaria (Grand-Place 12A, whose Commons descriptions state the address explicitly) and the King's House (Grand-Place 29-33). The King of Bavaria series is dominated by ornament details, so only its facade-bearing frames were taken. Grand-Place 37 (The Oak) and the Grand-Place 13-19 Dukes of Brabant block still have no image: Commons holds only multi-house group views for those, which cannot be attributed to one City record. The Dukes of Brabant block is covered by whole-composition photographs keyed to its facade unit rather than to a single house, because Grand-Place 13-19 form one designed facade. Grand-Place 37 (The Oak) shares its unit with Grand-Place 36 (The Little Fox) and is therefore covered by that unit's images. A second pass added one further view for each of the five facade units that had only a single image, so that every unit has at least two views and can participate in building-level retrieval. Candidates were checked against the Brussels monument record on the file page and inspected visually; sculptural details were rejected.",
+  "records": [
+    {
+      "source_id": "001",
+      "facade_unit_id": "gp-001",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-du-roi-d-espagne-01",
+        "epoch": 2008,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_du_Roi_d'Espagne_-_01.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/08/Belgique_-_Bruxelles_-_Maison_du_Roi_d%27Espagne_-_01.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-du-roi-d-espagne-01.jpg",
+        "preview_sha256": "dabc36ddeeb37b20d93b98b22d4c69e66b8deae587f7e295be09eb9b3ac3b2ef",
+        "licence": "CC BY-SA 3.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Facade of the King of Spain house; the file page carries Brussels monument record 2043-0065/001. Source-stated address Grand-Place, 1 matched to City dataset record 001 (The King of Spain). The file page states only 'Taken in 2008' as its capture date, which is used as the epoch. No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      }
+    },
+    {
+      "source_id": "001",
+      "asset": {
+        "asset_id": "commons-maison-du-roi-d-espagne-brussels-full-view-of-the-front-faca",
+        "epoch": 2026,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Maison_du_Roi_d'Espagne_(Brussels)_-_Full_view_of_the_front_facade.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Maison_du_Roi_d%27Espagne_%28Brussels%29_-_Full_view_of_the_front_facade.jpg",
+        "preview": "data/historical/commons/maison-du-roi-d-espagne-brussels-full-view-of-the-front-faca.jpg",
+        "preview_sha256": "e8d03190f12e6e49b329315a8962e75101fb0523fcacada6a746ea015a035689",
+        "licence": "CC BY-SA 4.0",
+        "credit": "iMahesh, via Wikimedia Commons",
+        "observation": "Commons category 'The King of Spain'; source-stated Grand-Place identity matched to City dataset record 001 (The King of Spain). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-001"
+    },
+    {
+      "source_id": "002",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-de-la-brouette-05b",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_de_la_Brouette_-_05b.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/50/Belgique_-_Bruxelles_-_Maison_de_la_Brouette_-_05b.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-de-la-brouette-05b.jpg",
+        "preview_sha256": "70c317b80bd4747a99312767ceecf7d873e06b8108520594036a11506a7e709e",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'The Wheelbarrow'; source-stated Grand-Place identity matched to City dataset record 002 (The Wheelbarrow). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-002"
+    },
+    {
+      "source_id": "002",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-de-la-brouette-05c",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_de_la_Brouette_-_05c.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Belgique_-_Bruxelles_-_Maison_de_la_Brouette_-_05c.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-de-la-brouette-05c.jpg",
+        "preview_sha256": "e1a54ef5ebcf383fbcf762efdac1ae1d956225650349d749dd491079271804b0",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'The Wheelbarrow'; source-stated Grand-Place identity matched to City dataset record 002 (The Wheelbarrow). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-002"
+    },
+    {
+      "source_id": "003",
+      "asset": {
+        "asset_id": "commons-el-saco-y-la-carretilla-grand-place-bruselas-b-lgica-2021-12",
+        "epoch": 2021,
+        "source_url": "https://commons.wikimedia.org/wiki/File:El_Saco_y_la_Carretilla,_Grand-Place,_Bruselas,_Bélgica,_2021-12-15,_DD_187-189_HDR.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/El_Saco_y_la_Carretilla%2C_Grand-Place%2C_Bruselas%2C_B%C3%A9lgica%2C_2021-12-15%2C_DD_187-189_HDR.jpg",
+        "preview": "data/historical/commons/el-saco-y-la-carretilla-grand-place-bruselas-b-lgica-2021-12.jpg",
+        "preview_sha256": "8b5aac746d6448dcb86470866cfbf26da87b76ee736ecfea5dad86b3641c0336",
+        "licence": "CC BY-SA 4.0",
+        "credit": "Diego Delso, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Sac'; source-stated Grand-Place identity matched to City dataset record 003 (The Sack). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-003"
+    },
+    {
+      "source_id": "003",
+      "asset": {
+        "asset_id": "commons-maison-du-sac-brussels-full-view-of-the-front-facade",
+        "epoch": 2026,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Maison_du_Sac_(Brussels)_-_Full_view_of_the_front_facade.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Maison_du_Sac_%28Brussels%29_-_Full_view_of_the_front_facade.jpg",
+        "preview": "data/historical/commons/maison-du-sac-brussels-full-view-of-the-front-facade.jpg",
+        "preview_sha256": "14164ef7d505b81eb8db2bee52b5ea28789d62ebbf03fd779b8ac2ed50fd3fba",
+        "licence": "CC BY-SA 4.0",
+        "credit": "iMahesh, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Sac'; source-stated Grand-Place identity matched to City dataset record 003 (The Sack). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-003"
+    },
+    {
+      "source_id": "004",
+      "asset": {
+        "asset_id": "commons-grote-markt-brussel-70",
+        "epoch": 2021,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Grote_Markt_Brussel_70.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Grote_Markt_Brussel_70.jpg",
+        "preview": "data/historical/commons/grote-markt-brussel-70.jpg",
+        "preview_sha256": "9c9803c3a879b49e271c071c52f547de8ea6672090d9cecd76f64b65127c7ae8",
+        "licence": "CC BY-SA 4.0",
+        "credit": "FrDr, via Wikimedia Commons",
+        "observation": "Commons category 'The She-Wolf'; source-stated Grand-Place identity matched to City dataset record 004 (The She-Wolf). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-004"
+    },
+    {
+      "source_id": "004",
+      "asset": {
+        "asset_id": "commons-grote-markt-brussel-71",
+        "epoch": 2021,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Grote_Markt_Brussel_71.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/17/Grote_Markt_Brussel_71.jpg",
+        "preview": "data/historical/commons/grote-markt-brussel-71.jpg",
+        "preview_sha256": "993c6e7e5d7cc6235fb8204b6551e83ff8c94fb32608c8fc9e5ccf648818f902",
+        "licence": "CC BY-SA 4.0",
+        "credit": "FrDr, via Wikimedia Commons",
+        "observation": "Commons category 'The She-Wolf'; source-stated Grand-Place identity matched to City dataset record 004 (The She-Wolf). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-004"
+    },
+    {
+      "source_id": "005",
+      "asset": {
+        "asset_id": "commons-grote-markt-brussel-67",
+        "epoch": 2021,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Grote_Markt_Brussel_67.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Grote_Markt_Brussel_67.jpg",
+        "preview": "data/historical/commons/grote-markt-brussel-67.jpg",
+        "preview_sha256": "d3d41abcdaff4321c9b5860aab449fc3bd55d1fdd9dd46e15b984155fa385e20",
+        "licence": "CC BY-SA 4.0",
+        "credit": "FrDr, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Cornet'; source-stated Grand-Place identity matched to City dataset record 005 (The Horn). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-005"
+    },
+    {
+      "source_id": "006",
+      "asset": {
+        "asset_id": "commons-belgium-6484-guildhall-14121896884",
+        "epoch": 2013,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgium-6484_-_Guildhall_(14121896884).jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Belgium-6484_-_Guildhall_%2814121896884%29.jpg",
+        "preview": "data/historical/commons/belgium-6484-guildhall-14121896884.jpg",
+        "preview_sha256": "5f9124ef70d0e693f4da2e06f952e5fbfc6b6f6fac4f4e6743ab9d589cef064e",
+        "licence": "CC BY-SA 2.0",
+        "credit": "Dennis G. Jarvis, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Renard'; source-stated Grand-Place identity matched to City dataset record 006 (The Fox). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-006"
+    },
+    {
+      "source_id": "006",
+      "asset": {
+        "asset_id": "commons-grote-markt-brussel-69",
+        "epoch": 2021,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Grote_Markt_Brussel_69.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Grote_Markt_Brussel_69.jpg",
+        "preview": "data/historical/commons/grote-markt-brussel-69.jpg",
+        "preview_sha256": "69573a2e8b7afd2615514a60e1f5f8f526e16d2b6882b7fe244f53397a48bfd5",
+        "licence": "CC BY-SA 4.0",
+        "credit": "FrDr, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Renard'; source-stated Grand-Place identity matched to City dataset record 006 (The Fox). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-006"
+    },
+    {
+      "source_id": "007",
+      "asset": {
+        "asset_id": "commons-br-ssel-grand-place",
+        "epoch": 2011,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Brüssel,_Grand_Place.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Br%C3%BCssel%2C_Grand_Place.jpg",
+        "preview": "data/historical/commons/br-ssel-grand-place.jpg",
+        "preview_sha256": "7c5e4e3fd395ffd483e933f7d3738fb8a9c422b260c3f05a01f6c0cd21172243",
+        "licence": "CC BY-SA 3.0",
+        "credit": "Feldstein, via Wikimedia Commons",
+        "observation": "Full facade of the Brussels Town Hall seen from the Grand-Place; the Gothic frontage and tower are visible. Source-stated address Grand-Place, 8 matched to City dataset record 007 (City Hall). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-007"
+    },
+    {
+      "source_id": "007",
+      "asset": {
+        "asset_id": "commons-h-tel-de-ville-bis",
+        "epoch": 2012,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Hôtel_de_Ville_bis.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e7/H%C3%B4tel_de_Ville_bis.jpg",
+        "preview": "data/historical/commons/h-tel-de-ville-bis.jpg",
+        "preview_sha256": "c498d773e5ad4be969cb0c375b05162b5679faf3fcaa39403c6504df4a3b7422",
+        "licence": "CC BY-SA 3.0",
+        "credit": "Lou Salomé, via Wikimedia Commons",
+        "observation": "Full facade of the Brussels Town Hall with its tower, photographed from the square. Source-stated address Grand-Place, 8 matched to City dataset record 007 (City Hall). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-007"
+    },
+    {
+      "source_id": "008",
+      "facade_unit_id": "gp-008",
+      "asset": {
+        "asset_id": "commons-grote-markt-brussel-4258305016",
+        "epoch": 2010,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Grote_Markt,_Brussel-4258305016.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Grote_Markt%2C_Brussel-4258305016.jpg",
+        "preview": "data/historical/commons/grote-markt-brussel-4258305016.jpg",
+        "preview_sha256": "6695e522fe5b303f2577f8f914cb0356ab81ef41622fefe08b84a88009c60c68",
+        "licence": "CC BY-SA 2.0",
+        "credit": "William Murphy, via Wikimedia Commons",
+        "observation": "Street view of the Grand-Place; the file page names the house De Sterre (The Star) and files it under the Maison de l'Etoile category. Source-stated address Grand-Place, 9 matched to City dataset record 008 (The Star). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      }
+    },
+    {
+      "source_id": "008",
+      "asset": {
+        "asset_id": "commons-karel-buls-straat-brussel-4532436459",
+        "epoch": 2009,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Karel_Buls_Straat,_Brussel-4532436459.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/77/Karel_Buls_Straat%2C_Brussel-4532436459.jpg",
+        "preview": "data/historical/commons/karel-buls-straat-brussel-4532436459.jpg",
+        "preview_sha256": "9c128d9270d2165ccf60a86f9736638dfffb7c6980147e2e3b6892934be27a00",
+        "licence": "CC BY 2.0",
+        "credit": "Brian Burk, via Wikimedia Commons",
+        "observation": "Commons category 'Maison de l'Étoile'; source-stated Grand-Place identity matched to City dataset record 008 (The Star). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-008"
+    },
+    {
+      "source_id": "009",
+      "asset": {
+        "asset_id": "commons-grand-place-9-bruxelles-01",
+        "epoch": 2024,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Grand-Place_9,_Bruxelles.01.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Grand-Place_9%2C_Bruxelles.01.jpg",
+        "preview": "data/historical/commons/grand-place-9-bruxelles-01.jpg",
+        "preview_sha256": "296d4855b255b6adcbcb1f874e2aaf62c2b688abf9fce8656db4e1face513968",
+        "licence": "CC BY-SA 4.0",
+        "credit": "Nenea hartia, via Wikimedia Commons",
+        "observation": "Commons category 'The Swan, Brussels' and monument record 2043-0065/009; source-stated Grand-Place identity matched to City dataset record 009 (The Swan). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-009"
+    },
+    {
+      "source_id": "009",
+      "asset": {
+        "asset_id": "commons-la-maison-du-cygne-bruxelles-2",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:La_Maison_du_Cygne,_Bruxelles_-_2.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d1/La_Maison_du_Cygne%2C_Bruxelles_-_2.jpg",
+        "preview": "data/historical/commons/la-maison-du-cygne-bruxelles-2.jpg",
+        "preview_sha256": "7654939a20e489755714e24b4c5ef962f6a029cf4b6c6bb9bcfe62e6440c66ff",
+        "licence": "CC0",
+        "credit": "Benoît Prieur, via Wikimedia Commons",
+        "observation": "Commons category 'The Swan, Brussels'; source-stated Grand-Place identity matched to City dataset record 009 (The Swan). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-009"
+    },
+    {
+      "source_id": "010",
+      "facade_unit_id": "gp-010",
+      "asset": {
+        "asset_id": "commons-grand-place-10-bruxelles-01",
+        "epoch": 2024,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Grand-Place_10,_Bruxelles.01.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/58/Grand-Place_10%2C_Bruxelles.01.jpg",
+        "preview": "data/historical/commons/grand-place-10-bruxelles-01.jpg",
+        "preview_sha256": "60f4ff9e6bcfe0d930d8bdc03f5340ce4790877707aff4d4f8e51399cbd2f64d",
+        "licence": "CC BY-SA 4.0",
+        "credit": "Nenea hartia, via Wikimedia Commons",
+        "observation": "Full facade of Grand-Place 10, the Brewers House; the file page carries Brussels monument record 2043-0065/010. Source-stated address Grand-Place, 10 matched to City dataset record 010 (The Brewers House (The Golden Tree)). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      }
+    },
+    {
+      "source_id": "010",
+      "asset": {
+        "asset_id": "commons-grand-place-brussels-frontal-view-of-the-maison-des-brasseur",
+        "epoch": 2026,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Grand-Place_(Brussels)_-_Frontal_view_of_the_Maison_des_Brasseurs_(Brewers'_House)_facade_and_gilded_equestrian_statue.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/72/Grand-Place_%28Brussels%29_-_Frontal_view_of_the_Maison_des_Brasseurs_%28Brewers%27_House%29_facade_and_gilded_equestrian_statue.jpg",
+        "preview": "data/historical/commons/grand-place-brussels-frontal-view-of-the-maison-des-brasseur.jpg",
+        "preview_sha256": "8f193c2d8cb8aad62b35372e57b24421b2f63696a6f9cfbb48f8648447c5dd87",
+        "licence": "CC BY-SA 4.0",
+        "credit": "iMahesh, via Wikimedia Commons",
+        "observation": "Commons category 'L'Arbre d'Or, Brussels'; source-stated Grand-Place identity matched to City dataset record 010 (The Brewers House (The Golden Tree)). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-010"
+    },
+    {
+      "source_id": "011",
+      "asset": {
+        "asset_id": "commons-bruxelles-grand-place-11",
+        "epoch": 2008,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Bruxelles_Grand-Place_11.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Bruxelles_Grand-Place_11.jpg",
+        "preview": "data/historical/commons/bruxelles-grand-place-11.jpg",
+        "preview_sha256": "8e145dc23ea91b460214ab4b2141097a6ec17b60028c129ffb6b0b1b78df524b",
+        "licence": "CC BY-SA 3.0",
+        "credit": "Michel wal, via Wikimedia Commons",
+        "observation": "Commons category 'Maison de la Rose'; source-stated Grand-Place identity matched to City dataset record 011 (The Rose). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-011"
+    },
+    {
+      "source_id": "011",
+      "asset": {
+        "asset_id": "commons-grand-place-11-12-bruxelles-01",
+        "epoch": 2024,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Grand-Place_11-12,_Bruxelles.01.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Grand-Place_11-12%2C_Bruxelles.01.jpg",
+        "preview": "data/historical/commons/grand-place-11-12-bruxelles-01.jpg",
+        "preview_sha256": "1224364a00b88c1bead17d10e70eebfbf878a01e383530bc43510dbbbf681e92",
+        "licence": "CC BY-SA 4.0",
+        "credit": "Nenea hartia, via Wikimedia Commons",
+        "observation": "Commons category 'Maison de la Rose' and monument record 2043-0065/011; source-stated Grand-Place identity matched to City dataset record 011 (The Rose). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-011"
+    },
+    {
+      "source_id": "012",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-du-mont-thabor-01",
+        "epoch": 2011,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_du_Mont_Thabor_-_01.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Belgique_-_Bruxelles_-_Maison_du_Mont_Thabor_-_01.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-du-mont-thabor-01.jpg",
+        "preview_sha256": "56f6c7b6bda01195a7deeac4ae58a8d19893e6c8a5c9c65fbcbe9e7e6a915517",
+        "licence": "CC BY-SA 3.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Mont Thabor'; source-stated Grand-Place identity matched to City dataset record 012 (Mount Tabor). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-012"
+    },
+    {
+      "source_id": "012",
+      "asset": {
+        "asset_id": "commons-bruxelles-grand-place-12",
+        "epoch": 2009,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Bruxelles_Grand-Place_12.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/51/Bruxelles_Grand-Place_12.jpg",
+        "preview": "data/historical/commons/bruxelles-grand-place-12.jpg",
+        "preview_sha256": "3ed0a9aa3dbe8380d41e39a336109f00ed102ebf46e8060802360b849c48cbb3",
+        "licence": "CC BY-SA 3.0",
+        "credit": "Michel wal, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Mont Thabor'; source-stated Grand-Place identity matched to City dataset record 012 (Mount Tabor). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-012"
+    },
+    {
+      "source_id": "013",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-du-roi-de-bavi-re-02",
+        "epoch": 2011,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_du_Roi_de_Bavière_-_02.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Belgique_-_Bruxelles_-_Maison_du_Roi_de_Bavi%C3%A8re_-_02.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-du-roi-de-bavi-re-02.jpg",
+        "preview_sha256": "4528ad91c1cce84186e02a5e3f60dc1e5fb655206ccbede676adf36b54b0e899",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Gable and upper facade of the house the file page identifies as Maison du Roi de Bavière, Grand-Place n° 12A. Source-stated address Grand-Place, 12a matched to City dataset record 013 (The King of Bavaria). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-013"
+    },
+    {
+      "source_id": "013",
+      "asset": {
+        "asset_id": "commons-maison-d-alsemberg-aux-trois-couleurs-le-roi-de-bavi-re-gr",
+        "epoch": 2017,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Maison_d_Alsemberg_Aux_Trois_Couleurs_Le_Roi_de_Bavière_Grand_Place_12_A.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Maison_d_Alsemberg_Aux_Trois_Couleurs_Le_Roi_de_Bavi%C3%A8re_Grand_Place_12_A.jpg",
+        "preview": "data/historical/commons/maison-d-alsemberg-aux-trois-couleurs-le-roi-de-bavi-re-gr.jpg",
+        "preview_sha256": "c6adaec3989ea77a850fbed55ef937458fe10751047b6da83893bd18e623454b",
+        "licence": "CC BY-SA 4.0",
+        "credit": "Mélioratif, via Wikimedia Commons",
+        "observation": "Street view of the house the file page names Maison d'Alsemberg / Aux Trois Couleurs / Le Roi de Bavière, Grand-Place 12A. Source-stated address Grand-Place, 12a matched to City dataset record 013 (The King of Bavaria). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-013"
+    },
+    {
+      "source_id": "015",
+      "facade_unit_id": "gp-13-19-ducs-de-brabant",
+      "asset": {
+        "asset_id": "commons-bruxelles-grand-place-maison-des-ducs-de-brabant-5",
+        "epoch": 2016,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Bruxelles_Grand-Place_Maison_des_Ducs_de_Brabant_5.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/26/Bruxelles_Grand-Place_Maison_des_Ducs_de_Brabant_5.jpg",
+        "preview": "data/historical/commons/bruxelles-grand-place-maison-des-ducs-de-brabant-5.jpg",
+        "preview_sha256": "450eaaa4e040b2702241f0de6079b3495f9e933f5ffc70442f6173a7d90776c6",
+        "licence": "CC BY-SA 4.0",
+        "credit": "Zairon, via Wikimedia Commons",
+        "observation": "This photograph shows the unified Baroque facade of the seven-house Dukes of Brabant composition (Grand-Place 13-19). It is a unit-level image: it is not a facade observation for Grand-Place 14 alone, and it must not be counted as a separate facade alongside the other houses in the group. No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      }
+    },
+    {
+      "source_id": "015",
+      "facade_unit_id": "gp-13-19-ducs-de-brabant",
+      "asset": {
+        "asset_id": "commons-maison-des-ducs-de-brabant-brussels-full-frontal-facade-",
+        "epoch": 2026,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Maison_des_Ducs_de_Brabant_(Brussels)_-_Full_frontal_facade_and_Grand-Place_square_with_tourists.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/50/Maison_des_Ducs_de_Brabant_%28Brussels%29_-_Full_frontal_facade_and_Grand-Place_square_with_tourists.jpg",
+        "preview": "data/historical/commons/maison-des-ducs-de-brabant-brussels-full-frontal-facade-.jpg",
+        "preview_sha256": "7e662cb45cfeba9876d16081f927cdd497cbe176e09cec6684a35c644f49724b",
+        "licence": "CC BY-SA 4.0",
+        "credit": "iMahesh, via Wikimedia Commons",
+        "observation": "This photograph shows the unified Baroque facade of the seven-house Dukes of Brabant composition (Grand-Place 13-19). It is a unit-level image: it is not a facade observation for Grand-Place 14 alone, and it must not be counted as a separate facade alongside the other houses in the group. No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      }
+    },
+    {
+      "source_id": "015",
+      "facade_unit_id": "gp-13-19-ducs-de-brabant",
+      "asset": {
+        "asset_id": "commons-maison-des-ducs-de-brabant-brussels-main-facade-on-the-g",
+        "epoch": 2026,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Maison_des_Ducs_de_Brabant_(Brussels)_-_Main_facade_on_the_Grand-Place_with_cobblestone_square_and_tourists.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Maison_des_Ducs_de_Brabant_%28Brussels%29_-_Main_facade_on_the_Grand-Place_with_cobblestone_square_and_tourists.jpg",
+        "preview": "data/historical/commons/maison-des-ducs-de-brabant-brussels-main-facade-on-the-g.jpg",
+        "preview_sha256": "97a72244387e6ebde99c42f0dbae984f96a4f821653adf1522282bf7425613d9",
+        "licence": "CC BY-SA 4.0",
+        "credit": "iMahesh, via Wikimedia Commons",
+        "observation": "This photograph shows the unified Baroque facade of the seven-house Dukes of Brabant composition (Grand-Place 13-19). It is a unit-level image: it is not a facade observation for Grand-Place 14 alone, and it must not be counted as a separate facade alongside the other houses in the group. No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      }
+    },
+    {
+      "source_id": "021",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-du-cerf-00",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_du_Cerf_-_00.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Belgique_-_Bruxelles_-_Maison_du_Cerf_-_00.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-du-cerf-00.jpg",
+        "preview_sha256": "0a3cc82d6842bf829c3b12e2650ea894c60a8fe74b75875e7ab6f979cf06ce24",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Cerf' and monument record 2043-0065/020; source-stated Grand-Place identity matched to City dataset record 021 (The Stag). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-021"
+    },
+    {
+      "source_id": "021",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-du-cerf-01b",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_du_Cerf_-_01b.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/19/Belgique_-_Bruxelles_-_Maison_du_Cerf_-_01b.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-du-cerf-01b.jpg",
+        "preview_sha256": "cc3fd09c38a1df94ea7fd0859627f72d38369214abc0f819b5af986f5f6dbb90",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Cerf' and monument record 2043-0065/020; source-stated Grand-Place identity matched to City dataset record 021 (The Stag). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-021"
+    },
+    {
+      "source_id": "021",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-du-cerf-01c",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_du_Cerf_-_01c.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Belgique_-_Bruxelles_-_Maison_du_Cerf_-_01c.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-du-cerf-01c.jpg",
+        "preview_sha256": "f2e507f93be65958380f9b68d96d02731aba2e5c86632f3f8b42dfa9219f73dd",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Cerf' and monument record 2043-0065/020; source-stated Grand-Place identity matched to City dataset record 021 (The Stag). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-021"
+    },
+    {
+      "source_id": "022",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-de-joseph-et-anne-00",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_de_Joseph_et_Anne_-_00.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Belgique_-_Bruxelles_-_Maison_de_Joseph_et_Anne_-_00.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-de-joseph-et-anne-00.jpg",
+        "preview_sha256": "0f697f03c94c7a1a5d1af1ea659b38bd86e4d4e540e92cf125ae9fd4a92610bc",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison de Joseph et Anne' and monument record 2043-0065/021; source-stated Grand-Place identity matched to City dataset record 022 (Joseph and Anne). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-022"
+    },
+    {
+      "source_id": "022",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-de-joseph-et-anne-04c",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_de_Joseph_et_Anne_-_04c.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Belgique_-_Bruxelles_-_Maison_de_Joseph_et_Anne_-_04c.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-de-joseph-et-anne-04c.jpg",
+        "preview_sha256": "201c2798ea5bb14b604c4297d2cdbe0ba4b1a7e7a57527a182dcfc7c21b1891a",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison de Joseph et Anne' and monument record 2043-0065/021; source-stated Grand-Place identity matched to City dataset record 022 (Joseph and Anne). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-022"
+    },
+    {
+      "source_id": "023",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-de-l-ange-01b",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_de_l'Ange_-_01b.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/63/Belgique_-_Bruxelles_-_Maison_de_l%27Ange_-_01b.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-de-l-ange-01b.jpg",
+        "preview_sha256": "4f9f41ea4bdf01a6032cd99a5010d7ed868ac9738763e91548dc8325cca3ff9d",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison de l'Ange'; source-stated Grand-Place identity matched to City dataset record 023 (The Angel). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-023"
+    },
+    {
+      "source_id": "023",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-de-l-ange-01c",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_de_l'Ange_-_01c.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/77/Belgique_-_Bruxelles_-_Maison_de_l%27Ange_-_01c.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-de-l-ange-01c.jpg",
+        "preview_sha256": "58fb9473d27d3bc4ab060350fdb7a3dc2798fce00f29718d82ec20182212a57d",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison de l'Ange'; source-stated Grand-Place identity matched to City dataset record 023 (The Angel). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-023"
+    },
+    {
+      "source_id": "024",
+      "asset": {
+        "asset_id": "commons-brussel-heuvelstraat-24",
+        "epoch": 2015,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Brussel_Heuvelstraat_24.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Brussel_Heuvelstraat_24.jpg",
+        "preview": "data/historical/commons/brussel-heuvelstraat-24.jpg",
+        "preview_sha256": "d9f9806d6a1c782b2f759e6eb94d77ad0da0129beea39246a16d93f722e2f0ec",
+        "licence": "CC BY-SA 4.0",
+        "credit": "Henxter, via Wikimedia Commons",
+        "observation": "Commons category 'Maison de la Balance'; source-stated Grand-Place identity matched to City dataset record 024 (The  Weighing  Scales). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-024"
+    },
+    {
+      "source_id": "024",
+      "asset": {
+        "asset_id": "commons-maison-de-la-balance-rue-de-la-colline-24-bruxelles",
+        "epoch": 2016,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Maison_de_la_Balance_Rue_de_la_Colline_24_Bruxelles.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Maison_de_la_Balance_Rue_de_la_Colline_24_Bruxelles.jpg",
+        "preview": "data/historical/commons/maison-de-la-balance-rue-de-la-colline-24-bruxelles.jpg",
+        "preview_sha256": "c6b2bcd149e9c063523410f965bbfe8638770b3cefb50d51a4fa34c060754d19",
+        "licence": "CC BY-SA 4.0",
+        "credit": "Mélioratif, via Wikimedia Commons",
+        "observation": "Commons category 'Maison de la Balance'; source-stated Grand-Place identity matched to City dataset record 024 (The  Weighing  Scales). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-024"
+    },
+    {
+      "source_id": "025",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-de-la-chaloupe-d-or-00",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_de_la_Chaloupe_d'Or_-_00.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Belgique_-_Bruxelles_-_Maison_de_la_Chaloupe_d%27Or_-_00.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-de-la-chaloupe-d-or-00.jpg",
+        "preview_sha256": "3a95473ea58e288775c5b6f16fe67eb092ba803af6a0f665ed4bc89cf2bab61e",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'The Golden Boat' and monument record 2043-0065/024; source-stated Grand-Place identity matched to City dataset record 025 (The Golden Boat). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-025"
+    },
+    {
+      "source_id": "025",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-de-la-chaloupe-d-or-06b",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_de_la_Chaloupe_d'Or_-_06b.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Belgique_-_Bruxelles_-_Maison_de_la_Chaloupe_d%27Or_-_06b.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-de-la-chaloupe-d-or-06b.jpg",
+        "preview_sha256": "3a8a7a2e1d256fa898b8691ddd71cbeb7dbfad839cb5ade735acb99164741e8c",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'The Golden Boat' and monument record 2043-0065/024; source-stated Grand-Place identity matched to City dataset record 025 (The Golden Boat). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-025"
+    },
+    {
+      "source_id": "025",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-de-la-chaloupe-d-or-07b",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_de_la_Chaloupe_d'Or_-_07b.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/90/Belgique_-_Bruxelles_-_Maison_de_la_Chaloupe_d%27Or_-_07b.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-de-la-chaloupe-d-or-07b.jpg",
+        "preview_sha256": "0ce90e0d95f364401facf00ce1af915dbbecdc754ab4324f07d836d4e19b0714",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'The Golden Boat' and monument record 2043-0065/024; source-stated Grand-Place identity matched to City dataset record 025 (The Golden Boat). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-025"
+    },
+    {
+      "source_id": "026",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-du-pigeon-02",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_du_Pigeon_-_02.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Belgique_-_Bruxelles_-_Maison_du_Pigeon_-_02.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-du-pigeon-02.jpg",
+        "preview_sha256": "1ca757354c97fdf8e4cacaf95db9315fa515aa5d187a89223460428b15d2eb23",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Pigeon' and monument record 2043-0065/026; source-stated Grand-Place identity matched to City dataset record 026 (The Pigeon). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-026"
+    },
+    {
+      "source_id": "026",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-du-pigeon-03",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_du_Pigeon_-_03.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Belgique_-_Bruxelles_-_Maison_du_Pigeon_-_03.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-du-pigeon-03.jpg",
+        "preview_sha256": "b45a0590822f14e616887f38021e328edb2fe502514d39eb0f478e46949a5f6e",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Pigeon' and monument record 2043-0065/026; source-stated Grand-Place identity matched to City dataset record 026 (The Pigeon). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-026"
+    },
+    {
+      "source_id": "027",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-du-marchand-d-or-02b",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_du_Marchand_d'Or_-_02b.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Belgique_-_Bruxelles_-_Maison_du_Marchand_d%27Or_-_02b.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-du-marchand-d-or-02b.jpg",
+        "preview_sha256": "d4e1490bd2fd7fa49a97ca0e617275e77312a6a84451f813899ea28be7d2dcff",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Marchand d'Or'; source-stated Grand-Place identity matched to City dataset record 027 (The Arms of the Duchy  of  Brabant). Commons states Grand-Place n° 28 as Maison du Marchand d'Or; the City dataset names record 027 'The Arms of the Duchy of Brabant'. The address agrees but the house name disagrees, so this identity conflict is recorded rather than resolved. No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-027"
+    },
+    {
+      "source_id": "027",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-du-marchand-d-or-02c",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_du_Marchand_d'Or_-_02c.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Belgique_-_Bruxelles_-_Maison_du_Marchand_d%27Or_-_02c.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-du-marchand-d-or-02c.jpg",
+        "preview_sha256": "63425a26b637eb5f068f256cf3317a7e1133da45f1235b58bd5df1b5bd539f8a",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Marchand d'Or'; source-stated Grand-Place identity matched to City dataset record 027 (The Arms of the Duchy  of  Brabant). Commons states Grand-Place n° 28 as Maison du Marchand d'Or; the City dataset names record 027 'The Arms of the Duchy of Brabant'. The address agrees but the house name disagrees, so this identity conflict is recorded rather than resolved. No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-027"
+    },
+    {
+      "source_id": "028",
+      "asset": {
+        "asset_id": "commons-bruselas-plaza-mayor-04",
+        "epoch": 2014,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Bruselas,_Plaza_Mayor_04.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Bruselas%2C_Plaza_Mayor_04.jpg",
+        "preview": "data/historical/commons/bruselas-plaza-mayor-04.jpg",
+        "preview_sha256": "995d6edae0138ac309dfdd0e6ed0cfc38941491c81390d25c074c81d5fabf8fd",
+        "licence": "CC BY-SA 4.0",
+        "credit": "LBM1948, via Wikimedia Commons",
+        "observation": "Facade of the King's House seen across the Grand-Place. Source-stated address Grand-Place, 29-33 matched to City dataset record 028 (The King's House). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-028"
+    },
+    {
+      "source_id": "028",
+      "asset": {
+        "asset_id": "commons-grand-place-brussels-frontal-view-of-the-king-s-house-maison",
+        "epoch": 2026,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Grand-Place_(Brussels)_-_Frontal_view_of_the_King's_House_(Maison_du_Roi)_facade_with_visitors_on_the_square.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/04/Grand-Place_%28Brussels%29_-_Frontal_view_of_the_King%27s_House_%28Maison_du_Roi%29_facade_with_visitors_on_the_square.jpg",
+        "preview": "data/historical/commons/grand-place-brussels-frontal-view-of-the-king-s-house-maison.jpg",
+        "preview_sha256": "1313ba540da94f14ca3244ca2a8770e3dd19d8ba2fcd0396de1b33f34c855d80",
+        "licence": "CC BY-SA 4.0",
+        "credit": "iMahesh, via Wikimedia Commons",
+        "observation": "Frontal view of the King's House (Maison du Roi / Broodhuis) showing the Neo-Gothic facade across its full height. Source-stated address Grand-Place, 29-33 matched to City dataset record 028 (The King's House). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-028"
+    },
+    {
+      "source_id": "028",
+      "asset": {
+        "asset_id": "commons-maison-du-roi-brussels-full-frontal-neo-gothic-facade-and-ce",
+        "epoch": 2026,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Maison_du_Roi_(Brussels)_-_Full_frontal_Neo-Gothic_facade_and_central_tower_view.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/82/Maison_du_Roi_%28Brussels%29_-_Full_frontal_Neo-Gothic_facade_and_central_tower_view.jpg",
+        "preview": "data/historical/commons/maison-du-roi-brussels-full-frontal-neo-gothic-facade-and-ce.jpg",
+        "preview_sha256": "f1ad916829ecb69da0bf627c0cea11d23cd3a1ca10804c644fbdc6cc61dcd6f7",
+        "licence": "CC BY-SA 4.0",
+        "credit": "iMahesh, via Wikimedia Commons",
+        "observation": "Full frontal Neo-Gothic facade of the King's House. Source-stated address Grand-Place, 29-33 matched to City dataset record 028 (The King's House). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-028"
+    },
+    {
+      "source_id": "029",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-du-heaume-02",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_du_Heaume_-_02.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Belgique_-_Bruxelles_-_Maison_du_Heaume_-_02.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-du-heaume-02.jpg",
+        "preview_sha256": "62718b76b6b53108fe4b4f91f974458c5df7ec15b42d185aabf540e797030a9c",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Heaume'; source-stated Grand-Place identity matched to City dataset record 029 (The Helm). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-029"
+    },
+    {
+      "source_id": "029",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-du-heaume-08",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_du_Heaume_-_08.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Belgique_-_Bruxelles_-_Maison_du_Heaume_-_08.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-du-heaume-08.jpg",
+        "preview_sha256": "eb1d132124a105c4c4fe03552c0511850858bb1891e0ccf700e53d95ec008669",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Heaume'; source-stated Grand-Place identity matched to City dataset record 029 (The Helm). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-029"
+    },
+    {
+      "source_id": "030",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-du-paon-03",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_du_Paon_-_03.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/93/Belgique_-_Bruxelles_-_Maison_du_Paon_-_03.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-du-paon-03.jpg",
+        "preview_sha256": "36c0c7de23a04bc25ee07a8c314ac91df7a91b3a3e7683d5dd27abff0b2a73fa",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Paon' and monument record 2043-0065/035; source-stated Grand-Place identity matched to City dataset record 030 (The Peacock). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-030"
+    },
+    {
+      "source_id": "030",
+      "facade_unit_id": "gp-030",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-du-paon-04",
+        "epoch": 2011,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_du_Paon_-_04.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/42/Belgique_-_Bruxelles_-_Maison_du_Paon_-_04.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-du-paon-04.jpg",
+        "preview_sha256": "1ed7ebc20ace2fd7826860c920292388b6d4c572aa62a1682dd0fff827300107",
+        "licence": "CC BY-SA 3.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Gable and upper facade of the Peacock; the file page carries Brussels monument record 2043-0065/035. Source-stated address Grand-Place, 35 matched to City dataset record 030 (The Peacock). The file page states only 'Taken in 2011' as its capture date, which is used as the epoch. No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      }
+    },
+    {
+      "source_id": "031",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-du-petit-renard-et-du-ch-ne-02",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_du_Petit_Renard_et_du_Chêne_-_02.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Belgique_-_Bruxelles_-_Maison_du_Petit_Renard_et_du_Ch%C3%AAne_-_02.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-du-petit-renard-et-du-ch-ne-02.jpg",
+        "preview_sha256": "c508b9e89793b6b3beda67fbd32acf80963d2e17b20c63730239a1c480f27f28",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Petit Renard et du Chêne' and monument record 2043-0065/036; source-stated Grand-Place identity matched to City dataset record 031 (The Little Fox). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-36-37-petit-renard"
+    },
+    {
+      "source_id": "031",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-du-petit-renard-et-du-ch-ne-03",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_du_Petit_Renard_et_du_Chêne_-_03.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Belgique_-_Bruxelles_-_Maison_du_Petit_Renard_et_du_Ch%C3%AAne_-_03.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-du-petit-renard-et-du-ch-ne-03.jpg",
+        "preview_sha256": "f9461d60e19584170001a3a6c66b2f646a2d35b3a04c30180a5a1b97c5466a5d",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison du Petit Renard et du Chêne' and monument record 2043-0065/036; source-stated Grand-Place identity matched to City dataset record 031 (The Little Fox). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-36-37-petit-renard"
+    },
+    {
+      "source_id": "033",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-de-sainte-barbe-02",
+        "epoch": 2019,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_de_Sainte-Barbe_-_02.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/19/Belgique_-_Bruxelles_-_Maison_de_Sainte-Barbe_-_02.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-de-sainte-barbe-02.jpg",
+        "preview_sha256": "38f58debdda34600e26b3579d2d8ed47665b76b5d8ac48282ed90b3d076b2ed3",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison de Sainte-Barbe' and monument record 2043-0065/038; source-stated Grand-Place identity matched to City dataset record 033 (Saint Barbara). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-033"
+    },
+    {
+      "source_id": "033",
+      "facade_unit_id": "gp-033",
+      "asset": {
+        "asset_id": "commons-bruxelles-sainte-barbe-2043-0065038",
+        "epoch": 2011,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Bruxelles_Sainte-Barbe_2043-0065038.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Bruxelles_Sainte-Barbe_2043-0065038.jpg",
+        "preview": "data/historical/commons/bruxelles-sainte-barbe-2043-0065038.jpg",
+        "preview_sha256": "3a084a3ce5277fe2137526868df88360d83b69520b1c95f1dc6385fa2a5d1a99",
+        "licence": "CC BY-SA 3.0",
+        "credit": "Galaxa1, via Wikimedia Commons",
+        "observation": "Facade of Saint Barbara; the file name and page carry Brussels monument record 2043-0065/038. Source-stated address Grand-Place, 38 matched to City dataset record 033 (Saint Barbara). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      }
+    },
+    {
+      "source_id": "034",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-de-l-ne-02",
+        "epoch": 2011,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_de_l'Âne_-_02.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Belgique_-_Bruxelles_-_Maison_de_l%27%C3%82ne_-_02.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-de-l-ne-02.jpg",
+        "preview_sha256": "95237d786c05296e766686da553cc74d7f370ecb3b76237d081576f2201480db",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison de l'Âne' and monument record 2043-0065/039; source-stated Grand-Place identity matched to City dataset record 034 (The House of the Donkey). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-034"
+    },
+    {
+      "source_id": "034",
+      "asset": {
+        "asset_id": "commons-belgique-bruxelles-maison-de-l-ne-03",
+        "epoch": 2011,
+        "source_url": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Maison_de_l'Âne_-_03.jpg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Belgique_-_Bruxelles_-_Maison_de_l%27%C3%82ne_-_03.jpg",
+        "preview": "data/historical/commons/belgique-bruxelles-maison-de-l-ne-03.jpg",
+        "preview_sha256": "8639dfa5643ccd1dbaaf7387d335df9a9504c80556ad3e2cabe17010c93aa9d1",
+        "licence": "CC BY-SA 4.0",
+        "credit": "EmDee, via Wikimedia Commons",
+        "observation": "Commons category 'Maison de l'Âne' and monument record 2043-0065/039; source-stated Grand-Place identity matched to City dataset record 034 (The House of the Donkey). No reviewer style label assigned.",
+        "annotation_status": "source preview; no reviewer annotation"
+      },
+      "facade_unit_id": "gp-034"
+    }
+  ],
+  "image_url_note": "image_url is the original upload URL; the committed preview is a checksum-pinned 800px thumbnail.",
+  "facade_unit_source": "facade-units.json"
+}

@@ -1,0 +1,49 @@
+{
+  "source": "KIK-IRPA BALaT exact-case photo records",
+  "label_source": "City of Brussels Grand Place building snapshot",
+  "status": "supplemental image evidence; source descriptions are weak labels, not reviewer visual classifications",
+  "records": [
+    {
+      "source_id": "004",
+      "asset": {
+        "asset_id": "T001816",
+        "epoch": 1969,
+        "source_url": "https://balat.kikirpa.be/en/photo/T001816/",
+        "image_url": "https://iiif.kikirpa.be/iiif/2/t001816/full/!800,800/0/default.jpg",
+        "preview": "data/historical/kik-irpa-T001816.jpg",
+        "preview_sha256": "3de3707056ab49bb0973b87de9739e416099caa3e031a28ea4e84497169ce00a",
+        "licence": "CC BY 4.0",
+        "credit": "KIK-IRPA, Brussels (Belgium), cliché T001816",
+        "observation": "BALaT identifies Maison La Louve, Grand-Place 5; the photo represents the facade facing the square. No reviewer style label assigned."
+      }
+    },
+    {
+      "source_id": "006",
+      "asset": {
+        "asset_id": "A102817",
+        "epoch": 1952,
+        "source_url": "https://balat.kikirpa.be/fr/photo/A102817/",
+        "image_url": "https://iiif.kikirpa.be/iiif/2/a102817/full/!800,800/0/default.jpg",
+        "preview": "data/historical/kik-irpa-A102817.jpg",
+        "preview_sha256": "7d525d591795af0e7e91700d2a7451f296e522741b3e105562a137ae3d474ced",
+        "licence": "CC BY 4.0",
+        "credit": "KIK-IRPA, Brussels (Belgium), cliché A102817",
+        "observation": "BALaT identifies Maison Le Renard, Grand-Place 7; the 1952 photo is an exterior view. No reviewer style label assigned."
+      }
+    },
+    {
+      "source_id": "011",
+      "asset": {
+        "asset_id": "T001731",
+        "epoch": 1969,
+        "source_url": "https://balat.kikirpa.be/en/photo/T001731/",
+        "image_url": "https://iiif.kikirpa.be/iiif/2/t001731/full/!800,800/0/default.jpg",
+        "preview": "data/historical/kik-irpa-T001731.jpg",
+        "preview_sha256": "5a3545fd118ec38252df74dac673df25a600e15a5913d7129b3fa840fac9ed4b",
+        "licence": "CC BY 4.0",
+        "credit": "KIK-IRPA, Brussels (Belgium), cliché T001731",
+        "observation": "BALaT identifies Maison La Rose, Grand-Place 11; the photo represents the facade facing the square. No reviewer style label assigned."
+      }
+    }
+  ]
+}

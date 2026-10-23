@@ -1,0 +1,26 @@
+opam-version: "2.0"
+name: "three_ages"
+version: "0.1.0"
+synopsis: "Three Ages OCaml/Bonsai evidence-review slice"
+maintainer: "Three Ages project"
+authors: ["Three Ages contributors"]
+license: "LicenseRef-NOASSERTION"
+homepage: "https://github.com/huaxel/three-ages"
+bug-reports: "https://github.com/huaxel/three-ages/issues"
+
+build: [
+  ["dune" "build" "main.bc.js"]
+]
+
+depends: [
+  "ocaml" {>= "5.2.0"}
+  "dune" {>= "3.16"}
+  "bonsai" {>= "v0.16" & < "v0.17"}
+  "core" {>= "v0.16" & < "v0.17"}
+  "js_of_ocaml-compiler" {>= "5.9"}
+  "ocaml-embed-file" {>= "v0.16" & < "v0.17"}
+  "ppx_jane" {>= "v0.16" & < "v0.17"}
+  "uri" {>= "4.0"}
+  "yojson" {>= "2.0"}
+]
+
