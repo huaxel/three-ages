@@ -1,7 +1,7 @@
 {
   "state": "complete",
   "config": {
-    "run_dir": "/home/juan/projects/ehb/three-ages/local/training/pilot-seed7-20261023-002018",
+    "run_dir": "local/training/pilot-seed7-20261023-002018",
     "batch_size": 16,
     "workers": 2,
     "max_steps": 0,

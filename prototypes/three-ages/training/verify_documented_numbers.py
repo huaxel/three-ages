@@ -114,6 +114,18 @@ def main() -> None:
     check('drawing probe, hard e1', fd1['top1_test'], 0.976100)
     check('capture-era probe, hard e1', tc1['top1_test'], 0.873300)
 
+    # Publication guard: this repository is public, so committed artifacts must
+    # not carry absolute home paths (they leak usernames and local layout).
+    leaks = []
+    for path in sorted((HERE / 'evidence').glob('*')):
+        if path.is_file() and path.suffix in ('.json', '.md', '.csv'):
+            text = path.read_text(encoding='utf-8', errors='replace')
+            if '/home/' in text or '/Users/' in text:
+                leaks.append(path.name)
+    check('no absolute home paths in evidence', len(leaks), 0, tol=0)
+    if leaks:
+        print('  leaking files:', ', '.join(leaks))
+
     failures = 0
     for label, actual, expected, ok in CHECKS:
         status = 'ok  ' if ok else 'FAIL'

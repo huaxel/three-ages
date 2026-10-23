@@ -1,7 +1,7 @@
 {
   "state": "complete",
   "config": {
-    "run_dir": "/home/juan/projects/ehb/three-ages/local/training/pilot-20261022-232106",
+    "run_dir": "local/training/pilot-20261022-232106",
     "batch_size": 16,
     "workers": 2,
     "max_steps": 0,

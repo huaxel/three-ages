@@ -1,7 +1,7 @@
 {
   "state": "complete",
   "config": {
-    "run_dir": "/home/juan/projects/ehb/three-ages/local/training/pilot-hard-epoch2-20261023-163620",
+    "run_dir": "local/training/pilot-hard-epoch2-20261023-163620",
     "batch_size": 16,
     "workers": 2,
     "max_steps": 0,
