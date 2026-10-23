@@ -248,7 +248,19 @@ each attempt measured something else:
    right.
 
 So I have no trustworthy measure of label cleanliness, and I am not reporting one
-of these numbers as if I did. What survives is the retrieval enrichment: 0.93%
+of these numbers as if I did. What I built instead is the check a human can do:
+
+```bash
+~/.venvs/rocm/bin/python prototypes/three-ages/training/make_label_audit_sheet.py --samples 40
+# -> local/training/label-audit.html
+```
+
+One page, 40 randomly chosen buildings out of the 6,119 that have both poles.
+Each row shows the present-day frame beside up to three publisher pictures of the
+same building, with ids, eras and the photographer, and the images are referenced
+from `local/` by relative path so no pixels enter the repository. Verified: 147
+image references, none missing, 40 sections. Glance at ~20 rows and the "are
+these the same building?" question is answerable in minutes. What survives is the retrieval enrichment: 0.93%
 cross-pole top-5 against a 0.0065% chance floor, about 143x, which shows the
 pairs carry signal without saying how clean they are. A real audit needs human
 eyes on a sample of frames.
