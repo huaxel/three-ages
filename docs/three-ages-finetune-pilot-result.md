@@ -240,7 +240,7 @@ python3 prototypes/three-ages/training/summarise_pilot.py local/training/pilot-X
 ```
 
 Frozen-baseline re-encoding check:
-`local/training/verify_baseline_reproduction.py`.
+`prototypes/three-ages/training/verify_baseline_reproduction.py`.
 
 The tuned encoder is usable by the project itself:
 

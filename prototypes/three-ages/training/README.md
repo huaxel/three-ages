@@ -85,3 +85,38 @@ trusted, because two of them predate the `toolchain=` field:
 
 So every number in the summary tables traces to the same build, and to the
 checkpoint named there.
+
+## Reproducing from a clean checkout
+
+Nothing under `local/` is committed, so the scripts fail fast with
+`FileNotFoundError: ... local/training/manifest.csv` until the corpus exists.
+Order matters:
+
+1. **Crawl the corpus** (network, ~40 h for the full publisher set):
+   `scripts/monument-corpus-pipeline.sh` writes `local/scraped/`,
+   `local/monument-inbox/` and the place records. Part of that run also builds
+   `local/training/manifest.csv`.
+2. **Present-day pole** (optional, needed for cross-pole numbers):
+   `build_mapillary_manifest.py` then `fetch_mapillary.py` populate
+   `local/mapillary-inbox/` and `local/training/mapillary_manifest.csv`.
+3. **Feature caches**: `prototypes/three-ages/build_embeddings.py` (frozen) or
+   the same script with `--checkpoint` (tuned). Budget ~10 min per 77k images on
+   the GPU here, and set `HF_HUB_OFFLINE=1` so weights come from the local model
+   mount instead of the Hub.
+4. **Train**: `train_local_pilot.py --run-dir local/training/run-X`, optionally
+   `--negatives hard --epochs 2 --refresh-pairs` (the validation-chosen setup).
+5. **Evaluate**: `eval_test_once.py` (test, once), `eval_neighbour_control.py`,
+   `eval_curated_slice.py`.
+
+Requirements: torch + torchvision + open_clip_torch (see
+`prototypes/requirements-ml.txt`); the two offline test suites need only numpy
+and torch, which is why they pass in a bare checkout:
+
+```bash
+~/.venvs/rocm/bin/python prototypes/three-ages/training/test_local_pilot.py   # 9 checks
+~/.venvs/rocm/bin/python prototypes/three-ages/training/test_three_ages.py    # 7 checks
+```
+
+A venv is recommended rather than required: on this machine the system Python has
+a CUDA build of torch that cannot see the AMD GPU, while `~/.venvs/rocm` has the
+ROCm build.

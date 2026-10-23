@@ -56,7 +56,7 @@ justifying it.
 
 ## The queue is generated
 
-`local/training/build_taskb_queue.py` writes `local/training/taskb_queue.csv`:
+`prototypes/three-ages/training/build_taskb_queue.py` writes `local/training/taskb_queue.csv`:
 **60 buildings, 10 per proxy bin**, all multi-era and all carrying present-day
 frames. It refuses to overwrite an existing queue, so work in progress is safe.
 

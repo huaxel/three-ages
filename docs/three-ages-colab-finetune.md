@@ -21,7 +21,7 @@ epochs are ever attempted. Nothing here needs to run for the current result.
 Upload to Drive as:
 
 ```
-Drive/three-ages/colab-pack/{pub,map}/     (built by local/training/build_colab_pack.py)
+Drive/three-ages/colab-pack/{pub,map}/     (built by prototypes/three-ages/training/build_colab_pack.py)
 Drive/three-ages/manifest.csv
 Drive/three-ages/mapillary_manifest.csv
 Drive/three-ages/train_local_pilot.py
