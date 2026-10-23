@@ -227,6 +227,32 @@ while held-out retrieval does not. Note that falling training loss is not eviden
 learning anything generalisable — that trap is what this measurement exists to
 catch.
 
+## Label noise: what I could and could not measure
+
+The training pairs assume a Mapillary frame shows the building the catalogue
+assigns it to. I tried three times to audit that assumption automatically, and
+each attempt measured something else:
+
+1. **Era confound.** Comparing each frame against its building's images and
+   against 20 other buildings gave 18.6% ("worse than chance"). Inspecting one
+   case showed why: the frame scored 0.33 against its own archival photos while
+   *unrelated modern* photos scored 0.6+. Medium dominated, not identity.
+2. **Candidate-count bias.** Restricting the gallery to modern photos gave 19.7%.
+   The same test run *within* the publisher pole — where pairing is reliable by
+   construction — gave 41.6%, which is the tell: the building had ~2 candidate
+   images while the rival pool had ~80, so the rivals were taking a maximum over
+   40x more draws.
+3. **Representative-image effect.** Equalising to one image per candidate gave
+   28.7% on the control. A single randomly drawn image of a building is often a
+   detail crop, so the test understates identifiability even when the label is
+   right.
+
+So I have no trustworthy measure of label cleanliness, and I am not reporting one
+of these numbers as if I did. What survives is the retrieval enrichment: 0.93%
+cross-pole top-5 against a 0.0065% chance floor, about 143x, which shows the
+pairs carry signal without saying how clean they are. A real audit needs human
+eyes on a sample of frames.
+
 ## Reproducing
 
 ```bash
