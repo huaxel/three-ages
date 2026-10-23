@@ -16,6 +16,10 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
+# Git commands must run from the repository root: resolving them from prototypes/
+# would inspect prototypes/local/, which does not exist, and the guard below
+# would pass no matter what is tracked at the real local/ directory.
+REPO_ROOT = ROOT.parent
 INGEST = ROOT / "three-ages" / "ingest_local_images.py"
 SOURCE_DATA = ROOT / "three-ages" / "data"
 MANIFEST_COLUMNS = [
@@ -142,7 +146,7 @@ def main() -> None:
     # The tracked repository must contain no local cache output.
     tracked = subprocess.run(
         ["git", "ls-files", "local"],
-        cwd=ROOT,
+        cwd=REPO_ROOT,
         capture_output=True,
         text=True,
         check=True,
@@ -152,7 +156,7 @@ def main() -> None:
 
     ignored = subprocess.run(
         ["git", "check-ignore", "local/facade-inbox/probe.jpg"],
-        cwd=ROOT,
+        cwd=REPO_ROOT,
         capture_output=True,
         text=True,
     )
