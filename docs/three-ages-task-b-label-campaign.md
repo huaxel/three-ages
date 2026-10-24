@@ -144,6 +144,13 @@ ensemble rows can feed the head images with nothing to learn from; the flag
 lets the reviewer mark that per row instead of burying it in prose. It is a
 reviewer field, so regeneration carries it over like the label itself.
 
+No browser? `scripts/review-taskb-cli.py` walks the same queue in the
+terminal (same session schema, real fingerprints, so the same applier
+merges it): `python3 scripts/review-taskb-cli.py --ids 23080,36603,23548,36728,34920,30528`.
+Photos cannot display over SSH — each case prints its notice URL for a
+second device, and `depicts_building` defaults to yes unless you say
+otherwise.
+
 ### Earlier: 12 of 60 labelled
 
 Six buildings were reviewed in chat on 2026-10-23 and recorded in the queue
