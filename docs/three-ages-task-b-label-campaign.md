@@ -195,6 +195,17 @@ buildings), top-1 0.18 (chance, p=0.39), within-one-era 0.622 vs perm mean
 replicates with a larger test set: no naming, but ordered errors far beyond
 chance. The final n=60 check gets the whole queue behind it.
 
+Auditing the suggestion against the 56 labels: agreement 38/56 (0.68) — a
+useful prior, not truth. The rebuild flag fires on 30 rows and catches 12 of
+the 18 overrides (precision 0.40, recall 0.67). The 6 unflagged overrides
+reveal a second extractor defect class, recorded here and NOT fixed
+mid-campaign: on 18133/39655/39891 the founding years (1900, 1911, 1923-27)
+never became primary years, so the suggestion pointed at a refit; on
+21072/40062 the corpus-range year 1939 ("Inventaire 1939-1999") was taken as
+primary, pointing at a predecessor inventory. Incidental-as-primary and
+founding-missed-as-primary — post-campaign extractor work, measured against
+these labels when the time comes.
+
 Distribution across 42: 1918-1940 x10, 1850-1892 x8, 1893-1914 x7,
 1945-1975 x7, pre-1850 x6, post-1975 x4.
 
