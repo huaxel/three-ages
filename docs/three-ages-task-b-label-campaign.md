@@ -162,9 +162,15 @@ Sainte-Alice (1945-1975 — the 1905 provisional church noted and set aside),
 18722 Cinquantenaire arcade (1850-1892), and the first four post-1975 labels
 (17272, 30551, 40062, 40116).
 
-Gap: all eighteen carry empty `phase_years` — the evidence quotes the years
-but the phase field was left blank throughout the fast workbench pass. The
-contract asks for it; backfill or accept evidence-only for this batch.
+Backfill: thirteen of the eighteen blank `phase_years` were mechanical
+readings of the quoted evidence (37300→1894-1909, 18702→1959-1962,
+39655→1911, 18133→1900, 34920→1936, 37481→1929-1933, 39891→1923-1927,
+23548→1974-1978, 36573→1955-1958, 17272→1983, 30551→1984-1988,
+40062→1976-1979, 36464→1928), confirmed by Juan and written verbatim —
+nothing else touched. Five need the reviewer's call: 39666 (phase stops at
+1914 or runs 1913-1928 across bins?), 27463 (1923-1930 or 1937-1943?),
+20685 (which post-war campaign?), 40116 (1987-1993?), 18722 (which
+19th-century campaign does 1850-1892 name?). Now 37 of 42 labels carry a phase.
 
 Distribution across 42: 1918-1940 x10, 1850-1892 x8, 1893-1914 x7,
 1945-1975 x7, pre-1850 x6, post-1975 x4.
