@@ -148,11 +148,15 @@ def main() -> None:
     out = Path(args.out)
     if out.exists() and not args.force:
         raise SystemExit(f'{out} exists; pass --force after checking for review edits')
+    # Review work must survive regeneration: reviewer-entered fields are carried
+    # over verbatim while the derived columns are recomputed.
+    REVIEWED = ('construction_era', 'phase_years', 'evidence', 'reviewer',
+                'reviewed_at', 'confidence')
+    carried = {}
     if out.exists():
-        existing = list(csv.DictReader(out.open(encoding='utf-8')))
-        if any(r.get('reviewer', '').strip() or r.get('construction_era', '').strip()
-               for r in existing):
-            raise SystemExit(f'{out} has reviewer edits; refusing to overwrite')
+        for row in csv.DictReader(out.open(encoding='utf-8')):
+            if any((row.get(k) or '').strip() for k in REVIEWED):
+                carried[row['building_id']] = {k: row.get(k, '') for k in REVIEWED}
 
     scraped = Path(args.scraped)
     covered = 0
@@ -169,6 +173,7 @@ def main() -> None:
             record = {}
         found = extract(record if isinstance(record, dict) else {})
         row.update(found)
+        row.update(carried.get(row['building_id'], {}))
         if found.get('primary_years'):
             covered += 1
 
@@ -183,6 +188,7 @@ def main() -> None:
         writer.writeheader()
         writer.writerows(rows)
     print(json.dumps({'out': str(out), 'rows': len(rows),
+                      'reviewed_rows_preserved': len(carried),
                       'rows_with_year_evidence': covered,
                       'note': 'notice_excerpt is quoted, never adjudicated'},
                      indent=2))

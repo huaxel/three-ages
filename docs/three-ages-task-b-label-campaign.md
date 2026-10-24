@@ -44,7 +44,31 @@ To keep that auditable, each label should also record the phase it came from:
 Two labels that disagree are then comparable ("they chose different phases")
 rather than opaque ("one of them was wrong").
 
-### First batch in progress: 6 of 60 labelled
+### A ranking "fix" that measured worse, and was reverted
+
+Reviewing the second batch showed the extractor surfacing later sentences over
+founding ones (the Institut chirurgical row suggested 1945-1975 for a building
+designed in 1892). The obvious fix — rank founding sentences first — was
+implemented and then **scored against the labels themselves**, which is the only
+honest test available:
+
+| ranking | agrees with the 12 reviewed labels |
+|---|---|
+| order of appearance (original) | **7 / 12** |
+| founding sentences first | 6 / 12 |
+
+It made things worse, and for a now-familiar reason: "founding" sentences
+frequently describe a *predecessor* (Cité Verregat's 1908 hippodrome, Horta's
+earlier house), so preferring them imports the same contamination the excerpts
+already suffer. The change was reverted; the evidence is recorded here rather
+than quietly deleted.
+
+What was kept from that work: regeneration now **preserves reviewer-entered
+fields** instead of refusing to run, so derived columns can be refreshed without
+touching a single label (verified: 12 preserved, 0 altered, suggestions
+unchanged after the revert).
+
+### Review progress: 12 of 60 labelled
 
 Six buildings were reviewed in chat on 2026-10-23 and recorded in the queue
 (`construction_era`, `phase_years`, quoted evidence, reviewer, date, confidence):
