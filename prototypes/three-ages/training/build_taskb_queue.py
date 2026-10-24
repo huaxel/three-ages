@@ -27,6 +27,11 @@ PER_BIN = 10
 
 
 def bin_of(year: int) -> str:
+    # Keep in sync with extract_notice_evidence.bin_of: wartime gap years
+    # (1915-1917, 1941-1944) belong to no named era, so proxies from those
+    # years stratify as '' rather than silently joining a neighbouring bin.
+    if 1915 <= year <= 1917 or 1941 <= year <= 1944:
+        return ''
     if year < 1850: return 'pre-1850'
     if year < 1893: return '1850-1892'
     if year < 1915: return '1893-1914'

@@ -61,6 +61,11 @@ def sentences(text: str):
 
 
 def bin_of(year: int) -> str:
+    # Era names omit wartime years on purpose (1915-1917, 1941-1944 belong to
+    # no bin). Return '' so a 1943 bridge (39723: opened 23.12.1943, parapet
+    # millesime 1945) stays unresolved instead of silently becoming 1945-1975.
+    if 1915 <= year <= 1917 or 1941 <= year <= 1944:
+        return ''
     if year < 1850: return 'pre-1850'
     if year < 1893: return '1850-1892'
     if year < 1915: return '1893-1914'
@@ -162,14 +167,11 @@ def main() -> None:
     covered = 0
     for row in rows:
         path = scraped / f"{row['building_id']}.fr.json"
-        if not path.is_file():
-            row['notice_excerpt'] = ''
-            row['notice_sources'] = ''
-            row['notice_years'] = ''
-            continue
+        # Missing or unreadable notices follow the same refresh path as empty
+        # records: clear every derived field, but always restore human edits.
         try:
             record = json.loads(path.read_text(encoding='utf-8'))
-        except (OSError, json.JSONDecodeError):
+        except (OSError, UnicodeError, json.JSONDecodeError):
             record = {}
         found = extract(record if isinstance(record, dict) else {})
         row.update(found)

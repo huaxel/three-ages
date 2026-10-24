@@ -20,6 +20,9 @@ from pathlib import Path
 CAPTURE_ERAS = ["pre-1900", "1900-1929", "1930-1959", "1960-1989", "1990-2009", "2010+"]
 
 # Construction eras follow Brussels building history, not round numbers.
+# Wartime years 1915-1917 and 1941-1944 belong to no bin: bin_of() returns ''
+# so a 1943 construction (bridge 39723, opened 23.12.1943) stays unresolved
+# instead of silently joining a neighbouring era.
 CONSTRUCTION_ERAS = ["pre-1850", "1850-1892", "1893-1914", "1918-1940", "1945-1975", "post-1975"]
 
 

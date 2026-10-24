@@ -23,6 +23,7 @@ python3 prototypes/test_independent_adjudication.py
 python3 prototypes/test_independent_bundle.py
 python3 prototypes/test_independent_bundle_import.py
 python3 -m unittest prototypes.test_training_manifest
+python3 -m unittest prototypes.test_notice_evidence
 python3 prototypes/test_crop_workflows.py
 python3 prototypes/test_local_ingest.py
 python3 prototypes/test_monument_scraper.py
