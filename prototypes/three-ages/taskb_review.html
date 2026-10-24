@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Task B — construction-era labelling</title>
+<style>
+:root { font: 15px/1.45 system-ui, sans-serif; color: #20252b; background: #faf9f7; }
+body { max-width: 1220px; margin: 0 auto; padding: 1.2rem; }
+header { display: flex; justify-content: space-between; gap: 1rem; align-items: start; flex-wrap: wrap; }
+h1 { margin: 0; font-size: 1.3rem; } .muted { color: #68717a; }
+.layout { display: grid; grid-template-columns: 300px 1fr; gap: 1rem; margin-top: 1rem; }
+nav, main, .card { background: white; border: 1px solid #e1e5e8; border-radius: 8px; padding: 1rem; }
+nav { align-self: start; position: sticky; top: 1rem; max-height: 88vh; overflow: auto; }
+button, select, textarea, input { font: inherit; }
+button { border: 1px solid #c9b6bd; background: white; border-radius: 6px; padding: .45rem .65rem; cursor: pointer; }
+button:hover, button.primary { background: #f1e9ec; border-color: #8b3f55; }
+.case-button { display: block; width: 100%; text-align: left; margin: .3rem 0; font-size: .85rem; }
+.case-button small { display: block; color: #68717a; }
+.case-button.done { opacity: .55; }
+.case-button.current { border-color: #8b3f55; background: #f1e9ec; }
+.suggest { padding: .6rem; background: #eef4ff; border-left: 4px solid #3366aa; margin: .7rem 0; }
+.flag { padding: .6rem; background: #fff5d6; border-left: 4px solid #c99300; margin: .7rem 0; }
+.excerpt { white-space: pre-wrap; background: #f6f6f4; padding: .7rem; border-radius: 5px; }
+.photos { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: .6rem; margin: .7rem 0; }
+figure { margin: 0; } figure img { width: 100%; max-height: 200px; object-fit: contain; background: #eee; border-radius: 4px; }
+figcaption { font-size: .78rem; color: #68717a; }
+.eras { display: grid; grid-template-columns: repeat(3, 1fr); gap: .4rem; margin: .5rem 0; }
+.eras button.picked { background: #8b3f55; border-color: #8b3f55; color: white; }
+.field { margin: .7rem 0; } label { display: block; font-weight: 650; margin-bottom: .2rem; }
+textarea, input[type=text], select { box-sizing: border-box; width: 100%; padding: .5rem; border: 1px solid #bfc7cc; border-radius: 5px; }
+textarea { min-height: 5rem; resize: vertical; }
+.actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .8rem; }
+kbd { background: #eee; border: 1px solid #ccc; border-radius: 3px; padding: 0 .3em; font-size: .85em; }
+.success { color: #176b3a; } .danger { color: #9a2838; }
+@media (max-width: 800px) { .layout { grid-template-columns: 1fr; } nav { position: static; max-height: none; } }
+</style>
+</head>
+<body>
+<header>
+  <div><h1>Task B — construction-era labelling</h1>
+  <p class="muted" id="progress">Loading queue…</p>
+  <p class="muted">Keys: <kbd>1</kbd>–<kbd>6</kbd> era · <kbd>e</kbd> focus evidence · <kbd>s</kbd> save+next · <kbd>←</kbd>/<kbd>→</kbd> move</p></div>
+  <div><label for="reviewer">Reviewer</label><input type="text" id="reviewer" placeholder="Your name" autocomplete="name">
+  <div class="actions"><button id="exportSession">Export session JSON</button></div></div>
+</header>
+<div id="status" class="muted"></div>
+<div class="layout">
+  <nav><strong>Queue</strong> <label class="muted"><input type="checkbox" id="hideDone" checked> hide decided</label><div id="caseList"></div></nav>
+  <main id="workspace"><p class="muted">Choose a case.</p></main>
+</div>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// djb2 hex — must match scripts/apply-taskb-session.py fingerprint().
+const djb2 = s => { let h = 5381; for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0; return h.toString(16); };
+const fp = r => djb2(r.notice_excerpt + '|' + r.suggested_era);
+
+let bundle = null, order = [], pos = 0;
+const drafts = new Map(); // building_id -> {era, phase, confidence, evidence}
+
+const reviewer = () => $('reviewer').value.trim();
+const rec = () => order[pos];
+const draftOf = r => drafts.get(r.building_id) || {era: '', phase: '', confidence: 'medium', evidence: r.notice_excerpt};
+
+function saveDraft() {
+  const r = rec(); if (!r) return;
+  drafts.set(r.building_id, {era: $('eraVal').value, phase: $('phase').value,
+    confidence: $('confidence').value, evidence: $('evidence').value});
+}
+
+function renderList() {
+  const hide = $('hideDone').checked, list = $('caseList'); list.innerHTML = '';
+  order = bundle.records.filter(r => !(hide && (r.labelled_era || drafts.get(r.building_id)?.era)));
+  if (pos >= order.length) pos = Math.max(0, order.length - 1);
+  order.forEach((r, i) => {
+    const b = document.createElement('button');
+    const done = r.labelled_era || drafts.get(r.building_id)?.era;
+    b.className = 'case-button' + (done ? ' done' : '') + (i === pos ? ' current' : '');
+    b.innerHTML = `<strong>${esc(r.identity_name || r.building_id)}</strong><small>${esc(done || ('suggest ' + r.suggested_era))}</small>`;
+    b.onclick = () => { saveDraft(); pos = i; render(); };
+    list.appendChild(b);
+  });
+  const decided = bundle.records.filter(r => r.labelled_era || drafts.get(r.building_id)?.era).length;
+  $('progress').textContent = `${decided} of ${bundle.records.length} decided · ${drafts.size} in this session`;
+}
+
+function render() {
+  renderList();
+  const w = $('workspace'), r = rec();
+  if (!r) { w.innerHTML = '<p class="muted">Queue clear. Export the session.</p>'; return; }
+  const d = draftOf(r);
+  w.innerHTML = `
+    <h2>${esc(r.identity_name || r.building_id)}</h2>
+    <p class="muted">${esc(r.address)} · ${esc(r.styles)} · <a href="${esc(r.notice_url)}" target="_blank" rel="noopener">notice</a></p>
+    <div class="suggest">Suggestion: <strong>${esc(r.suggested_era || '—')}</strong>
+      <span class="muted">· proxy ${esc(r.proxy_years)} (${esc(r.proxy_bin)}) · primary ${esc(r.primary_years)}</span></div>
+    ${r.rebuild_flag ? `<div class="flag"><strong>Rebuild flag:</strong> the notice mentions reconstruction — the earliest year may belong to a replaced building. Decide which campaign survives.</div>` : ''}
+    ${r.labelled_era ? `<p><strong>Already labelled: ${esc(r.labelled_era)}</strong> <span class="muted">(re-deciding here will be skipped on apply)</span></p>` : ''}
+    <div class="excerpt">${esc(r.notice_excerpt)}</div>
+    <div class="photos">${r.photos.map(p => `<figure><img loading="lazy" src="/${esc(p.src)}" alt=""><figcaption>${esc(p.capture_era)} · ${esc(p.caption)}</figcaption></figure>`).join('') || '<p class="muted">No servable photos.</p>'}</div>
+    <p class="muted">${r.photo_count} photos in manifest${r.photo_count > r.photos.length ? `, showing ${r.photos.length}` : ''} — if these show a park, street or interior rather than the building, note it in the evidence.</p>
+    <div class="field"><label>Construction era (principal campaign)</label><div class="eras" id="eras"></div>
+    <input type="hidden" id="eraVal" value="${esc(d.era)}"></div>
+    <div class="field"><label for="phase">Phase years (e.g. 1894-1909)</label><input type="text" id="phase" value="${esc(d.phase)}"></div>
+    <div class="field"><label for="confidence">Confidence</label><select id="confidence">
+      ${['high', 'medium', 'low'].map(c => `<option${c === d.confidence ? ' selected' : ''}>${c}</option>`).join('')}</select></div>
+    <div class="field"><label for="evidence">Evidence (quoted sentence)</label><textarea id="evidence">${esc(d.evidence)}</textarea></div>
+    <div class="actions"><button class="primary" id="saveNext">Save + next (s)</button>
+    <button id="prevBtn">← prev</button><button id="nextBtn">next →</button></div>`;
+  const eras = $('eras');
+  bundle.eras.forEach((e, i) => {
+    const b = document.createElement('button');
+    b.textContent = `${i + 1} · ${e}`;
+    if (e === d.era) b.classList.add('picked');
+    b.onclick = () => { $('eraVal').value = e; [...eras.children].forEach(x => x.classList.remove('picked')); b.classList.add('picked'); };
+    eras.appendChild(b);
+  });
+  $('saveNext').onclick = saveNext;
+  $('prevBtn').onclick = () => { saveDraft(); pos = (pos + order.length - 1) % order.length; render(); };
+  $('nextBtn').onclick = () => { saveDraft(); pos = (pos + 1) % order.length; render(); };
+}
+
+function saveNext() {
+  const r = rec(); if (!r) return;
+  if (!$('eraVal').value) { $('status').innerHTML = '<span class="danger">Pick an era first (keys 1–6).</span>'; return; }
+  saveDraft();
+  localStorage.setItem('taskbReviewer', reviewer());
+  $('status').innerHTML = `<span class="success">Saved ${esc(r.building_id)} → ${esc($('eraVal').value)}. Export the session when done.</span>`;
+  pos = (pos + 1) % order.length; render();
+}
+
+function exportSession() {
+  saveDraft();
+  if (!reviewer()) { $('status').innerHTML = '<span class="danger">Enter a reviewer name first.</span>'; return; }
+  const records = [];
+  for (const [bid, d] of drafts) {
+    if (!d.era) continue;
+    const r = bundle.records.find(x => x.building_id === bid);
+    records.push({building_id: bid, construction_era: d.era, phase_years: d.phase,
+      evidence: d.evidence, reviewer: `${reviewer()} (workbench, ${new Date().toISOString().slice(0, 10)})`,
+      reviewed_at: new Date().toISOString().slice(0, 10), confidence: d.confidence, fingerprint: fp(r)});
+  }
+  if (!records.length) { $('status').innerHTML = '<span class="danger">Nothing saved yet.</span>'; return; }
+  const href = URL.createObjectURL(new Blob([JSON.stringify({schema: 'taskb-session/1', records}, null, 2) + '\n'], {type: 'application/json'}));
+  $('status').innerHTML = `<span class="success">Session ready (${records.length} records): <a href="${href}" download="taskb-session.json">download taskb-session.json</a>. Apply with scripts/apply-taskb-session.py — it never overwrites existing labels.</span>`;
+}
+
+document.addEventListener('keydown', e => {
+  if (!rec()) return;
+  const tag = (document.activeElement || {}).tagName;
+  const typing = tag === 'TEXTAREA' || tag === 'INPUT' || tag === 'SELECT';
+  if (e.key >= '1' && e.key <= '6' && !typing) {
+    const btns = $('eras').children;
+    if (btns.length) btns[Number(e.key) - 1].click();
+  } else if (e.key === 's' && !typing) saveNext();
+  else if (e.key === 'e' && !typing) { e.preventDefault(); $('evidence').focus(); }
+  else if (e.key === 'ArrowRight' && !typing) { saveDraft(); pos = (pos + 1) % order.length; render(); }
+  else if (e.key === 'ArrowLeft' && !typing) { saveDraft(); pos = (pos + order.length - 1) % order.length; render(); }
+});
+
+async function init() {
+  $('reviewer').value = localStorage.getItem('taskbReviewer') || '';
+  $('hideDone').onchange = render;
+  $('exportSession').onclick = exportSession;
+  const res = await fetch('data/taskb-queue.json');
+  if (!res.ok) throw new Error('bundle not found — run export_taskb_workbench.py first');
+  bundle = await res.json();
+  render();
+}
+init().catch(err => { $('progress').textContent = String(err); });
+</script>
+</body>
+</html>

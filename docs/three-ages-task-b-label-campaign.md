@@ -131,6 +131,14 @@ buildings is flat and noisy (top-1 0.23/0.31/0.23/0.25), as expected with
 a four-building test set. Dummy is now beatable in principle but unbeaten
 in fact; still no claim of signal.
 
+Labelling now runs in a workbench instead of chat: `export_taskb_workbench.py`
+builds a 60-row bundle (suggestion, rebuild flag, excerpt, up to 4 facade
+photos) from the queue, `taskb_review.html` shows one building per screen
+(keys 1-6 pick the era, `s` saves + advances), and
+`scripts/apply-taskb-session.py` merges the exported session into the queue —
+fingerprint-checked per row, never overwriting an existing label. Serve the
+repo root (`python3 -m http.server`) so the root-relative preview paths resolve.
+
 ### Earlier: 12 of 60 labelled
 
 Six buildings were reviewed in chat on 2026-10-23 and recorded in the queue
