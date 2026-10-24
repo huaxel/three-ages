@@ -151,6 +151,36 @@ Photos cannot display over SSH — each case prints its notice URL for a
 second device, and `depicts_building` defaults to yes unless you say
 otherwise.
 
+### Batch 5 — 42 of 60 (2026-10-24)
+
+Eighteen workbench records in one sitting — the reviewer's own eighteen rows,
+not the six proposed (the queue is the menu, not the order). Notable: 18702
+IRPA (1945-1975, 1959-1962 — overriding its 1850-1892 suggestion, which came
+from the 1888 exhibition halls it replaced, another predecessor case), 20685
+Sainte-Alice (1945-1975 — the 1905 provisional church noted and set aside),
+36464 (1918-1940, the 1928 Art Deco rebuild chosen over the c.1860 house),
+18722 Cinquantenaire arcade (1850-1892), and the first four post-1975 labels
+(17272, 30551, 40062, 40116).
+
+Gap: all eighteen carry empty `phase_years` — the evidence quotes the years
+but the phase field was left blank throughout the fast workbench pass. The
+contract asks for it; backfill or accept evidence-only for this batch.
+
+Distribution across 42: 1918-1940 x10, 1850-1892 x8, 1893-1914 x7,
+1945-1975 x7, pre-1850 x6, post-1975 x4.
+
+Head check at n=42: 1085 train / 155 test images (37 train / 5 test
+buildings — 39891 joined the test set), top-1 0.20 (was 0.25), dummy 0.00
+— an artifact, not a triumph: the test set holds only pre-1850, 1918-1940
+and 1850-1892 images while the train majority is 1893-1914, so the majority
+classifier scores literally zero. The honest baseline is the permutation
+test (100 building-level shuffles): top-1 0.200 vs perm mean 0.183 (p=0.36,
+chance), but within-one-era 0.690 vs perm mean 0.469 — none of the 100
+shuffles reached it (p<0.01). First significant structure: the probe cannot
+name the era, but its errors land adjacent far beyond chance. The learning
+curve over 6/12/20/30/38 train buildings stays flat and noisy on top-1
+(0.28/0.05/0.11/0.16/0.20). Signal is forming in the ordering, not the label.
+
 ### Earlier: 12 of 60 labelled
 
 Six buildings were reviewed in chat on 2026-10-23 and recorded in the queue
