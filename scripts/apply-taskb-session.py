@@ -66,6 +66,8 @@ def main() -> None:
         row["reviewer"] = rec.get("reviewer", "")
         row["reviewed_at"] = rec.get("reviewed_at", "")
         row["confidence"] = rec.get("confidence", "")
+        if "depicts_building" in fieldnames:
+            row["depicts_building"] = rec.get("depicts_building", "yes")
         applied += 1
 
     with open(QUEUE, "w", encoding="utf-8", newline="") as fh:

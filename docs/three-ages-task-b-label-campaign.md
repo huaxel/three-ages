@@ -138,6 +138,11 @@ photos) from the queue, `taskb_review.html` shows one building per screen
 `scripts/apply-taskb-session.py` merges the exported session into the queue —
 fingerprint-checked per row, never overwriting an existing label. Serve the
 repo root (`python3 -m http.server`) so the root-relative preview paths resolve.
+Each record also carries `depicts_building` (yes/partially/no, default yes) —
+whether the photos show the labelled volume at all. The 37936 park case proved
+ensemble rows can feed the head images with nothing to learn from; the flag
+lets the reviewer mark that per row instead of burying it in prose. It is a
+reviewer field, so regeneration carries it over like the label itself.
 
 ### Earlier: 12 of 60 labelled
 

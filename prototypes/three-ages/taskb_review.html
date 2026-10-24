@@ -62,12 +62,12 @@ const drafts = new Map(); // building_id -> {era, phase, confidence, evidence}
 
 const reviewer = () => $('reviewer').value.trim();
 const rec = () => order[pos];
-const draftOf = r => drafts.get(r.building_id) || {era: '', phase: '', confidence: 'medium', evidence: r.notice_excerpt};
+const draftOf = r => drafts.get(r.building_id) || {era: '', phase: '', confidence: 'medium', depicts: 'yes', evidence: r.notice_excerpt};
 
 function saveDraft() {
   const r = rec(); if (!r) return;
   drafts.set(r.building_id, {era: $('eraVal').value, phase: $('phase').value,
-    confidence: $('confidence').value, evidence: $('evidence').value});
+    confidence: $('confidence').value, depicts: $('depicts').value, evidence: $('evidence').value});
 }
 
 function renderList() {
@@ -106,6 +106,8 @@ function render() {
     <div class="field"><label for="phase">Phase years (e.g. 1894-1909)</label><input type="text" id="phase" value="${esc(d.phase)}"></div>
     <div class="field"><label for="confidence">Confidence</label><select id="confidence">
       ${['high', 'medium', 'low'].map(c => `<option${c === d.confidence ? ' selected' : ''}>${c}</option>`).join('')}</select></div>
+    <div class="field"><label for="depicts">Photos depict the labelled building?</label><select id="depicts">
+      ${[['yes', 'yes — facades of this building'], ['partially', 'partially — some views are streets/parks/interiors'], ['no', 'no — ensemble/park, images show something else']].map(([v, t]) => `<option value="${v}"${v === d.depicts ? ' selected' : ''}>${t}</option>`).join('')}</select></div>
     <div class="field"><label for="evidence">Evidence (quoted sentence)</label><textarea id="evidence">${esc(d.evidence)}</textarea></div>
     <div class="actions"><button class="primary" id="saveNext">Save + next (s)</button>
     <button id="prevBtn">← prev</button><button id="nextBtn">next →</button></div>`;
@@ -140,7 +142,8 @@ function exportSession() {
     const r = bundle.records.find(x => x.building_id === bid);
     records.push({building_id: bid, construction_era: d.era, phase_years: d.phase,
       evidence: d.evidence, reviewer: `${reviewer()} (workbench, ${new Date().toISOString().slice(0, 10)})`,
-      reviewed_at: new Date().toISOString().slice(0, 10), confidence: d.confidence, fingerprint: fp(r)});
+      reviewed_at: new Date().toISOString().slice(0, 10), confidence: d.confidence,
+      depicts_building: d.depicts || 'yes', fingerprint: fp(r)});
   }
   if (!records.length) { $('status').innerHTML = '<span class="danger">Nothing saved yet.</span>'; return; }
   const href = URL.createObjectURL(new Blob([JSON.stringify({schema: 'taskb-session/1', records}, null, 2) + '\n'], {type: 'application/json'}));

@@ -156,7 +156,7 @@ def main() -> None:
     # Review work must survive regeneration: reviewer-entered fields are carried
     # over verbatim while the derived columns are recomputed.
     REVIEWED = ('construction_era', 'phase_years', 'evidence', 'reviewer',
-                'reviewed_at', 'confidence')
+                'reviewed_at', 'confidence', 'depicts_building')
     carried = {}
     if out.exists():
         for row in csv.DictReader(out.open(encoding='utf-8')):
@@ -182,7 +182,8 @@ def main() -> None:
     fields = list(rows[0].keys())
     for extra in ('notice_excerpt', 'notice_sources', 'notice_years',
                   'primary_years', 'evidence_strength', 'suggested_era',
-                  'rebuild_flag', 'phase_years', 'identity_name'):
+                  'rebuild_flag', 'phase_years', 'identity_name',
+                  'depicts_building'):
         if extra not in fields:
             fields.append(extra)
     with out.open('w', newline='', encoding='utf-8') as fh:
