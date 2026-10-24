@@ -172,6 +172,29 @@ nothing else touched. Five need the reviewer's call: 39666 (phase stops at
 20685 (which post-war campaign?), 40116 (1987-1993?), 18722 (which
 19th-century campaign does 1850-1892 name?). Now 37 of 42 labels carry a phase.
 
+### Batch 6 — 56 of 60 (2026-10-24)
+
+Fourteen more workbench records, including the first labels that override
+the queue's own derived columns on judgement: 39723, the gap-year bridge
+(proxy 1943, bin blank by rule), is labelled 1945-1975 — opened 23.12.1943,
+millésime 1945 on the parapet, replacing the 1931 bridge bombed in 1940.
+The gap rule stands for derived data; the label is a human call, and the two
+now visibly disagree, which is correct. Also 37929 Sainte-Anne (post-1975,
+1989-1990 — the 1839 predecessor demolished 1985), 37050 (1850-1892, the 1874
+beer store transformation chosen over the 1928-1933 refit), and 36603
+(post-1975, 1989-1990), which the CLI end-to-end test had briefly labelled
+and restored.
+
+Distribution across 56 is nearly flat: 1850-1892 x11, 1945-1975 x10,
+1918-1940 x10, 1893-1914 x9, pre-1850 x8, post-1975 x8. Four rows left:
+23080, 31548, 33035, 37072.
+
+Head check at n=56: 1254 train / 193 test images (45 train / 7 test
+buildings), top-1 0.18 (chance, p=0.39), within-one-era 0.622 vs perm mean
+0.427 — again no shuffle in 100 reached it (p<0.01). The pattern from n=42
+replicates with a larger test set: no naming, but ordered errors far beyond
+chance. The final n=60 check gets the whole queue behind it.
+
 Distribution across 42: 1918-1940 x10, 1850-1892 x8, 1893-1914 x7,
 1945-1975 x7, pre-1850 x6, post-1975 x4.
 
