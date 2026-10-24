@@ -118,6 +118,19 @@ rebuild chosen over 1724).
 Distribution across 24: 1850-1892 x7, pre-1850 x6, 1918-1940 x5,
 1893-1914 x3, 1945-1975 x3.
 
+Head check at n=24: 652 train / 130 test images (20 train / 4 test
+buildings — the test set doubled to 31346, 36469, 37936, 39706, two of
+them batch-4 pre-1850 labels), top-1 0.25 (was 0.33), dummy 0.31 still
+unbeaten (was 0.60 — the majority baseline fell as the test set widened
+beyond two buildings), within-one-era 0.61 (was 0.70). A permutation test
+(100 building-level shuffles) puts the honest result in context: true
+top-1 0.254 sits *above* the permutation mean 0.199 this time (p=0.28),
+within-one 0.608 vs perm mean 0.551 (p=0.27) — the right side of chance,
+nowhere near significant. The learning curve over 6/10/14/20 train
+buildings is flat and noisy (top-1 0.23/0.31/0.23/0.25), as expected with
+a four-building test set. Dummy is now beatable in principle but unbeaten
+in fact; still no claim of signal.
+
 ### Earlier: 12 of 60 labelled
 
 Six buildings were reviewed in chat on 2026-10-23 and recorded in the queue
