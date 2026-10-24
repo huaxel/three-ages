@@ -68,7 +68,57 @@ fields** instead of refusing to run, so derived columns can be refreshed without
 touching a single label (verified: 12 preserved, 0 altered, suggestions
 unchanged after the revert).
 
-### Review progress: 12 of 60 labelled
+### Batch 3 — 18 of 60 (2026-10-24)
+
+Third chat batch, all confirmed by Juan and recorded with phase_years +
+evidence + reviewer:
+34949 workshops Marchand (1918-1940, 1924-1930),
+19257 Galerie Louise ensemble (1945-1975, 1951-1964),
+39686 Impasse Migerode (pre-1850, 1840s — the 1875 replacements were
+demolished in 1993),
+23601 Basilique Koekelberg (1918-1940, 1921-1970 — overriding the
+1893-1914 suggestion, which came from the provisional 1904-1905 church),
+38070 Cité Verregat (1918-1940, first phase 1922-1926),
+39748 École technique Chomé-Wyns (1945-1975, 1955-1976 — the 1951 date is
+the square, not the school).
+
+Distribution across 18: 1850-1892 x7, 1918-1940 x4, 1893-1914 x3,
+1945-1975 x3, pre-1850 x1.
+
+Head check at n=18: 559 train / 67 test images, top-1 0.33 (was 0.24 at
+n=12), dummy 0.60 still unbeaten, within-one-era 0.70. A permutation test
+(100 shuffles) puts the honest result in context: true top-1 0.328 sits
+*below* the permutation mean 0.353 (p=0.65), within-one 0.701 vs perm
+mean 0.621 (p=0.19). The test set is only 2 buildings (36469, 39706),
+so no claim of signal yet — and the learning curve over 6/9/12/16 train
+buildings is flat. Dummy cannot be beaten until the test set holds more
+than two buildings; at the 10% building split that means of order 30+
+labelled buildings before the number is even capable of moving.
+
+Gap-year footnote: 154 of 22,834 buildings with proxy years (0.67%) have
+their earliest proxy in 1915-1917 or 1941-1944. The queue's 39723 row
+carried a stale `1945-1975` proxy_bin from before the gap rule; corrected
+to blank (gap, unresolved). No suggestion changed — no queue row's
+earliest primary year falls in a gap.
+
+### Batch 4 — 24 of 60 (2026-10-24)
+
+Fourth chat batch, same day, all recorded with phase_years + evidence +
+reviewer:
+37936 Parc de Bruxelles (pre-1850, 1776-1783),
+31346 église Notre-Dame de Bon Secours (pre-1850, 1664-1694),
+23215 ancien hôtel de l'Administration centrale, rue des Palais
+(1918-1940, 1936-1938 then 1946-1950 — the pre-1850 suggestion belonged
+to the demolished hôtel Somzée, another predecessor case),
+37766 maison de campagne Mosselman (pre-1850, avant 1810),
+32578 Grand Hospice / Institut Pacheco (pre-1850, 1824-1827),
+17291 cure Saint-Pierre (pre-1850, 1784 — the "plus probablement"
+rebuild chosen over 1724).
+
+Distribution across 24: 1850-1892 x7, pre-1850 x6, 1918-1940 x5,
+1893-1914 x3, 1945-1975 x3.
+
+### Earlier: 12 of 60 labelled
 
 Six buildings were reviewed in chat on 2026-10-23 and recorded in the queue
 (`construction_era`, `phase_years`, quoted evidence, reviewer, date, confidence):
