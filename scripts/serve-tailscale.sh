@@ -35,5 +35,6 @@ cd "$ROOT"
 printf 'Serving Three Ages on Tailscale address %s:%s\n' "$TAILSCALE_IP" "$PORT"
 printf 'Explorer:  http://%s:%s/prototypes/three-ages/\n' "$TAILSCALE_IP" "$PORT"
 printf 'Workbench: http://%s:%s/prototypes/three-ages/review.html\n' "$TAILSCALE_IP" "$PORT"
+printf 'Task-B labels: http://%s:%s/prototypes/three-ages/taskb_review.html\n' "$TAILSCALE_IP" "$PORT"
 printf 'Stop with Ctrl-C. This binds only to the selected Tailscale interface.\n'
 python3 -m http.server "$PORT" --bind "$TAILSCALE_IP"
