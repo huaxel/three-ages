@@ -117,7 +117,12 @@ def extract(record: dict) -> dict:
         primary = sorted({y for _, years in contextual for y in years})
     every = sorted({y for _, years in strong + contextual for y in years})
     rebuild = bool(rebuild_sentence)
+    identity = record.get('identity') or {}
     return {
+        # The excerpt can quote a neighbouring property (the Meunerie Moulart row
+        # once carried a villa demolition from the same street), so the notice's
+        # own name travels with it for the reviewer to check against the address.
+        'identity_name': str(identity.get('name') or ''),
         'suggested_era': bin_of(primary[0]) if primary else '',
         'rebuild_flag': 'review' if rebuild else '',
         'notice_excerpt': ' | '.join(e[:MAX_CHARS] for e in excerpts),
@@ -170,7 +175,7 @@ def main() -> None:
     fields = list(rows[0].keys())
     for extra in ('notice_excerpt', 'notice_sources', 'notice_years',
                   'primary_years', 'evidence_strength', 'suggested_era',
-                  'rebuild_flag'):
+                  'rebuild_flag', 'phase_years', 'identity_name'):
         if extra not in fields:
             fields.append(extra)
     with out.open('w', newline='', encoding='utf-8') as fh:

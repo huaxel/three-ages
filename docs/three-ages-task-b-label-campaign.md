@@ -44,6 +44,27 @@ To keep that auditable, each label should also record the phase it came from:
 Two labels that disagree are then comparable ("they chose different phases")
 rather than opaque ("one of them was wrong").
 
+### First batch in progress: 6 of 60 labelled
+
+Six buildings were reviewed in chat on 2026-10-23 and recorded in the queue
+(`construction_era`, `phase_years`, quoted evidence, reviewer, date, confidence):
+37327 Meunerie Moulart (1893-1914), 39699 Institut des Sœurs de Charité
+(1945-1975), 34982 chocolaterie Ruell (1893-1914), 37051 Brasserie Cantillon
+(1850-1892), 37479 ancienne église protestante (1850-1892), 35003 Hôtel communal
+d'Anderlecht (1850-1892). All six load through `load_reviewed_labels`.
+
+One systematic hazard, found on the first row: **an excerpt can quote a
+neighbouring property.** The Meunerie Moulart row carried a 1980 villa demolition
+from the same street, which suggested `post-1975` for a mill built in 1902-1903.
+The queue now carries `identity_name` (52 of 60 buildings are named in the
+notice) so a reviewer can see at a glance whether the quoted history belongs to
+this building, and the lesson is recorded here rather than in a comment nobody
+reads.
+
+Also fixed while doing this: `phase_years` was being written into a column that
+the extractor did not know about, so the first write dropped it silently. It is a
+first-class column now.
+
 ### The rule is applied as far as it can be automated
 
 `extract_notice_evidence.py` now writes two more columns from the same quoted
