@@ -189,6 +189,28 @@ Distribution across 56 is nearly flat: 1850-1892 x11, 1945-1975 x10,
 1918-1940 x10, 1893-1914 x9, pre-1850 x8, post-1975 x8. Four rows left:
 23080, 31548, 33035, 37072.
 
+### Batch 7 — 59 of 60 (2026-10-24)
+
+Seventeen pasted records, fourteen of them re-confirmations of batch 6 —
+all fourteen eras match the queue exactly, a free consistency check on the
+no-clobber path (all skipped, none altered). Three genuinely new: 23080
+Maison des Femmes (post-1975, 2009-2010 — the 1906 Strauven building it
+replaces named and set aside), 37072 D'Ieteren (1918-1940), 33035
+(pre-1850 on a 1600-1650 INCONNU excerpt, the thinnest evidence in the
+campaign). Only 31548 Ancienne Belgique is still open — the reviewer reports
+the standing volume is modern, and the notice names a 1982-1983 De Bondt
+campaign the excerpt never quotes: the likely call is post-1975 overriding
+the pre-1850 suggestion.
+
+Distribution across 59: 1850-1892 x11, 1918-1940 x11, 1945-1975 x10,
+1893-1914 x9, pre-1850 x9, post-1975 x9.
+
+Head check at n=59: 1279 train / 193 test images (48 train / 7 test
+buildings), top-1 0.19 (chance, p=0.32), within-one-era 0.663 vs perm mean
+0.425 — no shuffle in 100 reached it (p<0.01), the third replication. The
+campaign's finding is stable across n=42/56/59: the probe cannot name the
+era, but its errors are ordered far beyond chance.
+
 Head check at n=56: 1254 train / 193 test images (45 train / 7 test
 buildings), top-1 0.18 (chance, p=0.39), within-one-era 0.622 vs perm mean
 0.427 — again no shuffle in 100 reached it (p<0.01). The pattern from n=42
