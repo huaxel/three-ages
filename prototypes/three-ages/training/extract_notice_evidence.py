@@ -163,6 +163,12 @@ def main() -> None:
             if any((row.get(k) or '').strip() for k in REVIEWED):
                 carried[row['building_id']] = {k: row.get(k, '') for k in REVIEWED}
 
+    queued_ids = {row['building_id'] for row in rows}
+    removed_reviews = carried.keys() - queued_ids
+    if removed_reviews:
+        raise SystemExit('Refusing to drop reviewed building IDs from output: '
+                         + ', '.join(sorted(removed_reviews)))
+
     scraped = Path(args.scraped)
     covered = 0
     for row in rows:
@@ -180,7 +186,7 @@ def main() -> None:
             covered += 1
 
     fields = list(rows[0].keys())
-    for extra in ('notice_excerpt', 'notice_sources', 'notice_years',
+    for extra in REVIEWED + ('notice_excerpt', 'notice_sources', 'notice_years',
                   'primary_years', 'evidence_strength', 'suggested_era',
                   'rebuild_flag', 'phase_years', 'identity_name',
                   'depicts_building'):
@@ -191,7 +197,9 @@ def main() -> None:
         writer.writeheader()
         writer.writerows(rows)
     print(json.dumps({'out': str(out), 'rows': len(rows),
-                      'reviewed_rows_preserved': len(carried),
+                      'reviewed_rows_preserved': sum(
+                          any((row.get(k) or '').strip() for k in REVIEWED)
+                          for row in rows),
                       'rows_with_year_evidence': covered,
                       'note': 'notice_excerpt is quoted, never adjudicated'},
                      indent=2))

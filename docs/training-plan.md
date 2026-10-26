@@ -6,6 +6,17 @@ structural-change detection on the aligned four-epoch crops, reusing the
 provenance pipeline. The six-case pilot serves only as eval/testbed until
 scale exists. No training run starts before the blockers below clear.
 
+## Current research validity — 2026-10-25
+
+The supervised facade/structural readiness thresholds below still apply. Later
+self-supervised retrieval experiments and construction-era probes do not satisfy
+them or establish disentanglement. A shared-image leakage audit has quarantined
+2,691 cross-split rows into separate manifests; training/evaluation now reject
+exact shared-image leakage. Old checkpoints and test reports remain historical.
+Human identity/applicability review, a fresh confirmation cohort and clean
+retraining are still pending. See the [review backlog](prototype-next-iteration.md#review-backlog--2026-10-25)
+and [ML validity update](three-ages-finetune-pilot-result.md).
+
 ## Readiness status (2026-10-09)
 
 | Blocker | Status |

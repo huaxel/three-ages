@@ -82,6 +82,57 @@ class NoticeEvidenceTests(unittest.TestCase):
                     if not in_place:
                         self.assertEqual(queue.read_bytes(), original_source)
 
+    def test_removed_reviewed_ids_refuse_without_mutating_any_file(self):
+        # Partial reviews count too; even a depicts-only decision must not vanish.
+        for review in (REVIEW, {'depicts_building': 'no'}, {'evidence': 'Human note'}):
+            with self.subTest(review=review), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                queue, out = root / 'queue.csv', root / 'out.csv'
+                write_csv(queue, [{'building_id': '123', **STALE}])
+                write_csv(out, [{'building_id': '123', **review},
+                                {'building_id': '456', **review}])
+                (root / '123.fr.json').write_text(VALID, encoding='utf-8')
+                before = {p.name: p.read_bytes() for p in root.iterdir()}
+                result = self.run_cli(queue, out, root)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn('456', result.stderr)
+                self.assertIn('reviewed', result.stderr)
+                self.assertEqual({p.name: p.read_bytes() for p in root.iterdir()}, before)
+
+    def test_preservation_count_includes_source_reviews_not_only_output_overrides(self):
+        for existing_output in (False, True):
+            with self.subTest(existing_output=existing_output), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                queue, out = root / 'queue.csv', root / 'out.csv'
+                write_csv(queue, [{'building_id': '123', **REVIEW},
+                                  {'building_id': '456', **{k: '' for k in REVIEW}}])
+                if existing_output:
+                    # A removed but untouched output row is safe to drop.
+                    write_csv(out, [{'building_id': '456', **REVIEW},
+                                    {'building_id': '789', **{k: '' for k in REVIEW}}])
+                before = queue.read_bytes()
+                result = self.run_cli(queue, out, root)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                rows = read_csv(out)
+                self.assertEqual([r['building_id'] for r in rows], ['123', '456'])
+                self.assertEqual({k: rows[0][k] for k in REVIEW}, REVIEW)
+                self.assertEqual(json.loads(result.stdout)['reviewed_rows_preserved'],
+                                 2 if existing_output else 1)
+                self.assertEqual(queue.read_bytes(), before)
+
+    def test_later_output_review_adds_columns_missing_from_source_schema(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            queue, out = root / 'queue.csv', root / 'out.csv'
+            write_csv(queue, [{'building_id': '123'}, {'building_id': '456'}])
+            write_csv(out, [{'building_id': '123', **{k: '' for k in REVIEW}},
+                            {'building_id': '456', **REVIEW}])
+            result = self.run_cli(queue, out, root)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            rows = read_csv(out)
+            self.assertEqual({k: rows[1].get(k) for k in REVIEW}, REVIEW)
+            self.assertEqual(json.loads(result.stdout)['reviewed_rows_preserved'], 1)
+
     def test_gap_years_stay_unresolved(self):
         import importlib.util
         spec = importlib.util.spec_from_file_location('notice_evidence', SCRIPT)

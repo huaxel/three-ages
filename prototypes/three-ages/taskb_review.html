@@ -62,7 +62,7 @@ const drafts = new Map(); // building_id -> {era, phase, confidence, evidence}
 
 const reviewer = () => $('reviewer').value.trim();
 const rec = () => order[pos];
-const draftOf = r => drafts.get(r.building_id) || {era: '', phase: '', confidence: 'medium', depicts: 'yes', evidence: r.notice_excerpt};
+const draftOf = r => drafts.get(r.building_id) || {era: '', phase: '', confidence: 'medium', depicts: '', evidence: r.notice_excerpt};
 
 function saveDraft() {
   const r = rec(); if (!r) return;
@@ -70,24 +70,37 @@ function saveDraft() {
     confidence: $('confidence').value, depicts: $('depicts').value, evidence: $('evidence').value});
 }
 
-function renderList() {
+// Capture destinations before saving: hiding a decided draft shifts every index.
+function navigate(buildingId) {
+  saveDraft();
+  render(buildingId);
+}
+
+function move(delta) {
+  if (!order.length) return;
+  navigate(order[(pos + delta + order.length) % order.length].building_id);
+}
+
+function renderList(buildingId) {
   const hide = $('hideDone').checked, list = $('caseList'); list.innerHTML = '';
   order = bundle.records.filter(r => !(hide && (r.labelled_era || drafts.get(r.building_id)?.era)));
-  if (pos >= order.length) pos = Math.max(0, order.length - 1);
+  const target = order.findIndex(r => r.building_id === buildingId);
+  if (target >= 0) pos = target;
+  else if (pos >= order.length) pos = Math.max(0, order.length - 1);
   order.forEach((r, i) => {
     const b = document.createElement('button');
     const done = r.labelled_era || drafts.get(r.building_id)?.era;
     b.className = 'case-button' + (done ? ' done' : '') + (i === pos ? ' current' : '');
     b.innerHTML = `<strong>${esc(r.identity_name || r.building_id)}</strong><small>${esc(done || ('suggest ' + r.suggested_era))}</small>`;
-    b.onclick = () => { saveDraft(); pos = i; render(); };
+    b.onclick = () => navigate(r.building_id);
     list.appendChild(b);
   });
   const decided = bundle.records.filter(r => r.labelled_era || drafts.get(r.building_id)?.era).length;
   $('progress').textContent = `${decided} of ${bundle.records.length} decided · ${drafts.size} in this session`;
 }
 
-function render() {
-  renderList();
+function render(buildingId = rec()?.building_id) {
+  renderList(buildingId);
   const w = $('workspace'), r = rec();
   if (!r) { w.innerHTML = '<p class="muted">Queue clear. Export the session.</p>'; return; }
   const d = draftOf(r);
@@ -107,7 +120,7 @@ function render() {
     <div class="field"><label for="confidence">Confidence</label><select id="confidence">
       ${['high', 'medium', 'low'].map(c => `<option${c === d.confidence ? ' selected' : ''}>${c}</option>`).join('')}</select></div>
     <div class="field"><label for="depicts">Photos depict the labelled building?</label><select id="depicts">
-      ${[['yes', 'yes — facades of this building'], ['partially', 'partially — some views are streets/parks/interiors'], ['no', 'no — ensemble/park, images show something else']].map(([v, t]) => `<option value="${v}"${v === d.depicts ? ' selected' : ''}>${t}</option>`).join('')}</select></div>
+      ${[['', 'unknown — photos not reviewed'], ['yes', 'yes — facades of this building'], ['partially', 'partially — some views are streets/parks/interiors'], ['no', 'no — ensemble/park, images show something else']].map(([v, t]) => `<option value="${v}"${v === d.depicts ? ' selected' : ''}>${t}</option>`).join('')}</select></div>
     <div class="field"><label for="evidence">Evidence (quoted sentence)</label><textarea id="evidence">${esc(d.evidence)}</textarea></div>
     <div class="actions"><button class="primary" id="saveNext">Save + next (s)</button>
     <button id="prevBtn">← prev</button><button id="nextBtn">next →</button></div>`;
@@ -120,17 +133,16 @@ function render() {
     eras.appendChild(b);
   });
   $('saveNext').onclick = saveNext;
-  $('prevBtn').onclick = () => { saveDraft(); pos = (pos + order.length - 1) % order.length; render(); };
-  $('nextBtn').onclick = () => { saveDraft(); pos = (pos + 1) % order.length; render(); };
+  $('prevBtn').onclick = () => move(-1);
+  $('nextBtn').onclick = () => move(1);
 }
 
 function saveNext() {
   const r = rec(); if (!r) return;
   if (!$('eraVal').value) { $('status').innerHTML = '<span class="danger">Pick an era first (keys 1–6).</span>'; return; }
-  saveDraft();
   localStorage.setItem('taskbReviewer', reviewer());
   $('status').innerHTML = `<span class="success">Saved ${esc(r.building_id)} → ${esc($('eraVal').value)}. Export the session when done.</span>`;
-  pos = (pos + 1) % order.length; render();
+  move(1);
 }
 
 function exportSession() {
@@ -143,7 +155,7 @@ function exportSession() {
     records.push({building_id: bid, construction_era: d.era, phase_years: d.phase,
       evidence: d.evidence, reviewer: `${reviewer()} (workbench, ${new Date().toISOString().slice(0, 10)})`,
       reviewed_at: new Date().toISOString().slice(0, 10), confidence: d.confidence,
-      depicts_building: d.depicts || 'yes', fingerprint: fp(r)});
+      depicts_building: d.depicts || '', fingerprint: fp(r)});
   }
   if (!records.length) { $('status').innerHTML = '<span class="danger">Nothing saved yet.</span>'; return; }
   const href = URL.createObjectURL(new Blob([JSON.stringify({schema: 'taskb-session/1', records}, null, 2) + '\n'], {type: 'application/json'}));
@@ -159,13 +171,13 @@ document.addEventListener('keydown', e => {
     if (btns.length) btns[Number(e.key) - 1].click();
   } else if (e.key === 's' && !typing) saveNext();
   else if (e.key === 'e' && !typing) { e.preventDefault(); $('evidence').focus(); }
-  else if (e.key === 'ArrowRight' && !typing) { saveDraft(); pos = (pos + 1) % order.length; render(); }
-  else if (e.key === 'ArrowLeft' && !typing) { saveDraft(); pos = (pos + order.length - 1) % order.length; render(); }
+  else if (e.key === 'ArrowRight' && !typing) move(1);
+  else if (e.key === 'ArrowLeft' && !typing) move(-1);
 });
 
 async function init() {
   $('reviewer').value = localStorage.getItem('taskbReviewer') || '';
-  $('hideDone').onchange = render;
+  $('hideDone').onchange = () => navigate(rec()?.building_id);
   $('exportSession').onclick = exportSession;
   const res = await fetch('data/taskb-queue.json');
   if (!res.ok) throw new Error('bundle not found — run export_taskb_workbench.py first');

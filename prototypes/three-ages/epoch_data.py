@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+from datetime import datetime
 from pathlib import Path
 
 # Ordered oldest-first so "within one era" is meaningful.
@@ -26,27 +27,59 @@ CAPTURE_ERAS = ["pre-1900", "1900-1929", "1930-1959", "1960-1989", "1990-2009", 
 CONSTRUCTION_ERAS = ["pre-1850", "1850-1892", "1893-1914", "1918-1940", "1945-1975", "post-1975"]
 
 
-def load_reviewed_labels(path: str | Path) -> dict[str, str]:
-    """Read the label-campaign output: building_id -> construction era.
+def load_reviewed_labels(path: str | Path, *, labels_only: bool = False) -> dict[str, str]:
+    """Read validated construction reviews, failing closed on applicability.
 
-    Unknown bins raise: a typo must fail loudly, never train silently.
-    Contract: docs/three-ages-task-b-label-campaign.md."""
+    By default only explicit ``depicts_building=yes`` is eligible. This is an
+    interim BUILDING-level gate, not evidence that each image was reviewed.
+    ``labels_only=True`` reads building source truth without this interim gate.
+    Training may use it only together with the stronger per-image applicability
+    contract; it is never sufficient by itself. Metadata validation always applies.
+    Identical duplicate reviews coalesce; conflicting duplicates are rejected.
+    """
     reviewed: dict[str, str] = {}
-    with open(path, encoding="utf-8") as fh:
+    seen: dict[str, tuple[str, ...]] = {}
+    fields = ("construction_era", "evidence", "reviewer", "reviewed_at",
+              "confidence", "depicts_building", "phase_years")
+    with open(path, newline="", encoding="utf-8") as fh:
         for row in csv.DictReader(fh):
-            era = (row.get("construction_era") or "").strip()
+            bid = (row.get("building_id") or "").strip()
+            values = {key: (row.get(key) or "").strip() for key in fields}
+            era = values["construction_era"]
+            if not bid:
+                raise ValueError("review needs nonempty building_id")
             if era not in CONSTRUCTION_ERAS:
-                raise ValueError(
-                    f"unknown construction_era {era!r} for {row.get('building_id')!r}")
-            reviewed[row["building_id"]] = era
+                raise ValueError(f"unknown construction_era {era!r} for {bid!r}")
+            for key in ("evidence", "reviewer", "reviewed_at"):
+                if not values[key]:
+                    raise ValueError(f"missing {key} for {bid!r}")
+            try:
+                datetime.fromisoformat(values["reviewed_at"].replace("Z", "+00:00"))
+            except ValueError as exc:
+                raise ValueError(f"invalid reviewed_at for {bid!r}") from exc
+            if values["confidence"] not in {"low", "medium", "high"}:
+                raise ValueError(f"invalid confidence for {bid!r}")
+            if values["depicts_building"] not in {"", "yes", "partially", "no"}:
+                raise ValueError(f"invalid depicts_building for {bid!r}")
+            signature = tuple(values[key] for key in fields)
+            if bid in seen and seen[bid] != signature:
+                raise ValueError(f"conflicting duplicate building_id {bid!r}")
+            seen[bid] = signature
+            if labels_only or values["depicts_building"] == "yes":
+                reviewed[bid] = era
     return reviewed
 
 
-def with_reviewed_labels(rows: list[dict], reviewed: dict[str, str]) -> list[dict]:
-    """Keep only rows whose building has a reviewed label.
+def with_reviewed_labels(rows: list[dict], reviewed: dict[str, str], *,
+                         labels_only: bool = False) -> list[dict]:
+    """Join eligible reviews; construction training also excludes drawings.
 
-    No silent fallback to contributor-year proxies: unreviewed rows are out."""
-    return [r for r in rows if r["building_id"] in reviewed]
+    This source join is not a complete image-eligibility check. Construction
+    training must additionally apply construction_image_reviews. Missing drawing
+    status fails closed. Explicit ``labels_only=True`` is for label analysis.
+    """
+    return [r for r in rows if r["building_id"] in reviewed
+            and (labels_only or r.get("drawing_flag") is False)]
 
 # Style families compress the source's 43 styles (long tail below n=50) into
 # heads with support. Raw per-record styles stay in the manifest; families are
@@ -119,10 +152,12 @@ def _typed_row(raw: dict) -> dict:
         "building_id": raw["building_id"],
         "municipality": raw.get("municipality", ""),
         "filename": raw["filename"],
+        "source_filename": raw.get("source_filename") or raw["filename"],
+        "sequence_id": (raw.get("sequence_id") or "").strip(),
         "caption": raw.get("caption", ""),
         "caption_year": int(year) if str(year).strip().isdigit() else None,
         "capture_era": raw.get("capture_era", ""),
-        "drawing_flag": raw.get("drawing_flag", "") == "1",
+        "drawing_flag": ({"0": False, "1": True}.get(str(raw.get("drawing_flag", "")).strip())),
         "styles": [s for s in (raw.get("styles") or "").split("|") if s],
         "families": sorted({style_family(s) for s in (raw.get("styles") or "").split("|") if s}),
         "contributor_years": raw.get("contributor_years", ""),
@@ -141,4 +176,5 @@ def load_manifest(path: str | Path) -> list[dict]:
     same-named listings as duplicates, but 571 such groups checked out as
     different URLs and different bytes (2026-10-20), i.e. real pictures.
     """
-    return [_typed_row(raw) for raw in csv.DictReader(open(path, newline="", encoding="utf-8"))]
+    with open(path, newline="", encoding="utf-8") as handle:
+        return [_typed_row(raw) for raw in csv.DictReader(handle)]

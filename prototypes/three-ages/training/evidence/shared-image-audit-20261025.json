@@ -1,0 +1,50 @@
+{
+  "schema": "shared-image-audit/1",
+  "policy": "quarantine all copies of cross-split shared source IDs or exact bytes",
+  "limits": "Exact bytes/source IDs only. Near-duplicates, camera sequences and human identity/applicability remain open.",
+  "rows": {
+    "publisher": 77172,
+    "mapillary": 41046
+  },
+  "shared_groups": 3548,
+  "cross_split_groups": 1232,
+  "excluded_rows": 2691,
+  "excluded_by_pole_split": {
+    "map/test": 654,
+    "map/train": 1240,
+    "map/val": 625,
+    "pub/test": 41,
+    "pub/train": 95,
+    "pub/val": 36
+  },
+  "input_sha256": {
+    "publisher_manifest": "7978b91a345fd2b35cf3561b065f0357b4acc999fc43ad1b924b27d5e6e3917e",
+    "mapillary_manifest": "0fe975b771d02812a897f747ff476aa2786460be7920b4d4cc9923e1cb258185"
+  },
+  "code_sha256": "cdf206f5c8b5ef8cd66848f8c62edb1ed16c8cb79f979ff1f21ed343c7b407d5",
+  "observed_date": "2026-10-25",
+  "status": "quarantined manifests prepared; no clean retraining or new corpus evaluation",
+  "verification": {
+    "schema": "shared-image-audit/1",
+    "policy": "quarantine all copies of cross-split shared source IDs or exact bytes",
+    "limits": "No near-duplicate, camera-sequence or human identity verification",
+    "rows": {
+      "publisher": 77000,
+      "mapillary": 38527
+    },
+    "shared_groups": 2316,
+    "cross_split_groups": 0,
+    "excluded_rows": 0,
+    "excluded_by_pole_split": {},
+    "input_sha256": {
+      "publisher_manifest": "c7b954d28ebeefdccabfc003466c7c27f743c9e3ebea6c59f47032850c00ed8a",
+      "mapillary_manifest": "3c0ad0d66a34a42d470596f46210ebd19478f7754c49f00b0f6b8e5bd5862d50"
+    },
+    "code_sha256": "6b64fa90ee0716412a6f02f0d654907e3e27663164880106530d13d2f79f8487"
+  },
+  "artifact_paths": {
+    "local_full_audit": "local/training/image-isolated-20261025/shared-image-audit.json",
+    "local_filtered_publisher": "local/training/image-isolated-20261025/manifest.csv",
+    "local_filtered_mapillary": "local/training/image-isolated-20261025/mapillary_manifest.csv"
+  }
+}

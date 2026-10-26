@@ -33,12 +33,23 @@ python3 prototypes/test_corpus_pipeline.py
 python3 prototypes/test_bonsai_data_contract.py
 python3 prototypes/test_reviewed_state.py
 python3 prototypes/test_epoch_model.py
+python3 prototypes/test_evaluation_stats.py
+python3 prototypes/test_data_integrity.py
+python3 prototypes/test_sequence_metadata.py
+python3 prototypes/test_near_image_audit.py
+python3 prototypes/test_pair_audit.py
+python3 prototypes/test_pair_audit_validation.py
+python3 prototypes/test_construction_image_reviews.py
+python3 prototypes/test_review_workbench.py
 python3 prototypes/three-ages/training/verify_documented_numbers.py
 python3 prototypes/test_audit_facade_dataset.py
 python3 prototypes/audit_facade_dataset.py
 python3 scripts/test_review_sessions.py
+python3 scripts/test_taskb_sessions.py
 python3 -m compileall -q prototypes scripts/*.py
 node prototypes/smoke_ui.js
+node prototypes/test_taskb_review.js
+node prototypes/test_review_workbench.js
 python3 - <<'PY'
 import json
 import stat

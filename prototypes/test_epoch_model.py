@@ -10,6 +10,7 @@ from __future__ import annotations
 import csv
 import sys
 import tempfile
+import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent / "three-ages"
@@ -81,11 +82,12 @@ def test_load_manifest_typing() -> None:
         with open(path, "w", newline="", encoding="utf-8") as handle:
             writer = csv.DictWriter(handle, fieldnames=[
                 "building_id", "municipality", "filename", "caption", "caption_year",
-                "capture_era", "drawing_flag", "styles", "contributor_years",
+                "capture_era", "drawing_flag", "styles", "contributor_years", "source_filename", "sequence_id",
                 "latitude", "longitude", "split"])
             writer.writeheader()
             writer.writerow({"building_id": "7", "municipality": "X", "filename": "a.JPG",
                              "caption": "Rue X 7, 1998", "caption_year": "1998",
+                             "source_filename": "original.JPG", "sequence_id": "native-sequence",
                              "capture_era": "1990-2009", "drawing_flag": "1",
                              "styles": "Art nouveau|Éclectisme", "contributor_years": "1904",
                              "latitude": "50.8", "longitude": "4.3", "split": ""})
@@ -94,6 +96,10 @@ def test_load_manifest_typing() -> None:
                              "drawing_flag": "", "styles": "", "contributor_years": "",
                              "latitude": "", "longitude": "", "split": "test"})
         rows = load_manifest(path)
+        assert rows[0]["source_filename"] == "original.JPG"
+        assert rows[0]['sequence_id'] == 'native-sequence'
+        assert rows[1]['sequence_id'] == ''
+        assert rows[1]["source_filename"] == "b.JPG"
         assert rows[0]["caption_year"] == 1998
         assert rows[0]["drawing_flag"] is True
         assert rows[0]["families"] == ["art_nouveau", "eclectic"]
@@ -142,7 +148,7 @@ def _write_labels(tmp: str, entries: list[tuple[str, str]]) -> Path:
 
 def test_reviewed_labels_roundtrip() -> None:
     with tempfile.TemporaryDirectory() as tmp:
-        reviewed = load_reviewed_labels(_write_labels(tmp, [("7", "1893-1914")]))
+        reviewed = load_reviewed_labels(_write_labels(tmp, [("7", "1893-1914")]), labels_only=True)
         assert reviewed == {"7": "1893-1914"}
         assert set(reviewed.values()) <= set(CONSTRUCTION_ERAS)
 
@@ -161,4 +167,79 @@ def test_reviewed_labels_reject_unknown_bin() -> None:
 def test_reviewed_join_excludes_unreviewed() -> None:
     # No silent fallback to contributor-year proxies: unreviewed rows are out.
     rows = [{"building_id": "7"}, {"building_id": "9"}]
-    assert with_reviewed_labels(rows, {"7": "1893-1914"}) == [{"building_id": "7"}]
+    assert with_reviewed_labels(rows, {"7": "1893-1914"}, labels_only=True) == [{"building_id": "7"}]
+
+
+def test_training_gate_requires_explicit_applicability_and_excludes_drawings() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        path = _write_labels(tmp, [('7', '1893-1914')])
+        # Missing applicability is excluded even when a label is complete.
+        assert load_reviewed_labels(path) == {}
+        with path.open(newline='') as handle:
+            row = next(csv.DictReader(handle))
+        for status in ('', 'partially', 'no', 'yes'):
+            row['depicts_building'] = status
+            with path.open('w', newline='') as handle:
+                writer = csv.DictWriter(handle, fieldnames=list(row))
+                writer.writeheader()
+                writer.writerow(row)
+            reviewed = load_reviewed_labels(path)
+            assert bool(reviewed) == (status == 'yes')
+            rows = [{'building_id': '7', 'drawing_flag': False},
+                    {'building_id': '7', 'drawing_flag': True},
+                    {'building_id': '7'}]
+            assert with_reviewed_labels(rows, reviewed) == (rows[:1] if status == 'yes' else [])
+
+
+def test_review_metadata_and_conflicting_duplicates_rejected() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        path = _write_labels(tmp, [('7', '1893-1914')])
+        with path.open(newline='') as handle:
+            valid = next(csv.DictReader(handle))
+        valid['depicts_building'] = 'yes'
+
+        def write_rows(rows):
+            with path.open('w', newline='') as handle:
+                writer = csv.DictWriter(handle, fieldnames=list(valid))
+                writer.writeheader()
+                writer.writerows(rows)
+
+        for field, value in [('building_id', ''), ('reviewer', ' '),
+                             ('evidence', ''), ('reviewed_at', ''),
+                             ('reviewed_at', '2026-02-30'), ('confidence', 'certain'),
+                             ('depicts_building', 'maybe')]:
+            write_rows([dict(valid, **{field: value})])
+            with unittest.TestCase().assertRaises(ValueError):
+                load_reviewed_labels(path)
+        write_rows([valid, valid])
+        assert load_reviewed_labels(path) == {'7': '1893-1914'}
+        for field, value in [('construction_era', 'pre-1850'),
+                             ('reviewer', 'someone else'), ('evidence', 'different'),
+                             ('depicts_building', 'no')]:
+            write_rows([valid, dict(valid, **{field: value})])
+            with unittest.TestCase().assertRaisesRegex(ValueError, 'conflicting duplicate'):
+                load_reviewed_labels(path)
+
+
+def test_unknown_drawing_flags_fail_closed_through_csv_join() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / 'manifest.csv'
+        with path.open('w', newline='') as handle:
+            writer = csv.DictWriter(handle, fieldnames=['building_id', 'filename', 'drawing_flag'])
+            writer.writeheader()
+            for index, flag in enumerate(('', 'unknown', '0', '1')):
+                writer.writerow({'building_id': '7', 'filename': str(index), 'drawing_flag': flag})
+        rows = load_manifest(path)
+        assert [r['drawing_flag'] for r in rows] == [None, None, False, True]
+        assert [r['filename'] for r in with_reviewed_labels(rows, {'7': '1893-1914'})] == ['2']
+
+
+def load_tests(loader, tests, pattern):
+    # These historically were bare functions: running this file did no tests.
+    return unittest.TestSuite(unittest.FunctionTestCase(value)
+                              for name, value in sorted(globals().items())
+                              if name.startswith('test_') and callable(value))
+
+
+if __name__ == '__main__':
+    unittest.main()

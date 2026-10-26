@@ -1,0 +1,36 @@
+{
+  "schema": "sequence-metadata-coverage/1",
+  "role": "metadata-only availability audit; no image identity or model predictions",
+  "input_sha256": {
+    "original_manifest": "0fe975b771d02812a897f747ff476aa2786460be7920b4d4cc9923e1cb258185",
+    "derived_manifest": "df5fdec52748d21a55df0f8715702f5f1002a203f7d288db3cdaacdfb6b8472f",
+    "cached_metadata_tree": "d253483195266beb907ae9d336bbb2e333f6e4c59d8cc7873072c2d66a893c49"
+  },
+  "cached_metadata_files": 8726,
+  "cached_image_records": 41046,
+  "records_with_sequence_field": 0,
+  "records_with_known_native_sequence": 0,
+  "original_manifest_rows": 41046,
+  "all_legacy_fields_unchanged": true,
+  "sequence_evidence": {
+    "namespace": "mapillary",
+    "interpretation": "acquisition dependence; not building identity",
+    "status": "UNKNOWN",
+    "row_count": 41046,
+    "known_rows": 0,
+    "unknown_rows": 41046,
+    "row_coverage": 0.0,
+    "unique_source_count": 37605,
+    "known_unique_sources": 0,
+    "unknown_unique_sources": 37605,
+    "unique_source_coverage": 0.0,
+    "excluded_rows": 0,
+    "propagated_rows": 0,
+    "groups": [],
+    "cross_split_groups": []
+  },
+  "limits": "UNKNOWN coverage is not evidence of acquisition-sequence isolation; no sequence IDs inferred from dates, photographers or locations. Original manifests/images/reviews/splits unchanged.",
+  "observed_date": "2026-10-25",
+  "grouping_implementation_sha256": "2c71de3cec155a88bb3402a956e6a6c101d1e8bd5d7676585c9b42af45c5a932",
+  "preparation_implementation_sha256": "8758e8cbe131a812d7c46769395c6e6e3091482cd606359b53eb771ab2e68d67"
+}

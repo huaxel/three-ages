@@ -18,6 +18,7 @@ import sys
 import tempfile
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
+from unittest.mock import patch
 ROOT = Path(__file__).resolve().parent
 SCRAPER = ROOT / "three-ages" / "scrape_monument.py"
 SUMMARY = ROOT / "three-ages" / "summarise_corpus.py"
@@ -1689,8 +1690,13 @@ def test_place_scrape_runner(module) -> None:
         out = Path(tmp) / "places"
         argv = ["--places", "--out", str(out), "--places-out", str(out), url,
                 "--no-robots", "--progress-every", "0", "--quiet"]
-        with redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
+        fixture_fetcher = ServesPlaces()
+        with patch.object(module, "Fetcher", return_value=fixture_fetcher) as factory, \
+                patch("socket.socket", side_effect=AssertionError("offline test attempted network")), \
+                redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
             assert module.main(argv) == 0
+        factory.assert_called_once()
+        assert fixture_fetcher.requests == 1, "CLI dispatch must use the fixture fetcher"
         written = json.loads((out / "10601002.fr.json").read_text(encoding="utf-8"))
         assert written["kind"] == "place" and written["name"] == "Rue Africaine"
         assert written["extraction"]["content_hash"]

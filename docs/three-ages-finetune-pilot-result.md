@@ -1,5 +1,102 @@
 # Fine-tuning result: cross-condition contrastive pilot
 
+## Validity update — 2026-10-25
+
+The tables below are preserved historical experiments, **not clean held-out
+building/image generalisation evidence**. A full source-ID and byte-hash audit
+found 1,232 shared-image groups spanning splits (2,691 rows: 2,519 Mapillary,
+172 publisher). The seed-42 sampled training pairs share Mapillary source IDs
+with 479 validation and 501 test queries. Building-ID splitting alone did not
+provide image independence; the bias direction and size remain unmeasured.
+
+Separate quarantined manifests and an audit report now exist under
+`local/training/image-isolated-20261025/`; originals and old checkpoints remain
+unchanged. Training/evaluation reject exact shared-image leakage; old checkpoints
+cannot be resumed or passed off as freshly trained on isolated manifests.
+Near-duplicates, acquisition-sequence dependence and identity correctness still
+need review. Fixing evaluation inputs alone cannot undo exposure during training.
+
+Image-level Wilson intervals below are historical descriptive calculations,
+not valid group-aware uncertainty estimates. New comparisons use paired
+shared-image/building-group bootstrap differences and report macro metrics.
+The existing test cohort has been inspected repeatedly and is spent; a new
+locked cohort is required for confirmation. No clean retraining or new corpus
+model evaluation was performed in that initial repair stage.
+
+A subsequent metadata scope audit found that the historical “photo dating” head
+included drawing-flagged records: **767 of its 7,143 dated test rows**, alongside
+6,376 photo-flagged rows. Those percentages are not photograph-only dating
+baselines. The new capture-era head excludes drawings and unknown media; old
+numbers remain unchanged. Drawing flags themselves are caption-keyword proxies,
+not independently reviewed visual truth, and caption dates are also weak targets.
+See `training/evidence/capture-era-scope-audit-20261025.json` under
+`prototypes/three-ages/` for the pinned metadata-only count. No new test predictions
+were made to establish this scope correction.
+
+## Frozen development follow-up — 2026-10-25
+
+Fresh frozen CLIP features were encoded from the separately isolated publisher
+manifest: **76,999 images**, with the single declared unreadable image omitted.
+Every cached image SHA-256 was verified against disk; vectors are finite and
+unit-normalised. A seeded 100-image representation check reproduced the previous
+same-toolchain frozen cache exactly (maximum absolute component difference 0.0).
+No encoder weights were trained; kernel taint remained zero.
+
+A five-fold development protocol (seed 42, fixed C=1) was pinned **before scoring**.
+It uses 69,376 train/validation images from 23,734 buildings / 23,601 dependency
+groups; **zero test rows scored**. Linked buildings stay in one fold; scaler,
+logistic head and dummy are fitted afresh within each fold.
+
+| source photo/drawing proxy agreement | frozen probe | majority dummy |
+|---|---:|---:|
+| building-macro exact accuracy | **98.71%** | 93.50% |
+| image-weighted exact accuracy | **97.61%** | 90.25% |
+
+The macro improvement is **5.21 percentage points**, but aggregates hide
+minority-class failures as well as archive-age difficulty. The last two columns
+are image-level source-proxy support and recall, derived descriptively from the
+saved confusion matrices without fitting or predicting again:
+
+| caption-era slice | images | building-macro agreement | photo proxy n / recall | drawing proxy n / recall |
+|---|---:|---:|---:|---:|
+| pre-1900 | 1,485 | 83.29% | 324 / 41.36% | 1,161 / 93.54% |
+| 1900–1929 | 5,435 | 85.28% | 1,393 / 55.64% | 4,042 / 94.09% |
+| 1930–1959 | 1,459 | 84.71% | 493 / 69.98% | 966 / 92.34% |
+| 1960–1989 | 5,673 | 98.60% | 5,449 / 99.01% | 224 / 83.93% |
+| 1990–2009 | 13,327 | 99.67% | 13,216 / 99.92% | 111 / 54.95% |
+| 2010+ | 37,655 | 99.95% | 37,606 / 99.97% | 49 / 24.49% |
+| unknown | 4,342 | 97.96% | 4,133 / 98.43% | 209 / 76.56% |
+
+The modern headline is dominated by photo proxies: only **12/49 modern drawing
+proxies are recovered**, despite 99.95% aggregate agreement. Conversely, just
+**134/324 pre-1900 photo proxies are recovered**. This does **not** justify an
+automatic photo/drawing filter, particularly for historic-photo or modern-drawing
+candidates. Human image review remains necessary.
+
+These targets are **caption-keyword proxies**, not independently reviewed visual
+truth. This is evidence that a frozen head reproduces source flags on grouped
+development data—not 98.71% human-verified drawing recognition, architectural
+identity, construction dating, or disentanglement. Older-media slices remain
+substantially harder. No generalisation confidence interval is inferred from
+correlated fold fits; foundation-model pretraining overlap remains unverified.
+The saved OOF IDs/group assignments, fold-majority predictions, confusion matrix
+and macro scores were checked independently of the fitting loop.
+
+Pinned compact results/protocol:
+`training/evidence/drawing-grouped-development-20261025.json` and
+`drawing-development-protocol-20261025.json` under `prototypes/three-ages/`.
+Full byte-pinned cache, OOF report and lifecycle logs remain in
+`local/training/frozen-isolated-20261025/batch64/`. The first batch-32 attempt was
+explicitly stopped after throughput measurement; its logs were retained, and the
+completed batch-64 attempt had a 40-minute deadline and exited zero.
+
+The construction head remains blocked: per-image applicability was prepared for
+1,195 photographs of the existing 59 labelled buildings, **all still unreviewed**.
+No building-wide flag was converted into image truth. No fine-tuned retrieval or
+construction-era result was recomputed in this follow-up.
+
+## Historical fine-tuning narrative
+
 Date 2026-10-22/23. Machine: Framework Desktop, AMD Ryzen AI Max (Strix Halo),
 Radeon 8060S (gfx1151), kernel 7.3.0-4-cachyos, torch 2.14.1+rocm7.2 in
 `~/.venvs/rocm`. Runs live under `local/` (gitignored); this document records
@@ -72,8 +169,8 @@ checkpoint, so the numbers can be attributed to specific weights.
 | cross-pole | cross-era top5 | 0.02% | 1.33% | 58× |
 
 Brackets are 95% Wilson intervals (25/3,933 → 180/3,933 cross-era hits;
-41/4,421 → 186/4,421 cross-pole). The intervals do not overlap: the gain is not
-sampling noise. This is a deterministic recomputation from hashed artifacts, not
+41/4,421 → 186/4,421 cross-pole). These image-level intervals do not account for within-building dependence or
+shared-image leakage and do not establish that the gain exceeds sampling noise. This is a deterministic recomputation from hashed artifacts, not
 a second look — no model was chosen using these numbers.
 
 ## Forgetting check on the existing probes
@@ -99,9 +196,11 @@ moves 87.33% → 87.41% (a hair better) while cross-era retrieval rises 4.06% �
 longer; that contradicts the simpler story that more training always trades
 breadth for matching.
 
-The drawing gate survives in every variant (≥97.5%).
+Aggregate drawing-proxy agreement stays ≥97.5% in every variant; this does not
+establish reliable minority-class recall or a safe automatic filter.
 
-The drawn-vs-photo gate is intact. Photo dating gives up 1.70 pp (7,143 test
+The aggregate photo/drawing proxy score is retained. The historical mixed-media
+caption-era score gives up 1.70 pp (7,143 test
 rows, ~121 flips) while cross-era retrieval gains 3.94 pp on the test leg and
 2.93 pp on validation. This is the shape expected if the encoder leans less on
 photographic medium — but a probe accuracy drop is **not** evidence of
@@ -286,7 +385,11 @@ eyes on a sample of frames.
 
 ## Which checkpoint for which task
 
-There is no single best checkpoint, and the table above says why. Pick by use:
+There is no single best checkpoint, and the table above says why. Historical
+recommendations below concern exploratory retrieval/proxy diagnostics, not approved
+automatic filtering or verified image dates. The frozen head's minority-class
+failures above mean human review cannot be replaced by its aggregate accuracy.
+Pick by exploratory use:
 
 | task | checkpoint | cache |
 |---|---|---|
@@ -484,7 +587,7 @@ Identity discrimination is essentially unchanged (cluster top-1 83.2–83.5% ver
 neighbour resolution. It also avoids the epoch-2 collapse (full-gallery top-1
 stays ~16.5–17.5%, where a second random epoch fell to 14.3%).
 
-### Test split for the selected checkpoint
+### Historical test split for the selected checkpoint (exploratory; see validity update)
 
 The hard-negative model was chosen on validation (8/8 metric wins across two
 seeds), so its test result is a confirmation rather than a selection step:

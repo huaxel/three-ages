@@ -1,0 +1,387 @@
+{
+  "schema": "development-grouped-cv/1",
+  "head": "drawing",
+  "evaluation_role": "exploratory development; not locked confirmation",
+  "representation_requirement": "project-frozen encoder; no fine-tuning on fold-held-out buildings",
+  "pretraining_overlap": "foundation-model pretraining overlap with this corpus is unverified",
+  "splits_used": [
+    "train",
+    "val"
+  ],
+  "test_rows_used": 0,
+  "n_images": 69376,
+  "n_buildings": 23734,
+  "n_groups": 23601,
+  "classes": [
+    "photo",
+    "drawing"
+  ],
+  "seed": 42,
+  "n_folds": 5,
+  "estimator": {
+    "name": "LogisticRegression",
+    "C": 1.0,
+    "max_iter": 2000,
+    "preprocessing": "fold-local StandardScaler",
+    "multilabel": null,
+    "dummy": "most_frequent, fitted per fold"
+  },
+  "toolchain": {
+    "python": "3.13.15",
+    "numpy": "2.5.4",
+    "scikit_learn": "1.9.1"
+  },
+  "metrics": {
+    "image_exact_accuracy": 0.976115659594096,
+    "building_macro_exact_accuracy": 0.9871314362174728,
+    "dummy_image_exact_accuracy": 0.9025311346863468,
+    "dummy_building_macro_exact_accuracy": 0.9350404680064093,
+    "building_macro_exact_improvement_over_dummy": 0.052090968211063515,
+    "confusion_matrix": [
+      [
+        61517,
+        1097
+      ],
+      [
+        560,
+        6202
+      ]
+    ]
+  },
+  "per_capture_era": {
+    "1900-1929": {
+      "n_images": 5435,
+      "n_buildings": 3290,
+      "n_groups": 3279,
+      "class_support": {
+        "photo": 1393,
+        "drawing": 4042
+      },
+      "building_macro_exact_accuracy": 0.8528019148921046,
+      "dummy_building_macro_exact_accuracy": 0.22899038939260088,
+      "confusion_matrix": [
+        [
+          775,
+          618
+        ],
+        [
+          239,
+          3803
+        ]
+      ]
+    },
+    "1930-1959": {
+      "n_images": 1459,
+      "n_buildings": 801,
+      "n_groups": 798,
+      "class_support": {
+        "photo": 493,
+        "drawing": 966
+      },
+      "building_macro_exact_accuracy": 0.8471102520727988,
+      "dummy_building_macro_exact_accuracy": 0.3296046684623463,
+      "confusion_matrix": [
+        [
+          345,
+          148
+        ],
+        [
+          74,
+          892
+        ]
+      ]
+    },
+    "1960-1989": {
+      "n_images": 5673,
+      "n_buildings": 2626,
+      "n_groups": 2589,
+      "class_support": {
+        "photo": 5449,
+        "drawing": 224
+      },
+      "building_macro_exact_accuracy": 0.9860005537747351,
+      "dummy_building_macro_exact_accuracy": 0.960385455811008,
+      "confusion_matrix": [
+        [
+          5395,
+          54
+        ],
+        [
+          36,
+          188
+        ]
+      ]
+    },
+    "1990-2009": {
+      "n_images": 13327,
+      "n_buildings": 7719,
+      "n_groups": 7709,
+      "class_support": {
+        "photo": 13216,
+        "drawing": 111
+      },
+      "building_macro_exact_accuracy": 0.9967464588828091,
+      "dummy_building_macro_exact_accuracy": 0.993679785015703,
+      "confusion_matrix": [
+        [
+          13205,
+          11
+        ],
+        [
+          50,
+          61
+        ]
+      ]
+    },
+    "2010+": {
+      "n_images": 37655,
+      "n_buildings": 14880,
+      "n_groups": 14776,
+      "class_support": {
+        "photo": 37606,
+        "drawing": 49
+      },
+      "building_macro_exact_accuracy": 0.9994576029574153,
+      "dummy_building_macro_exact_accuracy": 0.9993766163328297,
+      "confusion_matrix": [
+        [
+          37595,
+          11
+        ],
+        [
+          37,
+          12
+        ]
+      ]
+    },
+    "pre-1900": {
+      "n_images": 1485,
+      "n_buildings": 1020,
+      "n_groups": 1014,
+      "class_support": {
+        "photo": 324,
+        "drawing": 1161
+      },
+      "building_macro_exact_accuracy": 0.832874581205031,
+      "dummy_building_macro_exact_accuracy": 0.20188876531004557,
+      "confusion_matrix": [
+        [
+          134,
+          190
+        ],
+        [
+          75,
+          1086
+        ]
+      ]
+    },
+    "unknown": {
+      "n_images": 4342,
+      "n_buildings": 2702,
+      "n_groups": 2664,
+      "class_support": {
+        "photo": 4133,
+        "drawing": 209
+      },
+      "building_macro_exact_accuracy": 0.979610122883309,
+      "dummy_building_macro_exact_accuracy": 0.9644727532456896,
+      "confusion_matrix": [
+        [
+          4068,
+          65
+        ],
+        [
+          49,
+          160
+        ]
+      ]
+    }
+  },
+  "target_semantics": "caption-keyword photo/drawing proxy; not independently reviewed image truth",
+  "excluded_cache_ids": [
+    "17387/11500227_0192_P04.jpg"
+  ],
+  "image_byte_provenance": "per-image cache SHA-256 verified against current files before fold assignment",
+  "input_sha256": {
+    "manifest": "c7b954d28ebeefdccabfc003466c7c27f743c9e3ebea6c59f47032850c00ed8a",
+    "embeddings": "a00c92c665ecead2e59b7dee8311c68791fa87ee43cc11a2fdbe8ed9990f3b9e",
+    "implementation": "f261057dad40adc1c2f4b080163fe79b7347b6854715ebadcb7a7bb2b268ea2b",
+    "probe": "d9e2d1fdb801de72505687eb39021d7b944d53666f480f2fa744a0b58f7498d4",
+    "data_definitions": "ee1303c1fce69ea6e345577f63a85900743905289c6ac0c0c3bc2bfab230d5a4",
+    "isolation": "198ada7c2b8e08b24b3420c28d27d565fda47b49c74bd205d05109dfe0c14f8b",
+    "statistics": "8b7d5a00c7a0092f111de47b15dc5f2e4ab17b5f7527f0dbadadaaf69a3a723b"
+  },
+  "uncertainty_limitation": "OOF folds share fitted training data; no independent-replication or generalisation CI claimed",
+  "date": "2026-10-25",
+  "encoder_training": "none",
+  "report_sha256": "846046a4afc688db15416b2339b417b84c8ff488dd9c02a51e544a340e49caba",
+  "protocol_sha256": "f868ef023fa29ffa872bc3cdb0a041d9d8ea1eadd335c477e62d9b4e58fd4d30",
+  "cache_verification": {
+    "schema": "frozen-cache-verification/1",
+    "rows": 76999,
+    "dimensions": 512,
+    "all_vectors_finite": true,
+    "all_image_byte_hashes_verified": true,
+    "excluded_ids": [
+      "17387/11500227_0192_P04.jpg"
+    ],
+    "maximum_norm_error": 1.1920928955078125e-07,
+    "reference_sample": {
+      "n": 100,
+      "seed": 42,
+      "max_abs_difference": 0.0,
+      "role": "representation reproduction, not prediction scoring"
+    },
+    "input_sha256": {
+      "manifest": "c7b954d28ebeefdccabfc003466c7c27f743c9e3ebea6c59f47032850c00ed8a",
+      "cache": "a00c92c665ecead2e59b7dee8311c68791fa87ee43cc11a2fdbe8ed9990f3b9e",
+      "protocol": "f868ef023fa29ffa872bc3cdb0a041d9d8ea1eadd335c477e62d9b4e58fd4d30"
+    },
+    "model": "ViT-B-32/laion2b_s34b_b79k",
+    "toolchain": "python3.13.15 torch2.14.1+rocm7.2 torchvision0.29.1+rocm7.2",
+    "kernel_taint_after_encoding": 0,
+    "encoder_training": "none"
+  },
+  "oof_checks": {
+    "unique_complete_development_IDs": true,
+    "test_IDs_scored": 0,
+    "each_building_and_dependency_group_in_exactly_one_score_fold": true,
+    "fit_score_group_overlap": 0,
+    "confusion_and_macro_scores_recomputed": true,
+    "dummy_matches_each_fold_training_majority": true
+  },
+  "post_hoc_class_diagnostics": {
+    "method": "Descriptive support/precision/recall derived from saved confusion matrices; no refitting, new predictions or threshold selection",
+    "implementation_sha256": "4720f561b285e81b81330d1c691a6eadf672b65675f949139148cca7676cf4d2",
+    "overall": {
+      "photo": {
+        "support": 62614,
+        "predicted_support": 62077,
+        "true_positive": 61517,
+        "precision": 0.9909789455031655,
+        "recall": 0.9824799565592359
+      },
+      "drawing": {
+        "support": 6762,
+        "predicted_support": 7299,
+        "true_positive": 6202,
+        "precision": 0.8497054391012467,
+        "recall": 0.917184265010352
+      }
+    },
+    "per_capture_era": {
+      "1900-1929": {
+        "photo": {
+          "support": 1393,
+          "predicted_support": 1014,
+          "true_positive": 775,
+          "precision": 0.7642998027613412,
+          "recall": 0.5563531945441493
+        },
+        "drawing": {
+          "support": 4042,
+          "predicted_support": 4421,
+          "true_positive": 3803,
+          "precision": 0.8602126215788283,
+          "recall": 0.9408708560118753
+        }
+      },
+      "1930-1959": {
+        "photo": {
+          "support": 493,
+          "predicted_support": 419,
+          "true_positive": 345,
+          "precision": 0.8233890214797136,
+          "recall": 0.6997971602434077
+        },
+        "drawing": {
+          "support": 966,
+          "predicted_support": 1040,
+          "true_positive": 892,
+          "precision": 0.8576923076923076,
+          "recall": 0.9233954451345756
+        }
+      },
+      "1960-1989": {
+        "photo": {
+          "support": 5449,
+          "predicted_support": 5431,
+          "true_positive": 5395,
+          "precision": 0.9933713864849936,
+          "recall": 0.9900899247568361
+        },
+        "drawing": {
+          "support": 224,
+          "predicted_support": 242,
+          "true_positive": 188,
+          "precision": 0.7768595041322314,
+          "recall": 0.8392857142857143
+        }
+      },
+      "1990-2009": {
+        "photo": {
+          "support": 13216,
+          "predicted_support": 13255,
+          "true_positive": 13205,
+          "precision": 0.99622783855149,
+          "recall": 0.9991676755447942
+        },
+        "drawing": {
+          "support": 111,
+          "predicted_support": 72,
+          "true_positive": 61,
+          "precision": 0.8472222222222222,
+          "recall": 0.5495495495495496
+        }
+      },
+      "2010+": {
+        "photo": {
+          "support": 37606,
+          "predicted_support": 37632,
+          "true_positive": 37595,
+          "precision": 0.9990167942176871,
+          "recall": 0.9997074934850821
+        },
+        "drawing": {
+          "support": 49,
+          "predicted_support": 23,
+          "true_positive": 12,
+          "precision": 0.5217391304347826,
+          "recall": 0.24489795918367346
+        }
+      },
+      "pre-1900": {
+        "photo": {
+          "support": 324,
+          "predicted_support": 209,
+          "true_positive": 134,
+          "precision": 0.6411483253588517,
+          "recall": 0.41358024691358025
+        },
+        "drawing": {
+          "support": 1161,
+          "predicted_support": 1276,
+          "true_positive": 1086,
+          "precision": 0.8510971786833855,
+          "recall": 0.9354005167958657
+        }
+      },
+      "unknown": {
+        "photo": {
+          "support": 4133,
+          "predicted_support": 4117,
+          "true_positive": 4068,
+          "precision": 0.9880981297060967,
+          "recall": 0.9842729252359061
+        },
+        "drawing": {
+          "support": 209,
+          "predicted_support": 225,
+          "true_positive": 160,
+          "precision": 0.7111111111111111,
+          "recall": 0.7655502392344498
+        }
+      }
+    }
+  }
+}

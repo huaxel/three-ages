@@ -6,6 +6,55 @@ by design: `train_probe.py` refuses `--head construction_era` without
 Contributor years and style windows are proxies, not training truth. This card
 defines the campaign that produces the labels file and wires the head.
 
+## Evaluation/applicability update — 2026-10-25
+
+Historical head checks below reuse overlapping test buildings. They are
+exploratory learning-curve observations, not independent replications; n=59 has
+only seven test buildings despite 193 images. The ordering signal is a hypothesis
+for confirmation, not validated construction dating or disentanglement.
+
+The probe now defaults to validation, refuses report overwrite and requires an
+explicit acknowledgement for exploratory reuse of the spent test cohort.
+Reports include building counts, building-macro exact/adjacent-era accuracy and
+baseline comparisons. Exact-image isolation is checked before fitting.
+`--grouped-cv FOLDS` now provides train+validation out-of-fold head diagnostics,
+keeping exact-image-linked buildings together and refitting preprocessing/head/
+baseline per fold. Project-tuned features refuse because their encoder saw fold
+holdouts. Frozen caches must carry verified per-image hashes from the canonical
+encoder; old caches require re-encoding, not retrofitted hashes. Fold outcomes,
+class support and capture-era slices are reported without pretending correlated
+folds are independent replications. No real construction CV score was produced.
+
+Construction training now requires source review metadata **and** explicit
+per-image eligibility via `--image-reviews`, excluding drawings/unknown media.
+The former `depicts_building=yes` check was only an interim building-wide gate;
+it cannot establish that each photograph depicts the labelled surviving volume.
+The source CSV remains building truth, not an image label. `labels_only=True`
+may load that truth only because the CLI separately mandates the stronger image
+review contract; it never bypasses image eligibility. No blanket `yes` backfill
+is permitted. Missing phases still need human review.
+
+`training/construction_image_reviews.py prepare` creates a new pinned cohort of
+non-drawing views, blank decisions, and a relative-link contact sheet. Only
+`applicable` with observation/reviewer/date/confidence is trainable. Wrong subject,
+predecessor, interior/detail, not-visually-inferable, unknown and missing decisions
+remain excluded. Both ordinary validation and grouped CV verify that feature
+bytes match the actual reviewed image, and refuse changed source labels/phases.
+The existing 59-building inventory contains 1,195 photos and zero image-level
+positives; it is not an instruction to spend extra reviewer hours. Use bounded
+subsets first. See the training README for preparation and probe commands.
+Browser/terminal entrypoints now default applicability to unknown, and legacy
+session imports cannot invent `yes`. Existing positive values were preserved;
+because older interfaces defaulted to yes, those still warrant identity review.
+
+Before a new confirmation: freeze primary metrics (building-macro exact-era and
+within-one-era accuracy), class support/baselines, image applicability criteria,
+and shared-image grouping; use grouped development validation for selection.
+Choose and freeze a new independently reviewed cohort without looking at model
+scores, pin its IDs/input hashes and record an evaluation budget before running.
+Further annotation batches still require the existing reviewer-time approval.
+No new cohort or human labels were invented during the repair.
+
 ## The label definition is undefined, and that is load-bearing
 
 The contract says `construction_era` is one of six bins. It does not say *which
@@ -207,14 +256,14 @@ Distribution across 59: 1850-1892 x11, 1918-1940 x11, 1945-1975 x10,
 
 Head check at n=59: 1279 train / 193 test images (48 train / 7 test
 buildings), top-1 0.19 (chance, p=0.32), within-one-era 0.663 vs perm mean
-0.425 — no shuffle in 100 reached it (p<0.01), the third replication. The
+0.425 — no shuffle in 100 reached it (p<0.01), the third overlapping exploratory check. The
 campaign's finding is stable across n=42/56/59: the probe cannot name the
 era, but its errors are ordered far beyond chance.
 
 Head check at n=56: 1254 train / 193 test images (45 train / 7 test
 buildings), top-1 0.18 (chance, p=0.39), within-one-era 0.622 vs perm mean
 0.427 — again no shuffle in 100 reached it (p<0.01). The pattern from n=42
-replicates with a larger test set: no naming, but ordered errors far beyond
+persists in an overlapping, larger test set: no naming, but ordered errors far beyond
 chance. The final n=60 check gets the whole queue behind it.
 
 Auditing the suggestion against the 56 labels: agreement 38/56 (0.68) — a

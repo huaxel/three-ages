@@ -12,7 +12,7 @@ Usage: python3 scripts/review-taskb-cli.py [--ids 23080,36603,...] [--out taskb-
 Photos cannot display in a terminal. Each case prints its preview paths and
 the monument notice URL — open the URL on any device with a browser to see
 the building. If you cannot see the photos, leave depicts at its default
-(yes) and say so in the evidence; the flag can be corrected later.
+(unknown). Historical construction evidence is not an image identity review.
 """
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ djb2 = _applier.djb2_utf16
 QUEUE = ROOT / "local" / "training" / "taskb_queue.csv"
 INBOX = ROOT / "local" / "monument-inbox"
 ERAS = ["pre-1850", "1850-1892", "1893-1914", "1918-1940", "1945-1975", "post-1975"]
-DEPICTS = {"y": "yes", "p": "partially", "n": "no"}
+DEPICTS = {"u": "", "y": "yes", "p": "partially", "n": "no"}
 
 
 def prompt(text: str, default: str = "") -> str:
@@ -94,8 +94,10 @@ def main() -> None:
         if era == "skip":
             continue
         phase = prompt("Phase years (e.g. 1894-1909)")
-        depicts = prompt("Photos depict the building? (y/p/n)", "y").lower()
-        depicts = DEPICTS.get(depicts, "yes")
+        depicts = prompt("Photos depict the building? (u=unknown/y/p/n)", "u").lower()
+        while depicts not in DEPICTS:
+            depicts = prompt("Choose u, y, p or n", "u").lower()
+        depicts = DEPICTS[depicts]
         confidence = prompt("Confidence (high/medium/low)", "medium").lower()
         if confidence not in ("high", "medium", "low"):
             confidence = "medium"

@@ -31,6 +31,9 @@ sys.path.insert(0, str(PROTO))
 MODEL = 'ViT-B-32'
 PRETRAINED = 'laion2b_s34b_b79k'
 
+from data_integrity import assert_image_isolation  # noqa: E402
+from pair_sampling import photo, cross_sample, mine_pairs  # noqa: E402
+
 
 def healthy():
     if int(Path('/proc/sys/kernel/tainted').read_text()) & 128:
@@ -59,55 +62,7 @@ def check_splits(pub, mmap):
         if bid in known and known[bid] != r['split']:
             raise ValueError(f'Split leakage for building {bid}')
         known[bid] = r['split']
-
-
-def photo(r):
-    return str(r['drawing_flag']).lower() in ('0', 'false', '')
-
-
-def cross_sample(left, right, cap, rng):
-    # Uniformly sample a Cartesian product without materializing it.
-    n = len(left) * len(right)
-    return [(left[i // len(right)], right[i % len(right)])
-            for i in rng.sample(range(n), min(cap, n))]
-
-
-def mine_pairs(pub, mmap, seed=0, cap=20):
-    rng = random.Random(seed)
-    pb, mb = defaultdict(list), defaultdict(list)
-    for source, groups in ((pub, pb), (mmap, mb)):
-        for r in source:
-            if r['split'] == 'train' and photo(r):
-                groups[r['building_id']].append(r)
-    pairs = []
-    counts = {'cross_era': 0, 'cross_pole': 0}
-    for bid in sorted(pb):
-        era = defaultdict(list)
-        for r in pb[bid]:
-            if r['capture_era']:
-                era[r['capture_era']].append(r)
-        keys = sorted(era)
-        # Flatten era-pair products into integer intervals; sample without
-        # allocating O(number-of-images squared) intermediate pair lists.
-        groups = [(era[a], era[b]) for i, a in enumerate(keys) for b in keys[i+1:]]
-        total = sum(len(a)*len(b) for a, b in groups)
-        chosen = rng.sample(range(total), min(cap, total))
-        for index in chosen:
-            for a, b in groups:
-                n = len(a)*len(b)
-                if index < n:
-                    pairs.append((a[index//len(b)], b[index%len(b)]))
-                    counts['cross_era'] += 1
-                    break
-                index -= n
-        if bid in mb:
-            sampled = cross_sample(pb[bid], mb[bid], cap, rng)
-            pairs.extend(sampled)
-            counts['cross_pole'] += len(sampled)
-    rng.shuffle(pairs)
-    if not pairs:
-        raise ValueError('No eligible training pairs')
-    return pairs, counts
+    assert_image_isolation(pub, mmap)
 
 
 def building_loss(a, b, bids, scale):
@@ -276,38 +231,52 @@ def cached_vectors(path, rows):
     return aligned / norms
 
 
-def metrics(qrows, qvec, grows, gvec):
+def metrics(qrows, qvec, grows, gvec, *, return_outcomes=False):
     if not qrows or len(grows) < 6: raise ValueError('Insufficient evaluation data')
     assert len(qrows) == len(qvec) and len(grows) == len(gvec)
     gb = np.array([r['building_id'] for r in grows])
     ge = np.array([r['capture_era'] for r in grows])
-    gpos = {r['_id']: i for i, r in enumerate(grows)}
-    eras = defaultdict(set)
-    for r in grows:
-        if r['capture_era']: eras[r['building_id']].add(r['capture_era'])
-    mate_counts = defaultdict(int)
-    for bid in gb: mate_counts[bid] += 1
+    identities = np.array([r.get('_image_identity', r['_id']) for r in grows])
+    mates = defaultdict(list)
+    for i, r in enumerate(grows):
+        mates[r['building_id']].append(i)
     top5 = cross5 = eligible = n = 0
+    outcomes = []
     for start in range(0, len(qrows), 128):
         qr = qrows[start:start+128]
         sims = qvec[start:start+128] @ gvec.T
         for i, r in enumerate(qr):
-            if r['_id'] in gpos: sims[i, gpos[r['_id']]] = -np.inf
+            identity = r.get('_image_identity', r['_id'])
+            sims[i, identities == identity] = -np.inf
         order = np.argpartition(-sims, 4, axis=1)[:, :5]
         for i, r in enumerate(qr):
-            available = mate_counts[r['building_id']] - int(r['_id'] in gpos)
-            if available <= 0: continue
+            identity = r.get('_image_identity', r['_id'])
+            available = [j for j in mates[r['building_id']] if identities[j] != identity]
+            if not available: continue
             n += 1
-            same = gb[order[i]] == r['building_id']
-            top5 += bool(same.any())
-            valid = bool(r['capture_era']) and bool(eras[r['building_id']] - {r['capture_era']})
+            same = (gb[order[i]] == r['building_id']) & np.isfinite(sims[i, order[i]])
+            hit = bool(same.any())
+            top5 += hit
+            cross_hit = None
+            valid = bool(r['capture_era']) and any(
+                ge[j] and ge[j] != r['capture_era'] for j in available)
             if valid:
                 eligible += 1
-                cross5 += bool((same & (ge[order[i]] != '') &
-                              (ge[order[i]] != r['capture_era'])).any())
-    return {'queries_with_mates': n, 'top5': top5/max(1,n),
-            'cross_era_eligible_queries': eligible,
-            'cross_era_top5_fair': cross5/max(1,eligible)}
+                cross_hit = bool((same & (ge[order[i]] != '') &
+                                  (ge[order[i]] != r['capture_era'])).any())
+                cross5 += cross_hit
+            outcomes.append({'id': r['_id'], 'building_id': r['building_id'],
+                             'group': r.get('_evaluation_group', r['building_id']),
+                             'top5': int(hit),
+                             'cross_era_top5_fair': int(cross_hit) if valid else None})
+    result = {'queries_with_mates': n, 'top5': top5/max(1,n),
+              'cross_era_eligible_queries': eligible,
+              'cross_era_top5_fair': cross5/max(1,eligible),
+              'query_buildings': len({r['building_id'] for r in outcomes}),
+              'independent_groups': len({r['group'] for r in outcomes})}
+    if return_outcomes:
+        result['outcomes'] = outcomes
+    return result
 
 
 def atomic_json(path, data):
@@ -339,17 +308,30 @@ def main():
                          'buildings (frozen embeddings) so negatives are confusable')
     ap.add_argument('--resume', default='',
                     help='checkpoint to continue training from (same optimiser state)')
+    ap.add_argument('--publisher-manifest', default=str(DATA/'manifest.csv'))
+    ap.add_argument('--mapillary-manifest', default=str(DATA/'mapillary_manifest.csv'))
     args = ap.parse_args()
     if args.batch_size < 2 or args.workers < 0: raise ValueError('Invalid batch/workers')
     run = Path(args.run_dir)
-    run.mkdir(parents=True, exist_ok=False)
+    if run.exists():
+        raise ValueError(f'Run directory exists: {run}')
     healthy()
-    (run/'train_local_pilot.snapshot.py').write_text(Path(__file__).read_text())
     random.seed(args.seed); np.random.seed(args.seed); torch.manual_seed(args.seed)
     torch.set_num_threads(4)
-    pub = load_rows(DATA/'manifest.csv', REPO/'local'/'monument-inbox', 'pub')
-    mmap = load_rows(DATA/'mapillary_manifest.csv', REPO/'local'/'mapillary-inbox', 'map')
+    pub = load_rows(args.publisher_manifest, REPO/'local'/'monument-inbox', 'pub')
+    mmap = load_rows(args.mapillary_manifest, REPO/'local'/'mapillary-inbox', 'map')
     check_splits(pub, mmap)
+    manifest_hashes = {name: hashlib.sha256(Path(path).read_bytes()).hexdigest()
+                       for name, path in [('publisher', args.publisher_manifest),
+                                          ('mapillary', args.mapillary_manifest)]}
+    resume_state = None
+    if args.resume:
+        resume_state = torch.load(args.resume, map_location='cpu', weights_only=False)
+        if resume_state.get('verified_manifest_sha256') != manifest_hashes:
+            raise ValueError('Resume checkpoint lacks matching image-isolated manifest provenance; '
+                             'start a fresh run, do not resume contaminated weights')
+    run.mkdir(parents=True, exist_ok=False)
+    (run/'train_local_pilot.snapshot.py').write_text(Path(__file__).read_text())
     # One historical publisher frame has no frozen embedding. Explicitly
     # exclude cache gaps from BOTH train/eval so comparisons use identical IDs.
     excluded = []
@@ -361,7 +343,7 @@ def main():
                         if f"{r['building_id']}/{r['filename']}" not in have)
         aligned.append([r for r in source
                         if f"{r['building_id']}/{r['filename']}" in have])
-    if set(excluded) != {'pub/17387/11500227_0192_P04.jpg'}:
+    if not set(excluded) <= {'pub/17387/11500227_0192_P04.jpg'}:
         raise ValueError(f'Unexpected frozen-cache exclusions: {excluded}')
     pub, mmap = aligned
     pairs, kinds = mine_pairs(pub, mmap, args.seed)
@@ -370,10 +352,13 @@ def main():
               'pretrained': PRETRAINED, 'kernel': os.uname().release,
               'torch': torch.__version__, 'pairs': len(pairs), 'pair_kinds': kinds,
               'query_split': 'val', 'gallery': len(pub), 'excluded_cache_ids': excluded,
-              'sha256': {name: hashlib.sha256(path.read_bytes()).hexdigest()
+              'verified_manifest_sha256': manifest_hashes,
+              'sha256': {name: hashlib.sha256(Path(path).read_bytes()).hexdigest()
                          for name, path in [('code', Path(__file__)),
-                                            ('publisher_manifest', ROOT/'manifest.csv'),
-                                            ('mapillary_manifest', ROOT/'mapillary_manifest.csv')]},
+                                            ('publisher_manifest', args.publisher_manifest),
+                                            ('mapillary_manifest', args.mapillary_manifest),
+                                            ('pair_sampling', CODE/'pair_sampling.py'),
+                                            ('data_integrity', CODE/'data_integrity.py')]},
               'note': 'Full gallery incl. all splits; only validation queries scored'}
     pbase = cached_vectors(ROOT/'embeddings.npz', pub)
     mbase = cached_vectors(ROOT/'mapillary_embeddings.npz', mapval)
@@ -389,7 +374,7 @@ def main():
     with torch.no_grad(): model.logit_scale.fill_(math.log(1/0.07))
     resumed_from = ''
     if args.resume:
-        state = torch.load(args.resume, map_location='cpu', weights_only=False)
+        state = resume_state
         if state.get('model') != MODEL or state.get('pretrained') != PRETRAINED:
             raise SystemExit('resume checkpoint backbone mismatch')
         model.load_state_dict(state['state_dict'])
@@ -474,7 +459,7 @@ def main():
     torch.save({'state_dict':{k:v.detach().cpu() for k,v in model.state_dict().items()},
                 'optimizer':opt.state_dict(),'model':MODEL,'pretrained':PRETRAINED,
                 'seed':args.seed,'steps':n,'epoch_complete':not bool(args.max_steps),
-                'config':vars(args)},temp)
+                'config':vars(args), 'verified_manifest_sha256': manifest_hashes},temp)
     temp.replace(run/'checkpoint.pt')
     report['state']='checkpoint_saved'; atomic_json(run/'report.json',report)
     if args.max_steps:

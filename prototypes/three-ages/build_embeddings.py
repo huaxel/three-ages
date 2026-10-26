@@ -12,6 +12,7 @@ and manifest size it was built from.
 from __future__ import annotations
 
 import argparse
+import io
 import sys
 from pathlib import Path
 
@@ -73,18 +74,22 @@ def main() -> None:
         rows = rows[:args.limit]
     root = Path(args.image_root)
     ids: list[str] = []
+    image_hashes: list[str] = []
     vectors: list[np.ndarray] = []
     batch: list[torch.Tensor] = []
     batch_ids: list[str] = []
+    batch_hashes: list[str] = []
 
     def flush() -> None:
         with torch.no_grad():
             feats = model.encode_image(torch.stack(batch))
             feats = feats / feats.norm(dim=-1, keepdim=True)
         ids.extend(batch_ids)
+        image_hashes.extend(batch_hashes)
         vectors.extend(feats.cpu().numpy().astype("float32"))
         batch.clear()
         batch_ids.clear()
+        batch_hashes.clear()
 
     missing = 0
     for pos, row in enumerate(rows, 1):
@@ -93,9 +98,12 @@ def main() -> None:
             missing += 1
             continue
         try:
-            with Image.open(path) as image:
-                batch.append(preprocess(image.convert("RGB")).to(args.device))
+            image_bytes = path.read_bytes()
+            with Image.open(io.BytesIO(image_bytes)) as image:
+                tensor = preprocess(image.convert("RGB")).to(args.device)
+            batch.append(tensor)
             batch_ids.append(f"{row['building_id']}/{row['filename']}")
+            batch_hashes.append(hashlib.sha256(image_bytes).hexdigest())
         except Exception:  # unreadable file: counted, not fatal
             missing += 1
             continue
@@ -108,6 +116,8 @@ def main() -> None:
     matrix = np.stack(vectors) if vectors else np.zeros((0, 512), dtype="float32")
     out.parent.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(out, ids=np.array(ids), embeddings=matrix,
+                        image_sha256=np.array(image_hashes, dtype=str),
+                        manifest_sha256=hashlib.sha256(Path(args.manifest).read_bytes()).hexdigest(),
                         model=model_tag, manifest_rows=len(rows),
                         checkpoint=args.checkpoint, checkpoint_sha256=checkpoint_sha,
                         # Provenance: preprocessing/resize behaviour differs between

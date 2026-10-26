@@ -1,0 +1,37 @@
+{
+  "schema": "drawing-development-protocol/1",
+  "created_utc": "2026-10-25T10:22:36.666261+00:00",
+  "head": "drawing",
+  "role": "exploratory development diagnostic, not locked confirmation",
+  "model": "ViT-B-32/laion2b_s34b_b79k",
+  "encoder_training": "none; frozen pretrained inference only",
+  "folds": 5,
+  "seed": 42,
+  "splits": [
+    "train",
+    "val"
+  ],
+  "test_scoring": false,
+  "estimator": {
+    "C": 1.0,
+    "max_iter": 2000,
+    "scaler": "fold-local StandardScaler",
+    "dummy": "fold-local most_frequent"
+  },
+  "primary_metrics": [
+    "building_macro_exact_accuracy",
+    "dummy_building_macro_exact_accuracy"
+  ],
+  "target_semantics": "caption-keyword photo/drawing proxy, not reviewed image truth",
+  "uncertainty": "no independent-replication or generalisation CI from correlated folds",
+  "selection": "one fixed configuration; do not choose hyperparameters from this result",
+  "cache": "local/training/frozen-isolated-20261025/batch64/embeddings.npz",
+  "report": "local/training/frozen-isolated-20261025/batch64/drawing_development_cv.json",
+  "input_sha256": {
+    "manifest": "c7b954d28ebeefdccabfc003466c7c27f743c9e3ebea6c59f47032850c00ed8a",
+    "probe": "d9e2d1fdb801de72505687eb39021d7b944d53666f480f2fa744a0b58f7498d4",
+    "cv": "f261057dad40adc1c2f4b080163fe79b7347b6854715ebadcb7a7bb2b268ea2b",
+    "source_definitions": "ee1303c1fce69ea6e345577f63a85900743905289c6ac0c0c3bc2bfab230d5a4",
+    "isolation": "198ada7c2b8e08b24b3420c28d27d565fda47b49c74bd205d05109dfe0c14f8b"
+  }
+}

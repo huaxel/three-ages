@@ -4,5 +4,6 @@
 open-clip-torch
 scikit-learn
 numpy
-# torch CPU build is sufficient (no GPU on the training box):
+# CPU torch suffices for synthetic contracts and linear probes; encoder inference
+# may use a separately provisioned GPU environment. For CPU-only installation:
 #   pip install torch --index-url https://download.pytorch.org/whl/cpu

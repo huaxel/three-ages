@@ -1,0 +1,12 @@
+{
+  "schema": "capture-era-scope-audit/1",
+  "date": "2026-10-25",
+  "source_manifest_sha256": "7978b91a345fd2b35cf3561b065f0357b4acc999fc43ad1b924b27d5e6e3917e",
+  "historical_report_sha256": "00cc66e30ec8ebf3d4cf6ca48f56ca9e57c3133dec07272688755bda0bbf523f",
+  "historical_report": "prototypes/three-ages/training/evidence/report_capture_era_frozen_venv.json",
+  "dated_test_rows": 7143,
+  "photo_flag_rows": 6376,
+  "drawing_flag_rows": 767,
+  "interpretation": "Historical caption-era evaluation included drawing-flagged rows; not a photo-only dating score",
+  "limits": "Drawing flags and caption dates are source-derived proxies, not human visual ground truth. Metadata count only; no new test predictions or model selection."
+}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' file: data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Offline image review workbench</title>
+<style>
+body{font:16px system-ui,sans-serif;max-width:1100px;margin:2rem auto;padding:0 1rem;color:#182331;background:#f6f7f9}button,input,select,textarea{font:inherit;padding:.45rem}button{cursor:pointer}nav,.backups{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin:1rem 0}#images{display:flex;flex-wrap:wrap;gap:1rem}figure{margin:0;flex:1;min-width:240px}img{max-width:100%;max-height:65vh;object-fit:contain}figcaption,dd{white-space:pre-wrap;overflow-wrap:anywhere}dt{font-weight:bold;margin-top:.7rem}#fields{display:grid;gap:.8rem}#fields label{display:grid;gap:.3rem}textarea{min-height:6rem}#status{padding:1rem;border:1px solid #7c8b9a;white-space:pre-wrap}input:disabled,textarea:disabled,select:disabled{color:#475569}small{display:block}
+</style>
+</head>
+<body>
+<h1>Offline image review</h1>
+<p>Human decisions only. Source reviews are read-only. Your source files are never changed. Download backups to retain drafts outside this browser.</p>
+<p>This page is a build-time evidence snapshot, not a live source validator. Validate downloaded CSV against current source bytes with <code>stage_review_workbench.py</code> into a NEW directory before use. No identity, licence or training approval is inferred here. Importing another reviewer's backup does not constitute an independent review.</p>
+<label>Reviewer for explicit Save + next commits <input id="globalReviewer" autocomplete="off" placeholder="Type your reviewer name"></label>
+<nav aria-label="Cases">
+<button id="previous" type="button">Previous</button>
+<select id="caseSelect" aria-label="Current case"></select>
+<button id="next" type="button">Next</button>
+<label><input id="hideCompleted" type="checkbox"> Hide completed</label>
+<span id="progress"></span>
+</nav>
+<main>
+<h2 id="caseTitle"></h2>
+<div id="images"></div>
+<dl id="context"></dl>
+<div id="fields"></div>
+<p><button id="saveNext" type="button">Save + next</button></p>
+<small>Save + next may fill today's date and the reviewer you explicitly typed above. It never fills a decision or confidence.</small>
+</main>
+<section class="backups" aria-label="Backups and exports">
+<button id="exportJSON" type="button">Download draft JSON</button>
+<button id="exportRecovery" type="button" hidden>Download stored recovery data</button>
+<label>Import draft JSON <input id="importJSON" type="file" accept=".json,application/json"></label>
+<button id="exportCSV" type="button">Download completed CSV</button>
+</section>
+<p>CSV preserves raw cells, all baseline fields and canonical header order. Formula-looking values are not altered because immutable fingerprints must match. Open the CSV in a text editor, or import every column into a spreadsheet as text; do not open it with automatic formula interpretation.</p>
+<p id="status" role="status" aria-live="polite"></p>
+<script type="application/json" id="reviewData">__REVIEW_DATA__</script>
+<script>__REVIEW_MODEL__</script>
+<script>__REVIEW_UI__</script>
+</body>
+</html>

@@ -8,6 +8,7 @@ The repository contains a 34-building City of Brussels Grand Place snapshot and 
 
 - [`prototypes/three-ages/`](prototypes/three-ages/) — browser explorer, source data, images, review worksheets and generators
 - [`ocaml/`](ocaml/) — experimental OCaml/Bonsai evidence-review slice using the same JSON artifacts
+- [`prototypes/three-ages/training/README.md`](prototypes/three-ages/training/README.md) — ML data isolation, byte-pinned features, development evaluation and human review workflow
 - [`docs/three-ages-annotation-spec.md`](docs/three-ages-annotation-spec.md) — evidence and review schema
 - [`docs/three-ages-demo-script.md`](docs/three-ages-demo-script.md) — five-minute review flow
 - [`docs/three-ages-source-access.md`](docs/three-ages-source-access.md) — source, licence and access status
@@ -34,6 +35,11 @@ If the project-local opam switch already exists, skip `opam switch create` and
 run the remaining commands.
 
 The prototype gate regenerates structural crops and exports, validates source and review provenance, tests preservation/refusal/reset behavior in isolated copies, compiles Python, exercises the browser UI, strictly parses JSON and checks artifact permissions. The Bonsai gate builds the JavaScript bundle and tests draft contracts, review decoding, case-switch isolation and download attribution. CI runs the prototype gate with `--check-clean` on Python 3.10 and 3.13 and runs the Bonsai gate on OCaml 5.2 and Node.js 22.
+
+The optional synthetic ML contract gate is `scripts/validate-ml.sh` in an
+environment with PyTorch, NumPy and scikit-learn. It needs no corpus, model
+weights or GPU and also runs in CI. See the ML workflow above for actual data
+and feature-generation prerequisites.
 
 ## Run locally
 

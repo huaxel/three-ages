@@ -1,63 +1,39 @@
 #!/usr/bin/env python3
-"""Encode the publisher corpus with a tuned checkpoint, for the linear probes.
+"""Compatibility entrypoint for the canonical provenance-aware cache builder.
 
-Uses the pilot's own encode path and the frozen cache's ID set, so probe results
-are directly comparable to the frozen baselines (same rows, same order rules).
+Uses build_embeddings.py rather than maintaining a second encoder/cache schema.
+Choose the isolated manifest explicitly; old tuned caches remain historical.
 """
 from __future__ import annotations
 import argparse
-import json
+import subprocess
 import sys
 from pathlib import Path
 
-import numpy as np
-import torch
-
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE))
-from train_local_pilot import MODEL, PRETRAINED, ROOT, encode, healthy, load_rows  # noqa: E402
+REPO = HERE.parents[2]
 
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument('--checkpoint', required=True)
     ap.add_argument('--out', required=True)
+    ap.add_argument('--manifest', default=str(REPO/'local/training/manifest.csv'))
+    ap.add_argument('--image-root', default=str(REPO/'local/monument-inbox'))
     ap.add_argument('--batch-size', type=int, default=64)
-    ap.add_argument('--workers', type=int, default=2)
+    ap.add_argument('--device', default='cuda')
+    ap.add_argument('--workers', type=int, default=None,
+                    help='deprecated; canonical builder batches synchronously')
     args = ap.parse_args()
-    out = Path(args.out)
-    if out.exists():
-        raise SystemExit(f'{out} exists; refusing to overwrite')
-    healthy()
-
-    state = torch.load(args.checkpoint, map_location='cpu', weights_only=False)
-    if state.get('model') != MODEL or state.get('pretrained') != PRETRAINED:
-        raise SystemExit('checkpoint backbone mismatch')
-    rows = load_rows(ROOT / 'manifest.csv', ROOT.parent / 'monument-inbox', 'pub')
-    # Same inclusion set as the frozen cache, so probes compare like with like.
-    with np.load(ROOT / 'embeddings.npz', allow_pickle=False) as data:
-        have = set(data['ids'].tolist())
-    rows = [r for r in rows if f"{r['building_id']}/{r['filename']}" in have]
-
-    import open_clip
-    model, _, val_tf = open_clip.create_model_and_transforms(
-        MODEL, pretrained=PRETRAINED, device='cuda')
-    model.load_state_dict(state['state_dict'])
-    model.eval()
-    print(f'encoding {len(rows)} publisher images with tuned weights', flush=True)
-    vectors = encode(model, rows, val_tf, args.batch_size, args.workers)
-    if len(vectors) != len(rows):
-        raise SystemExit('row/vector count mismatch')
-    healthy()
-    temp = out.with_suffix('.tmp.npz')
-    np.savez(temp,
-             ids=np.array([f"{r['building_id']}/{r['filename']}" for r in rows]),
-             embeddings=vectors,
-             model=np.array(f'{MODEL}/{PRETRAINED}+tuned:{Path(args.checkpoint).parent.name}'))
-    temp.replace(out)
-    print(json.dumps({'out': str(out), 'rows': len(rows),
-                      'checkpoint': str(args.checkpoint),
-                      'steps': state.get('steps')}), flush=True)
+    if Path(args.out).exists():
+        ap.error('output exists; refusing to replace a cache')
+    if args.workers is not None:
+        print('--workers is deprecated and ignored by the canonical builder', file=sys.stderr)
+    command = [sys.executable, str(HERE.parent/'build_embeddings.py'),
+               '--checkpoint', args.checkpoint, '--out', args.out,
+               '--manifest', args.manifest, '--image-root', args.image_root,
+               '--batch-size', str(args.batch_size), '--device', args.device]
+    subprocess.run(command, check=True)
 
 
 if __name__ == '__main__':

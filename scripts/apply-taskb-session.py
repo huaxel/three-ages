@@ -45,6 +45,8 @@ def main() -> None:
         reader = csv.DictReader(fh)
         rows = list(reader)
         fieldnames = reader.fieldnames or list(rows[0].keys())
+    if 'depicts_building' not in fieldnames:
+        fieldnames.append('depicts_building')
     by_id = {r["building_id"]: r for r in rows}
 
     applied, skipped_labelled, stale = 0, [], []
@@ -67,7 +69,7 @@ def main() -> None:
         row["reviewed_at"] = rec.get("reviewed_at", "")
         row["confidence"] = rec.get("confidence", "")
         if "depicts_building" in fieldnames:
-            row["depicts_building"] = rec.get("depicts_building", "yes")
+            row["depicts_building"] = rec.get("depicts_building", "")
         applied += 1
 
     with open(QUEUE, "w", encoding="utf-8", newline="") as fh:
