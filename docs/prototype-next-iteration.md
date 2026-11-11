@@ -320,3 +320,5 @@ Code paths under `training/` above are relative to
 ## Decision boundary
 
 Do not add more interface features until the curated-MVP evidence has been reviewed. The next work is human confirmation of identity mappings, register semantics, facade observations and structural comparisons.
+
+Refocus 2026-10-26: no new model-tuning variants, repeated construction-era scoring, or corpus expansion until the annotation-validity diagnostic in [research-focus.md](research-focus.md) completes. The facade audit now distinguishes 17 populated review rows from 6 uncontradicted valid labels (11 semantic contradictions); per-class valid support is baroque 4/2 units, classical french 2/1 unit, renaissance-inspired 0. The annotation spec requires `facade_style` to stay blank on context-only rows.

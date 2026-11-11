@@ -406,6 +406,16 @@ def audit_facade_dataset(
     per_class_image_counts: dict[str, int] = {}
     per_class_units: dict[str, set[str]] = {}
     per_class_buildings: dict[str, set[str]] = {}
+    valid_per_class_image_counts: dict[str, int] = {}
+    valid_per_class_units: dict[str, set[str]] = {}
+
+    semantic_markers = (
+        "no case-level facade annotation is assigned",
+        "did not assign a facade-period",
+        "area context only",
+        "ensemble/area context only",
+    )
+    semantic_contradictions: list[dict[str, str]] = []
 
     for idx, r in enumerate(rows):
         style = r.get("facade_style", "").strip().lower()
@@ -429,6 +439,17 @@ def audit_facade_dataset(
                 incomplete_rows_list.append((idx, f"style={style} but missing required observation/metadata/valid date"))
             else:
                 reviewed_rows_list.append(r)
+                observation = (
+                    r.get("facade_observation", "") + " " + r.get("structural_observation", "")
+                ).lower()
+                contradicted = any(marker in observation for marker in semantic_markers)
+                if contradicted:
+                    semantic_contradictions.append({
+                        "row_index": str(idx),
+                        "source_id": r.get("source_id", ""),
+                        "asset_id": r.get("asset_id", ""),
+                        "facade_style": style,
+                    })
                 per_class_image_counts[style] = per_class_image_counts.get(style, 0) + 1
                 unit_id = r.get("facade_unit_id") or r.get("source_id") or ""
                 bldg_id = r.get("source_id", "")
@@ -436,12 +457,17 @@ def audit_facade_dataset(
                     per_class_units.setdefault(style, set()).add(unit_id)
                 if bldg_id:
                     per_class_buildings.setdefault(style, set()).add(bldg_id)
+                if not contradicted:
+                    valid_per_class_image_counts[style] = valid_per_class_image_counts.get(style, 0) + 1
+                    if unit_id:
+                        valid_per_class_units.setdefault(style, set()).add(unit_id)
         else:
             pending_rows_count += 1
 
     reviewed_count = len(reviewed_rows_list)
     per_class_unique_units = {k: len(v) for k, v in per_class_units.items()}
     per_class_unique_buildings = {k: len(v) for k, v in per_class_buildings.items()}
+    valid_per_class_unique_units = {k: len(v) for k, v in valid_per_class_units.items()}
 
     # 4. Group Structure & Split Feasibility
     groups = find_connected_groups(rows)
@@ -482,12 +508,17 @@ def audit_facade_dataset(
             "is_ready_for_evaluation": is_ready_for_eval,
             "total_rows": total_rows,
             "reviewed_rows_count": reviewed_count,
+            "valid_label_rows_count": reviewed_count - len(semantic_contradictions),
+            "semantic_contradiction_count": len(semantic_contradictions),
+            "semantic_contradictions": semantic_contradictions,
             "pending_rows_count": pending_rows_count,
             "incomplete_review_rows_count": len(incomplete_rows_list),
             "invalid_styles_count": len(invalid_styles),
             "per_class_image_counts": per_class_image_counts,
             "per_class_unique_units": per_class_unique_units,
             "per_class_unique_buildings": per_class_unique_buildings,
+            "valid_per_class_image_counts": valid_per_class_image_counts,
+            "valid_per_class_unique_units": valid_per_class_unique_units,
         },
         "group_leakage_audit": {
             "multi_image_units_count": len(multi_image_units),
@@ -541,6 +572,8 @@ def format_audit_report(report: dict[str, Any]) -> str:
         "-" * 78,
         "LABEL READINESS AUDIT",
         f"Reviewed rows:           {readiness['reviewed_rows_count']}",
+        f"Valid labels:            {readiness.get('valid_label_rows_count', readiness['reviewed_rows_count'])}",
+        f"Semantic contradictions:  {readiness.get('semantic_contradiction_count', 0)}",
         f"Pending rows:            {readiness['pending_rows_count']}",
         f"Incomplete rows:         {readiness['incomplete_review_rows_count']}",
         f"Invalid styles:          {readiness['invalid_styles_count']}",
@@ -554,6 +587,13 @@ def format_audit_report(report: dict[str, Any]) -> str:
             lines.append(f"  - {cls:<22}: {count:>2} images across {units:>2} unit(s), {bldgs:>2} building(s)")
     else:
         lines.append("Per-class reviewed distribution: None (0 reviewed visual labels)")
+
+    valid_counts = readiness.get("valid_per_class_image_counts", {})
+    if valid_counts:
+        lines.append("Per-class valid-label distribution:")
+        for cls, count in valid_counts.items():
+            units = readiness.get("valid_per_class_unique_units", {}).get(cls, 0)
+            lines.append(f"  - {cls:<22}: {count:>2} images across {units:>2} unit(s)")
 
     lines.extend([
         "-" * 78,

@@ -1,0 +1,29 @@
+{
+  "name": "brussels-painting-study",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve": "node serve.mjs",
+    "test": "node --test *.test.mjs && python3 -m unittest discover -s . -p 'test_*.py'",
+    "render": "node render.mjs && node directions-render.mjs && node batch-render.mjs",
+    "render:directions": "node directions-render.mjs",
+    "render:batch": "node batch-render.mjs",
+    "validate:batch": "node batch-cli.mjs validate",
+    "check:pool-sandbox": "node pool/sandbox-check.mjs",
+    "check:pool-ui": "node pool/review-browser.mjs",
+    "check:pool-replay": "node pool/replay.mjs",
+    "freeze:structure": "node pool/freeze-structure.mjs",
+    "generate:operators": "node pool/local-operators.mjs",
+    "render:structure": "node pool/structure-search.mjs",
+    "check:structure-ui": "node pool/explore-browser.mjs",
+    "persona:show": "node pool/persona-style.mjs show",
+    "render:personas": "node pool/program-search.mjs",
+    "persona:organic": "node pool/organic-personas.mjs",
+    "check:organic-ui": "node pool/organic-browser.mjs",
+    "persona:sample": "node pool/persona-sample.mjs",
+    "check:persona-sample-ui": "node pool/persona-sample-browser.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.60.0"
+  }
+}

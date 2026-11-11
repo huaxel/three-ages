@@ -1,0 +1,63 @@
+BRUSSELS PAINTING / IMAGE-TO-SCENE TASK
+
+You receive ONE supplied Buildings of Brussels photograph and its approved catalog entry.
+Output one JSON scene, version 1. No JavaScript, Python, SVG, HTML, image-model calls,
+network requests, package installation or renderer edits. This is visual interpretation,
+not an architectural survey. Use only what is visible. Do not infer an epoch or date.
+
+The renderer supplies the saturated architectural-print style. Describe the building,
+not a new brush engine or a bespoke style. Keep the photograph's framing. Coordinates
+refer to its 500 x 500 pixels, including the white margin. Source id and scene id must
+match the approved catalog entry. The shared instrument handles ink, paper, texture,
+registration, window repetition and linework.
+
+Required JSON fields:
+  version: 1
+  id: approved catalog id
+  source: same approved id
+  title: source title
+  method: "agent-visual-interpretation"
+  omissions: up to 8 explicit notes about ambiguity and what you simplified
+  view: [x0,y0,x1,y1] of the photographic frame inside the 500 x 500 image
+  elements: 1..80 ordered primitives (background first, foreground last)
+
+Allowed primitives (all IDs unique, lowercase letters/digits/hyphens; reserve "sky"):
+
+1. Polygon:
+  {"type":"polygon","id":"roof","role":"stone","points":[[120,200],[200,180],[280,205],[200,210]]}
+  A simple, non-self-intersecting polygon with 3..64 vertices. Roles:
+  wall-warm, wall-cool, wall-light, stone, glass, context, dark, ochre, paper.
+  "context" is for schematic neighboring buildings, vegetation and secondary masses.
+
+2. Facade with repeated openings:
+  {"type":"facade","id":"front","role":"wall-warm",
+   "quad":[[120,220],[300,210],[330,470],[100,470]],
+   "rows":[[0.1,0.25],[0.4,0.55],[0.7,0.85]],
+   "bays":[[0.1,0.3],[0.4,0.6],[0.7,0.9]],"band":0.04,"mullions":1}
+  Quad order: top-left, top-right, bottom-right, bottom-left; strictly convex.
+  Roles: wall-warm, wall-cool, wall-light, ochre.
+  Rows and bays are ordered, non-overlapping intervals in 0..1 across the quad.
+  band is optional, 0..0.12 of facade height below each window row. It must not
+  overlap the next row or leave the quad. mullions is optional: 0, 1 or 2.
+  Use separate polygons for visible irregular openings rather than inventing a grid.
+
+3. Line:
+  {"type":"line","id":"cornice","role":"outline","points":[[120,220],[300,210]],"width":0.6}
+  2..64 points; roles outline, light, context; optional width 0.2..3.
+
+All coordinates must be finite numbers in 0..500. No extra fields. Maximum scene
+size is 32768 UTF-8 bytes; maximum compiled output is 1200 marks. Use a small number
+of meaningful elements, not hundreds of tiny polygons. No source pixels in JSON.
+
+Important limitations:
+- This first vocabulary has no real curved surfaces, lettering or botanical forms.
+- Represent visible portions conservatively; do not reconstruct behind trees or cars.
+- Architectural lines are drawn over colour plates. Avoid encoding hidden linework.
+- Say what the vocabulary fails to capture in omissions. A valid file is not proof
+  of photographic fidelity or artistic quality.
+
+Save a NEW candidate JSON file; do not overwrite an approved scene. Validate it:
+  node experiments/paint-brussels/batch-cli.mjs validate /path/to/candidate.json
+Read validation errors and revise the JSON, not the validator or painter.
+Human/visual inspection is still needed after rendering. Do not promote a candidate,
+publish it, or launch paid inference or training as part of this task.

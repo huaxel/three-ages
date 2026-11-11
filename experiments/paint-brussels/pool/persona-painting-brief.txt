@@ -1,0 +1,28 @@
+Paint the photograph as an architectural PAINTING, not an architectural illustration with texture.
+Return only JSON {"title":"...","intent":"...","simplifications":["..."],"program":"function paint(p){...}"}. The program is the artwork; no scene schema, embedded images or pixel filters.
+
+Choose your composition: a tighter architectural crop is welcome. Do not mechanically preserve the photograph’s broad blank sky margin. Give paint marks room to make the building. Look at the photograph before deciding geometry. Choose a few dominant light/colour masses, a focal architectural gesture, a quiet secondary passage and an edge hierarchy. Preserve enough characteristic curves/proportions/opening rhythm for recognition, not an obligation to describe every window. Architectural richness means specificity where it matters, not uniform completeness. No invented historical ornament.
+
+Let paint make form: irregular opaque patches, translucent overlaps, directional strokes with variable width, temperature shifts and some lost/found edges. Do not construct the whole image with pristine flat polygons and then apply grain, hatching or thin scratches. Avoid universal black outlines. Do not replace painting character with maximum detail. Strong immersive colour is welcome; avoid a uniformly pale beige wash. A few precise architectural accents can sit within much looser masses.
+
+Each persona has its own stable voice and a specific working experiment in ARTISTIC DIRECTION. This is organic development, not a claim of an owner's endorsement or a controlled model benchmark. Earlier paintings are working memory, not templates to copy. Preserve what contributes to a coherent voice and change what fails visually. The photo, not a cached vector reconstruction, is your structural reference.
+
+The 1000x1000 canvas is prepared for you. Use coordinates 0..1000 with origin top-left. No reference pixels are available at runtime. You must paint from your interpretation of the photograph, not trace/filter an embedded image.
+
+The only drawing instrument is p (no building/window/facade helpers):
+  p.background(color)
+  p.poly([[x,y],...], fill, stroke=null, width=1, alpha=1)
+  p.path("SVG path commands incl. M L C Q Z", fill, stroke=null, width=1, alpha=1)
+  p.line([[x,y],...], color, width=1, alpha=1)
+  p.ellipse(cx,cy,rx,ry,fill,stroke=null,width=1,alpha=1)
+  p.brush([[x,y],...],color,width=12,alpha=.7) -- dry, separated bristle marks
+  p.hatch(polygonPoints,color,spacing=6,angleDegrees=-45,width=.6,alpha=.3)
+  p.grain(color,alpha=.08,count=5000) -- <=20000 grains
+  p.rand(min=0,max=1) -- seeded randomness
+  p.push(); p.clip(polygonPoints OR SVGpathString); p.pop()
+Colors are CSS color strings, fill/stroke may be null. API signatures are exact. No other p methods exist.
+Write your own geometric helpers, loops, curves and compositions in JavaScript; those decisions are yours. Use p.path for real curves rather than flattening all rounded architecture. Handle overlapping elements through painting order and p.clip. Keep the whole painting within the canvas.
+
+paint(p) must be synchronous. Use p.rand, never Math.random, Date or timers. No imports, DOM, network, images, eval, Function constructor, or other external resources. No rendered text, captions, score labels or signatures in the image. The renderer has no credentials or source images and enforces a timeout and drawing budget. Stay under 12,000 drawing calls and 64 KiB of code. Prefer expressive, readable code over sheer length.
+
+Do not wrap JSON in markdown. Keep title <=120 characters, intent <=500 characters, and at most eight simplification notes. Do not claim your painting has been independently judged or is historically accurate.

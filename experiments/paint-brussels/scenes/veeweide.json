@@ -1,0 +1,649 @@
+{
+  "version": 1,
+  "id": "veeweide",
+  "title": "Veeweidestraat × Processiestraat",
+  "source": "veeweide",
+  "method": "agent-visual-interpretation",
+  "omissions": [
+    "Rounded projecting bays are flattened into perspective quads; this representation does not yet model curved facades.",
+    "Window subdivision and cornice profiles are simplified. Ground-floor signage and awnings are omitted.",
+    "This is an agent interpretation of a photograph, not a measured architectural reconstruction."
+  ],
+  "view": [
+    72,
+    14,
+    427,
+    486
+  ],
+  "elements": [
+    {
+      "type": "polygon",
+      "id": "left-neighbor",
+      "role": "context",
+      "points": [
+        [
+          72,
+          353
+        ],
+        [
+          108,
+          355
+        ],
+        [
+          100,
+          486
+        ],
+        [
+          72,
+          486
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "id": "right-neighbors",
+      "role": "context",
+      "points": [
+        [
+          378,
+          461
+        ],
+        [
+          397,
+          448
+        ],
+        [
+          415,
+          433
+        ],
+        [
+          427,
+          445
+        ],
+        [
+          427,
+          486
+        ],
+        [
+          382,
+          486
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "id": "brick-volume",
+      "role": "wall-warm",
+      "points": [
+        [
+          91,
+          486
+        ],
+        [
+          117,
+          274
+        ],
+        [
+          124,
+          267
+        ],
+        [
+          145,
+          264
+        ],
+        [
+          148,
+          257
+        ],
+        [
+          155,
+          257
+        ],
+        [
+          155,
+          264
+        ],
+        [
+          179,
+          269
+        ],
+        [
+          181,
+          276
+        ],
+        [
+          206,
+          270
+        ],
+        [
+          209,
+          261
+        ],
+        [
+          216,
+          261
+        ],
+        [
+          217,
+          271
+        ],
+        [
+          239,
+          277
+        ],
+        [
+          265,
+          279
+        ],
+        [
+          308,
+          276
+        ],
+        [
+          310,
+          266
+        ],
+        [
+          328,
+          263
+        ],
+        [
+          328,
+          256
+        ],
+        [
+          335,
+          256
+        ],
+        [
+          336,
+          264
+        ],
+        [
+          351,
+          268
+        ],
+        [
+          361,
+          278
+        ],
+        [
+          381,
+          461
+        ],
+        [
+          380,
+          486
+        ]
+      ]
+    },
+    {
+      "type": "facade",
+      "id": "left-bay",
+      "role": "wall-warm",
+      "quad": [
+        [
+          126,
+          287
+        ],
+        [
+          169,
+          289
+        ],
+        [
+          158,
+          448
+        ],
+        [
+          106,
+          451
+        ]
+      ],
+      "rows": [
+        [
+          0.03,
+          0.22
+        ],
+        [
+          0.35,
+          0.56
+        ],
+        [
+          0.7,
+          0.92
+        ]
+      ],
+      "bays": [
+        [
+          0.02,
+          0.28
+        ],
+        [
+          0.34,
+          0.65
+        ],
+        [
+          0.71,
+          0.98
+        ]
+      ],
+      "band": 0.035,
+      "mullions": 0
+    },
+    {
+      "type": "facade",
+      "id": "middle-bay",
+      "role": "wall-warm",
+      "quad": [
+        [
+          195,
+          287
+        ],
+        [
+          238,
+          291
+        ],
+        [
+          241,
+          449
+        ],
+        [
+          183,
+          451
+        ]
+      ],
+      "rows": [
+        [
+          0.03,
+          0.22
+        ],
+        [
+          0.35,
+          0.56
+        ],
+        [
+          0.7,
+          0.92
+        ]
+      ],
+      "bays": [
+        [
+          0.02,
+          0.28
+        ],
+        [
+          0.34,
+          0.65
+        ],
+        [
+          0.71,
+          0.98
+        ]
+      ],
+      "band": 0.035,
+      "mullions": 0
+    },
+    {
+      "type": "facade",
+      "id": "right-bay",
+      "role": "wall-warm",
+      "quad": [
+        [
+          311,
+          294
+        ],
+        [
+          358,
+          294
+        ],
+        [
+          377,
+          447
+        ],
+        [
+          320,
+          448
+        ]
+      ],
+      "rows": [
+        [
+          0.03,
+          0.22
+        ],
+        [
+          0.35,
+          0.56
+        ],
+        [
+          0.7,
+          0.92
+        ]
+      ],
+      "bays": [
+        [
+          0.02,
+          0.28
+        ],
+        [
+          0.34,
+          0.65
+        ],
+        [
+          0.71,
+          0.98
+        ]
+      ],
+      "band": 0.035,
+      "mullions": 0
+    },
+    {
+      "type": "facade",
+      "id": "central-flat",
+      "role": "wall-warm",
+      "quad": [
+        [
+          254,
+          287
+        ],
+        [
+          278,
+          289
+        ],
+        [
+          288,
+          449
+        ],
+        [
+          262,
+          449
+        ]
+      ],
+      "rows": [
+        [
+          0.03,
+          0.22
+        ],
+        [
+          0.35,
+          0.56
+        ],
+        [
+          0.7,
+          0.92
+        ]
+      ],
+      "bays": [
+        [
+          0.16,
+          0.84
+        ]
+      ],
+      "band": 0.025,
+      "mullions": 0
+    },
+    {
+      "type": "polygon",
+      "id": "left-coping",
+      "role": "stone",
+      "points": [
+        [
+          119,
+          271
+        ],
+        [
+          143,
+          266
+        ],
+        [
+          175,
+          273
+        ],
+        [
+          176,
+          279
+        ],
+        [
+          142,
+          273
+        ],
+        [
+          118,
+          277
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "id": "middle-coping",
+      "role": "stone",
+      "points": [
+        [
+          185,
+          276
+        ],
+        [
+          209,
+          269
+        ],
+        [
+          239,
+          277
+        ],
+        [
+          240,
+          283
+        ],
+        [
+          210,
+          276
+        ],
+        [
+          184,
+          282
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "id": "right-coping",
+      "role": "stone",
+      "points": [
+        [
+          309,
+          269
+        ],
+        [
+          330,
+          264
+        ],
+        [
+          354,
+          270
+        ],
+        [
+          359,
+          279
+        ],
+        [
+          333,
+          271
+        ],
+        [
+          309,
+          276
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "id": "left-roof-fin",
+      "role": "stone",
+      "points": [
+        [
+          149,
+          257
+        ],
+        [
+          155,
+          257
+        ],
+        [
+          155,
+          287
+        ],
+        [
+          149,
+          287
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "id": "middle-roof-fin",
+      "role": "stone",
+      "points": [
+        [
+          209,
+          260
+        ],
+        [
+          216,
+          260
+        ],
+        [
+          216,
+          290
+        ],
+        [
+          210,
+          290
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "id": "right-roof-fin",
+      "role": "stone",
+      "points": [
+        [
+          329,
+          255
+        ],
+        [
+          335,
+          255
+        ],
+        [
+          339,
+          294
+        ],
+        [
+          332,
+          294
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "id": "ground-floor",
+      "role": "stone",
+      "points": [
+        [
+          94,
+          460
+        ],
+        [
+          376,
+          460
+        ],
+        [
+          380,
+          486
+        ],
+        [
+          90,
+          486
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "id": "shop-front",
+      "role": "dark",
+      "points": [
+        [
+          132,
+          470
+        ],
+        [
+          312,
+          470
+        ],
+        [
+          315,
+          486
+        ],
+        [
+          130,
+          486
+        ]
+      ]
+    },
+    {
+      "type": "line",
+      "id": "upper-string-course",
+      "role": "light",
+      "points": [
+        [
+          113,
+          333
+        ],
+        [
+          176,
+          334
+        ],
+        [
+          240,
+          337
+        ],
+        [
+          314,
+          338
+        ],
+        [
+          365,
+          339
+        ]
+      ],
+      "width": 0.9
+    },
+    {
+      "type": "line",
+      "id": "lower-string-course",
+      "role": "light",
+      "points": [
+        [
+          103,
+          391
+        ],
+        [
+          174,
+          391
+        ],
+        [
+          241,
+          392
+        ],
+        [
+          318,
+          393
+        ],
+        [
+          372,
+          393
+        ]
+      ],
+      "width": 0.8
+    }
+  ]
+}

@@ -4,7 +4,7 @@ Owner decision 2026-10-09: sequence both targets. Stage 1 trains facade
 style/period recognition on the scaled BALaT corpus; Stage 2 trains
 structural-change detection on the aligned four-epoch crops, reusing the
 provenance pipeline. The six-case pilot serves only as eval/testbed until
-scale exists. No training run starts before the blockers below clear.
+scale exists. No Stage 1 classifier training run starts before the blockers below clear.
 
 ## Current research validity — 2026-10-25
 
@@ -16,6 +16,14 @@ exact shared-image leakage. Old checkpoints and test reports remain historical.
 Human identity/applicability review, a fresh confirmation cohort and clean
 retraining are still pending. See the [review backlog](prototype-next-iteration.md#review-backlog--2026-10-25)
 and [ML validity update](three-ages-finetune-pilot-result.md).
+
+Refocus 2026-10-26: no new tuning variants, repeated construction-era scoring, or
+corpus expansion until the annotation-validity diagnostic in
+[research-focus.md](research-focus.md) is complete. The weak catalogue-tag linear
+probes are exploratory diagnostics only: they do not evaluate reviewed visual
+labels or qualify as Stage 1 training. The next empirical gate is to test whether
+the populated facade reviews mean what supervised training needs; the entry
+thresholds below remain unchanged.
 
 ## Readiness status (2026-10-09)
 

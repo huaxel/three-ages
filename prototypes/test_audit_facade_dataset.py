@@ -382,6 +382,8 @@ def test_prototype_committed_dataset_audit() -> None:
 
     assert weak["rows_with_weak_label"] == 72
     assert readiness["reviewed_rows_count"] == 17
+    assert readiness["semantic_contradiction_count"] == 11
+    assert readiness["valid_label_rows_count"] == 6
     assert readiness["pending_rows_count"] == 60
     assert readiness["per_class_unique_units"] == {"baroque": 4, "classical french": 1, "renaissance-inspired": 1}
     assert readiness["incomplete_review_rows_count"] == 0
@@ -395,6 +397,42 @@ def test_prototype_committed_dataset_audit() -> None:
     text = format_audit_report(report)
     assert "THREE AGES — AUDITABLE DATASET EVALUATION & READINESS REPORT" in text
     assert "INSUFFICIENT DATA" in text
+
+
+def test_context_only_style_is_flagged_not_valid() -> None:
+    """A populated style alongside a context-only observation is completion, not a valid label."""
+    with tempfile.TemporaryDirectory() as tmpdir:
+        csv_path = Path(tmpdir) / "semantic.csv"
+        rows = [
+            {
+                "source_id": "005",
+                "facade_unit_id": "gp-005",
+                "asset_id": "E049753",
+                "preview_sha256": "h1",
+                "facade_style": "baroque",
+                "facade_observation": "Recorded as area context only; no case-level facade annotation is assigned.",
+                "reviewer": "Alice",
+                "reviewed_at": "2026-10-09T10:00:00Z",
+                "confidence": "medium",
+            },
+            {
+                "source_id": "024",
+                "facade_unit_id": "gp-024",
+                "asset_id": "balance-1878",
+                "preview_sha256": "h2",
+                "facade_style": "baroque",
+                "facade_observation": "Same facade composition visibly persists; facade evidence only.",
+                "reviewer": "Alice",
+                "reviewed_at": "2026-10-09T10:00:00Z",
+                "confidence": "medium",
+            },
+        ]
+        write_test_csv(csv_path, rows)
+        readiness = audit_facade_dataset(csv_path)["label_readiness"]
+        assert readiness["reviewed_rows_count"] == 2
+        assert readiness["semantic_contradiction_count"] == 1
+        assert readiness["valid_label_rows_count"] == 1
+        assert readiness["semantic_contradictions"][0]["asset_id"] == "E049753"
 
 
 if __name__ == "__main__":

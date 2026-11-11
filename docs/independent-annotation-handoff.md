@@ -2,7 +2,21 @@
 
 For a reviewer-ready checklist, use the [independent annotation packet](independent-annotation-review-packet.md).
 
-Blind second-review worksheets cover the six-case pilot, case-level structural comparisons and scaled photo sources:
+### Minimal blind facade-style re-review
+
+The generic pilot independent worksheet currently contains 17 observation/reviewer/date fields copied exactly from the primary worksheet; it is not an independent review. The generic bundle builder now refuses any prefilled review answers. Do not share the old independent worksheet or build the generic bundle from it.
+
+To prepare a source-blind consistency check of the 17 existing style-labelled images, run:
+
+```sh
+python3 prototypes/three-ages/build_blind_facade_style_packet.py
+```
+
+Share only `local/training/blind-style-review-20261026/blind-facade-style-review.zip`. Keep the adjacent `answer-key.json` private. The ZIP presents anonymous image IDs, blank review fields and metadata-stripped, pixel-preserving images; required attribution is separated into a file marked for after review. This checks only the existing small annotated set; it is not a representative sample or model evaluation. After return, preserve the returned ZIP, compare its `review.csv` to the private answer key, record agreement/abstention and reviewer time, and do not use it for training without the normal adjudication gate.
+
+The generic pilot image worksheet cannot currently be used for a full blind bundle: its 17 observation/reviewer/date fields are copied from primary review, and regeneration preserves those values. The bundle builder refuses this state. Do not clear or overwrite those worksheets to force a bundle; use the focused style-only packet above for the current check. A future full bundle needs clean blank review worksheets in a separate, provenance-preserving staging area.
+
+Other blind second-review worksheets cover the six-case pilot, case-level structural comparisons and scaled photo sources:
 
 - `prototypes/three-ages/data/three-ages-independent-image-review.csv`
 - `prototypes/three-ages/data/three-ages-independent-structural-review.csv`
@@ -18,7 +32,7 @@ python3 prototypes/three-ages/build_independent_review_bundle.py
 
 Import a reviewer-returned ZIP with `python3 prototypes/three-ages/import_independent_review_bundle.py --bundle <zip>`. It verifies the evidence files and local provenance, and only copies annotation fields; it never extracts archive paths to disk.
 
-The export copies evidence provenance but omits the primary annotator's identity notes, labels, observations, reviewer, date, confidence, and review status. The second reviewer should work from these files without first consulting the primary review worksheets. Independent fields are preserved on regeneration; a changed evidence key or provenance causes a refusal rather than silently reattaching a review.
+When creating an independent worksheet for the first time, the exporter copies evidence provenance but omits primary identity notes, labels, observations, reviewer, date, confidence, and review status. On regeneration it preserves existing independent fields; it does not clear or repair contaminated values. A changed evidence key or provenance causes a refusal rather than silently reattaching a review. Inspect the resulting review columns before sharing, and use the bundle builder's blank-answer guard.
 
 ## Required review steps
 

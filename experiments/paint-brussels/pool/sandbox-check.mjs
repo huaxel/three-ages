@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {renderProgram} from './render-program.mjs';
+const program='function paint(p){p.background("#d6a549");p.poly([[100,800],[120,300],[600,200],[900,750]],"#b65d43","#294c56",2);p.line([[120,320],[600,220],[890,740]],"#f1dfb1",4);p.ellipse(450,450,70,100,"#294c56");p.grain("#243f48",.1,1000);}';
+const a=await renderProgram(program),b=await renderProgram(program);
+assert.equal(a.metadata.renderSha256,b.metadata.renderSha256);
+assert.equal(a.metadata.resourceScope,'delegated-user-scope');
+assert.equal(a.metadata.referencePixelsMounted,false);
+assert.deepEqual(a.metadata.limits,{memory:'1610612736',pids:'256',cpu:'200000 100000'});
+await assert.rejects(()=>renderProgram('x'.repeat(65537)),/64 KiB/);
+await assert.rejects(()=>renderProgram('function paint(p){for(let i=0;i<13000;i++)p.line([[0,0],[1,1]],"black");}'),/Drawing-call budget/);
+await assert.rejects(()=>renderProgram('async function paint(p){return;}'),/must be synchronous/);
+await assert.rejects(()=>renderProgram('function paint(p){while(true){}}',{timeout:8000}),/failure|deadline/i);
+console.log('Sandbox checks passed: real limits, no source mount, deterministic replay, code/call budgets, deadline cleanup');

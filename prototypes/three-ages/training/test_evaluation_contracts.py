@@ -14,11 +14,43 @@ from train_local_pilot import check_splits, metrics
 
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from train_probe import validate_cache_training
+from train_probe import (load_style_taxonomy, style_taxonomy_targets, targets,
+                         taxonomy_has_target, validate_cache_training)
 from construction_image_reviews import prepare as prepare_image_reviews
 
 
 class EvaluationContractTests(unittest.TestCase):
+    def test_reviewed_style_taxonomy_excludes_descriptor_classes(self):
+        mapping = load_style_taxonomy()
+        classes = {label for labels in mapping.values() for label in labels}
+        self.assertEqual(len(classes), 16)
+        self.assertIn('baroque', classes)
+        self.assertIn('historicist_neo', classes)
+        self.assertNotIn('descriptor (non-period; excluded from positive labels)', classes)
+
+    def test_taxonomy_targets_preserve_multi_labels_and_drop_unmapped_only_rows(self):
+        mapping = {
+            'Baroque': ['baroque'],
+            'Baroque classicisant': ['baroque', 'baroque_classical'],
+            'Descriptor only': [],
+        }
+        rows = [
+            {'styles': ['Baroque', 'Baroque classicisant', 'Gothique']},
+            {'styles': 'Gothique'},
+            {'styles': ['Descriptor only']},
+        ]
+        matrix, classes, unmatched = style_taxonomy_targets(rows, mapping)
+        self.assertEqual(classes, ['baroque', 'baroque_classical'])
+        self.assertEqual(matrix.tolist(), [[1, 1], [0, 0], [0, 0]])
+        self.assertEqual(unmatched, {'Gothique': 2})
+        self.assertTrue(taxonomy_has_target(rows[0]['styles'], mapping))
+        self.assertFalse(taxonomy_has_target(rows[1]['styles'], mapping))
+        self.assertFalse(taxonomy_has_target(rows[2]['styles'], mapping))
+
+    def test_public_taxonomy_target_builder_rejects_all_negative_rows(self):
+        with self.assertRaisesRegex(ValueError, 'positive mapped target'):
+            targets([{'styles': ['Gothique']}], 'style_taxonomy')
+
     def test_old_tuned_probe_cache_rejected_even_with_clean_input(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory)/'manifest.csv'

@@ -75,6 +75,7 @@ notes
 - Use a controlled style vocabulary only after a reviewer agrees to it.
 - Record visible features and evidence, not just a style label.
 - Allow `uncertain`, `mixed`, and `not-visible` outcomes.
+- Leave `facade_style` blank when the observation withholds a case-level annotation (context-only, ensemble-only, or unconfirmed identity). A populated style alongside such an observation is a protocol violation, not a valid label; the audit flags it as a semantic contradiction.
 
 ### Structural evidence
 

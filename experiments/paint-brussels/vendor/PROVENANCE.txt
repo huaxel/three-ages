@@ -1,0 +1,14 @@
+p5.brush standalone renderer, version 3.0.0
+Upstream: https://github.com/acamposuribe/p5.brush
+Commit: d56350a647d0b098a9e79d397447a8094f6c45a4
+File: dist/brush.js (unmodified)
+Licence: MIT; see LICENSE.txt
+SHA-256: d8afe814fa4557dcdc41b3fa7a9cec5dfe1c9819700d745232f6c0a4e7add186
+
+Inspection: standalone setup/frame handling and API documentation examined;
+source searched for network requests and dynamic-code execution (no matches).
+This is not a comprehensive third-party security audit. There is no endpoint
+for evaluating submitted JavaScript; scene.mjs is an agent-authored local module.
+The app uses only local assets. Original study pages disable network connections;
+the batch page permits same-origin JSON reads, with no external connections, through
+Content-Security-Policy. Do not reuse this as an untrusted-code sandbox.

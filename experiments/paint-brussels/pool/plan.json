@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "subjects": [
+    {
+      "id": "ackermans",
+      "title": "Ets. Ackermans",
+      "post": "https://buildingsofbrussels.tumblr.com/post/162253721064",
+      "image": "https://64.media.tumblr.com/ebb07baeb21f3291592ada9c51e59b90/tumblr_os4kbxNF101vensaeo1_1280.jpg",
+      "sha256": "1182052ee9557ab99b51bde5aa176f3f5a4e2ec39262c5c6047212ba4909fba8",
+      "pixels": 1080
+    },
+    {
+      "id": "mettewie",
+      "title": "Louis Mettewielaan 272",
+      "post": "https://buildingsofbrussels.tumblr.com/post/161963928459",
+      "image": "https://64.media.tumblr.com/7961bde75e86a7da0250cebce0792e84/tumblr_orqu2gOyAI1vensaeo1_1280.jpg",
+      "sha256": "2347918b9aad2247a7fc6d388151ef9025b270f95a7a3493e977aaa72d06546d",
+      "pixels": 1080
+    },
+    {
+      "id": "veeweide",
+      "title": "Veeweidestraat × Processiestraat",
+      "post": "https://buildingsofbrussels.tumblr.com/post/160872162919",
+      "image": "https://64.media.tumblr.com/85ff003e14e0a43766bcd005891798de/tumblr_oq96b31eHF1vensaeo1_1280.jpg",
+      "sha256": "d1beac80c5dc01ebde547f41ed389652806e4a832bbdf2df1ebccd881219cab9",
+      "pixels": 1080
+    }
+  ],
+  "briefs": [
+    "Create a luminous architectural print: saturated colour fields, careful structural linework, real curves and unusually attentive window/cornice detail. Keep the image alive rather than diagrammatic.",
+    "Create a richly observed coloured engraving: dense but selective architectural line, subtle hatching, deep warm/cool colour, and strong spatial depth. Do not reduce the facade to repeated rectangular holes.",
+    "Create an opaque, tactile architectural painting: visible dry brush decisions, warm/cool colour relationships, convincing geometry and very specific architectural accents. Avoid a generic oil-paint filter.",
+    "Create an inventive cut-paper/overprint city portrait: layering and registration slips, curved and faceted forms, strong colour atmosphere, and precision where the building is distinctive. Not a flat icon.",
+    "Create a cinematic street portrait in coloured ink: deliberate light and shadow, layered facade depth and detailed joinery; fewer marks in secondary areas. Keep the recognisable building, not an imagined replacement.",
+    "Choose your own distinctive visual language for this photograph, using the instrument freely. Prioritise architectural richness and immersive colour over decorative texture. Make an interpretation worth exploring, not just a technically correct sketch."
+  ]
+}

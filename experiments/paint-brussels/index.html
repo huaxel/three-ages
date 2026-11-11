@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Looking, again — Brussels painting study 001</title>
+<link rel="stylesheet" href="style.css">
+<script src="vendor/brush.js" defer></script><script type="module" src="studio.mjs"></script>
+</head>
+<body>
+<header><a href="https://buildingsofbrussels.tumblr.com/">BUILDINGS OF BRUSSELS</a><span>COMPUTATIONAL PAINTING · STUDY 001</span></header>
+<main>
+<section class="intro"><p class="eyebrow">AN ORDINARY CORNER, SEEN AGAIN</p><h1>Looking, again.</h1><p class="deck">One photograph. An executable interpretation.<br>What has to survive for this to remain <em>this</em> building?</p><p><a href="directions.html">Explore four different visual directions →</a></p></section>
+<section class="pair" aria-label="Photograph and painted interpretation">
+<figure><div class="image-well"><img id="reference" src="../../local/paint-brussels/source.jpg" alt="Buildings of Brussels photograph of the cream-banded brick corner building at Democratiestraat 29"><p id="missing" hidden>Reference not prepared. Run <code>python3 experiments/paint-brussels/prepare.py</code> from the repository root.</p></div><figcaption><span>01 / THE PHOTOGRAPH</span><a id="source-link" href="https://www.tumblr.com/buildingsofbrussels/162278233614/democratiestraat-29-veeweide-aurora-district">Buildings of Brussels ↗</a></figcaption></figure>
+<figure><div class="image-well" id="painting"><p id="status" role="status">Preparing the brush engine…</p></div><figcaption><span>02 / THE INTERPRETATION</span><span id="mark-count">Code, not an image model</span></figcaption></figure>
+</section>
+<form id="controls" aria-label="Painting settings">
+<label>Palette<select name="palette"><option value="earth">Brick & overcast light</option><option value="dusk">Violet & warm stone</option></select></label>
+<label>Reveal<select name="stage"><option value="1">1 · Masses</option><option value="2">2 · Window rhythm</option><option value="3" selected>3 · Architectural accents</option></select></label>
+<label>Seed<input name="seed" type="number" min="0" max="999999" step="1" value="29"></label>
+<button type="submit">Paint again</button><a id="download" aria-disabled="true">Save painting ↓</a><a href="scene.mjs" download>Painting program ↓</a>
+</form>
+<section class="notes"><div><p class="eyebrow">DEMOCRATIESTRAAT 29</p><h2>Veeweide–Aurora, Anderlecht.</h2><p>Keep the turning corner, the repeated windows, the cream bands and the vertical seam. Let the neighboring street recede. Leave most of the sky alone.</p></div><div><p class="eyebrow">WHAT THIS IS — AND ISN’T</p><p>An agent-authored architectural study, painted with p5.brush. The building geometry was written from visual inspection of the photograph. No trained painter, automatic facade extraction, epoch prediction, or fidelity evaluation is being claimed.</p><p>Palette changes and progressive passes are experiments, not evidence that a style generalizes. The source photograph remains the reference, not the painting.</p></div></section>
+</main><footer>PRIVATE LOCAL STUDY · Reference pixels are not included in the repository. <a href="https://github.com/acamposuribe/p5.brush">Brush instrument: p5.brush</a></footer>
+</body></html>

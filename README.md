@@ -13,6 +13,8 @@ The repository contains a 34-building City of Brussels Grand Place snapshot and 
 - [`docs/three-ages-demo-script.md`](docs/three-ages-demo-script.md) — five-minute review flow
 - [`docs/three-ages-source-access.md`](docs/three-ages-source-access.md) — source, licence and access status
 - [`scripts/monument-corpus-pipeline.sh`](scripts/monument-corpus-pipeline.sh) — unattended scrape of the whole architectural inventory (26,419 notices) plus its verifiers
+- [`docs/research-focus.md`](docs/research-focus.md) — primary research question, active gate, deferred work and stop rules
+- [Colab training skill](.agents/skills/colab-training/SKILL.md) — safe headless Colab CLI workflow for approved ML jobs
 - [`docs/prototype-review.md`](docs/prototype-review.md) — current evidence assessment
 - [`docs/prototype-next-iteration.md`](docs/prototype-next-iteration.md) — curated-MVP definition of done
 - [`docs/three-ages-review-packet.md`](docs/three-ages-review-packet.md) — human review checklist and controlled decisions

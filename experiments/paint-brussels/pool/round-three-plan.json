@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "subjects": [
+    {
+      "id": "s-159793361269",
+      "title": "Brussel Congres station, Pachecolaan, Martelaars district, Brussels",
+      "post": "https://buildingsofbrussels.tumblr.com/post/159793361269",
+      "image": "https://64.media.tumblr.com/71f687b7368f2e8d491fc171852c20b7/tumblr_oopuibDeHj1vensaeo1_1280.jpg",
+      "sha256": "2b6a6032001b532c447e8b39290a263108ab68ef6bd7abd7ee1d72945089efee",
+      "pixels": 1080,
+      "selectionReason": "tower, carved relief, perspective and tall ribs"
+    },
+    {
+      "id": "s-157537942549",
+      "title": "Lambin’s house, Slotlaan 21, Gribaumont district, Sint-Lambrechts-Woluwe",
+      "post": "https://buildingsofbrussels.tumblr.com/post/157537942549",
+      "image": "https://64.media.tumblr.com/b9cdc212603c584071cb389038e3981a/tumblr_olqphwkDdE1vensaeo1_1280.jpg",
+      "sha256": "c0e5b87fbdf28663025b0d5ca12839e476792e09ca473af7225ddfec6a256625",
+      "pixels": 1080,
+      "selectionReason": "brick planes, projecting bay and steep roof"
+    },
+    {
+      "id": "s-155960204129",
+      "title": "Ropsy Chaudronstraat 24, Kuregem district, Anderlecht",
+      "post": "https://buildingsofbrussels.tumblr.com/post/155960204129",
+      "image": "https://64.media.tumblr.com/9495252e14952a37d433152e70277e23/tumblr_ojw5gqePJt1vensaeo1_1280.jpg",
+      "sha256": "ea03c1d60c08c0afee5d2922343adc8c23745594be133be42f76ca52827e68ad",
+      "pixels": 1080,
+      "selectionReason": "modern arches, glazing and sky atmosphere"
+    },
+    {
+      "id": "s-154995371829",
+      "title": "Saint Job’s Russian Orthodox church, De Frélaan 19, Observatory district, Ukkel",
+      "post": "https://buildingsofbrussels.tumblr.com/post/154995371829",
+      "image": "https://64.media.tumblr.com/bdaf95d096d9182c79832388f212aadd/tumblr_oitdrtWoOs1vensaeo1_1280.jpg",
+      "sha256": "968cf76d3e2f76f5d36ed3d2c5c4eff41f3935de63f8a2246acda4e05352589c",
+      "pixels": 1080,
+      "selectionReason": "curved domes, ornamental silhouette and tree occlusion"
+    },
+    {
+      "id": "s-154176306769",
+      "title": "December 7th. Hotel Haerens, Corner of Brugmanlaan and Looflaan, Montjoie-Langeveld district, Ukkel",
+      "post": "https://buildingsofbrussels.tumblr.com/post/154176306769",
+      "image": "https://64.media.tumblr.com/6f0d0c635074396d44af817683a5062d/tumblr_ohu43bBzSB1vensaeo1_1280.jpg",
+      "sha256": "5dac749800b4122e97f16897917c3fbbce4a76d0ff2c909d694a7c1db447bdac",
+      "pixels": 1080,
+      "selectionReason": "rounded corner, sculpted stone and leafless branches"
+    },
+    {
+      "id": "s-153789104309",
+      "title": "November 28th, II. VUB Student Housing, Triomflaan, University district, Etterbeek",
+      "post": "https://buildingsofbrussels.tumblr.com/post/153789104309",
+      "image": "https://64.media.tumblr.com/8db0dcad04ffc6b1aee66e8ba12307f4/tumblr_ohdeug7OyP1vensaeo1_1280.jpg",
+      "sha256": "c3fe7fea5b471ce38dcb06962e058c3c82a0d1e40b0561521a6250793c9135dc",
+      "pixels": 1080,
+      "selectionReason": "modular coloured volumes and low foreground planting"
+    },
+    {
+      "id": "s-152658253424",
+      "title": "November 2nd. ING Brussels’ Headquarters (formerly Banque Lambert), Marnixlaan 24, European district, Brussels. Gordon Bunshaft’s (SOM) only European building, ",
+      "post": "https://buildingsofbrussels.tumblr.com/post/152658253424",
+      "image": "https://64.media.tumblr.com/2f6200fb8c519a81b34a847f5431b6f5/tumblr_og1c01PvN51vensaeo1_1280.jpg",
+      "sha256": "935908ab033b626c750377c173bf1fc4d07728e834b8d36c23401cf6bc4e5b41",
+      "pixels": 1080,
+      "selectionReason": "deep concrete grid, glazing and corner perspective"
+    },
+    {
+      "id": "s-150085783554",
+      "title": "September 7th. Instituut Anneessens-Funck, Groot Eiland 39, Anneessens district, Brussels",
+      "post": "https://buildingsofbrussels.tumblr.com/post/150085783554",
+      "image": "https://64.media.tumblr.com/94095ea31a0f132d63b79d672b555147/tumblr_od5err0RfA1vensaeo1_1280.jpg",
+      "sha256": "c3b91fb4e018d6d73f6f5d23228f4b9ab03ca049e7d65a3ebe343b7b01d3bee6",
+      "pixels": 1080,
+      "selectionReason": "ornate corner, arched doorway and strong window rhythm"
+    }
+  ],
+  "briefs": [
+    "Create a luminous architectural print: saturated colour fields, careful structural linework, real curves and unusually attentive window/cornice detail. Keep the image alive rather than diagrammatic.",
+    "Create a colour-led architectural portrait with the confidence and economy of an expressive print. Use larger warm/cool colour relationships, atmospheric light, layered ink or dry-brush decisions, and selective rather than blanket detail. Let quiet planes remain quiet. Preserve the distinctive silhouette, major curves, openings and viewpoint; use a few crisp structural accents so expressiveness does not become wonky geometry. Do not increase hatch density or brick counts just to look detailed. Aim for a painting worth keeping, not an inventory diagram. Keep colour immersive, and make your own compositional and mark-making choices."
+  ],
+  "experiment": {
+    "kind": "preference-transfer-v1",
+    "round": 3,
+    "parentPoolId": "pool-1794404292208-9057af08",
+    "preferencesSha256": "076508a784a8009975943ea707721ca4ff1273e6d14a93f21be0df2074bf3938",
+    "humanPairs": 8,
+    "sourceEvents": 10,
+    "arms": [
+      "existing luminous-print brief",
+      "colour-led economy and expressive material"
+    ],
+    "decisionBasis": "Latest answer per pair: existing brief preferred 4, tie 4, previous extra-guided brief preferred 0. Ten append-only events represent eight comparisons, not ten independent labels. No evidence that more prescriptive detail guidance helped.",
+    "hypothesis": "Keep the working baseline and explore colour-led economy, not further detail prescription. This is a new art-direction comparison, not a trained policy or an isolated causal estimate.",
+    "selection": "Eight new source posts selected before generation for contrast; all previously painted posts excluded. Not a random sample; foundation-model pretraining overlap is unknown.",
+    "protocol": "One fresh program per arm/source, one own-render revision opportunity; same model, medium, resource limits. Counterbalanced A/B. Retain all failures and successful fallback versions. Max32 painting-model requests; no automatic training."
+  }
+}

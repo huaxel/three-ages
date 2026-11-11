@@ -128,18 +128,20 @@ def evidence_path(data_dir: Path, relative: str) -> Path:
 
 def build(data_dir: Path = DATA, output: Path = Path("/tmp/three-ages-independent-review.zip")) -> Path:
     channels = (
-        (IMAGE_WORKSHEET, IMAGE_ALLOWED_FIELDS, "three-ages-independent-image-review.csv", "preview", "asset_id"),
-        (STRUCTURAL_WORKSHEET, STRUCTURAL_ALLOWED_FIELDS, "three-ages-independent-structural-review.csv", "case_crop_previews", "source_id"),
-        (BALAT_WORKSHEET, BALAT_ALLOWED_FIELDS, BALAT_WORKSHEET, "preview", "photo_id"),
-        (COMMONS_WORKSHEET, COMMONS_ALLOWED_FIELDS, COMMONS_WORKSHEET, "preview", "photo_id"),
+        (IMAGE_WORKSHEET, IMAGE_ALLOWED_FIELDS, IMAGE_REVIEW, "three-ages-independent-image-review.csv", "preview", "asset_id"),
+        (STRUCTURAL_WORKSHEET, STRUCTURAL_ALLOWED_FIELDS, STRUCTURAL_REVIEW, "three-ages-independent-structural-review.csv", "case_crop_previews", "source_id"),
+        (BALAT_WORKSHEET, BALAT_ALLOWED_FIELDS, PHOTO_REVIEW, BALAT_WORKSHEET, "preview", "photo_id"),
+        (COMMONS_WORKSHEET, COMMONS_ALLOWED_FIELDS, PHOTO_REVIEW, COMMONS_WORKSHEET, "preview", "photo_id"),
     )
     contents = {"README-review.md": README.encode("utf-8")}
     image_files: dict[str, Path] = {}
     gallery_sections = []
-    for source_name, allowed_fields, archive_csv, preview_field, key in channels:
+    for source_name, allowed_fields, review_fields, archive_csv, preview_field, key in channels:
         fields, source_rows = rows(data_dir / source_name)
         if fields != list(allowed_fields):
             raise RuntimeError(f"{source_name} has unexpected columns; refusing to bundle possibly non-blind data")
+        if any(str(row.get(field, "")).strip() for row in source_rows for field in review_fields):
+            raise RuntimeError(f"{source_name} contains existing review answers; refusing to place them in a blind packet")
         outputs = []
         for row in source_rows:
             relative_paths = row.get(preview_field, "").split(";") if preview_field == "case_crop_previews" else [row.get(preview_field, "")]

@@ -21,6 +21,7 @@ python3 prototypes/test_review_workflows.py
 python3 prototypes/test_independent_review.py
 python3 prototypes/test_independent_adjudication.py
 python3 prototypes/test_independent_bundle.py
+python3 prototypes/test_blind_facade_style_packet.py
 python3 prototypes/test_independent_bundle_import.py
 python3 -m unittest prototypes.test_training_manifest
 python3 -m unittest prototypes.test_notice_evidence
@@ -50,6 +51,7 @@ python3 -m compileall -q prototypes scripts/*.py
 node prototypes/smoke_ui.js
 node prototypes/test_taskb_review.js
 node prototypes/test_review_workbench.js
+npm test --prefix experiments/paint-brussels
 python3 - <<'PY'
 import json
 import stat

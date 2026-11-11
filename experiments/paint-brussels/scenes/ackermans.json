@@ -1,0 +1,690 @@
+{
+  "version": 1,
+  "id": "ackermans",
+  "title": "Ets. Ackermans",
+  "source": "ackermans",
+  "method": "agent-visual-interpretation",
+  "omissions": [
+    "Canopy is one observed silhouette, not individually generated trees. No hidden facade is reconstructed behind it.",
+    "Industrial arched openings are simplified into rectangular openings; signage and small brick details are omitted.",
+    "The glass tower and canal barge are simplified polygons. Coordinates are agent-authored, not automatically extracted."
+  ],
+  "view": [
+    72,
+    14,
+    427,
+    486
+  ],
+  "elements": [
+    {
+      "type": "polygon",
+      "id": "office-left",
+      "role": "wall-cool",
+      "points": [
+        [
+          72,
+          197
+        ],
+        [
+          171,
+          175
+        ],
+        [
+          171,
+          220
+        ],
+        [
+          116,
+          231
+        ],
+        [
+          72,
+          222
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "id": "office-roof",
+      "role": "wall-cool",
+      "points": [
+        [
+          214,
+          170
+        ],
+        [
+          245,
+          160
+        ],
+        [
+          318,
+          174
+        ],
+        [
+          318,
+          187
+        ],
+        [
+          214,
+          181
+        ]
+      ]
+    },
+    {
+      "type": "facade",
+      "id": "office-ribbon",
+      "role": "wall-light",
+      "quad": [
+        [
+          214,
+          181
+        ],
+        [
+          319,
+          190
+        ],
+        [
+          319,
+          210
+        ],
+        [
+          214,
+          201
+        ]
+      ],
+      "rows": [
+        [
+          0.1,
+          0.9
+        ]
+      ],
+      "bays": [
+        [
+          0.03,
+          0.19
+        ],
+        [
+          0.23,
+          0.4
+        ],
+        [
+          0.44,
+          0.61
+        ],
+        [
+          0.65,
+          0.81
+        ],
+        [
+          0.85,
+          0.98
+        ]
+      ],
+      "band": 0,
+      "mullions": 0
+    },
+    {
+      "type": "polygon",
+      "id": "tower",
+      "role": "wall-cool",
+      "points": [
+        [
+          166,
+          149
+        ],
+        [
+          180,
+          143
+        ],
+        [
+          203,
+          145
+        ],
+        [
+          219,
+          153
+        ],
+        [
+          216,
+          214
+        ],
+        [
+          166,
+          224
+        ]
+      ]
+    },
+    {
+      "type": "facade",
+      "id": "tower-glass",
+      "role": "wall-cool",
+      "quad": [
+        [
+          172,
+          155
+        ],
+        [
+          214,
+          157
+        ],
+        [
+          213,
+          200
+        ],
+        [
+          171,
+          207
+        ]
+      ],
+      "rows": [
+        [
+          0.04,
+          0.46
+        ],
+        [
+          0.51,
+          0.96
+        ]
+      ],
+      "bays": [
+        [
+          0.02,
+          0.22
+        ],
+        [
+          0.27,
+          0.48
+        ],
+        [
+          0.53,
+          0.73
+        ],
+        [
+          0.78,
+          0.98
+        ]
+      ],
+      "band": 0.02,
+      "mullions": 0
+    },
+    {
+      "type": "polygon",
+      "id": "tower-cap",
+      "role": "stone",
+      "points": [
+        [
+          161,
+          146
+        ],
+        [
+          169,
+          140
+        ],
+        [
+          189,
+          138
+        ],
+        [
+          215,
+          141
+        ],
+        [
+          228,
+          147
+        ],
+        [
+          221,
+          152
+        ],
+        [
+          170,
+          151
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "id": "canopy",
+      "role": "context",
+      "points": [
+        [
+          73,
+          210
+        ],
+        [
+          92,
+          201
+        ],
+        [
+          100,
+          215
+        ],
+        [
+          116,
+          211
+        ],
+        [
+          128,
+          232
+        ],
+        [
+          144,
+          226
+        ],
+        [
+          153,
+          217
+        ],
+        [
+          166,
+          224
+        ],
+        [
+          173,
+          208
+        ],
+        [
+          188,
+          212
+        ],
+        [
+          199,
+          205
+        ],
+        [
+          219,
+          218
+        ],
+        [
+          234,
+          208
+        ],
+        [
+          252,
+          216
+        ],
+        [
+          269,
+          195
+        ],
+        [
+          283,
+          209
+        ],
+        [
+          296,
+          200
+        ],
+        [
+          307,
+          213
+        ],
+        [
+          322,
+          194
+        ],
+        [
+          342,
+          196
+        ],
+        [
+          354,
+          188
+        ],
+        [
+          373,
+          199
+        ],
+        [
+          387,
+          185
+        ],
+        [
+          402,
+          200
+        ],
+        [
+          417,
+          189
+        ],
+        [
+          427,
+          193
+        ],
+        [
+          427,
+          344
+        ],
+        [
+          370,
+          345
+        ],
+        [
+          322,
+          311
+        ],
+        [
+          132,
+          317
+        ],
+        [
+          105,
+          355
+        ],
+        [
+          73,
+          357
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "id": "industrial-roof",
+      "role": "stone",
+      "points": [
+        [
+          135,
+          310
+        ],
+        [
+          317,
+          303
+        ],
+        [
+          371,
+          319
+        ],
+        [
+          379,
+          328
+        ],
+        [
+          317,
+          315
+        ],
+        [
+          133,
+          322
+        ]
+      ]
+    },
+    {
+      "type": "facade",
+      "id": "industrial-front",
+      "role": "wall-warm",
+      "quad": [
+        [
+          136,
+          319
+        ],
+        [
+          317,
+          315
+        ],
+        [
+          319,
+          401
+        ],
+        [
+          130,
+          397
+        ]
+      ],
+      "rows": [
+        [
+          0.08,
+          0.43
+        ],
+        [
+          0.63,
+          0.96
+        ]
+      ],
+      "bays": [
+        [
+          0.03,
+          0.2
+        ],
+        [
+          0.27,
+          0.46
+        ],
+        [
+          0.54,
+          0.73
+        ],
+        [
+          0.8,
+          0.98
+        ]
+      ],
+      "band": 0.035,
+      "mullions": 1
+    },
+    {
+      "type": "polygon",
+      "id": "warehouse-annex",
+      "role": "wall-warm",
+      "points": [
+        [
+          317,
+          319
+        ],
+        [
+          382,
+          331
+        ],
+        [
+          427,
+          341
+        ],
+        [
+          427,
+          401
+        ],
+        [
+          320,
+          401
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "id": "annex-opening",
+      "role": "dark",
+      "points": [
+        [
+          328,
+          366
+        ],
+        [
+          360,
+          367
+        ],
+        [
+          361,
+          398
+        ],
+        [
+          327,
+          398
+        ]
+      ]
+    },
+    {
+      "type": "line",
+      "id": "sign-band",
+      "role": "light",
+      "points": [
+        [
+          135,
+          356
+        ],
+        [
+          318,
+          354
+        ]
+      ],
+      "width": 1.8
+    },
+    {
+      "type": "polygon",
+      "id": "quay",
+      "role": "wall-cool",
+      "points": [
+        [
+          72,
+          403
+        ],
+        [
+          427,
+          401
+        ],
+        [
+          427,
+          473
+        ],
+        [
+          72,
+          475
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "id": "quay-edge",
+      "role": "stone",
+      "points": [
+        [
+          72,
+          400
+        ],
+        [
+          427,
+          400
+        ],
+        [
+          427,
+          412
+        ],
+        [
+          72,
+          416
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "id": "canal",
+      "role": "dark",
+      "points": [
+        [
+          72,
+          474
+        ],
+        [
+          427,
+          471
+        ],
+        [
+          427,
+          486
+        ],
+        [
+          72,
+          486
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "id": "barge",
+      "role": "stone",
+      "points": [
+        [
+          72,
+          406
+        ],
+        [
+          132,
+          402
+        ],
+        [
+          158,
+          410
+        ],
+        [
+          167,
+          436
+        ],
+        [
+          72,
+          439
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "id": "barge-roof",
+      "role": "wall-cool",
+      "points": [
+        [
+          76,
+          402
+        ],
+        [
+          137,
+          398
+        ],
+        [
+          157,
+          405
+        ],
+        [
+          146,
+          413
+        ],
+        [
+          72,
+          413
+        ]
+      ]
+    },
+    {
+      "type": "line",
+      "id": "barge-windows",
+      "role": "outline",
+      "points": [
+        [
+          78,
+          421
+        ],
+        [
+          145,
+          421
+        ]
+      ],
+      "width": 3
+    },
+    {
+      "type": "line",
+      "id": "canal-light",
+      "role": "light",
+      "points": [
+        [
+          81,
+          479
+        ],
+        [
+          201,
+          476
+        ],
+        [
+          338,
+          479
+        ]
+      ],
+      "width": 0.7
+    }
+  ]
+}

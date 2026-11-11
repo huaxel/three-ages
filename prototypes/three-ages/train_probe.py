@@ -4,7 +4,8 @@
 Heads (single-image, linear on frozen CLIP, CPU):
   drawing      -- binary photo-vs-drawing triage (the gate for everything else)
   capture_era  -- 6-era photo dating (task A; doubles as the B backbone later)
-  style        -- multi-label style-family classification (weak source labels)
+  style        -- multi-label exploratory 12-family head (weak source labels)
+  style_taxonomy -- multi-label owner-crosswalk categories (still weak source labels)
 
 Construction-era training needs --reviewed-labels source truth AND
 --image-reviews with current, explicit per-image applicability. Building-wide
@@ -22,6 +23,7 @@ import argparse
 import hashlib
 import json
 import sys
+from collections import Counter
 from pathlib import Path
 
 import numpy as np
@@ -43,13 +45,54 @@ from data_integrity import assert_image_isolation  # noqa: E402
 from development_cv import grouped_development_cv  # noqa: E402
 from construction_image_reviews import eligible_image_keys  # noqa: E402
 
-HEADS = ("drawing", "capture_era", "style", "construction_era")
+HEADS = ("drawing", "capture_era", "style", "style_taxonomy", "construction_era")
+STYLE_TAXONOMY_PATH = ROOT / "data" / "irismonument-style-mapping.json"
+DESCRIPTOR_CLASSES = {"descriptor (non-period; excluded from positive labels)", "period undetermined"}
 TARGET_SEMANTICS = {
     'drawing': 'caption-keyword photo/drawing proxy; not independently reviewed image truth',
     'capture_era': 'caption-derived capture-era proxy; not independently verified capture dates',
-    'style': 'weak catalogue style metadata; not reviewed ground truth',
+    'style': 'weak catalogue style metadata collapsed into exploratory broad families; not reviewed ground truth',
+    'style_taxonomy': 'weak catalogue style tags mapped through the owner-agreed Irismonument taxonomy; not reviewed visual truth',
     'construction_era': 'human-reviewed construction campaign; image applicability must be reviewed separately',
 }
+
+
+def load_style_taxonomy(path: Path = STYLE_TAXONOMY_PATH) -> dict[str, list[str]]:
+    """Load the reviewed source-term crosswalk, excluding non-period descriptors."""
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    mapping = payload.get("mapping")
+    if not isinstance(mapping, dict):
+        raise ValueError(f"style taxonomy mapping missing from {path}")
+    out: dict[str, list[str]] = {}
+    for term, details in mapping.items():
+        classes = details.get("classes", []) if isinstance(details, dict) else []
+        out[term] = [c for c in classes if c not in DESCRIPTOR_CLASSES]
+    return out
+
+
+def taxonomy_has_target(styles, mapping: dict[str, list[str]]) -> bool:
+    if isinstance(styles, str):
+        styles = [s for s in styles.split("|") if s]
+    return any(mapping.get(style) for style in (styles or []))
+
+
+def style_taxonomy_targets(rows: list[dict], mapping: dict[str, list[str]]):
+    classes = sorted({c for values in mapping.values() for c in values})
+    positions = {label: i for i, label in enumerate(classes)}
+    matrix = np.zeros((len(rows), len(classes)), dtype=int)
+    unmatched: Counter[str] = Counter()
+    for pos, row in enumerate(rows):
+        styles = row.get("styles") or []
+        if isinstance(styles, str):
+            styles = [s for s in styles.split("|") if s]
+        for style in styles:
+            mapped = mapping.get(style)
+            if mapped is None:
+                unmatched[style] += 1
+                continue
+            for label in mapped:
+                matrix[pos, positions[label]] = 1
+    return matrix, classes, dict(sorted(unmatched.items()))
 
 
 def targets(rows: list[dict], head: str, reviewed: dict[str, str] | None = None):
@@ -71,6 +114,12 @@ def targets(rows: list[dict], head: str, reviewed: dict[str, str] | None = None)
                 if family in FAMILY_NAMES:
                     matrix[pos, FAMILY_NAMES.index(family)] = 1
         return matrix, FAMILY_NAMES
+    if head == "style_taxonomy":
+        mapping = load_style_taxonomy()
+        if any(not taxonomy_has_target(row.get('styles'), mapping) for row in rows):
+            raise ValueError('style_taxonomy rows must have a positive mapped target')
+        matrix, classes, _ = style_taxonomy_targets(rows, mapping)
+        return matrix, classes
     raise AssertionError(f"unreachable: {head}")
 
 
@@ -155,6 +204,20 @@ def main() -> None:
         parser.error('embedding cache needs unique IDs and aligned vectors')
     by_id = dict(zip(keys, vectors))
     manifest_rows = load_manifest(args.manifest)
+    taxonomy_mapping = load_style_taxonomy() if args.head == 'style_taxonomy' else None
+    taxonomy_unmapped_all: Counter[str] = Counter()
+    taxonomy_no_positive_rows = 0
+    if taxonomy_mapping is not None:
+        for row in manifest_rows:
+            styles = row.get('styles') or []
+            if isinstance(styles, str):
+                styles = [s for s in styles.split('|') if s]
+            mapped = any(taxonomy_mapping.get(style) for style in styles)
+            if styles and not mapped:
+                taxonomy_no_positive_rows += 1
+            for style in styles:
+                if style not in taxonomy_mapping:
+                    taxonomy_unmapped_all[style] += 1
     manifest_ids, manifest_membership = set(), {}
     for row in manifest_rows:
         bid, split = row['building_id'], row['split']
@@ -166,7 +229,7 @@ def main() -> None:
         manifest_ids.add(key)
         manifest_membership[bid] = split
         row['_path'] = args.image_root / row['building_id'] / row['filename']
-    require_feature_bytes = bool(args.grouped_cv or args.head == 'construction_era')
+    require_feature_bytes = bool(args.grouped_cv or args.head in ('construction_era', 'style_taxonomy'))
     historical_excluded = set()
     if require_feature_bytes:
         for row in manifest_rows:
@@ -180,7 +243,9 @@ def main() -> None:
             if (not args.grouped_cv or r['split'] in ('train', 'val'))
             and (require_feature_bytes or f"{r['building_id']}/{r['filename']}" in by_id)
             and (args.head != "capture_era" or (r["capture_era"] and r['drawing_flag'] is False))
-            and (args.head != "drawing" or r['drawing_flag'] is not None)]
+            and (args.head != "drawing" or r['drawing_flag'] is not None)
+            and (taxonomy_mapping is None or taxonomy_has_target(
+                r.get('styles'), taxonomy_mapping))]
     reviewed: dict[str, str] = {}
     image_applicability = None
     if args.head == "construction_era":
@@ -195,7 +260,8 @@ def main() -> None:
     excluded = [f"{r['building_id']}/{r['filename']}" for r in rows
                 if f"{r['building_id']}/{r['filename']}" not in by_id]
     if require_feature_bytes and not set(excluded) <= {'17387/11500227_0192_P04.jpg'}:
-        scope = 'CV' if args.grouped_cv else 'construction'
+        scope = ('CV' if args.grouped_cv else
+                 'construction' if args.head == 'construction_era' else 'style taxonomy')
         parser.error(f'undeclared {scope} cache gaps: {excluded}')
     rows = [r for r in rows if f"{r['building_id']}/{r['filename']}" in by_id]
     if not rows:
@@ -204,7 +270,8 @@ def main() -> None:
         raise SystemExit("no labelled rows with embeddings; run build_embeddings.py first")
 
     if require_feature_bytes:
-        scope = 'grouped CV' if args.grouped_cv else 'construction evaluation'
+        scope = ('grouped CV' if args.grouped_cv else
+                 'construction evaluation' if args.head == 'construction_era' else 'style taxonomy evaluation')
         if 'image_sha256' not in cache or len(cache['image_sha256']) != len(keys):
             parser.error(f'{scope} requires per-image SHA-256 cache metadata; re-encode, do not retrofit hashes')
         cached_hashes = dict(zip(keys, cache['image_sha256'].tolist()))
@@ -214,7 +281,11 @@ def main() -> None:
                 parser.error(f'cached image bytes differ from current file: {key}')
 
     X = np.stack([by_id[f"{r['building_id']}/{r['filename']}"] for r in rows])
-    y, classes = targets(rows, args.head, reviewed)
+    taxonomy_unmatched: dict[str, int] = {}
+    if args.head == 'style_taxonomy':
+        y, classes, taxonomy_unmatched = style_taxonomy_targets(rows, taxonomy_mapping)
+    else:
+        y, classes = targets(rows, args.head, reviewed)
     if args.grouped_cv:
         report = grouped_development_cv(
             X, y, rows, classes, ordered=args.head in ('capture_era', 'construction_era'),
@@ -227,6 +298,14 @@ def main() -> None:
             report['applicability_gate'] = 'explicit applicable per-image reviews pinned to current source bytes, label and phase'
             report['image_applicability'] = image_applicability
         report['target_semantics'] = TARGET_SEMANTICS[args.head]
+        if args.head == 'style_taxonomy':
+            report['taxonomy_mapping'] = {
+                'classes': list(classes),
+                'unmapped_style_occurrences': dict(sorted(taxonomy_unmapped_all.items())),
+                'unmapped_occurrence_count': sum(taxonomy_unmapped_all.values()),
+                'unmapped_style_occurrences_in_model_rows': taxonomy_unmatched,
+                'styled_rows_without_positive_target': taxonomy_no_positive_rows,
+            }
         report['input_sha256'] = {
             'manifest': hashlib.sha256(Path(args.manifest).read_bytes()).hexdigest(),
             'embeddings': hashlib.sha256(Path(args.embeddings).read_bytes()).hexdigest(),
@@ -236,6 +315,8 @@ def main() -> None:
             'isolation': hashlib.sha256((ROOT/'training/data_integrity.py').read_bytes()).hexdigest(),
             'statistics': hashlib.sha256((ROOT/'training/stats.py').read_bytes()).hexdigest(),
         }
+        if args.head == 'style_taxonomy':
+            report['input_sha256']['style_taxonomy_mapping'] = hashlib.sha256(STYLE_TAXONOMY_PATH.read_bytes()).hexdigest()
         if args.reviewed_labels:
             report['input_sha256']['reviewed_labels'] = hashlib.sha256(Path(args.reviewed_labels).read_bytes()).hexdigest()
         if args.image_reviews:
@@ -275,6 +356,24 @@ def main() -> None:
                     "dummy_majority_test_accuracy": None}
     for split in ("train", "val", "test"):
         report[f"n_{split}_buildings"] = len(set(building_ids[splits == split]))
+    if args.head == 'style_taxonomy':
+        report['taxonomy_mapping'] = {
+            'classes': list(classes),
+            'unmapped_style_occurrences': dict(sorted(taxonomy_unmapped_all.items())),
+            'unmapped_occurrence_count': sum(taxonomy_unmapped_all.values()),
+            'unmapped_style_occurrences_in_model_rows': taxonomy_unmatched,
+            'styled_rows_without_positive_target': taxonomy_no_positive_rows,
+            'mapping_sha256': hashlib.sha256(STYLE_TAXONOMY_PATH.read_bytes()).hexdigest(),
+        }
+        report['image_byte_provenance'] = 'per-image cache SHA-256 verified against current files before fitting'
+        report['input_sha256'] = {
+            'manifest': hashlib.sha256(Path(args.manifest).read_bytes()).hexdigest(),
+            'embeddings': hashlib.sha256(Path(args.embeddings).read_bytes()).hexdigest(),
+            'probe': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            'data_definitions': hashlib.sha256((ROOT/'epoch_data.py').read_bytes()).hexdigest(),
+            'isolation': hashlib.sha256((ROOT/'training/data_integrity.py').read_bytes()).hexdigest(),
+            'style_taxonomy_mapping': hashlib.sha256(STYLE_TAXONOMY_PATH.read_bytes()).hexdigest(),
+        }
     if args.head == "construction_era":
         report['applicability_gate'] = 'explicit applicable per-image reviews pinned to current source bytes, label and phase'
         report['image_applicability'] = image_applicability
@@ -292,14 +391,18 @@ def main() -> None:
         report["micro_f1_test"] = float(
             __import__("sklearn.metrics", fromlist=["f1_score"]).f1_score(
                 y[evaluation], pred, average="micro", zero_division=0))
+        metric_module = __import__("sklearn.metrics", fromlist=["f1_score", "precision_score", "recall_score"])
         per_family = {}
         for pos, family in enumerate(classes):
             col_t, col_p = y[evaluation][:, pos], pred[:, pos]
             per_family[family] = {
                 "support": int(col_t.sum()),
-                "f1": float(__import__("sklearn.metrics", fromlist=["f1_score"]).f1_score(
-                    col_t, col_p, zero_division=0))}
-        report["per_family"] = per_family
+                "f1": float(metric_module.f1_score(col_t, col_p, zero_division=0))}
+            if args.head == 'style_taxonomy':
+                per_family[family]['predicted_support'] = int(col_p.sum())
+                per_family[family]['precision'] = float(metric_module.precision_score(col_t, col_p, zero_division=0))
+                per_family[family]['recall'] = float(metric_module.recall_score(col_t, col_p, zero_division=0))
+        report['per_style_class' if args.head == 'style_taxonomy' else 'per_family'] = per_family
     else:
         report['confusion_matrix'] = confusion_matrix(y[evaluation], pred, labels=range(len(classes))).tolist()
         report['per_class'] = classification_by_class(report['confusion_matrix'], classes)

@@ -36,11 +36,11 @@ def main() -> None:
         (data / "structural" / "crop.png").write_bytes(crop)
         image_fields = IMAGE_ALLOWED_FIELDS
         image = {field: "" for field in image_fields}
-        image.update({"asset_id": "photo-1", "preview": "data/historical/photo.jpg", "preview_sha256": hashlib.sha256(photo).hexdigest(), "licence": "CC BY 4.0", "credit": "Photographer", "facade_observation": "Independent observation", "reviewer": "Reviewer B", "reviewed_at": "2026-01-02"})
+        image.update({"asset_id": "photo-1", "preview": "data/historical/photo.jpg", "preview_sha256": hashlib.sha256(photo).hexdigest(), "licence": "CC BY 4.0", "credit": "Photographer"})
         write_csv(data / "three-ages-independent-image-review.csv", image_fields, image)
         structural_fields = STRUCTURAL_ALLOWED_FIELDS
         structural = {field: "" for field in structural_fields}
-        structural.update({"source_id": "case-1", "comparison_id": "epochs-1", "case_crop_previews": "data/structural/crop.png", "case_crop_pixel_sha256": "abc", "structural_observation": "Independent comparison", "reviewer": "Reviewer B", "reviewed_at": "2026-01-02"})
+        structural.update({"source_id": "case-1", "comparison_id": "epochs-1", "case_crop_previews": "data/structural/crop.png", "case_crop_pixel_sha256": "abc"})
         write_csv(data / "three-ages-independent-structural-review.csv", structural_fields, structural)
         (data / "historical" / "balat.jpg").write_bytes(b"balat")
         (data / "historical" / "commons.jpg").write_bytes(b"commons")
@@ -49,7 +49,7 @@ def main() -> None:
             (COMMONS_WORKSHEET, COMMONS_ALLOWED_FIELDS, "commons-1", "data/historical/commons.jpg"),
         ):
             scaled = {field: "" for field in allowed}
-            scaled.update({"photo_id": photo, "preview": preview, "licence": "CC BY 4.0", "credit": "credit", "facade_label": "Baroque", "reviewer": "Reviewer B", "reviewed_at": "2026-01-02"})
+            scaled.update({"photo_id": photo, "preview": preview, "licence": "CC BY 4.0", "credit": "credit"})
             write_csv(data / filename, allowed, scaled)
         output = build(data, Path(temp) / "review.zip")
         with zipfile.ZipFile(output) as archive:
@@ -65,14 +65,33 @@ def main() -> None:
             if b"evidence/data/historical/photo.jpg" not in gallery or b"PRIMARY SECRET" in gallery:
                 raise AssertionError("gallery omitted evidence or leaked primary review text")
             payload = b"\n".join(archive.read(name) for name in names if name.endswith(".csv"))
-            if b"confidence" in payload or b"Independent observation" not in payload:
-                raise AssertionError("bundle unexpectedly contains a confidence field or lost reviewer input")
+            if b"confidence" in payload or b"Independent observation" in payload or b"Reviewer B" in payload:
+                raise AssertionError("bundle exposed reviewer answers or added an unapproved field")
+            for name in names:
+                if name.endswith(".csv"):
+                    for row in csv.DictReader(archive.read(name).decode("utf-8").splitlines()):
+                        for field in ("identity_verdict", "facade_label", "facade_observation",
+                                      "structural_observation", "reviewer", "reviewed_at"):
+                            if field in row and row[field].strip():
+                                raise AssertionError(f"blind bundle contains a filled answer: {field}")
             manifest = json.loads(archive.read("SHA256SUMS.json"))
             for name, digest in manifest["files"].items():
                 if hashlib.sha256(archive.read(name)).hexdigest() != digest:
                     raise AssertionError(f"bundle checksum mismatch: {name}")
 
-        # An unexpected primary-review field must fail closed, never get packaged.
+        # A partially annotated sheet must fail closed, never reveal an answer.
+        image["facade_observation"] = "Primary answer"
+        write_csv(data / "three-ages-independent-image-review.csv", image_fields, image)
+        try:
+            build(data, Path(temp) / "answer-leak.zip")
+        except RuntimeError as error:
+            if "existing review answers" not in str(error):
+                raise
+        else:
+            raise AssertionError("prefilled review answer was accepted into a blind bundle")
+
+        # An unexpected primary-review field must also fail closed.
+        image["facade_observation"] = ""
         image_fields = image_fields + ("confidence",)
         image["confidence"] = "high"
         write_csv(data / "three-ages-independent-image-review.csv", image_fields, image)

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Drawing + imperfect ink — Buildings of Brussels</title>
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="directions.css"><link rel="stylesheet" href="hybrid.css">
+<script type="module" src="directions.mjs"></script>
+</head>
+<body>
+<header><a href="https://buildingsofbrussels.tumblr.com/">BUILDINGS OF BRUSSELS</a><span>VISUAL LANGUAGE · CONTACT SHEET 001</span></header>
+<main>
+<section class="direction-intro">
+<div><p class="eyebrow">03 + 04 → 05 / AN ARCHITECTURAL PRINT</p><h1>Bathed<br>in colour.</h1><p class="deck">Ochre light, warm brick, cool shadow.<br>The linework remains—but colour now carries the whole image.</p><p class="baseline-link"><a href="index.html">← The first watercolor study</a> · <a href="batch.html">Try the same painter on three new buildings →</a></p></div>
+<figure class="reference-card"><img id="direction-reference" src="/local/paint-brussels/source.jpg" alt="Source photograph of Democratiestraat 29 from Buildings of Brussels"><figcaption>THE SHARED REFERENCE<br>Democratiestraat 29 · Anderlecht<br><a href="https://www.tumblr.com/buildingsofbrussels/162278233614/democratiestraat-29-veeweide-aurora-district">Buildings of Brussels ↗</a></figcaption><p id="reference-error" hidden>Reference unavailable. Run <code>prepare.py</code> to fetch the pinned photograph.</p></figure>
+</section>
+<div class="experiment-bar"><p>Same authored building geometry. Different mark-making systems.</p><form id="direction-controls"><label>Seed<input name="seed" type="number" min="0" max="999999" step="1" value="29"></label><button type="submit">Rebuild the sheet</button></form><a id="hybrid-comparison-download" aria-disabled="true">Save 3 / 5 / 4 comparison ↓</a><a id="sheet-download" aria-disabled="true">Save the original four ↓</a></div>
+<p id="direction-status" role="status">Preparing the hybrid and its starting points…</p>
+<section id="hybrid-feature" class="hybrid-feature" aria-label="New study combining treatments three and four"></section>
+<details class="previous-study"><summary>The quieter version — kept for comparison</summary><div class="previous-content"><canvas id="restrained-preview" width="1000" height="1000" role="img" aria-label="Previous restrained hybrid, with precise lines and a mostly unprinted sky"></canvas><div><h2>More line than colour.</h2><p>The first hybrid left the sky and much of the facade as paper. This version is retained, with the same seed as the new study, so we can judge what the added colour changes.</p><a id="restrained-download" aria-disabled="true">Save the quieter version ↓</a></div></div></details>
+<h2 class="starting-points">The four starting points.</h2>
+<section id="directions-grid" class="directions-grid" aria-label="Four visual treatments of the same building"></section>
+<section class="direction-footnote"><div><p class="eyebrow">WHAT TO LOOK FOR</p><p>Not just whether you like the texture. Does the corner still turn? Does the window rhythm survive? Does the image invite a second look—or make the building generic?</p></div><div><p class="eyebrow">A SEARCH, NOT A RESULT</p><p>All five are agent-authored Canvas 2D programs. No image model, learned style, automated facade extraction, or physical paint simulation. Both palette and mark-making change: this is art direction, not a controlled medium-only experiment. Nothing is uploaded or rated automatically.</p></div></section>
+</main>
+<footer><span>PRIVATE LOCAL STUDY · Original photograph stays in ignored local storage.</span><a href="treatments.mjs" download>Inspect the rendering programs ↓</a></footer>
+<dialog id="detail-dialog" aria-labelledby="detail-title"><div class="detail-header"><div><p class="eyebrow">LOOK CLOSER</p><h2 id="detail-title"></h2></div><button id="close-detail" type="button">Close ×</button></div><div class="detail-layout"><img id="detail-image" alt=""><div><img id="detail-reference" src="/local/paint-brussels/source.jpg" alt="Original photograph for comparison"><p id="detail-description"></p><a id="detail-download">Save this interpretation ↓</a></div></div></dialog>
+</body></html>
